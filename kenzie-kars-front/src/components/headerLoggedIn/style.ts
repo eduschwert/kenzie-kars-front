@@ -43,8 +43,9 @@ export const DivHeader = styled.div`
   }
 `;
 
-export const DivLinkHeader = styled.div`
+export const DivInfoHeader = styled.div`
   display: none;
+  position: relative;
 
   @media (min-width: 600px) {
     display: flex;
@@ -52,28 +53,26 @@ export const DivLinkHeader = styled.div`
     align-items: center;
     justify-content: center;
     border-left: 2px solid var(--color-grey6);
-    gap: 32px;
+    gap: 10px;
     padding-left: 37px;
   }
-  & > div > a {
-    position: relative;
-    overflow: hidden;
-    background: linear-gradient(
-      to right,
-      var(--color-brand1),
-      var(--color-brand1) 50%,
-      var(--color-grey2) 50%
-    );
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-size: 200% 100%;
-    background-position: 100%;
-    transition: background-position 380ms ease;
+  & > section {
+    display: none;
+    position: absolute;
+    background-color: var(--color-grey9);
+    border-radius: var(--radius-2);
+    top: 58px;
+    color: green;
+    width: 170px;
+    box-shadow: 0px 4px 40px -10px rgba(0, 0, 0, 0.25);
   }
-  & > div > a:hover {
-    color: var(--color-brand1);
-    background-position: 0 100%;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:hover > section {
+    display: flex;
   }
 `;
 
@@ -124,10 +123,68 @@ export const DivMenu = styled.div<iDiv>`
     -webkit-text-fill-color: transparent;
     background-size: 200% 100%;
     background-position: 100%;
-    transition: background-position 380ms ease;
+    transition: background-position 450ms ease;
   }
   & > div > div > a:hover {
     color: var(--color-brand1);
     background-position: 0 100%;
+  }
+`;
+
+export const MenuList = styled.ul`
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 17px;
+  min-width: 100%;
+
+  & > li {
+    min-width: 100%;
+  }
+  & > li > button {
+    min-width: 100%;
+    border: 0px;
+    background-color: transparent;
+    border-radius: var(--radius-2);
+    padding: 8px;
+  }
+
+  & > li > button:hover {
+    cursor: pointer;
+    background-color: var(--color-grey8);
+  }
+`;
+
+export const MenuUserInfo = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+`;
+
+export const MenuUserItems = styled.div`
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 17px;
+  min-width: 100vw;
+
+  & > li {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    min-width: 100%;
+  }
+  & > li > button {
+    min-width: 50%;
+    border: 0px;
+    background-color: transparent;
+    border-radius: var(--radius-2);
+    padding: 8px;
+  }
+
+  & > li > button:hover {
+    cursor: pointer;
+    border-bottom: 2px solid var(--color-grey8);
   }
 `;
