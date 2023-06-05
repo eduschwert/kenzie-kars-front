@@ -27,12 +27,15 @@ export const DivFooter = styled.div`
   }
 `;
 
-export const BtnFooter = styled.button`
+export const LinkFooter = styled.a`
   border: 0px;
   width: 39px;
   height: 38px;
   background-color: var(--color-grey1);
   border-radius: var(--radius-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   &:hover {
     background-color: var(--color-grey2);
