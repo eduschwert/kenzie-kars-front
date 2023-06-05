@@ -1,4 +1,3 @@
-
 import { GlobalStyle } from "./styles/globalStyles";
 
 function App() {
