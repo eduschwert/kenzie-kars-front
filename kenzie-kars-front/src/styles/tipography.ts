@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { BaseText } from "../components/baseText/baseText";
+import { BaseText } from "./baseText/baseText";
 interface iStyledTextProps {
   textColor?: string;
   textStyle?: string;
@@ -141,7 +141,7 @@ export const StyledText = styled(BaseText)<iStyledTextProps>`
     switch (textColor) {
       case "white":
         return css`
-          color: var(--white--fixed);
+          color: var(--white-fixed);
         `;
       case "grey2":
         return css`
