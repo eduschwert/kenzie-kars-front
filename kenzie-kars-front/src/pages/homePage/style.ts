@@ -10,6 +10,7 @@ export const HomePageContainer = styled.main`
   min-width: 100%;
   max-width: 100%;
   min-height: 100%;
+  margin-top: 80px;
 `;
 
 export const MaskImageDiv = styled.div`
