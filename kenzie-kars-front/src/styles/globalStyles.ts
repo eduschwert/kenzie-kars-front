@@ -26,7 +26,8 @@ html {
   --color-brand1: #4529e6;
   --color-brand2: #5126ea;
   --color-brand3: #b0a6f0;
-  --color-brand4: #f6f6f6;
+  /* --color-brand4: #f6f6f6; */
+  --color-brand4: #edeafd;
         
   --color-grey0: #0b0d0d;
   --color-grey1: #212529;
