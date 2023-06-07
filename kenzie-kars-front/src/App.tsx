@@ -1,12 +1,15 @@
-import { CardCar } from "./components/cardCar";
+import ThemeProvider from "@mui/material/styles/ThemeProvider";
+import { HomePage } from "./pages/homePage";
 import { GlobalStyle } from "./styles/globalStyles";
+import { theme } from "./theme";
 
 function App() {
   return (
     <div className="App">
-      <GlobalStyle />
-      {/* <h1>Olá</h1> */}
-      <CardCar />
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <HomePage />
+      </ThemeProvider>
     </div>
   );
 }

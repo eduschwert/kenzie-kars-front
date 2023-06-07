@@ -30,6 +30,16 @@ export function text(textStyle: string) {
         font-size: 32px;
         font-weight: 500;
         font-family: var(--font-family-lexend);
+
+        /* @media (min-width: 700px) {
+          font-size: 36px;
+          font-weight: 700;
+        }
+
+        @media (min-width: 900px) {
+          font-size: 44px;
+          font-weight: 700;
+        } */
       `;
     case "heading-4-600":
       return css`
@@ -51,9 +61,19 @@ export function text(textStyle: string) {
       `;
     case "heading-5-500":
       return css`
-        font-size: 30px;
+        font-size: 24px;
         font-weight: 500;
         font-family: var(--font-family-lexend);
+
+        /* @media (min-width: 700px) {
+          font-size: 30px;
+          font-weight: 600;
+        }
+
+        @media (min-width: 900px) {
+          font-size: 36px;
+          font-weight: 600;
+        } */
       `;
     case "heading-6-600":
       return css`

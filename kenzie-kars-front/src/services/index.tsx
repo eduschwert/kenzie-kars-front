@@ -1,3 +1,6 @@
-import React from "react";
+import axios from "axios";
 
-export { React }
+export const api = axios.create({
+  baseURL: "https://localhost:3000",
+  timeout: 5000,
+});
