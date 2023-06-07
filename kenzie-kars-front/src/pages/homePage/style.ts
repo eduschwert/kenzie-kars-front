@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import homeheader from "./../../assets/homeheader.svg";
-import { iDisplayMenu } from "./types";
+import { iDisplay } from "./types";
 
 interface iGallery {
   display: boolean;
@@ -16,6 +16,7 @@ export const HomePageContainer = styled.main`
 export const MaskImageDiv = styled.div`
   margin-top: 0;
   height: 500px;
+  width: 100vw;
 
   background-image: linear-gradient(
       to bottom,
@@ -26,6 +27,7 @@ export const MaskImageDiv = styled.div`
 
   object-fit: cover;
   background-repeat: no-repeat;
+  background-position: center;
   /* -webkit-mask-image: linear-gradient(var(--color-grey0), transparent);
   mask-image: linear-gradient(var(--color-grey0), transparent);
   */
@@ -35,33 +37,48 @@ export const MaskImageDiv = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     text-align: center;
     gap: 2rem;
     margin: 0 auto;
+    padding-top: 3rem;
+
+    @media (min-width: 700px) {
+      display: flex;
+      justify-content: center;
+      padding-top: 0rem;
+    }
   }
 `;
 
-export const SectionHomePageHeader = styled.div`
+export const SectionHomePageHeader = styled.div<iDisplay>`
   margin-top: 80px;
-  scroll-margin-top: 88px;
+  /* display: none; */
+  display: ${({ display }) => (display === true ? "flex" : " none")};
+  /* justify-content: space-between; */
+  scroll-margin-top: 80px;
   width: 100%;
   height: 500px;
   font-size: clamp(24px, 10vw, 36px);
+
+  @media (min-width: 700px) {
+    display: flex;
+    width: 100vw;
+  }
 `;
 
 export const SectionHomePageMain = styled.div`
   display: flex;
   flex-direction: row;
   align-items: space-between;
-  justify-content: center;
+  justify-content: flex-start;
   text-align: center;
   gap: 2rem;
   margin: 0 auto;
 `;
 
-export const SectionHomePageMainMenu = styled.div<iDisplayMenu>`
-  width: 30%;
+export const SectionHomePageMainMenu = styled.div<iDisplay>`
+  width: 100%;
   display: flex;
   display: ${({ display }) => (display === false ? "flex" : " none")};
   flex-direction: row;
@@ -72,23 +89,42 @@ export const SectionHomePageMainMenu = styled.div<iDisplayMenu>`
   padding: 2rem;
 
   @media (min-width: 700px) {
+    width: 30%;
     display: flex;
   }
 `;
 
-export const SectionHomePageMainProductGallery = styled.div<iGallery>`
+export const MainHeaderTitleDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: space-between;
+  justify-content: center;
+  text-align: center;
+  gap: 2rem;
+  padding: 2rem;
+  margin-top: 2rem;
+
+  @media (min-width: 700px) {
+    justify-content: center;
+    margin-top: 0;
+  }
+`;
+
+export const SectionHomePageMainProductGallery = styled.div<iDisplay>`
   width: 100%;
   display: ${({ display }) => (display === true ? "flex" : " none")};
   justify-content: flex-start;
+  flex-direction: column;
   flex-wrap: nowrap;
   overflow-x: auto;
   gap: 2rem;
+  margin-bottom: 2rem;
 
-  @media (min-width: 700) {
-    width: 70%;
+  @media (min-width: 700px) {
+    min-width: 70%;
     display: flex;
     align-items: space-between;
-    justify-content: center;
+    justify-content: space-between;
   }
 `;
 

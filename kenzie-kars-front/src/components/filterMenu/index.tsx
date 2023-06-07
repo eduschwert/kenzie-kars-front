@@ -1,9 +1,17 @@
 import { List } from "@mui/material";
-import { AdvertisingButton, HomePageNav, MenuButtons } from "./style";
+import {
+  AdvertisingButton,
+  CancelFilters,
+  CancelFiltersNarrow,
+  HomePageNav,
+  MenuButtons,
+} from "./style";
 import { useState } from "react";
 import { SelectList } from "../selectList";
 import { MinMaxMenuButtons } from "../minMaxMenu";
 import { iAdvertising } from "./types";
+import { StyledButton } from "../../styles/buttons";
+import { StyledText } from "../../styles/tipography";
 
 export const FilterMenu = ({ advertising, setAdvertising }: iAdvertising) => {
   const carBrands = ["Porsche", "Ford", "Fiat", "Honda", "Toyota"];
@@ -60,9 +68,19 @@ export const FilterMenu = ({ advertising, setAdvertising }: iAdvertising) => {
     setSelectedOption("fuel");
   };
 
+  console.log("WINDOW", window.screen.width);
+
   return (
     <>
       <HomePageNav>
+        <CancelFiltersNarrow>
+          <StyledText tag="p" textStyle={"heading-7-500"}>
+            {`Filtros`}
+          </StyledText>
+          <StyledButton tag="button" buttonColor={"link"}>
+            {`X`}
+          </StyledButton>
+        </CancelFiltersNarrow>
         <List component="ul" disablePadding className="NavNestedListTitle">
           <SelectList
             open={actionOverCarBrand}
@@ -110,11 +128,25 @@ export const FilterMenu = ({ advertising, setAdvertising }: iAdvertising) => {
         </MenuButtons>
         <AdvertisingButton>
           {!advertising && (
-            <button
+            <StyledButton
+              tag="button"
               onClick={() => setAdvertising((advertising) => !advertising)}
-            >{`Ver anúncio`}</button>
+              // buttonStyle={window.screen.width < 700 ? "sm" : "bg"}
+              buttonStyle="sm"
+              buttonColor="brand1"
+            >{`Ver anúncio`}</StyledButton>
           )}
         </AdvertisingButton>
+        <CancelFilters>
+          {
+            <StyledButton
+              tag="button"
+              onClick={() => setAdvertising((advertising) => !advertising)}
+              buttonStyle={window.screen.width < 700 ? "sm" : "bg"}
+              buttonColor="brand1"
+            >{`Limpar Filtros`}</StyledButton>
+          }
+        </CancelFilters>
       </HomePageNav>
     </>
   );
