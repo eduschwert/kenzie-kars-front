@@ -1,10 +1,11 @@
 import { createGlobalStyle } from "styled-components";
 export const GlobalStyle = createGlobalStyle`
-
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Lexend&display=swap');
 *{
   margin: 0;
   padding: 0;
-  box-sizing: border-box;       
+  box-sizing: border-box;  
+
 }
 button{
   cursor: pointer;
@@ -29,7 +30,8 @@ html {
   --color-brand1: #4529e6;
   --color-brand2: #5126ea;
   --color-brand3: #b0a6f0;
-  --color-brand4: #f6f6f6;
+  /* --color-brand4: #f6f6f6; */
+  --color-brand4: #edeafd;
         
   --color-grey0: #0b0d0d;
   --color-grey1: #212529;
@@ -51,17 +53,10 @@ html {
   --color-success1: #18794e;
   --color-success2: #ccebd7;
   --color-success3: #ddf3e4;
-    
-  --font-size-32: 2rem;
-  --font-size-30: 1.875rem;
-  --font-size-28: 1.75rem;
-  --font-size-24: 1.5rem;
-  --font-size-20: 1.25rem;
-  --font-size-18: 1.125rem;
-  --font-size-16: 1rem;
-  --font-size-14: .875rem;
-  --font-size-12: .75rem;
 
+  --font-family-lexend:'Lexend', sans-serif;
+  --font-family-inter: 'Inter', sans-serif;
+    
   --radius-1: 8px;
   --radius-2: 4px;
   --radius-50:50%;

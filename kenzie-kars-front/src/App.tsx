@@ -1,17 +1,14 @@
-import { AnnoucementPage } from "./pages/annoucement"
-import { GlobalStyle } from "./styles/globalStyles"
-
+import { GlobalStyle } from "./styles/globalStyles";
 
 function App() {
-  
-
   return (
     <div className="App">
-      <GlobalStyle />
-      
-      <AnnoucementPage />    
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <HomePage />
+      </ThemeProvider>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
