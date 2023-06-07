@@ -8,20 +8,68 @@ import {
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import { ISelectProps } from "./types";
+import { iFilterConditions } from "../../contexts/productContext/types";
+import { useContext } from "react";
+import { ProductContext } from "../../contexts/productContext";
 
 export const SelectList = ({
   open,
   arrayMap,
   primary,
   onClickButton,
-  onClickItem,
-}: ISelectProps) => {
+}: //   onClickItem,
+ISelectProps) => {
   const stylesSubItems = {
     textAlign: "left",
     fontSize: 20,
     fontFamily: "Lexend",
     fontWeight: 500,
   };
+  const { filterConditions, setFilterConditions } = useContext(ProductContext);
+
+  const filterItemSelect = (primary: string, e: string) => {
+    console.log("%%%%%%%%%%%%%%%", e);
+    switch (primary) {
+      case "Marca": {
+        console.log(primary);
+        const newFilterConditions = { ...filterConditions, brand: e };
+        setFilterConditions(newFilterConditions);
+        break;
+      }
+      case "Modelo": {
+        console.log(primary);
+        const newFilterConditions = { ...filterConditions, model: e };
+        setFilterConditions(newFilterConditions);
+        break;
+      }
+      case "Cor": {
+        console.log(primary);
+        const newFilterConditions = { ...filterConditions, color: e };
+        setFilterConditions(newFilterConditions);
+        break;
+      }
+      case "Ano": {
+        console.log(primary);
+        const newFilterConditions = { ...filterConditions, year: e };
+        setFilterConditions(newFilterConditions);
+        break;
+      }
+      case "Combustível": {
+        console.log(primary);
+        const newFilterConditions = { ...filterConditions, fuel: e };
+        setFilterConditions(newFilterConditions);
+        break;
+      }
+
+      default: {
+        console.log(primary);
+        const newFilterConditions = { ...filterConditions, brand: e };
+        setFilterConditions(newFilterConditions);
+        break;
+      }
+    }
+  };
+
   return (
     <Box sx={{ fontSize: 3 }}>
       <ListItemButton onClick={onClickButton}>
@@ -41,7 +89,7 @@ export const SelectList = ({
                 key={index}
                 defaultValue={e}
                 sx={{ pl: 4 }}
-                onClick={() => onClickItem(e)}
+                onClick={() => filterItemSelect(primary, e)}
               >
                 <ListItemText
                   primary={e}

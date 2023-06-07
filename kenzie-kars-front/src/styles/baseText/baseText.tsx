@@ -17,6 +17,7 @@ export const BaseText = ({ children, tag, className }: iBaseTextProps) => {
       {tag === "h6" && <h6 className={className}>{children}</h6>}
       {tag === "p" && <p className={className}>{children}</p>}
       {tag === "span" && <span className={className}>{children}</span>}
+      {tag === "a" && <a className={className}>{children}</a>}
     </div>
   );
 };

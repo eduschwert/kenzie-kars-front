@@ -3,7 +3,11 @@ import { createContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { iChildren, iDefaultErrorResponse } from "../../interfaces/global";
 import mockedProducts from "./mockedDatabase";
-import { iProductItem, iProductProviderValue } from "./types";
+import {
+  iFilterConditions,
+  iProductItem,
+  iProductProviderValue,
+} from "./types";
 
 export const ProductContext = createContext({} as iProductProviderValue);
 
@@ -12,15 +16,19 @@ export const ProductProvider = ({ children }: iChildren) => {
   const [filteredProducts, setFilteredProducts] = useState(
     [] as iProductItem[]
   );
+  const [filterConditions, setFilterConditions] = useState<iFilterConditions>({
+    mileage: false,
+    price: false,
+  });
   const [loadingProducts, setLoadingProducts] = useState<boolean>(false);
-  const [actionOverCarBrand, setActionOverCarBrand] = useState<boolean>(false);
-  const [actionOverCarModel, setActionOverCarModel] = useState<boolean>(false);
-  const [actionOverCarColor, setActionOverCarColor] = useState<boolean>(false);
-  const [actionOverCarYear, setActionOverCarYear] = useState<boolean>(false);
-  const [actionOverCarFuel, setActionOverCarFuel] = useState<boolean>(false);
-  const [actionOverCarMileage, setActionOverCarMileage] =
-    useState<boolean>(false);
-  const [actionOverCarPrice, setActionOverCarPrice] = useState<boolean>(false);
+  // const [actionOverCarBrand, setActionOverCarBrand] = useState<boolean>(false);
+  // const [actionOverCarModel, setActionOverCarModel] = useState<boolean>(false);
+  // const [actionOverCarColor, setActionOverCarColor] = useState<boolean>(false);
+  // const [actionOverCarYear, setActionOverCarYear] = useState<boolean>(false);
+  // const [actionOverCarFuel, setActionOverCarFuel] = useState<boolean>(false);
+  // const [actionOverCarMileage, setActionOverCarMileage] =
+  //   useState<boolean>(false);
+  // const [actionOverCarPrice, setActionOverCarPrice] = useState<boolean>(false);
 
   useEffect(() => {
     const getProducts = async () => {
@@ -45,21 +53,24 @@ export const ProductProvider = ({ children }: iChildren) => {
       value={{
         products,
         filteredProducts,
+        setFilteredProducts,
         loadingProducts,
-        actionOverCarBrand,
-        setActionOverCarBrand,
-        actionOverCarModel,
-        setActionOverCarModel,
-        actionOverCarColor,
-        setActionOverCarColor,
-        actionOverCarYear,
-        setActionOverCarYear,
-        actionOverCarFuel,
-        setActionOverCarFuel,
-        actionOverCarMileage,
-        setActionOverCarMileage,
-        actionOverCarPrice,
-        setActionOverCarPrice,
+        filterConditions,
+        setFilterConditions,
+        // actionOverCarBrand,
+        // setActionOverCarBrand,
+        // actionOverCarModel,
+        // setActionOverCarModel,
+        // actionOverCarColor,
+        // setActionOverCarColor,
+        // actionOverCarYear,
+        // setActionOverCarYear,
+        // actionOverCarFuel,
+        // setActionOverCarFuel,
+        // actionOverCarMileage,
+        // setActionOverCarMileage,
+        // actionOverCarPrice,
+        // setActionOverCarPrice,
       }}
     >
       {children}

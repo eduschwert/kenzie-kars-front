@@ -4,5 +4,5 @@ export interface ISelectProps {
   primary: string;
   onClickButton: () => void;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  onClickItem: (e: any) => void;
+  //   onClickItem: (e: any) => void;
 }

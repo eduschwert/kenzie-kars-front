@@ -1,9 +1,10 @@
 import styled from "styled-components";
 import homeheader from "./../../assets/homeheader.svg";
+import { iDisplayMenu } from "./types";
 
-// export const BodyDashborardClient = styled.body`
-//   margin-top: 85px;
-// `;
+interface iGallery {
+  display: boolean;
+}
 
 export const HomePageContainer = styled.main`
   min-width: 100%;
@@ -58,26 +59,36 @@ export const SectionHomePageMain = styled.div`
   margin: 0 auto;
 `;
 
-export const SectionHomePageMainMenu = styled.div`
+export const SectionHomePageMainMenu = styled.div<iDisplayMenu>`
   width: 30%;
   display: flex;
+  display: ${({ display }) => (display === false ? "flex" : " none")};
   flex-direction: row;
   align-items: space-between;
   justify-content: space-between;
   text-align: center;
   gap: 2rem;
   padding: 2rem;
+
+  @media (min-width: 700px) {
+    display: flex;
+  }
 `;
 
-export const SectionHomePageMainProductGallery = styled.div`
-  width: 70%;
-
-  display: flex;
-  flex-direction: row;
-  align-items: space-between;
-  justify-content: center;
-  text-align: center;
+export const SectionHomePageMainProductGallery = styled.div<iGallery>`
+  width: 100%;
+  display: ${({ display }) => (display === true ? "flex" : " none")};
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  overflow-x: auto;
   gap: 2rem;
+
+  @media (min-width: 700) {
+    width: 70%;
+    display: flex;
+    align-items: space-between;
+    justify-content: center;
+  }
 `;
 
 export const HomePageNav = styled.nav`
