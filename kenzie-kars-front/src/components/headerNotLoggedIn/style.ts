@@ -27,6 +27,7 @@ export const Header = styled.header`
   top: 0px;
   left: 0px;
   right: 0px;
+  z-index: 80;
 `;
 
 export const DivHeader = styled.div`
