@@ -9,7 +9,11 @@ export const GlobalStyle = createGlobalStyle`
 button{
   cursor: pointer;
 }
-
+.App{
+  width: 100vw;
+  height: 100vh;
+  
+}
 a{
   color: unset;
   text-decoration: none;
