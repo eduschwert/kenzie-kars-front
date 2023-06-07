@@ -1,3 +1,3 @@
-export interface iDisplayMenu {
+export interface iDisplay {
   display: boolean;
 }

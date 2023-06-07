@@ -64,6 +64,7 @@ export const HomePageMenuItem = styled.li`
 `;
 
 export const MenuButtons = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -77,6 +78,31 @@ export const AdvertisingButton = styled.div`
   gap: 2rem;
   margin-left: 1rem;
   margin-top: 1rem;
+
+  @media (min-width: 700px) {
+    display: none;
+  }
+`;
+
+export const CancelFilters = styled.div`
+  display: none;
+
+  @media (min-width: 700px) {
+    display: flex;
+    justify-content: center;
+    padding: 0 1rem;
+    gap: 7rem;
+    width: 100%;
+    margin-top: 2rem;
+  }
+`;
+
+export const CancelFiltersNarrow = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+  width: 100%;
+  margin-bottom: 2rem;
 
   @media (min-width: 700px) {
     display: none;

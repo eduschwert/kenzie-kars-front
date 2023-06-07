@@ -5,17 +5,20 @@ import { CarList } from "../../components/carList";
 import { StyledCarList } from "../../components/carList/style";
 import { FilterMenu } from "../../components/filterMenu";
 import { Footer } from "../../components/footer/style";
-import { HeaderLoggedIn } from "../../components/headerLoggedIn";
+// import { HeaderLoggedIn } from "../../components/headerLoggedIn";
 import { HeaderNotLoggedIn } from "../../components/headerNotLoggedIn";
 import { StyledText } from "../../styles/tipography";
 import {
   HomePageContainer,
+  MainHeaderTitleDiv,
   MaskImageDiv,
   SectionHomePageHeader,
   SectionHomePageMain,
   SectionHomePageMainMenu,
   SectionHomePageMainProductGallery,
 } from "./style";
+import { AdvertisingButton } from "../../components/filterMenu/style";
+import { StyledButton } from "../../styles/buttons";
 // import { ProductContext } from "../../contexts/productContext";
 // import { List } from "@mui/material";
 // import { red } from "@mui/material/colors";
@@ -28,7 +31,7 @@ export const HomePage = () => {
     <>
       <HeaderNotLoggedIn />
       <HomePageContainer>
-        <SectionHomePageHeader>
+        <SectionHomePageHeader display={advertising}>
           <MaskImageDiv>
             <div>
               <StyledText
@@ -53,6 +56,16 @@ export const HomePage = () => {
           </SectionHomePageMainMenu>
           <SectionHomePageMainProductGallery display={advertising}>
             <CarList />
+            <AdvertisingButton>
+              {advertising && (
+                <StyledButton
+                  tag="button"
+                  onClick={() => setAdvertising((advertising) => !advertising)}
+                  buttonStyle={window.screen.width < 700 ? "sm" : "bg"}
+                  buttonColor="brand1"
+                >{`Filtros`}</StyledButton>
+              )}
+            </AdvertisingButton>
           </SectionHomePageMainProductGallery>
         </SectionHomePageMain>
       </HomePageContainer>
