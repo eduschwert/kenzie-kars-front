@@ -1,6 +1,5 @@
 import {
   CommentsAboutCar,
-  ContainBackgroundLinear,
   ContainerAnnoucement,
   ContentAnnoucement,
   ContentDescriptionComment,
@@ -14,10 +13,12 @@ import {
   ProfileUser,
 } from "./style";
 import exteriorCarro from "../../imagensMock/exterior-carro.png";
+import { HeaderLoggedIn } from "../../components/headerLoggedIn";
+import { FooterComponent } from "../../components/footer";
 export const AnnoucementPage = () => {
   return (
     <ContainerAnnoucement>
-      <ContainBackgroundLinear></ContainBackgroundLinear>
+      <HeaderLoggedIn />
       <ContentAnnoucement>
         <div className="contentImgs">
           <div className="responsiveImgsAndDescription">
@@ -37,6 +38,19 @@ export const AnnoucementPage = () => {
               </div>
               <button>Comprar</button>
             </InformationCar>
+            <DescriptionCar>
+              <div>
+                <p>Descrição</p>
+                <span>
+                  {" "}
+                  Lorem Ipsum is simply dummy text of the printing and
+                  typesetting industry. Lorem Ipsum has been the industry's
+                  standard dummy text ever since the 1500s, when an unknown
+                  printer took a galley of type and scrambled it to make a type
+                  specimen book.
+                </span>
+              </div>
+            </DescriptionCar>
           </div>
           <div className="responsivePhotosAndProfile">
             <ContentPhotosCar>
@@ -78,18 +92,6 @@ export const AnnoucementPage = () => {
           </div>
         </div>
         <ContentDescriptionComment>
-          <DescriptionCar>
-            <div>
-              <p>Descrição</p>
-              <span>
-                {" "}
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy
-                text ever since the 1500s, when an unknown printer took a galley
-                of type and scrambled it to make a type specimen book.
-              </span>
-            </div>
-          </DescriptionCar>
           <CommentsAboutCar>
             <h2>Comentários</h2>
             <div className="allignCommentAndProfile">
@@ -114,7 +116,7 @@ export const AnnoucementPage = () => {
                   <h2>MA</h2>
                 </div>
                 <p>Marcos Antônio</p>
-                <span> há 3 dias</span>
+                <span> há 7 dias</span>
               </ProfileComment>
               <p>
                 Lorem Ipsum is simply dummy text of the printing and typesetting
@@ -130,7 +132,7 @@ export const AnnoucementPage = () => {
                   <h2>CS</h2>
                 </div>
                 <p>Camila Silva</p>
-                <span> há 3 dias</span>
+                <span> há 1 mês</span>
               </ProfileComment>
               <p>
                 Lorem Ipsum is simply dummy text of the printing and typesetting
@@ -144,16 +146,17 @@ export const AnnoucementPage = () => {
             <div className="allignProfileAndInput">
               <ProfileComment>
                 <div className="photoProfileComment">
-                  <h2>CS</h2>
+                  <h2>SL</h2>
                 </div>
-                <p>Camila Silva</p>
+                <p>Samuel Leão</p>
               </ProfileComment>
-              <input type="text" placeholder="Digitar comentário" />
+              <textarea placeholder="Digite um comentário..." />
               <button>Comentar</button>
             </div>
           </InputAndButtonForComment>
         </ContentDescriptionComment>
       </ContentAnnoucement>
+      <FooterComponent />
     </ContainerAnnoucement>
   );
 };

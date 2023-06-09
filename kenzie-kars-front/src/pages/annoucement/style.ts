@@ -1,43 +1,41 @@
 import styled from "styled-components";
 
 export const ContainerAnnoucement = styled.div`
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: ce;
-  background-color: var(--color-grey7);
-`;
-
-export const ContainBackgroundLinear = styled.div`
-  width: 100%;
-  height: 400px;
-  background-color: var(--color-brand2);
-  background-image: linear-gradient(to top, --color-brand1, --color-brand2);
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  background: linear-gradient(
+    to bottom,
+    var(--color-brand1) 80px,
+    var(--color-brand1) 520px,
+    var(--color-grey7) 530px,
+    var(--color-grey7) 100%
+  );
 `;
 
 export const ContentAnnoucement = styled.div`
+  margin-top: 50px;
   display: flex;
-  justify-content: center;
-  position: fixed;
-  top: 100px;
+  flex-direction: column;
+  max-width: 1300px;
+  margin: 0 auto;
+  margin-top: 78px;
+  gap: 20px;
 
   .contentImgs {
     display: flex;
     gap: 15px;
     flex-wrap: wrap;
-    justify-content: center;
+    -webkit-box-pack: center;
+    justify-content: space-between;
+    margin-top: 50px;
 
     .responsiveImgsAndDescription {
-      max-width: 82%;
+      max-width: 62%;
       display: flex;
       flex-direction: column;
       gap: 20px;
     }
 
     .responsivePhotosAndProfile {
-      max-width: 82%;
+      max-width: 34%;
       display: flex;
       flex-direction: column;
       gap: 20px;
@@ -197,10 +195,7 @@ export const ContentDescriptionComment = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
-  position: absolute;
-  width: 693px;
-  left: 1px;
-  top: 680px;
+  width: 62%;
 `;
 
 export const DescriptionCar = styled.div`
@@ -265,7 +260,7 @@ export const ProfileComment = styled.div`
     background: #e34d8c;
     border-radius: 150px;
     font-weight: 500;
-    font-size: 12px;
+    font-size: 8px;
     line-height: 0px;
     color: #ffffff;
   }
@@ -288,28 +283,34 @@ export const ProfileComment = styled.div`
 export const InputAndButtonForComment = styled.div`
   background-color: var(--color-grey10);
   max-width: 100%;
-  height: 289px;
+  height: 315px;
   border-radius: var(--radius-2);
   display: flex;
   justify-content: center;
   align-items: center;
-
+  padding: 36px 44px;
+  margin-bottom: 50px;
   .allignProfileAndInput {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 20px;
+    width: 48%;
+    position: absolute;
   }
-  input {
-    width: 600px;
+  textarea {
+    width: 100%;
     height: 128px;
+    border-radius: var(--radius-2);
+    padding: 15px;
+    resize: none;
   }
 
   button {
     width: 108px;
     height: 38px;
-    margin-left: 68%;
-    position: absolute;
+    position: relative;
+    margin-left: 82%;
     bottom: 72px;
     background: var(--color-brand1);
     border: 1.5px solid var(--color-brand1);
