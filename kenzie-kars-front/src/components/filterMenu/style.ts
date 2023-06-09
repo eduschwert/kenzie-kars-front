@@ -5,19 +5,21 @@ export const HomePageNav = styled.nav`
   justify-content: space-between;
   align-items: start;
   width: 20%;
+  min-width: 300px;
   padding: 2rem;
   min-height: 10rem;
   min-width: 15rem;
 
-  /* .NavSubItem {
+  .NavSubItem {
     text-align: left;
   }
   .NavNestedListTitle {
+    width: 100%;
     font-size: 1rem;
     text-align: left;
     font-weight: 600;
     font-family: "Lexend", "sans-serif";
-  } */
+  }
 
   @media (min-width: 280px) {
     padding: 1rem;
@@ -45,7 +47,7 @@ export const HomePageNav = styled.nav`
   @media (min-width: 630px) {
     flex-direction: column;
     justify-content: start;
-    width: 30%;
+    width: 100%;
 
     & > nav {
       display: flex;
@@ -58,6 +60,7 @@ export const HomePageNav = styled.nav`
 export const HomePageMenuItem = styled.li`
   margin-bottom: 1.5rem;
   font-size: 24px;
+
   @media (min-width: 280px) {
     font-size: 10px;
   }
@@ -73,8 +76,9 @@ export const MenuButtons = styled.div`
 `;
 
 export const AdvertisingButton = styled.div`
+  width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   gap: 2rem;
   margin-left: 1rem;
   margin-top: 1rem;
@@ -86,14 +90,15 @@ export const AdvertisingButton = styled.div`
 
 export const CancelFilters = styled.div`
   display: none;
+  width: 100%;
 
   @media (min-width: 700px) {
     display: flex;
     justify-content: center;
     padding: 0 1rem;
     gap: 7rem;
-    width: 100%;
     margin-top: 2rem;
+    margin-left: 1rem;
   }
 `;
 
