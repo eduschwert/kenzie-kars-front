@@ -10,7 +10,6 @@ export const GlobalStyle = createGlobalStyle`
 button{
   cursor: pointer;
 }
-
 a{
   color: unset;
   text-decoration: none;
