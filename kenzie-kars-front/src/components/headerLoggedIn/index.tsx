@@ -20,7 +20,10 @@ export function HeaderLoggedIn() {
   return (
     <Header id="header">
       <DivHeader>
-        <img src={logo_blue}></img>
+        <a>
+          <img src={logo_blue}></img>
+        </a>
+
         <DivInfoHeader>
           <div>
             <InitialsCircle text="SL" />
