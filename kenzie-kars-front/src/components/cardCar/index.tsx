@@ -8,9 +8,11 @@ import {
   CarTagActive,
   CarTagInactive,
   CarTagGoodDeal,
+  DivBtnsCard,
 } from "./style";
 import { StyledText } from "../../styles/tipography";
 import { InitialsCircle } from "../initialsCircle";
+import { StyledButton } from "../../styles/buttons";
 
 export function CardCar() {
   return (
@@ -44,7 +46,7 @@ export function CardCar() {
           <StyledText tag="p" textStyle="body-2-400" textColor="grey2">
             {`Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem...`}
           </StyledText>
-          <DivUserInfo>
+          {/* <DivUserInfo>
             {" "}
             <div>
               <InitialsCircle text="SL" />
@@ -52,7 +54,7 @@ export function CardCar() {
             <StyledText tag="p" textStyle="body-1-400" textColor="grey2">
               {`Samuel Leão`}
             </StyledText>
-          </DivUserInfo>
+          </DivUserInfo> */}
           <DivCarDetails>
             <DivCarItems>
               {" "}
@@ -67,6 +69,19 @@ export function CardCar() {
               {`R$10.000,00`}
             </StyledText>
           </DivCarDetails>
+          <DivBtnsCard>
+            {" "}
+            <StyledButton
+              tag="button"
+              buttonStyle={"sm"}
+              buttonColor="outline1"
+            >{`Filtros`}</StyledButton>
+            <StyledButton
+              tag="button"
+              buttonStyle={"sm"}
+              buttonColor="outline1"
+            >{`Ver detalhes`}</StyledButton>
+          </DivBtnsCard>
         </CardSection>
       </a>
     </CardLi>
