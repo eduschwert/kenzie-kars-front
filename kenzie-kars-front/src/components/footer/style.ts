@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Footer = styled.footer`
   background: var(--color-grey0);
-  width: 100vw;
+  width: 100%;
   min-height: 80px;
 `;
 
