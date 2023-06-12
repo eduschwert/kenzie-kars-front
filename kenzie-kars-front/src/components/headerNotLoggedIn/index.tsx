@@ -9,6 +9,7 @@ import logo_blue from "../../assets/logo_blue.png";
 import { StyledText } from "../../styles/tipography";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { useState } from "react";
+import { StyledButton } from "../../styles/buttons";
 
 export function HeaderNotLoggedIn() {
   const [menu, setMenu] = useState(false);
@@ -16,14 +17,19 @@ export function HeaderNotLoggedIn() {
   return (
     <Header id="header">
       <DivHeader>
-        <img src={logo_blue}></img>
+        <a>
+          <img src={logo_blue}></img>
+        </a>
+
         <DivLinkHeader>
           <StyledText tag="a" textStyle="body-1-600" textColor="grey2">
             {`Fazer Login`}
           </StyledText>
-          <StyledText tag="a" textStyle="body-1-600" textColor="grey2">
-            {`Cadastrar`}
-          </StyledText>
+          <StyledButton
+            tag="button"
+            buttonStyle={"bg"}
+            buttonColor="outline1"
+          >{`Cadastrar`}</StyledButton>
         </DivLinkHeader>
         <BtnMenuHeader onClick={() => setMenu(!menu)}>
           {menu ? (
@@ -39,9 +45,11 @@ export function HeaderNotLoggedIn() {
             {`Fazer Login`}
           </StyledText>
 
-          <StyledText tag="a" textStyle="body-1-600" textColor="grey2">
-            {`Cadastrar`}
-          </StyledText>
+          <StyledButton
+            tag="button"
+            buttonStyle={"sm"}
+            buttonColor="outline1"
+          >{`Cadastrar`}</StyledButton>
         </div>
       </DivMenu>
     </Header>

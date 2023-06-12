@@ -1,15 +1,15 @@
-import { ThemeProvider } from "styled-components";
-import { GlobalStyle } from "./styles/globalStyles";
+import ThemeProvider from "@mui/material/styles/ThemeProvider";
 import { HomePage } from "./pages/homePage";
+import { GlobalStyle } from "./styles/globalStyles";
 import { theme } from "./theme";
-import { AnnoucementPage } from "./pages/annoucement";
 
 function App() {
   return (
     <div className="App">
-      <GlobalStyle />
-      <AnnoucementPage />
-      {/* <ThemeProvider theme={theme}><HomePage /></ThemeProvider> */}
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <HomePage />
+      </ThemeProvider>
     </div>
   );
 }
