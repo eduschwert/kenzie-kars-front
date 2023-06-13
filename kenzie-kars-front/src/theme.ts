@@ -9,6 +9,18 @@ export const theme = createTheme({
         },
       },
     },
+    MuiAutocomplete: {
+      styleOverrides: {
+        root: {
+          "&:hover .MuiOutlinedInput-notchedOutline": {
+            borderColor: "#868e96",
+          },
+          "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+            borderColor: "#868e96",
+          },
+        },
+      },
+    },
     MuiTextField: {
       styleOverrides: {
         root: {
@@ -20,10 +32,10 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           "&:hover .MuiOutlinedInput-notchedOutline": {
-            borderColor: "#FF6600",
+            borderColor: "#868e96",
           },
           "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-            borderColor: "#FF6600",
+            borderColor: "#868e96",
           },
         },
       },
@@ -54,3 +66,18 @@ export const theme = createTheme({
     },
   },
 });
+
+// palette: {
+//   primary: {
+//     light: '#757ce8',
+//     main: '#3f50b5',
+//     dark: '#002884',
+//     contrastText: '#fff',
+//   },
+//   secondary: {
+//     light: '#ff7961',
+//     main: '#f44336',
+//     dark: '#ba000d',
+//     contrastText: '#000',
+//   },
+// },
