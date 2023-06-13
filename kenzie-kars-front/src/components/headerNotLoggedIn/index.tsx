@@ -14,7 +14,7 @@ import { useLocation } from "react-router-dom";
 
 export function HeaderNotLoggedIn() {
   const [menu, setMenu] = useState(false);
-  const location = useLocation();
+  // const location = useLocation();
 
   return (
     <Header id="header">
@@ -27,14 +27,16 @@ export function HeaderNotLoggedIn() {
           <StyledButton
             tag="a"
             buttonStyle={"bg"}
-            buttonColor={location.pathname !== "/login" ? "link" : "disable"}
+            buttonColor="link"
+            // buttonColor={location.pathname !== "/login" ? "link" : "disable"}
           >{`Fazer Login`}</StyledButton>
           <StyledButton
-            tag="button"
+            tag="a"
             buttonStyle={"bg"}
-            buttonColor={
-              location.pathname !== "/register" ? "outline1" : "disable"
-            }
+            // buttonColor={
+            //   location.pathname !== "/register" ? "outline1" : "disable"
+            // }
+            buttonColor="outline1"
           >{`Cadastrar`}</StyledButton>
         </DivLinkHeader>
         <BtnMenuHeader onClick={() => setMenu(!menu)}>
@@ -49,15 +51,17 @@ export function HeaderNotLoggedIn() {
         <div>
           <StyledButton
             tag="a"
-            buttonStyle={"bg"}
-            buttonColor={location.pathname !== "/login" ? "link" : "disable"}
+            buttonStyle={"sm"}
+            // buttonColor={location.pathname !== "/login" ? "link" : "disable"}
+            buttonColor="link"
           >{`Fazer Login`}</StyledButton>
           <StyledButton
-            tag="button"
-            buttonStyle={"sm"}
-            buttonColor={
-              location.pathname !== "/register" ? "outline1" : "disable"
-            }
+            tag="a"
+            buttonStyle={"sm-header"}
+            // buttonColor={
+            //   location.pathname !== "/register" ? "outline1" : "disable"
+            // }
+            buttonColor="outline1"
           >{`Cadastrar`}</StyledButton>
         </div>
       </DivMenu>
