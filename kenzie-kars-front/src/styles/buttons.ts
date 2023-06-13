@@ -62,6 +62,17 @@ export const Button = (buttonStyle: string) => {
         font-size: 16px;
         font-size: 16px;
       `;
+    case "sm-header":
+      return css`
+        height: 38px;
+        padding: 12px 27px;
+        border-radius: var(--radius-2);
+
+        font-family: var(--font-family-inter);
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 0px;
+      `;
 
     default:
       return css`

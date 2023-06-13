@@ -1,8 +1,10 @@
 import ThemeProvider from "@mui/material/styles/ThemeProvider";
 import { GlobalStyle } from "./styles/globalStyles";
 import { theme } from "./theme";
+
 import { RoutesMain } from "./routes";
 import { ToastContainer } from "react-toastify";
+
 
 function App() {
   return (
@@ -10,6 +12,7 @@ function App() {
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <RoutesMain />
+
         <ToastContainer
           position="top-right"
           autoClose={2000}
@@ -22,6 +25,7 @@ function App() {
           pauseOnHover
           theme="light"
         />
+
       </ThemeProvider>
     </div>
   );

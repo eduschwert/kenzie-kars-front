@@ -13,7 +13,7 @@ export const CardLi = styled.li`
   }
   & > a > div {
     width: 100%;
-    height: 30%;
+    min-height: 30%;
     background-color: var(--color-grey7);
     border: 2px solid transparent;
     position: relative;
@@ -26,6 +26,8 @@ export const CardLi = styled.li`
 export const CardSection = styled.section`
   padding-top: 15px;
   padding-right: 12px;
+  padding-left: 12px;
+  padding-bottom: 15px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -88,4 +90,11 @@ export const CarTagGoodDeal = styled.div`
   right: 0px;
   padding: 4px 4px 4px 4px;
   border: 1px solid var(--color-success2);
+`;
+
+export const DivBtnsCard = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 15px;
 `;
