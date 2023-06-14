@@ -24,9 +24,9 @@ import { iRegisterFormValues } from "./types";
 export const RegisterFormMui = () => {
   const { spinner, setSpinner, errorApi, setErrorApi, registerUser } =
     useContext(UserContext);
-  const [loadingRegForm, setLoadingRegForm] = useState(false);
+  // const [loadingRegForm, setLoadingRegForm] = useState(false);
 
-  const { stateList, cityList, getStates, getCitiesOfState, setSelectedState } =
+  const { stateList, cityList, getStates, getCitiesOfState } =
     useContext(CitiesContext);
   const [errorRegister, setErrorRegister] = useState(false);
 
@@ -82,6 +82,7 @@ export const RegisterFormMui = () => {
     getStates();
     // eslint-disable-next-line react-hooks/exhaustive-deps
     console.log("NEW STATE LIST", stateList);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -208,6 +209,9 @@ export const RegisterFormMui = () => {
               <TextField
                 {...params}
                 label={"Estado"}
+                InputLabelProps={{
+                  style: { fontSize: "12px", padding: "0.3rem 0" },
+                }}
                 {...register("address.state")}
                 error={!!errors.address?.state}
                 helperText={
@@ -228,6 +232,9 @@ export const RegisterFormMui = () => {
               <TextField
                 {...params}
                 label={"Cidade"}
+                InputLabelProps={{
+                  style: { fontSize: "12px", padding: "0.3rem 0" },
+                }}
                 {...register("address.city")}
                 error={!!errors.address?.city}
                 helperText={errors.address?.city && errors.address.city.message}

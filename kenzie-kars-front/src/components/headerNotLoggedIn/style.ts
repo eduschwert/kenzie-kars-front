@@ -16,7 +16,7 @@ const menuAnimation = keyframes`
 
 `;
 export const Header = styled.header`
-  width: 100vw;
+  width: 100%;
   height: 80px;
   border-bottom: 2px solid var(--color-grey6);
   display: flex;

@@ -16,6 +16,8 @@ export const CssTextField = styled(TextField)({
     color: "var(--color-brand1)",
   },
   "& .MuiFormLabel-root": {
+    fontSize: "0.7rem",
+    padding: "0.3rem 0",
     color: "var(--color-grey3)",
   },
   "& .MuiOutlinedInput-root": {
@@ -27,6 +29,7 @@ export const CssTextField = styled(TextField)({
     },
   },
   "& .MuiAutocomplete-input-root": {
+    fontSize: "0.8rem",
     "& fieldset": {
       border: "2px solid var(--color-grey4)",
     },
