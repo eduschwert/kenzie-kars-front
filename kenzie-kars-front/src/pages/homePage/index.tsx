@@ -2,15 +2,13 @@
 // s
 import { useState } from "react";
 import { CarList } from "../../components/carList";
-import { StyledCarList } from "../../components/carList/style";
+
 import { FilterMenu } from "../../components/filterMenu";
-import { Footer } from "../../components/footer/style";
-// import { HeaderLoggedIn } from "../../components/headerLoggedIn";
+
 import { HeaderNotLoggedIn } from "../../components/headerNotLoggedIn";
 import { StyledText } from "../../styles/tipography";
 import {
   HomePageContainer,
-  MainHeaderTitleDiv,
   MaskImageDiv,
   SectionHomePageHeader,
   SectionHomePageMain,
@@ -19,10 +17,7 @@ import {
 } from "./style";
 import { AdvertisingButton } from "../../components/filterMenu/style";
 import { StyledButton } from "../../styles/buttons";
-// import { ProductContext } from "../../contexts/productContext";
-// import { List } from "@mui/material";
-// import { red } from "@mui/material/colors";
-// import { FilterMenu } from "../../components/filterMenu";
+import { FooterComponent } from "../../components/footer";
 
 export const HomePage = () => {
   const [advertising, setAdvertising] = useState<boolean>(false);
@@ -31,7 +26,7 @@ export const HomePage = () => {
     <>
       <HeaderNotLoggedIn />
       <HomePageContainer>
-        <SectionHomePageHeader display={advertising}>
+        <SectionHomePageHeader id="advertising" display={advertising}>
           <MaskImageDiv>
             <div>
               <StyledText
@@ -69,7 +64,7 @@ export const HomePage = () => {
           </SectionHomePageMainProductGallery>
         </SectionHomePageMain>
       </HomePageContainer>
-      <Footer />
+      <FooterComponent />
     </>
   );
 };

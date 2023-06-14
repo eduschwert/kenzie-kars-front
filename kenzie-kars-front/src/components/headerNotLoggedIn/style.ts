@@ -56,26 +56,6 @@ export const DivLinkHeader = styled.div`
     gap: 32px;
     padding-left: 37px;
   }
-  & > div > a {
-    position: relative;
-    overflow: hidden;
-    background: linear-gradient(
-      to right,
-      var(--color-brand1),
-      var(--color-brand1) 50%,
-      var(--color-grey2) 50%
-    );
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-size: 200% 100%;
-    background-position: 100%;
-    transition: background-position 380ms ease;
-  }
-  & > div > a:hover {
-    color: var(--color-brand1);
-    background-position: 0 100%;
-  }
 `;
 
 export const BtnMenuHeader = styled.button`
@@ -102,33 +82,16 @@ export const DivMenu = styled.div<iDiv>`
   width: 100vw;
   position: absolute;
   display: ${({ display }) => (display === true ? "flex" : " none")};
-
+  background-color: white;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
 
   & > div {
     padding: 25px 15px 25px 15px;
     display: flex;
     flex-direction: column;
-    gap: 18px;
+    gap: 35px;
   }
-  & > div > div > a {
-    position: relative;
-    overflow: hidden;
-    background: linear-gradient(
-      to right,
-      var(--color-brand1),
-      var(--color-brand1) 50%,
-      var(--color-grey2) 50%
-    );
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-size: 200% 100%;
-    background-position: 100%;
-    transition: background-position 380ms ease;
-  }
-  & > div > div > a:hover {
-    color: var(--color-brand1);
-    background-position: 0 100%;
+  & > div {
+    width: 100%;
   }
 `;

@@ -13,14 +13,16 @@ import { StyledText } from "../../styles/tipography";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { useState } from "react";
 import { InitialsCircle } from "../initialsCircle";
+import { useLocation } from "react-router-dom";
 
 export function HeaderLoggedIn() {
   const [menu, setMenu] = useState(false);
+  const location = useLocation();
 
   return (
     <Header id="header">
       <DivHeader>
-        <a>
+        <a href={location.pathname !== "/" ? "/" : ""}>
           <img src={logo_blue}></img>
         </a>
 

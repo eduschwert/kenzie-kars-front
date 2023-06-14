@@ -6,29 +6,38 @@ import {
   Header,
 } from "./style";
 import logo_blue from "../../assets/logo_blue.png";
-import { StyledText } from "../../styles/tipography";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { useState } from "react";
 import { StyledButton } from "../../styles/buttons";
+import { useLocation } from "react-router-dom";
 
 export function HeaderNotLoggedIn() {
   const [menu, setMenu] = useState(false);
+  const location = useLocation();
 
   return (
     <Header id="header">
       <DivHeader>
-        <a>
+        <a href={location.pathname !== "/" ? "/" : ""}>
           <img src={logo_blue}></img>
         </a>
 
         <DivLinkHeader>
-          <StyledText tag="a" textStyle="body-1-600" textColor="grey2">
-            {`Fazer Login`}
-          </StyledText>
           <StyledButton
-            tag="button"
+            href="/login"
+            tag="a"
             buttonStyle={"bg"}
-            buttonColor="outline1"
+            buttonColor={location.pathname !== "/login" ? "link" : "disable"}
+            disabled={location.pathname !== "/login" ? false : true}
+          >{`Fazer Login`}</StyledButton>
+          <StyledButton
+            href="/register"
+            tag="a"
+            buttonStyle={"bg"}
+            buttonColor={
+              location.pathname !== "/register" ? "outline1" : "disable"
+            }
+            disabled={location.pathname !== "/register" ? false : true}
           >{`Cadastrar`}</StyledButton>
         </DivLinkHeader>
         <BtnMenuHeader onClick={() => setMenu(!menu)}>
@@ -41,14 +50,21 @@ export function HeaderNotLoggedIn() {
       </DivHeader>
       <DivMenu display={menu}>
         <div>
-          <StyledText tag="a" textStyle="body-1-600" textColor="grey2">
-            {`Fazer Login`}
-          </StyledText>
-
           <StyledButton
-            tag="button"
-            buttonStyle={"sm"}
-            buttonColor="outline1"
+            href="/login"
+            tag="a"
+            buttonStyle={"sm-header"}
+            buttonColor={location.pathname !== "/login" ? "link" : "disable"}
+            disabled={location.pathname !== "/login" ? false : true}
+          >{`Fazer Login`}</StyledButton>
+          <StyledButton
+            href="/register"
+            tag="a"
+            buttonStyle={"sm-header"}
+            buttonColor={
+              location.pathname !== "/register" ? "outline1" : "disable"
+            }
+            disabled={location.pathname !== "/register" ? false : true}
           >{`Cadastrar`}</StyledButton>
         </div>
       </DivMenu>
