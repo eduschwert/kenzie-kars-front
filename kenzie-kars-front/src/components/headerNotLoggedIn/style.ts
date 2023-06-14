@@ -82,7 +82,7 @@ export const DivMenu = styled.div<iDiv>`
   width: 100vw;
   position: absolute;
   display: ${({ display }) => (display === true ? "flex" : " none")};
-
+  background-color: white;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
 
   & > div {

@@ -11,7 +11,7 @@ export function FooterComponent() {
         <StyledText tag="p" textStyle="body-2-400" textColor="white">
           {`@ 2022 - Todos os direitos reservados`}
         </StyledText>
-        <LinkFooter href="#id">
+        <LinkFooter href="#header">
           <MdKeyboardDoubleArrowUp size="16px" color="#FFFFFF" />
         </LinkFooter>
       </DivFooter>

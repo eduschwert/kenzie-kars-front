@@ -87,8 +87,8 @@ export const RegisterFormMui = () => {
   return (
     <StyledRegForm>
       <StyledRegisterTitle>
-        <StyledText tag="h3" textStyle="heading-5-500">{`Cadastro`}</StyledText>
-        <StyledText tag="p" textStyle="body-2-500">
+        <StyledText tag="h3" textStyle="heading-4-500">{`Cadastro`}</StyledText>
+        <StyledText tag="p" textStyle="body-1-600">
           {`Informações pessoais`}
         </StyledText>
       </StyledRegisterTitle>
@@ -177,7 +177,7 @@ export const RegisterFormMui = () => {
           helperText={errors.description && errors.description.message}
         />
 
-        <StyledText tag="p" textStyle="body-2-500">
+        <StyledText tag="p" textStyle="body-1-600">
           {`Informações de endereço`}
         </StyledText>
 
@@ -281,8 +281,8 @@ export const RegisterFormMui = () => {
           }
         />
 
-        <StyledText tag="p" textStyle="body-2-500">
-          {`Tipo de conta`}
+        <StyledText tag="p" textStyle="body-1-600">
+          {`Tipo de conta:`}
         </StyledText>
 
         <SellerOrBuyerButtons>
