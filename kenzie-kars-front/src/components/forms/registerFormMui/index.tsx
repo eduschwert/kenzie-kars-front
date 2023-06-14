@@ -206,7 +206,7 @@ export const RegisterFormMui = () => {
             onChange={(event, value) => getCitiesOfState(event, value)}
             onBlur={() => trigger("address.state")}
             renderInput={(params) => (
-              <TextField
+              <CssTextField
                 {...params}
                 label={"Estado"}
                 InputLabelProps={{
@@ -229,7 +229,7 @@ export const RegisterFormMui = () => {
             sx={{ minWidth: "63%" }}
             onBlur={() => trigger("address.city")}
             renderInput={(params) => (
-              <TextField
+              <CssTextField
                 {...params}
                 label={"Cidade"}
                 InputLabelProps={{

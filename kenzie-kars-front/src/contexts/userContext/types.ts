@@ -31,7 +31,6 @@ export interface iUserRegisterInformation extends iUserLoginInformation {
   address: iUserAddress;
   is_seller: boolean;
   password: string;
-  // passwordConfirmation?: string;
 }
 
 export interface iUserProviderProps {
