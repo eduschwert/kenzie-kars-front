@@ -26,7 +26,7 @@ export const HomePage = () => {
     <>
       <HeaderNotLoggedIn />
       <HomePageContainer>
-        <SectionHomePageHeader display={advertising}>
+        <SectionHomePageHeader id="advertising" display={advertising}>
           <MaskImageDiv>
             <div>
               <StyledText

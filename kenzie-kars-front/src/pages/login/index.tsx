@@ -9,7 +9,7 @@ export const Login = () => {
       <HeaderNotLoggedIn />
       <main>
         <LoginSection>
-          <LoginFormDiv>
+          <LoginFormDiv id="form_login">
             <LoginFormMui />
           </LoginFormDiv>
         </LoginSection>

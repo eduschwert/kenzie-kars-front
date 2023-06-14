@@ -6,7 +6,6 @@ import {
   Header,
 } from "./style";
 import logo_blue from "../../assets/logo_blue.png";
-import { StyledText } from "../../styles/tipography";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { useState } from "react";
 import { StyledButton } from "../../styles/buttons";
@@ -19,7 +18,7 @@ export function HeaderNotLoggedIn() {
   return (
     <Header id="header">
       <DivHeader>
-        <a>
+        <a href={location.pathname !== "/" ? "/" : ""}>
           <img src={logo_blue}></img>
         </a>
 
@@ -52,15 +51,15 @@ export function HeaderNotLoggedIn() {
       <DivMenu display={menu}>
         <div>
           <StyledButton
-            tag="Link"
-            to="/login"
-            buttonStyle={"sm"}
+            href="/login"
+            tag="a"
+            buttonStyle={"sm-header"}
             buttonColor={location.pathname !== "/login" ? "link" : "disable"}
             disabled={location.pathname !== "/login" ? false : true}
           >{`Fazer Login`}</StyledButton>
           <StyledButton
-            tag="Link"
-            to="/register"
+            href="/register"
+            tag="a"
             buttonStyle={"sm-header"}
             buttonColor={
               location.pathname !== "/register" ? "outline1" : "disable"
