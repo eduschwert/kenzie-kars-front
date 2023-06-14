@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { Link } from "react-router-dom";
 
 interface iBaseButtonProps {
   tag: string;
@@ -8,6 +9,7 @@ interface iBaseButtonProps {
   disabled?: boolean;
   onClick?: () => void;
   href?: string;
+  to?: string;
 }
 
 export const BaseButton = ({
@@ -18,6 +20,7 @@ export const BaseButton = ({
   disabled,
   onClick,
   href,
+  to,
 }: iBaseButtonProps) => {
   return (
     <div>

@@ -14,7 +14,7 @@ import { useLocation } from "react-router-dom";
 
 export function HeaderNotLoggedIn() {
   const [menu, setMenu] = useState(false);
-  // const location = useLocation();
+  const location = useLocation();
 
   return (
     <Header id="header">
@@ -25,18 +25,20 @@ export function HeaderNotLoggedIn() {
 
         <DivLinkHeader>
           <StyledButton
+            href="/login"
             tag="a"
             buttonStyle={"bg"}
-            buttonColor="link"
-            // buttonColor={location.pathname !== "/login" ? "link" : "disable"}
+            buttonColor={location.pathname !== "/login" ? "link" : "disable"}
+            disabled={location.pathname !== "/login" ? false : true}
           >{`Fazer Login`}</StyledButton>
           <StyledButton
+            href="/register"
             tag="a"
             buttonStyle={"bg"}
-            // buttonColor={
-            //   location.pathname !== "/register" ? "outline1" : "disable"
-            // }
-            buttonColor="outline1"
+            buttonColor={
+              location.pathname !== "/register" ? "outline1" : "disable"
+            }
+            disabled={location.pathname !== "/register" ? false : true}
           >{`Cadastrar`}</StyledButton>
         </DivLinkHeader>
         <BtnMenuHeader onClick={() => setMenu(!menu)}>
@@ -50,18 +52,20 @@ export function HeaderNotLoggedIn() {
       <DivMenu display={menu}>
         <div>
           <StyledButton
-            tag="a"
+            tag="Link"
+            to="/login"
             buttonStyle={"sm"}
-            // buttonColor={location.pathname !== "/login" ? "link" : "disable"}
-            buttonColor="link"
+            buttonColor={location.pathname !== "/login" ? "link" : "disable"}
+            disabled={location.pathname !== "/login" ? false : true}
           >{`Fazer Login`}</StyledButton>
           <StyledButton
-            tag="a"
+            tag="Link"
+            to="/register"
             buttonStyle={"sm-header"}
-            // buttonColor={
-            //   location.pathname !== "/register" ? "outline1" : "disable"
-            // }
-            buttonColor="outline1"
+            buttonColor={
+              location.pathname !== "/register" ? "outline1" : "disable"
+            }
+            disabled={location.pathname !== "/register" ? false : true}
           >{`Cadastrar`}</StyledButton>
         </div>
       </DivMenu>

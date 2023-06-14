@@ -4,7 +4,6 @@ import { useState } from "react";
 import { CarList } from "../../components/carList";
 
 import { FilterMenu } from "../../components/filterMenu";
-import { Footer } from "../../components/footer/style";
 
 import { HeaderNotLoggedIn } from "../../components/headerNotLoggedIn";
 import { StyledText } from "../../styles/tipography";
@@ -18,6 +17,7 @@ import {
 } from "./style";
 import { AdvertisingButton } from "../../components/filterMenu/style";
 import { StyledButton } from "../../styles/buttons";
+import { FooterComponent } from "../../components/footer";
 
 export const HomePage = () => {
   const [advertising, setAdvertising] = useState<boolean>(false);
@@ -64,7 +64,7 @@ export const HomePage = () => {
           </SectionHomePageMainProductGallery>
         </SectionHomePageMain>
       </HomePageContainer>
-      <Footer />
+      <FooterComponent />
     </>
   );
 };
