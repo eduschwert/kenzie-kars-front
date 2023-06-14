@@ -5,15 +5,15 @@ const addressSchema = yup.object().shape({
     .string()
     .required("CEP é obrigatório")
     .max(8, "CEP com max de 8 caracteres"),
-  state: yup.string().required("Estado obrigatório"),
-  city: yup.string().required("Cidade obrigatória"),
+  state: yup.string().required("Estado é obrigatório"),
+  city: yup.string().required("Cidade é obrigatória"),
   street_name: yup
     .string()
     .required("Rua é obrigatória")
     .max(60, "Rua com max de 60 caracteres"),
   street_number: yup
     .string()
-    .required("Número obrigatório")
+    .required("Número é obrigatório")
     .max(10, "Número com max de 10 caracteres"),
   complement: yup.string().max(8, "Número com max de 8 caracteres"),
 });

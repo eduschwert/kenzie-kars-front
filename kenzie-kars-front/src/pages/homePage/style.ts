@@ -16,7 +16,7 @@ export const HomePageContainer = styled.main`
 export const MaskImageDiv = styled.div`
   margin-top: 0;
   height: 500px;
-  width: 100vw;
+  width: 100%;
 
   background-image: linear-gradient(
       to bottom,
@@ -63,7 +63,7 @@ export const SectionHomePageHeader = styled.div<iDisplay>`
 
   @media (min-width: 700px) {
     display: flex;
-    width: 100vw;
+    width: 100%;
   }
 `;
 
@@ -73,7 +73,7 @@ export const SectionHomePageMain = styled.div`
   align-items: space-between;
   justify-content: flex-start;
   text-align: center;
-  gap: 2rem;
+  gap: 1rem;
   margin: 0 auto;
 `;
 
@@ -84,12 +84,12 @@ export const SectionHomePageMainMenu = styled.div<iDisplay>`
   flex-direction: row;
   align-items: space-between;
   justify-content: space-between;
-  text-align: center;
+  /* text-align: center; */
   gap: 2rem;
   padding: 2rem;
 
   @media (min-width: 700px) {
-    width: 30%;
+    width: 40%;
     display: flex;
   }
 `;
@@ -121,7 +121,7 @@ export const SectionHomePageMainProductGallery = styled.div<iDisplay>`
   margin-bottom: 2rem;
 
   @media (min-width: 700px) {
-    min-width: 70%;
+    min-width: 65%;
     display: flex;
     align-items: space-between;
     justify-content: space-between;

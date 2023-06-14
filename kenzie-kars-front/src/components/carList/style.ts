@@ -2,60 +2,23 @@ import styled from "styled-components";
 
 export const StyledCarList = styled.ul`
   width: 100%;
-  display: flex;
-  justify-content: space-around;
-  align-items: space-around;
-  gap: 1.5rem;
-  margin: 0 auto;
+  display: grid;
   margin-top: 2rem;
-  padding-bottom: 1rem;
-  overflow-x: scroll;
-  flex-wrap: wrap;
 
-  @media (min-width: 760px) {
-    & {
-      grid-template-columns: 285px 285px;
-      grid-row-gap: 24px;
-      gap: 24px;
-      overflow-x: hidden;
-      flex-wrap: wrap;
-    }
+  @media (min-width: 700px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
   }
 
-  @media (min-width: 900px) {
-    & {
-      grid-template-columns: 285px 285px 285px;
-      gap: 24px;
-      grid-row-gap: 24px;
-      overflow-x: hidden;
-      flex-wrap: wrap;
-    }
+  @media (min-width: 1100px) {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
   }
 
-  /* @media (min-width: 700px) {
-    max-width: 600px;
+  @media (min-width: 1460px) {
     display: grid;
-    grid-template-columns: auto auto;
-    gap: 1rem;
-    overflow-x: hidden;
-    flex-wrap: wrap;
+    grid-template-columns: repeat(5, 1fr);
   }
-
-  @media (min-width: 900px) {
-    max-width: 800px;
-    display: grid;
-    grid-template-columns: auto auto auto;
-    gap: 1rem;
-    flex-wrap: wrap;
-    overflow-x: hidden; */
-
-  /* @media (min-width: 1200px) {
-    max-width: 1000px;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
-    overflow-x: none;
-    flex-wrap: wrap; */
 `;
 
 export const StyledNoCarsFound = styled.div`

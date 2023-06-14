@@ -28,7 +28,6 @@ ISelectProps) => {
   const { filterConditions, setFilterConditions } = useContext(ProductContext);
 
   const filterItemSelect = (primary: string, e: string) => {
-    console.log("%%%%%%%%%%%%%%%", e);
     switch (primary) {
       case "Marca": {
         console.log(primary);
