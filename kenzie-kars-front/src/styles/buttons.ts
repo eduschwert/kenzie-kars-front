@@ -118,6 +118,7 @@ export const StyledButton = styled(BaseButton)<iStyledButtonProps>`
           background-color: var(--color-grey5);
           color: var(--white-fixed);
           border: solid 1.5px var(--color-grey5);
+          padding: 12px 34px;
         `;
       case "brand1":
         return css`
@@ -168,6 +169,7 @@ export const StyledButton = styled(BaseButton)<iStyledButtonProps>`
           background-color: var(--color-grey10);
           color: var(--color-grey0);
           border: solid 1.5px var(--color-grey0);
+          padding: 12px 27px;
 
           :hover {
             background-color: var(--color-grey1);
