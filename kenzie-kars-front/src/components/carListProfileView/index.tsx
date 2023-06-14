@@ -1,6 +1,6 @@
 import { StyledCarList } from "./style";
 
-export const CarListProfileSellerPage = () => {
+export const CarListProfileView = () => {
   return (
     <StyledCarList>
       <h1>oi</h1>

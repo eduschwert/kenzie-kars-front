@@ -1,9 +1,14 @@
 import { createPortal } from "react-dom";
+import { ReactNode, useEffect, useRef } from "react";
 import { Container } from "./styles";
-import { useEffect, useRef } from "react";
-import { iModalProps } from "./types";
 
-export const Modal = ({ toggleModal, children }: iModalProps) => {
+interface ModalProps {
+  toggleModal: () => void;
+  blockClosing?: boolean;
+  children: ReactNode;
+}
+
+export const Modal = ({ toggleModal, children, blockClosing }: ModalProps) => {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -30,7 +35,7 @@ export const Modal = ({ toggleModal, children }: iModalProps) => {
 
   return createPortal(
     <Container>
-      <div ref={ref}>{children}</div>
+      <div ref={blockClosing ? null : ref}>{children}</div>
     </Container>,
     document.body
   );

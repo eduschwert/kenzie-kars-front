@@ -12,7 +12,7 @@ import { fipeApi } from "../../services/fipeApi";
 import { AxiosResponse } from "axios";
 import { CssTextField } from "../forms/muiStyle";
 import { Autocomplete } from "@mui/material";
-import { api } from "../../services";
+import { api } from "../../services/api";
 
 export const ModalAddCar = ({ toggleModal }: iModalAddCarProps) => {
   const [cars, setCars] = useState([] as Array<iVehicleFipeApi>);

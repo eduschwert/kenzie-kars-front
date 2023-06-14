@@ -11,9 +11,9 @@ import {
   StyledDiv,
 } from "./style";
 import { ModalAddCar } from "../../components/ModalAddCar";
-import { CarListProfileSellerPage } from "../../components/carListProfileSellerPage";
+import { CarListProfileSellerPage } from "../../components/carListProfileView";
 
-export const ProfileSellerPage = () => {
+export const ProfileView = () => {
   const [isOpenModal, setIsOpenModal] = useState(false);
 
   const toggleModal = () => setIsOpenModal(!isOpenModal);

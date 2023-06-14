@@ -79,8 +79,9 @@ export const UserProvider = ({ children }: iChildren) => {
       const { accessToken, user: userResponse } = response.data;
       window.localStorage.clear();
       window.localStorage.setItem("@KenzieKars:token", accessToken);
+      api.defaults.headers.common.authorization = `Bearer ${response.data.token}`;
       setUser(userResponse);
-      navigate("/");
+      navigate("/profileview");
     } catch (error) {
       const currentError = error as AxiosError<iDefaultErrorResponse>;
       console.error(error);

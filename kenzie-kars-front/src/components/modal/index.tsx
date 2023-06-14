@@ -1,6 +1,6 @@
 import { createPortal } from "react-dom";
 import { ReactNode, useEffect, useRef } from "react";
-import { Container } from "@mui/material";
+import { Container } from "./styles";
 
 interface ModalProps {
   toggleModal: () => void;
@@ -21,9 +21,9 @@ export const Modal = ({ toggleModal, children, blockClosing }: ModalProps) => {
         return;
       }
 
-      if (!ref.current.contains(event.target as HTMLElement)) {
-        toggleModal();
-      }
+      // if (!ref.current.contains(event.target as HTMLElement)) {
+      //   toggleModal();
+      // }
     };
 
     window.addEventListener("mousedown", handleClick);
