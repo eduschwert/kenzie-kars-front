@@ -13,7 +13,7 @@ export const Container = styled.div`
   align-items: flex-start;
 
   > div {
-    margin-top: 78px;
+    margin: 78px 0;
     background: var(--white-fixed);
     border-radius: var(--radius-1);
     width: 520px;

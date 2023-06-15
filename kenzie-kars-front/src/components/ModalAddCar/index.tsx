@@ -14,12 +14,15 @@ import { CssTextField } from "../forms/muiStyle";
 import { Autocomplete } from "@mui/material";
 import { api } from "../../services/api";
 
-export const ModalAddCar = ({ toggleModal }: iModalAddCarProps) => {
+export const ModalAddCar = ({
+  toggleModal,
+  setVehicles,
+}: iModalAddCarProps) => {
   const [cars, setCars] = useState([] as Array<iVehicleFipeApi>);
   const [brands, setBrands] = useState([] as Array<string>);
   const [models, setModels] = useState([] as Array<string>);
-  const [years, setYears] = useState([] as Array<string>);
-  const [fuels, setFuels] = useState([] as Array<string>);
+  const [year, setYear] = useState("");
+  const [fuel, setFuel] = useState(0);
   const [fipePrice, setFipePrice] = useState(0);
 
   const fuelsOptions = ["gasolina", "álcool", "híbrido"];
@@ -50,8 +53,6 @@ export const ModalAddCar = ({ toggleModal }: iModalAddCarProps) => {
     defaultValues: {
       brand: "",
       model: "",
-      year: "",
-      fuel: "",
       mileage: "",
       color: "",
       price: "",
@@ -68,11 +69,9 @@ export const ModalAddCar = ({ toggleModal }: iModalAddCarProps) => {
   ) => {
     setValue("brand", value || "");
     setValue("model", "");
-    setValue("year", "");
-    setValue("fuel", "");
     setModels([]);
-    setYears([]);
-    setFuels([]);
+    setYear("");
+    setFuel(0);
     setFipePrice(0);
 
     if (value) {
@@ -93,57 +92,16 @@ export const ModalAddCar = ({ toggleModal }: iModalAddCarProps) => {
     value: string | null
   ) => {
     setValue("model", value || "");
-    setValue("year", "");
-    setValue("fuel", "");
-    setYears([]);
-    setFuels([]);
-    setFipePrice(0);
 
+    let car;
     if (value) {
-      const filteredYears = [
-        ...new Set(
-          cars.filter((car) => car.name === value).map((car) => car.year)
-        ),
-      ];
-      setYears([...filteredYears, ""]);
+      car = cars.find((car) => car.name === value);
     }
-  };
 
-  const handleYearChange = (
-    _: SyntheticEvent<Element, Event>,
-    value: string | null
-  ) => {
-    setValue("year", value || "");
-    setValue("fuel", "");
-    setFuels([]);
-    setFipePrice(0);
-
-    if (value) {
-      const filteredFuels = [
-        ...new Set(
-          cars
-            .filter((car) => car.name === watch("model") && car.year === value)
-            .map((car) => fuelsOptions[car.fuel - 1])
-        ),
-      ];
-      setFuels([...filteredFuels, ""]);
-    }
-  };
-
-  const handleFuelChange = (
-    _: SyntheticEvent<Element, Event>,
-    value: string | null
-  ) => {
-    setValue("fuel", value || "");
-    const selectedCar = cars.find(
-      (car) =>
-        car.name === watch("model") &&
-        car.year === watch("year") &&
-        fuelsOptions[car.fuel - 1] === value
-    );
-
-    if (selectedCar) {
-      setFipePrice(selectedCar.value);
+    if (car) {
+      setYear(car.year);
+      setFuel(car.fuel);
+      setFipePrice(car.value);
     }
   };
 
@@ -152,13 +110,21 @@ export const ModalAddCar = ({ toggleModal }: iModalAddCarProps) => {
     data = {
       ...data,
       fipe_price: fipePrice,
+      year: year,
       fuel: fuelNumber + 1,
       mileage: Number(data.mileage),
       price: Number(data.price),
       images: [data.image1, data.image2],
     };
     try {
+      const token = localStorage.getItem("@KenzieKars:token");
+      api.defaults.headers.common.authorization = `Bearer ${token}`;
+
       const response = await api.post("vehicles", data);
+      setVehicles((previousVehicles) => [
+        ...(previousVehicles || []),
+        response.data,
+      ]);
       toggleModal();
     } catch (error) {
       console.error(error);
@@ -232,59 +198,25 @@ export const ModalAddCar = ({ toggleModal }: iModalAddCarProps) => {
             )}
           />
           <Flex>
-            <Controller
-              control={control}
-              name="year"
-              render={({ field }) => (
-                <Autocomplete
-                  {...field}
-                  options={years}
-                  renderInput={(params) => (
-                    <CssTextField
-                      {...params}
-                      label="Ano"
-                      error={!!errors.year}
-                      helperText={errors.year?.message}
-                      variant="outlined"
-                      size="medium"
-                      type="text"
-                    />
-                  )}
-                  onChange={(event, value) => {
-                    field.onChange(value);
-                    handleYearChange(event, value);
-                  }}
-                  disabled={!watch("brand") || !watch("model")}
-                />
-              )}
+            <CssTextField
+              value={year}
+              label="Ano"
+              variant="outlined"
+              size="medium"
+              type="text"
+              InputProps={{
+                readOnly: true,
+              }}
             />
-            <Controller
-              control={control}
-              name="fuel"
-              render={({ field }) => (
-                <Autocomplete
-                  {...field}
-                  options={fuels}
-                  renderInput={(params) => (
-                    <CssTextField
-                      {...params}
-                      label="Combustível"
-                      error={!!errors.fuel}
-                      helperText={errors.fuel?.message}
-                      variant="outlined"
-                      size="medium"
-                      type="text"
-                    />
-                  )}
-                  onChange={(event, value) => {
-                    field.onChange(value);
-                    handleFuelChange(event, value);
-                  }}
-                  disabled={
-                    !watch("brand") || !watch("model") || !watch("year")
-                  }
-                />
-              )}
+            <CssTextField
+              value={fuel}
+              label="Combustível"
+              variant="outlined"
+              size="medium"
+              type="text"
+              InputProps={{
+                readOnly: true,
+              }}
             />
           </Flex>
           <Flex>

@@ -17,29 +17,11 @@ import { AiOutlineConsoleSql } from "react-icons/ai";
 export const UserContext = createContext({} as iUserProviderProps);
 
 export const UserProvider = ({ children }: iChildren) => {
-  const [user, setUser] = useState({} as iUserRegisterInformation);
+  const [user, setUser] = useState<iUserRegisterInformation | null>(null);
   const [loadingProfileView, setLoadingProfileView] = useState<boolean>(false);
   const [spinner, setSpinner] = useState<boolean>(false);
   const [errorApi, setErrorApi] = useState<boolean>(false);
   const navigate = useNavigate();
-  const defaultValues = {
-    name: "",
-    email: "",
-    cpf: "",
-    phone: "",
-    birthdate: "",
-    description: "",
-    address: {
-      cep: "",
-      state: "",
-      city: "",
-      street_name: "",
-      street_number: "",
-      complement: "",
-    },
-    is_seller: false,
-    password: "",
-  };
 
   useEffect(() => {
     const token = localStorage.getItem("@KenzieKars:token");
@@ -50,15 +32,18 @@ export const UserProvider = ({ children }: iChildren) => {
         return;
       } else {
         try {
-          const { data } = await api.get("/users", {
+          const { data } = await api.get<iUserRegisterInformation>("/users", {
             headers: {
               authorization: `Bearer ${token}`,
             },
           });
-
+          api.defaults.headers.common.authorization = `Bearer ${token}`;
           setUser(data);
-          navigate("/");
-          // navigate("/profileview");
+          if (data.is_seller) {
+            navigate("/profileview");
+          } else {
+            navigate("/");
+          }
         } catch (error) {
           localStorage.clear();
           navigate("/");
@@ -71,22 +56,25 @@ export const UserProvider = ({ children }: iChildren) => {
       }
     }
 
-    // loadUser();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [location.pathname]);
+    loadUser();
+  }, [navigate]);
 
   const signInUser = async (formData: iUserLoginInformation) => {
     try {
       setSpinner(true);
       const response = await api.post("/login", formData);
       toast.success("Usuário logado com sucesso");
-      console.log("LOGIN RESPONSE", response);
-      const { token } = response.data;
       window.localStorage.clear();
-      window.localStorage.setItem("@KenzieKars:token", accessToken);
+      window.localStorage.setItem("@KenzieKars:token", response.data.token);
       api.defaults.headers.common.authorization = `Bearer ${response.data.token}`;
-      setUser(userResponse);
-      navigate("/profileview");
+
+      const { data } = await api.get<iUserRegisterInformation>("/users");
+      setUser(data);
+      if (data.is_seller) {
+        navigate("/profileview");
+      } else {
+        navigate("/");
+      }
     } catch (error) {
       const currentError = error as AxiosError<iDefaultErrorResponse>;
       console.error(error);
@@ -120,7 +108,8 @@ export const UserProvider = ({ children }: iChildren) => {
   }
   const logoutUser = () => {
     window.localStorage.clear();
-    setUser(defaultValues);
+    setUser(null);
+    navigate("/");
   };
 
   return (

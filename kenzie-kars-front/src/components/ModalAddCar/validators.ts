@@ -9,14 +9,6 @@ export const vehicleSchema = z.object({
     if (!model || typeof model !== "string") return "";
     return model;
   }, z.string().nonempty("O modelo é obrigatório")),
-  year: z.preprocess((year) => {
-    if (!year || typeof year !== "string") return "";
-    return year;
-  }, z.string().nonempty("O ano é obrigatório")),
-  fuel: z.preprocess((fuel) => {
-    if (!fuel || typeof fuel !== "string") return "";
-    return fuel;
-  }, z.string().nonempty("O tipo de combustível é obrigatório")),
   mileage: z.string().nonempty("A quilometragem é obrigatória"),
   color: z.string().nonempty("A cor é obrigatória"),
   price: z.string().nonempty("O preço é obrigatório"),

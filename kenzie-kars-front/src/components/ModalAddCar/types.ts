@@ -1,6 +1,9 @@
+import { Dispatch, SetStateAction } from "react";
+import { iVehicle } from "../../pages/profileView/types";
+
 export interface iModalAddCarProps {
   toggleModal: () => void;
-  // setTasks: Dispatch<SetStateAction<Task[]>>
+  setVehicles: Dispatch<SetStateAction<Array<iVehicle> | null>>;
 }
 
 export interface iVehicleFipeApi {

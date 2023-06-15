@@ -21,9 +21,15 @@ export const Modal = ({ toggleModal, children, blockClosing }: ModalProps) => {
         return;
       }
 
-      // if (!ref.current.contains(event.target as HTMLElement)) {
-      //   toggleModal();
-      // }
+      if (
+        !ref.current.contains(event.target as HTMLElement) &&
+        !(
+          event.target instanceof HTMLElement &&
+          event.target.className.includes("Mui")
+        )
+      ) {
+        toggleModal();
+      }
     };
 
     window.addEventListener("mousedown", handleClick);
