@@ -6,6 +6,13 @@ interface iGallery {
   display: boolean;
 }
 
+export const ContainerHomePage = styled.div`
+  @media (min-width: 700px) {
+    min-height: 100%;
+    position: relative;
+  }
+`;
+
 export const HomePageContainer = styled.main`
   min-width: 100%;
   max-width: 100%;
@@ -75,6 +82,10 @@ export const SectionHomePageMain = styled.div`
   text-align: center;
   gap: 1rem;
   margin: 0 auto;
+
+  @media (min-width: 700px) {
+    padding-bottom: 12rem;
+  }
 `;
 
 export const SectionHomePageMainMenu = styled.div<iDisplay>`
