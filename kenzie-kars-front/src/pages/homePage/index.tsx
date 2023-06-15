@@ -8,6 +8,7 @@ import { FilterMenu } from "../../components/filterMenu";
 import { HeaderNotLoggedIn } from "../../components/headerNotLoggedIn";
 import { StyledText } from "../../styles/tipography";
 import {
+  ContainerHomePage,
   HomePageContainer,
   MaskImageDiv,
   SectionHomePageHeader,
@@ -23,7 +24,7 @@ export const HomePage = () => {
   const [advertising, setAdvertising] = useState<boolean>(false);
   console.log(advertising);
   return (
-    <>
+    <ContainerHomePage>
       <HeaderNotLoggedIn />
       <HomePageContainer>
         <SectionHomePageHeader id="advertising" display={advertising}>
@@ -65,6 +66,6 @@ export const HomePage = () => {
         </SectionHomePageMain>
       </HomePageContainer>
       <FooterComponent />
-    </>
+    </ContainerHomePage>
   );
 };

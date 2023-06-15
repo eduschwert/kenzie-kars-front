@@ -4,6 +4,7 @@ export const StyledCarList = styled.ul`
   width: 100%;
   display: grid;
   margin-top: 2rem;
+  justify-content: center;
 
   @media (min-width: 700px) {
     grid-template-columns: repeat(2, 1fr);
