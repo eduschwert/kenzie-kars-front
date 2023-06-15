@@ -22,19 +22,20 @@ export interface iUserAddress {
   complement?: string;
 }
 
-export interface iUserRegisterInformation extends iUserLoginInformation {
+export interface iUserRegisterInformation {
+  id: string;
   name: string;
+  email: string;
   cpf: string;
   phone: string;
-  birthdate: string;
+  birthdate: Date;
   description: string;
-  address: iUserAddress;
   is_seller: boolean;
-  password: string;
+  createdAt: Date;
 }
 
 export interface iUserProviderProps {
-  user: iUserRegisterInformation;
+  user: iUserRegisterInformation | null;
   signInUser: (formData: iUserLoginInformation) => void;
   // loading: boolean;
   // setLoading: React.Dispatch<React.SetStateAction<boolean>>;
