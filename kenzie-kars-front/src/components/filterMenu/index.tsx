@@ -39,6 +39,7 @@ export const FilterMenu = ({ advertising, setAdvertising }: iAdvertising) => {
   const [actionOverCarColor, setActionOverCarColor] = useState<boolean>(false);
   const [actionOverCarYear, setActionOverCarYear] = useState<boolean>(false);
   const [actionOverCarFuel, setActionOverCarFuel] = useState<boolean>(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [selectedOption, setSelectedOption] = useState<string>("");
   const [kmValue, setKmValue] = useState<number[]>([0, 100]);
   const [priceValue, setPriceValue] = useState<number[]>([10, 1000]);

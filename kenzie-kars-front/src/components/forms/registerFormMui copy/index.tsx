@@ -1,18 +1,26 @@
 import { useContext, useEffect, useState } from "react";
+// import { zodResolver } from "@hookform/resolvers/zod";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { SubmitHandler, useForm } from "react-hook-form";
+// import { SingleInput } from "../../inputComponent";
 import {
   StyledRegForm,
   StyledRegisterTitle,
   SellerOrBuyerButtons,
   SubmitButton,
   SelectContainer,
+  ErrorMsg,
 } from "./style";
+// import { Container } from "../../../styles/containers";
 import "react-toastify/dist/ReactToastify.css";
+// import { Link } from "react-router-dom";
 import { StyledButton } from "../../../styles/buttons";
 import { UserContext } from "../../../contexts/userContext/UserContext";
 import { StyledText } from "../../../styles/tipography";
 import { CitiesContext } from "../../../contexts/citiesContext/CitiesContext";
+// import { SelectInput } from "../../selectComponent";
+// import { RegisterData, registerSchema } from "./validators";
+// import { SelectComboBox } from "../../selectComboBox";
 import { CssTextField } from "../muiStyle";
 import { Form } from "../style";
 import { Autocomplete, TextField } from "@mui/material";
@@ -24,9 +32,9 @@ import { iRegisterFormValues } from "./types";
 export const RegisterFormMui = () => {
   const { spinner, setSpinner, errorApi, setErrorApi, registerUser } =
     useContext(UserContext);
-  // const [loadingRegForm, setLoadingRegForm] = useState(false);
+  const [loadingRegForm, setLoadingRegForm] = useState(false);
 
-  const { stateList, cityList, getStates, getCitiesOfState } =
+  const { stateList, cityList, getStates, getCitiesOfState, setSelectedState } =
     useContext(CitiesContext);
   const [errorRegister, setErrorRegister] = useState(false);
 
@@ -82,14 +90,40 @@ export const RegisterFormMui = () => {
     getStates();
     // eslint-disable-next-line react-hooks/exhaustive-deps
     console.log("NEW STATE LIST", stateList);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // useEffect(() => {
+  //   console.log("SPINNER", spinner, isValid);
+  //   console.log("ERROS", errors);
+  // }, [spinner, isValid, errors]);
+
   return (
+    // <Box sx={{ maxWidth: "30rem" }}>
     <StyledRegForm>
+      {/* <StyledRegisterTitle> */}
+      {/* <StyledText
+            tag="h3"
+            textStyle="heading-5-500"
+          >{`Cadastro`}</StyledText>
+          <StyledText tag="p" textStyle="body-2-500">
+            {`Informações pessoais`}
+          </StyledText> */}
+      {/* <Button  tag="a" >
+            <StyledText tag="span" textColor="grey" textStyle="headline">
+              {`Retornar para o login`}
+            </StyledText>
+          </Button> */}
+      {/* </StyledRegisterTitle> */}
+
+      {/* <Typography variant="h5" component="h2" sx={{ mb: "2rem" }}>
+        {`Register`}
+      </Typography>
+      <Typography variant="p" component="h2" sx={{ mb: "2rem" }}>
+        {`Informações pessoais`}
+      </Typography> */}
       <StyledRegisterTitle>
-        <StyledText tag="h3" textStyle="heading-4-500">{`Cadastro`}</StyledText>
-        <StyledText tag="p" textStyle="body-1-600">
+        <StyledText tag="h3" textStyle="heading-5-500">{`Cadastro`}</StyledText>
+        <StyledText tag="p" textStyle="body-2-500">
           {`Informações pessoais`}
         </StyledText>
       </StyledRegisterTitle>
@@ -178,7 +212,7 @@ export const RegisterFormMui = () => {
           helperText={errors.description && errors.description.message}
         />
 
-        <StyledText tag="p" textStyle="body-1-600">
+        <StyledText tag="p" textStyle="body-2-500">
           {`Informações de endereço`}
         </StyledText>
 
@@ -206,12 +240,9 @@ export const RegisterFormMui = () => {
             onChange={(event, value) => getCitiesOfState(event, value)}
             onBlur={() => trigger("address.state")}
             renderInput={(params) => (
-              <CssTextField
+              <TextField
                 {...params}
                 label={"Estado"}
-                InputLabelProps={{
-                  style: { fontSize: "12px", padding: "0.3rem 0" },
-                }}
                 {...register("address.state")}
                 error={!!errors.address?.state}
                 helperText={
@@ -229,12 +260,9 @@ export const RegisterFormMui = () => {
             sx={{ minWidth: "63%" }}
             onBlur={() => trigger("address.city")}
             renderInput={(params) => (
-              <CssTextField
+              <TextField
                 {...params}
                 label={"Cidade"}
-                InputLabelProps={{
-                  style: { fontSize: "12px", padding: "0.3rem 0" },
-                }}
                 {...register("address.city")}
                 error={!!errors.address?.city}
                 helperText={errors.address?.city && errors.address.city.message}
@@ -242,6 +270,13 @@ export const RegisterFormMui = () => {
             )}
           />
         </SelectContainer>
+
+        {/* 
+          <SelectComboBox
+            optionsArray={stateList}
+            label="Estado"
+            onChange={getCitiesOfState}
+          /> */}
 
         <CssTextField
           required
@@ -288,8 +323,8 @@ export const RegisterFormMui = () => {
           }
         />
 
-        <StyledText tag="p" textStyle="body-1-600">
-          {`Tipo de conta:`}
+        <StyledText tag="p" textStyle="body-2-500">
+          {`Tipo de conta`}
         </StyledText>
 
         <SellerOrBuyerButtons>
@@ -372,7 +407,9 @@ export const RegisterFormMui = () => {
             )}
           </StyledButton>
         </SubmitButton>
+        {/* </Box> */}
       </Form>
     </StyledRegForm>
+    // </Box>
   );
 };

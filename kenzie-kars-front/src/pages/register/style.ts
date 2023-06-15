@@ -4,6 +4,9 @@ export const RegisterSection = styled.div`
   display: flex;
   justify-content: center;
   background-color: var(--color-grey6);
+  @media (min-width: 700px) {
+    padding-bottom: 6rem;
+  }
 `;
 export const RegisterFormDiv = styled.div`
   margin-top: 100px;

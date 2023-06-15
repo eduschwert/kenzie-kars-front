@@ -1,11 +1,11 @@
 import { FooterComponent } from "../../components/footer";
 import { HeaderNotLoggedIn } from "../../components/headerNotLoggedIn";
-import { LoginFormDiv, LoginSection } from "./style";
+import { ContainerWrapper, LoginFormDiv, LoginSection } from "./style";
 import { LoginFormMui } from "../../components/forms/loginFormMui";
 
 export const Login = () => {
   return (
-    <>
+    <ContainerWrapper>
       <HeaderNotLoggedIn />
       <main>
         <LoginSection>
@@ -15,6 +15,6 @@ export const Login = () => {
         </LoginSection>
       </main>
       <FooterComponent />
-    </>
+    </ContainerWrapper>
   );
 };
