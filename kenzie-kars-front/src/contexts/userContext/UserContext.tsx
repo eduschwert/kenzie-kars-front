@@ -68,6 +68,11 @@ export const UserProvider = ({ children }: iChildren) => {
           } else {
             navigate("/");
           }
+          if (data.is_seller) {
+            navigate("/profileview");
+          } else {
+            navigate("/");
+          }
         } catch (error) {
           // localStorage.clear();
           navigate("/");
@@ -92,9 +97,17 @@ export const UserProvider = ({ children }: iChildren) => {
       setSpinner(true);
       const response = await api.post("login", formData);
       toast.success("Usuário logado com sucesso");
-      console.log("LOGIN RESPONSE", response);
-      const { token } = response.data;
       window.localStorage.clear();
+      window.localStorage.setItem("@KenzieKars:token", response.data.token);
+      api.defaults.headers.common.authorization = `Bearer ${response.data.token}`;
+
+      const { data } = await api.get<iUserRegisterInformation>("/users");
+      setUser(data);
+      if (data.is_seller) {
+        navigate("/profileview");
+      } else {
+        navigate("/");
+      }
       window.localStorage.setItem("@KenzieKars:token", token);
       navigate("/");
     } catch (error) {
@@ -130,7 +143,8 @@ export const UserProvider = ({ children }: iChildren) => {
   }
   const logoutUser = () => {
     window.localStorage.clear();
-    setUser(defaultValues);
+    setUser(null);
+    navigate("/");
   };
 
   return (

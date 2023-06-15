@@ -3,6 +3,7 @@ import { ProtectedRoutes } from "../components/ProtectedRoutes";
 import { HomePage } from "../pages/homePage";
 import { Register } from "../pages/register";
 import { Login } from "../pages/login";
+import { ProfileView } from "../pages/profileView";
 
 export const RoutesMain = () => {
   return (
@@ -11,7 +12,7 @@ export const RoutesMain = () => {
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
       <Route element={<ProtectedRoutes />}>
-        {/* <Route path="/profileview" element={<ProfileView />} /> */}
+        <Route path="/profileview" element={<ProfileView />} />
       </Route>
       <Route path="*" element={<Login />} />
     </Routes>

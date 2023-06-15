@@ -32,11 +32,10 @@ export interface iUserRegisterInformation {
   email: string;
   cpf: string;
   phone: string;
-  birthdate: string;
+  birthdate: Date;
   description: string;
-  address: iUserAddress;
   is_seller: boolean;
-  password: string;
+  createdAt: Date;
 }
 
 export interface iUserResponse {
