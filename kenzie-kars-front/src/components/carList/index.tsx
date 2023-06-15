@@ -16,6 +16,47 @@ export const CarList = () => {
     <>
       {isNotEmpty ? (
         <StyledCarList>
+          <div>
+            <CardCar />
+          </div>
+          <div>
+            <CardCar />
+          </div>
+          <div>
+            <CardCar />
+          </div>
+          <div>
+            <CardCar />
+          </div>
+          <div>
+            <CardCar />
+          </div>
+          <div>
+            <CardCar />
+          </div>
+          <div>
+            <CardCar />
+          </div>
+          <div>
+            <CardCar />
+          </div>
+          <div>
+            <CardCar />
+          </div>
+          <div>
+            <CardCar />
+          </div>
+          <div>
+            <CardCar />
+          </div>
+          <div>
+            <CardCar />
+          </div>
+          <div>
+            <CardCar />
+          </div>
+
+          {/* <CardCar />
           <CardCar />
           <CardCar />
           <CardCar />
@@ -26,10 +67,7 @@ export const CarList = () => {
           <CardCar />
           <CardCar />
           <CardCar />
-          <CardCar />
-          <CardCar />
-          <CardCar />
-          <CardCar />
+          <CardCar /> */}
           {/* {filteredProducts.map((car, index) => (
             <CardCar
               key={index}

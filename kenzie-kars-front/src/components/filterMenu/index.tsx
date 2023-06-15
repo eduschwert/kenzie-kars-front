@@ -4,11 +4,9 @@ import {
   CancelFilters,
   CancelFiltersNarrow,
   HomePageNav,
-  MenuButtons,
 } from "./style";
 import { useState } from "react";
 import { SelectList } from "../selectList";
-import { MinMaxMenuButtons } from "../minMaxMenu";
 import { iAdvertising } from "./types";
 import { StyledButton } from "../../styles/buttons";
 import { StyledText } from "../../styles/tipography";
@@ -150,12 +148,12 @@ export const FilterMenu = ({ advertising, setAdvertising }: iAdvertising) => {
             onClickButton={handleClickFuel}
           />
         </List>
-        <Box width={280} mx="auto" mt={3} ml={2}>
+        <Box width="100%" mx="auto" mt={3} ml={2}>
           <Typography textAlign={start} mb={3}>
             Km
           </Typography>
         </Box>
-        <Box width={260} mx="auto" mt={3} ml={4}>
+        <Box width="80%" mx="auto" mt={3} ml={4}>
           <Slider
             value={kmValue}
             onChange={handleSliderKmChange}
@@ -167,12 +165,12 @@ export const FilterMenu = ({ advertising, setAdvertising }: iAdvertising) => {
             max={maxKm}
           />
         </Box>
-        <Box width={280} mx="auto" mt={3} ml={2}>
+        <Box width="100%" mx="auto" mt={3} ml={2}>
           <Typography textAlign={start} mb={5}>
             Price
           </Typography>
         </Box>
-        <Box width={260} mx="auto" mt={3} ml={4}>
+        <Box width="80%" mx="auto" mt={3} ml={4}>
           <Slider
             value={priceValue}
             onChange={handleSliderPriceChange}

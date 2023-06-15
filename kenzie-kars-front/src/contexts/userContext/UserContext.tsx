@@ -12,6 +12,7 @@ import {
 import { iChildren } from "../../interfaces/global";
 import { useNavigate } from "react-router-dom";
 import { AxiosError } from "axios";
+import { AiOutlineConsoleSql } from "react-icons/ai";
 
 export const UserContext = createContext({} as iUserProviderProps);
 
@@ -41,42 +42,46 @@ export const UserProvider = ({ children }: iChildren) => {
   };
 
   useEffect(() => {
-    const token = localStorage.getItem("@Kenziehub:token");
-    const userId = localStorage.getItem("@Kenziehub:userid");
+    const token = localStorage.getItem("@KenzieKars:token");
+
     async function loadUser() {
       if (!token) {
-        console.log("NÃO TEM TOKEN");
         setLoadingProfileView(false);
         return;
       } else {
         try {
-          setLoadingProfileView(true);
-          const { data } = await api.get(`/users/${userId}`, {
+          const { data } = await api.get("/users", {
             headers: {
               authorization: `Bearer ${token}`,
             },
           });
+
           setUser(data);
           navigate("/");
+          // navigate("/profileview");
         } catch (error) {
           localStorage.clear();
           navigate("/");
           console.error(error);
+          const currentError = error as AxiosError<iDefaultErrorResponse>;
+          toast.error(`Ops! Algo deu errado: ${currentError.response?.data}`);
         } finally {
           setLoadingProfileView(false);
         }
       }
     }
 
-    loadUser();
-  }, []);
+    // loadUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location.pathname]);
 
   const signInUser = async (formData: iUserLoginInformation) => {
     try {
       setSpinner(true);
       const response = await api.post("/login", formData);
       toast.success("Usuário logado com sucesso");
-      const { accessToken, user: userResponse } = response.data;
+      console.log("LOGIN RESPONSE", response);
+      const { token } = response.data;
       window.localStorage.clear();
       window.localStorage.setItem("@KenzieKars:token", accessToken);
       api.defaults.headers.common.authorization = `Bearer ${response.data.token}`;
@@ -85,7 +90,7 @@ export const UserProvider = ({ children }: iChildren) => {
     } catch (error) {
       const currentError = error as AxiosError<iDefaultErrorResponse>;
       console.error(error);
-      toast.error(`Ops! Algo deu errado: ${currentError.response?.data}`);
+      toast.error(`Ops! Algo deu errado: ${currentError.response?.data.error}`);
     } finally {
       setSpinner(false);
     }
