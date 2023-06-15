@@ -4,6 +4,11 @@ export const Footer = styled.footer`
   background: var(--color-grey0);
   width: 100%;
   min-height: 80px;
+  @media (min-width: 700px) {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
 `;
 
 export const DivFooter = styled.div`
