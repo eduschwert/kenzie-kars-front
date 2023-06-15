@@ -63,11 +63,7 @@ export const UserProvider = ({ children }: iChildren) => {
           });
           console.log(data);
           setUser(data);
-          if (data.is_seller) {
-            navigate("/profileview");
-          } else {
-            navigate("/");
-          }
+
           if (data.is_seller) {
             navigate("/profileview");
           } else {
@@ -92,6 +88,7 @@ export const UserProvider = ({ children }: iChildren) => {
   }, [location.pathname]);
 
   console.log("User State", user);
+
   const signInUser = async (formData: iUserLoginInformation) => {
     try {
       setSpinner(true);
@@ -101,15 +98,15 @@ export const UserProvider = ({ children }: iChildren) => {
       window.localStorage.setItem("@KenzieKars:token", response.data.token);
       api.defaults.headers.common.authorization = `Bearer ${response.data.token}`;
 
-      const { data } = await api.get<iUserRegisterInformation>("/users");
+      const { data } = await api.get<iUserResponse>("/users");
       setUser(data);
       if (data.is_seller) {
         navigate("/profileview");
       } else {
         navigate("/");
       }
-      window.localStorage.setItem("@KenzieKars:token", token);
-      navigate("/");
+
+      // navigate("/");
     } catch (error) {
       const currentError = error as AxiosError<iDefaultErrorResponse>;
       console.error(error);
@@ -143,7 +140,7 @@ export const UserProvider = ({ children }: iChildren) => {
   }
   const logoutUser = () => {
     window.localStorage.clear();
-    setUser(null);
+    setUser(defaultValues);
     navigate("/");
   };
 
