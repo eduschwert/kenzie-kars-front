@@ -10,7 +10,7 @@ export interface iUserLoginInformation {
 export interface iUserInformation {
   name: string;
   email: string;
-  id: number;
+  id: string;
 }
 
 export interface iUserAddress {
@@ -22,8 +22,12 @@ export interface iUserAddress {
   complement?: string;
 }
 
-export interface iUserRegisterInformation {
+export interface iUserAddressResponse extends iUserAddress {
   id: string;
+  createdAt: string;
+}
+
+export interface iUserRegisterInformation {
   name: string;
   email: string;
   cpf: string;
@@ -34,8 +38,22 @@ export interface iUserRegisterInformation {
   createdAt: Date;
 }
 
+export interface iUserResponse {
+  name: string;
+  email: string;
+  cpf: string;
+  phone: string;
+  birthdate: string;
+  description: string;
+  address: iUserAddressResponse;
+  is_seller: boolean;
+  id: string;
+  createdAt: string;
+}
+
 export interface iUserProviderProps {
-  user: iUserRegisterInformation | null;
+  user: iUserResponse;
+
   signInUser: (formData: iUserLoginInformation) => void;
   // loading: boolean;
   // setLoading: React.Dispatch<React.SetStateAction<boolean>>;

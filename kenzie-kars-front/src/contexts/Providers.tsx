@@ -1,4 +1,4 @@
-import { CitiesProvider } from "./CitiesContext/CitiesContext";
+import { CitiesProvider } from "./citiesContext/CitiesContext";
 import { iDefaultPropsProvider } from "./types";
 import { UserProvider } from "./userContext/UserContext";
 
