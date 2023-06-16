@@ -6,7 +6,7 @@ export const Container = styled.div`
   width: 100vw;
   height: 100vh;
   position: fixed;
-  overflow-y: auto;
+  overflow: hidden;
 
   display: flex;
   justify-content: center;
@@ -19,5 +19,20 @@ export const Container = styled.div`
     width: 520px;
     max-width: 100%;
     padding: 0 1.5rem 2rem 1.5rem;
+    overflow-y: auto;
+    max-height: calc(100vh - 156px);
+
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color: var(--color-grey6);
+      border-radius: var(--radius-2);
+    }
+
+    ::-webkit-scrollbar-track {
+      background-color: var(--white-fixed);
+    }
   }
 `;

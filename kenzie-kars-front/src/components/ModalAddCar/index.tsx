@@ -106,12 +106,11 @@ export const ModalAddCar = ({
   };
 
   const onSubmit = async (data) => {
-    const fuelNumber = fuelsOptions.findIndex((fuel) => fuel === data.fuel);
     data = {
       ...data,
       fipe_price: fipePrice,
       year: year,
-      fuel: fuelNumber + 1,
+      fuel: fuel,
       mileage: Number(data.mileage),
       price: Number(data.price),
       images: [data.image1, data.image2],
@@ -209,7 +208,7 @@ export const ModalAddCar = ({
               }}
             />
             <CssTextField
-              value={fuel}
+              value={fuel !== 0 ? fuelsOptions[fuel - 1] : ""}
               label="Combustível"
               variant="outlined"
               size="medium"
