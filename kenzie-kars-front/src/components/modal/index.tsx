@@ -18,6 +18,22 @@ export const Modal = ({ toggleModal, children, blockClosing }: ModalProps) => {
       }
     };
 
+    const handleClick = (event: MouseEvent) => {
+      if (!ref.current || blockClosing) {
+        return;
+      }
+
+      if (
+        !ref.current.contains(event.target as HTMLElement) &&
+        !(
+          event.target instanceof HTMLElement &&
+          event.target.className.includes("Mui")
+        )
+      ) {
+        toggleModal();
+      }
+    };
+
     const disableScroll = () => {
       document.body.style.overflow = "hidden";
     };
@@ -27,42 +43,14 @@ export const Modal = ({ toggleModal, children, blockClosing }: ModalProps) => {
     };
 
     window.addEventListener("keydown", handleEscKey);
+    window.addEventListener("mousedown", handleClick);
     disableScroll();
 
     return () => {
       window.removeEventListener("keydown", handleEscKey);
+      window.removeEventListener("mousedown", handleClick);
       enableScroll();
     };
-  }, [toggleModal]);
-
-  useEffect(() => {
-    if (!blockClosing) {
-      const handleClick = (event: MouseEvent) => {
-        if (!ref.current) {
-          return;
-        }
-
-        if (!event.target) {
-          return;
-        }
-
-        if (
-          !ref.current.contains(event.target as HTMLElement) &&
-          !(
-            event.target instanceof HTMLElement &&
-            event.target.className.includes("Mui")
-          )
-        ) {
-          toggleModal();
-        }
-      };
-
-      window.addEventListener("mousedown", handleClick);
-
-      return () => {
-        window.removeEventListener("mousedown", handleClick);
-      };
-    }
   }, [toggleModal, blockClosing]);
 
   return createPortal(
