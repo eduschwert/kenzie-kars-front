@@ -24,7 +24,7 @@ export const ProfileView = () => {
 
   const { user } = useUser();
 
-  const initials = user?.name.substring(0, 2).toUpperCase();
+  const initials = user?.name?.substring(0, 2)?.toUpperCase();
 
   useEffect(() => {
     const fetchUserCars = async () => {
