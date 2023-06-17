@@ -1,9 +1,14 @@
 import { SyntheticEvent, useEffect, useState } from "react";
 import { StyledText } from "../../styles/tipography";
 import { Modal } from "../Modal";
-import { Flex, StyledBodyModal, StyledForm, StyledHeaderModal } from "./style";
+import {
+  Flex,
+  FlexEnd,
+  StyledBodyModal,
+  StyledForm,
+  StyledHeaderModal,
+} from "./style";
 import { iModalAddCarProps, iVehicleFipeApi } from "./types";
-import X from "../../assets/x.svg";
 import { useForm, Controller } from "react-hook-form";
 import { StyledButton } from "../../styles/buttons";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -13,6 +18,7 @@ import { AxiosResponse } from "axios";
 import { CssTextField } from "../forms/muiStyle";
 import { Autocomplete } from "@mui/material";
 import { api } from "../../services/api";
+import { AiOutlineClose } from "react-icons/ai";
 
 export const ModalAddCar = ({
   toggleModal,
@@ -138,7 +144,7 @@ export const ModalAddCar = ({
             Criar anúncio
           </StyledText>
           <button onClick={toggleModal} type="button">
-            <img src={X} alt="Fechar modal" />
+            <AiOutlineClose />
           </button>
         </StyledHeaderModal>
         <StyledBodyModal>
@@ -337,9 +343,20 @@ export const ModalAddCar = ({
               />
             )}
           />
-          <StyledButton tag="button" buttonStyle="bg" buttonColor="brand1">
-            Criar anúncio
-          </StyledButton>
+          <FlexEnd>
+            <StyledButton
+              onClick={toggleModal}
+              type="button"
+              buttonStyle="bg"
+              buttonColor="negative"
+              width="126px"
+            >
+              Cancelar
+            </StyledButton>
+            <StyledButton buttonStyle="bg" buttonColor="brand1" width="193px">
+              Criar anúncio
+            </StyledButton>
+          </FlexEnd>
         </StyledBodyModal>
       </StyledForm>
     </Modal>

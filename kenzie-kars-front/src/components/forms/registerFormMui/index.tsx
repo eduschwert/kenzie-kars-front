@@ -294,7 +294,6 @@ export const RegisterFormMui = () => {
 
         <SellerOrBuyerButtons>
           <StyledButton
-            tag="button"
             type="button"
             buttonStyle="bg"
             buttonColor={buyerActiveButton ? "brand1" : "outline2"}
@@ -303,7 +302,6 @@ export const RegisterFormMui = () => {
             {`Comprador`}
           </StyledButton>
           <StyledButton
-            tag="button"
             type="button"
             buttonStyle="bg"
             buttonColor={sellerActiveButton ? "brand1" : "outline2"}
@@ -342,7 +340,6 @@ export const RegisterFormMui = () => {
         {/* {errorApi ? <ErrorMsg>Email já existente</ErrorMsg> : <></>} */}
         <SubmitButton>
           <StyledButton
-            tag="button"
             type="submit"
             buttonStyle="bg-full"
             buttonColor="brand1"

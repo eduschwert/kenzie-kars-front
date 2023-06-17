@@ -59,9 +59,9 @@ export const ProfileView = () => {
             </StyledText>
             <StyledButton
               onClick={toggleModal}
-              tag="button"
               buttonStyle="bg"
               buttonColor="outlineBrand1"
+              width="160px"
             >
               Criar anuncio
             </StyledButton>

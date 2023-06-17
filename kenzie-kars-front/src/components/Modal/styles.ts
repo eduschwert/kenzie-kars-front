@@ -10,10 +10,9 @@ export const Container = styled.div`
 
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
 
   > div {
-    margin: 78px 0;
     background: var(--white-fixed);
     border-radius: var(--radius-1);
     width: 520px;

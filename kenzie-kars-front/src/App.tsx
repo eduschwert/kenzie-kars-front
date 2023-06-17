@@ -5,10 +5,9 @@ import { theme } from "./theme";
 import { RoutesMain } from "./routes";
 import { ToastContainer } from "react-toastify";
 
-
 function App() {
   return (
-    <div className="App">
+    <>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <RoutesMain />
@@ -25,9 +24,8 @@ function App() {
           pauseOnHover
           theme="light"
         />
-
       </ThemeProvider>
-    </div>
+    </>
   );
 }
 
