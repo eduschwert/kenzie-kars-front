@@ -14,13 +14,26 @@ import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { useState } from "react";
 import { InitialsCircle } from "../initialsCircle";
 import { useLocation } from "react-router-dom";
+import { iUserResponse } from "../../contexts/userContext/types";
+import { StyledButton } from "../../styles/buttons";
+import { ModalEditUser } from "../modalEditUser";
 
-export function HeaderLoggedIn() {
+interface iProp {
+  user: iUserResponse;
+}
+
+export function HeaderLoggedIn({ user }: iProp) {
+  const [isOpenModal, setIsOpenModal] = useState(false);
   const [menu, setMenu] = useState(false);
+  const [modalType, setMenuType] = useState("user");
+  const toggleModal = () => setIsOpenModal(!isOpenModal);
   const location = useLocation();
 
   return (
     <Header id="header">
+      {isOpenModal && modalType == "user" ? (
+        <ModalEditUser toggleModal={toggleModal} />
+      ) : null}
       <DivHeader>
         <a href={location.pathname !== "/" ? "/" : ""}>
           <img src={logo_blue}></img>
@@ -28,44 +41,47 @@ export function HeaderLoggedIn() {
 
         <DivInfoHeader>
           <div>
-            <InitialsCircle text="SL" />
+            {" "}
+            <InitialsCircle
+              text={user.name ? user.name.substring(0, 2).toUpperCase() : ""}
+            />{" "}
           </div>
           <StyledText tag="p" textStyle="body-1-400" textColor="grey2">
-            {`Samuel Leão`}
+            {user.name}
           </StyledText>
           <section>
             <MenuList>
               <li>
-                <button>
-                  {" "}
-                  <StyledText tag="p" textStyle="body-1-400" textColor="grey2">
-                    {`Editar perfil`}
-                  </StyledText>
-                </button>
+                <StyledButton
+                  tag="button"
+                  buttonStyle={"sm-header"}
+                  buttonColor="link"
+                  onClick={() => {
+                    toggleModal();
+                    setMenuType("user");
+                  }}
+                >{`Editar perfil`}</StyledButton>
               </li>
               <li>
-                <button>
-                  {" "}
-                  <StyledText tag="p" textStyle="body-1-400" textColor="grey2">
-                    {`Editar endereço`}
-                  </StyledText>
-                </button>
+                <StyledButton
+                  tag="button"
+                  buttonStyle={"sm-header"}
+                  buttonColor="link"
+                >{`Editar endereço`}</StyledButton>
               </li>
               <li>
-                <button>
-                  {" "}
-                  <StyledText tag="p" textStyle="body-1-400" textColor="grey2">
-                    {`Meus anúncios`}
-                  </StyledText>
-                </button>
+                <StyledButton
+                  tag="button"
+                  buttonStyle={"sm-header"}
+                  buttonColor="link"
+                >{`Meus anúncios`}</StyledButton>
               </li>
               <li>
-                <button>
-                  {" "}
-                  <StyledText tag="p" textStyle="body-1-400" textColor="grey2">
-                    {`Sair`}
-                  </StyledText>
-                </button>
+                <StyledButton
+                  tag="button"
+                  buttonStyle={"sm-header"}
+                  buttonColor="link"
+                >{`Sair`}</StyledButton>
               </li>
             </MenuList>
           </section>
@@ -82,45 +98,48 @@ export function HeaderLoggedIn() {
         <div>
           <MenuUserInfo>
             <div>
-              <InitialsCircle text="SL" />
+              {" "}
+              <InitialsCircle
+                text={user.name ? user.name.substring(0, 2).toUpperCase() : ""}
+              />{" "}
             </div>
             <StyledText tag="p" textStyle="body-1-400" textColor="grey2">
-              {`Samuel Leão`}
+              {user.name}
             </StyledText>
           </MenuUserInfo>
 
           <MenuUserItems>
             <li>
-              <button>
-                {" "}
-                <StyledText tag="p" textStyle="body-1-400" textColor="grey2">
-                  {`Editar perfil`}
-                </StyledText>
-              </button>
+              <StyledButton
+                tag="button"
+                buttonStyle={"sm-header"}
+                buttonColor="link"
+                onClick={() => {
+                  toggleModal();
+                  setMenuType("user");
+                }}
+              >{`Editar perfil`}</StyledButton>
             </li>
             <li>
-              <button>
-                {" "}
-                <StyledText tag="p" textStyle="body-1-400" textColor="grey2">
-                  {`Editar endereço`}
-                </StyledText>
-              </button>
+              <StyledButton
+                tag="button"
+                buttonStyle={"sm-header"}
+                buttonColor="link"
+              >{`Editar endereço`}</StyledButton>
             </li>
             <li>
-              <button>
-                {" "}
-                <StyledText tag="p" textStyle="body-1-400" textColor="grey2">
-                  {`Meus anúncios`}
-                </StyledText>
-              </button>
+              <StyledButton
+                tag="button"
+                buttonStyle={"sm-header"}
+                buttonColor="link"
+              >{`Meus anúncios`}</StyledButton>
             </li>
             <li>
-              <button>
-                {" "}
-                <StyledText tag="p" textStyle="body-1-400" textColor="grey2">
-                  {`Sair`}
-                </StyledText>
-              </button>
+              <StyledButton
+                tag="button"
+                buttonStyle={"sm-header"}
+                buttonColor="link"
+              >{`Sair`}</StyledButton>
             </li>
           </MenuUserItems>
         </div>

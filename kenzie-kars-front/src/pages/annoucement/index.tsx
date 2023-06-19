@@ -15,10 +15,17 @@ import {
 import exteriorCarro from "../../imagensMock/exterior-carro.png";
 import { HeaderLoggedIn } from "../../components/headerLoggedIn";
 import { FooterComponent } from "../../components/footer";
+import { HeaderNotLoggedIn } from "../../components/headerNotLoggedIn";
+import { useUser } from "../../hooks/useUser";
 export const AnnoucementPage = () => {
+  const { user } = useUser();
   return (
     <ContainerAnnoucement>
-      <HeaderLoggedIn />
+      {user.name !== "" ? (
+        <HeaderLoggedIn user={user} />
+      ) : (
+        <HeaderNotLoggedIn />
+      )}
       <ContentAnnoucement>
         <div className="contentImgs">
           <div className="responsiveImgsAndDescription">

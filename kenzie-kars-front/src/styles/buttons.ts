@@ -21,6 +21,17 @@ export const Button = (buttonStyle: string) => {
         font-size: 14px;
         line-height: 0px;
       `;
+    case "sm-modal":
+      return css`
+        height: 38px;
+        border-radius: var(--radius-2);
+        width: 100%;
+
+        font-family: var(--font-family-inter);
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 0px;
+      `;
     case "bg":
       return css`
         height: 48px;
