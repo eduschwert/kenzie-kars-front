@@ -16,7 +16,7 @@ interface iStyledButtonProps {
     | "alert"
     | "success"
     | "brandDisable";
-  buttonStyle: "sm" | "bg" | "round";
+  buttonStyle: "sm" | "sm-modal" | "bg" | "round";
   width?: string;
 }
 
@@ -74,7 +74,7 @@ export const buttonCSS = css<iStyledButtonProps>`
           width: 100%;
           padding-left: 5px;
           padding-right: 5px;
-          
+
           font-size: 14px;
         `;
       case "round":
