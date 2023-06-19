@@ -67,6 +67,16 @@ export const buttonCSS = css<iStyledButtonProps>`
 
           font-size: 14px;
         `;
+      case "sm-modal":
+        return css`
+          height: 38px;
+          border-radius: var(--radius-2);
+          width: 100%;
+          padding-left: 5px;
+          padding-right: 5px;
+          
+          font-size: 14px;
+        `;
       case "round":
         return css`
           width: 24px;
