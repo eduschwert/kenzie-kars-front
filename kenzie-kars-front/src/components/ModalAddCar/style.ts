@@ -39,3 +39,14 @@ export const Flex = styled.div`
     width: 50%;
   }
 `;
+
+export const FlexEnd = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  @media (min-width: 400px) {
+    justify-content: flex-end;
+  }
+`;

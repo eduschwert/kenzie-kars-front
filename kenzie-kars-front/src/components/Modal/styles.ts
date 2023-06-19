@@ -22,7 +22,7 @@ export const Container = styled.div`
 
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
 
   > div {
     margin: 60px 0;

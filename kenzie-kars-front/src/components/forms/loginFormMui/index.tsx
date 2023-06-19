@@ -9,14 +9,13 @@ import {
   StyledMessage,
 } from "./style";
 import "react-toastify/dist/ReactToastify.css";
-import { StyledButton } from "../../../styles/buttons";
+import { StyledButton, StyledLinkButton } from "../../../styles/buttons";
 import { UserContext } from "../../../contexts/userContext/UserContext";
 import { StyledText } from "../../../styles/tipography";
 import { CssTextField } from "../muiStyle";
 import { Form } from "../style";
 import { SyncLoader } from "react-spinners";
 import { iUserLoginFormValues } from "./types";
-import { useNavigate } from "react-router-dom";
 import { loginFormSchema } from "./schema";
 
 export const LoginFormMui = () => {
@@ -24,7 +23,6 @@ export const LoginFormMui = () => {
     useContext(UserContext);
 
   const [errorLogin, setErrorLogin] = useState<boolean>(false);
-  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -104,10 +102,10 @@ export const LoginFormMui = () => {
 
         <SubmitButton>
           <StyledButton
-            tag="button"
             type="submit"
-            buttonStyle="bg-full"
-            buttonColor="brand1"
+            buttonStyle={"bg"}
+            buttonColor={"brand1"}
+            width="100%"
             disabled={!!(errors.email || errors.password)}
           >
             {spinner ? <SyncLoader color="#FFFFFF" size={8} /> : "Entrar"}
@@ -120,15 +118,13 @@ export const LoginFormMui = () => {
           </StyledText>
         </StyledMessage>
 
-        <StyledButton
-          tag="a"
-          type="button"
-          buttonStyle="bg-full"
+        <StyledLinkButton
+          buttonStyle={"bg"}
           buttonColor={"outline2"}
-          onClick={() => navigate("/register")}
+          to={"/register"}
         >
           {`Cadastrar`}
-        </StyledButton>
+        </StyledLinkButton>
       </Form>
     </StyledRegForm>
   );

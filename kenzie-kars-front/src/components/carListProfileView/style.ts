@@ -39,10 +39,8 @@ export const ImageBox = styled.div<iImageBoxProps>`
     top: 14px;
     left: 14px;
     position: absolute;
-    ${({ is_active }) =>
-      is_active
-        ? "background: var(--color-brand1);"
-        : "background: var(--color-grey4);"}
+    background-color: ${({ is_active }) =>
+      is_active ? " var(--color-brand1)" : " var(--color-grey4)"};
     width: 51px;
     height: 24px;
     display: flex;
@@ -55,8 +53,8 @@ export const ImageBox = styled.div<iImageBoxProps>`
   }
 
   > img {
-    max-width: 65%;
-    max-height: 65%;
+    max-width: 100%;
+    max-height: 100%;
     object-fit: cover;
   }
 `;
