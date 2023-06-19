@@ -8,8 +8,9 @@ import {
 import logo_blue from "../../assets/logo_blue.png";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { useState } from "react";
-import { StyledButton } from "../../styles/buttons";
+import { StyledLinkButton } from "../../styles/buttons";
 import { useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export function HeaderNotLoggedIn() {
   const [menu, setMenu] = useState(false);
@@ -18,27 +19,25 @@ export function HeaderNotLoggedIn() {
   return (
     <Header id="header">
       <DivHeader>
-        <a href={location.pathname !== "/" ? "/" : ""}>
+        <Link to={"/"}>
           <img src={logo_blue}></img>
-        </a>
+        </Link>
 
         <DivLinkHeader>
-          <StyledButton
-            href="/login"
-            tag="a"
+          <StyledLinkButton
+            to="/login"
             buttonStyle={"bg"}
-            buttonColor={location.pathname !== "/login" ? "link" : "disable"}
-            disabled={location.pathname !== "/login" ? false : true}
-          >{`Fazer Login`}</StyledButton>
-          <StyledButton
-            href="/register"
-            tag="a"
+            buttonColor={"link"}
+            disabled={location.pathname === "/login"}
+          >{`Fazer Login`}</StyledLinkButton>
+          <StyledLinkButton
+            to="/register"
             buttonStyle={"bg"}
-            buttonColor={
-              location.pathname !== "/register" ? "outline1" : "disable"
-            }
-            disabled={location.pathname !== "/register" ? false : true}
-          >{`Cadastrar`}</StyledButton>
+            buttonColor={"outline2"}
+            disabled={location.pathname === "/register"}
+          >
+            {`Cadastrar`}
+          </StyledLinkButton>
         </DivLinkHeader>
         <BtnMenuHeader onClick={() => setMenu(!menu)}>
           {menu ? (
@@ -50,22 +49,18 @@ export function HeaderNotLoggedIn() {
       </DivHeader>
       <DivMenu display={menu}>
         <div>
-          <StyledButton
-            href="/login"
-            tag="a"
-            buttonStyle={"sm-header"}
-            buttonColor={location.pathname !== "/login" ? "link" : "disable"}
-            disabled={location.pathname !== "/login" ? false : true}
-          >{`Fazer Login`}</StyledButton>
-          <StyledButton
-            href="/register"
-            tag="a"
-            buttonStyle={"sm-header"}
-            buttonColor={
-              location.pathname !== "/register" ? "outline1" : "disable"
-            }
-            disabled={location.pathname !== "/register" ? false : true}
-          >{`Cadastrar`}</StyledButton>
+          <StyledLinkButton
+            to="/login"
+            buttonStyle={"bg"}
+            buttonColor={"link"}
+            disabled={location.pathname === "/login"}
+          >{`Fazer Login`}</StyledLinkButton>
+          <StyledLinkButton
+            to="/register"
+            buttonStyle={"bg"}
+            buttonColor={"outline2"}
+            disabled={location.pathname === "/register"}
+          >{`Cadastrar`}</StyledLinkButton>
         </div>
       </DivMenu>
     </Header>

@@ -297,6 +297,7 @@ export const RegisterFormMui = () => {
             type="button"
             buttonStyle="bg"
             buttonColor={buyerActiveButton ? "brand1" : "outline2"}
+            width="50%"
             onClick={() => selectBuyer()}
           >
             {`Comprador`}
@@ -305,6 +306,7 @@ export const RegisterFormMui = () => {
             type="button"
             buttonStyle="bg"
             buttonColor={sellerActiveButton ? "brand1" : "outline2"}
+            width="50%"
             onClick={() => selectSeller()}
           >
             {`Anunciante`}
@@ -341,8 +343,9 @@ export const RegisterFormMui = () => {
         <SubmitButton>
           <StyledButton
             type="submit"
-            buttonStyle="bg-full"
+            buttonStyle="bg"
             buttonColor="brand1"
+            width="100%"
             disabled={
               !!(
                 errors.name ||

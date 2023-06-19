@@ -20,6 +20,10 @@ interface iStyledButtonProps {
   width?: string;
 }
 
+type iStyledLinkButtonProps = iStyledButtonProps & {
+  disabled?: boolean;
+};
+
 export const buttonCSS = css<iStyledButtonProps>`
   display: flex;
   justify-content: center;
@@ -31,13 +35,18 @@ export const buttonCSS = css<iStyledButtonProps>`
 
   transition: 150ms ease-in-out;
 
-  width: ${({ width }) => width || "100%"};
+  width: ${({ width }) => width || "auto"};
 
   &:disabled {
     background-color: var(--color-grey5);
     color: var(--white-fixed);
     border: solid 1.5px var(--color-grey5);
     cursor: not-allowed;
+    &:hover {
+      background-color: var(--color-grey5);
+      color: var(--white-fixed);
+      border: solid 1.5px var(--color-grey5);
+    }
   }
 
   ${({ buttonStyle }) => {
@@ -200,6 +209,21 @@ export const StyledButton = styled.button<iStyledButtonProps>`
   ${buttonCSS}
 `;
 
-export const StyledLinkButton = styled(Link)<iStyledButtonProps>`
+export const StyledLinkButton = styled(Link)<iStyledLinkButtonProps>`
   ${buttonCSS}
+
+  ${({ disabled }) => {
+    if (disabled) {
+      return css`
+        background-color: var(--color-grey5);
+        color: var(--white-fixed);
+        border: solid 1.5px var(--color-grey5);
+        &:hover {
+          background-color: var(--color-grey5);
+          color: var(--white-fixed);
+          border: solid 1.5px var(--color-grey5);
+        }
+      `;
+    }
+  }}
 `;

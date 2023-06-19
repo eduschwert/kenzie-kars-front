@@ -103,8 +103,9 @@ export const LoginFormMui = () => {
         <SubmitButton>
           <StyledButton
             type="submit"
-            buttonStyle="bg-full"
-            buttonColor="brand1"
+            buttonStyle={"bg"}
+            buttonColor={"brand1"}
+            width="100%"
             disabled={!!(errors.email || errors.password)}
           >
             {spinner ? <SyncLoader color="#FFFFFF" size={8} /> : "Entrar"}
@@ -118,7 +119,7 @@ export const LoginFormMui = () => {
         </StyledMessage>
 
         <StyledLinkButton
-          buttonStyle="bg-full"
+          buttonStyle={"bg"}
           buttonColor={"outline2"}
           to={"/register"}
         >

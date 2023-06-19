@@ -31,7 +31,7 @@ export const ModalAddCar = ({
   const [fuel, setFuel] = useState(0);
   const [fipePrice, setFipePrice] = useState(0);
 
-  const fuelsOptions = ["gasolina", "álcool", "híbrido"];
+  const fuelsOptions = ["flex", "híbrido", "elétrico"];
 
   useEffect(() => {
     const fetchBrands = async () => {
