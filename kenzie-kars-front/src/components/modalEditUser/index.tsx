@@ -2,22 +2,16 @@ import { StyledText } from "../../styles/tipography";
 import { Modal } from "../Modal";
 import { CssTextField } from "../forms/muiStyle";
 
-import {
-  DivBtns,
-  DivTitle,
-  Form,
-  StyledRegForm,
-  StyledTitle,
-  SubmitButton,
-} from "./style";
+import { DivBtns, DivTitle, Form, StyledRegForm, StyledTitle } from "./style";
 import { StyledButton } from "../../styles/buttons";
 import { AiOutlineClose } from "react-icons/ai";
 
 interface iProp {
   toggleModal: () => void;
+  setMenuType: (item: string) => void;
 }
 
-export const ModalEditUser = ({ toggleModal }: iProp) => {
+export const ModalEditUser = ({ toggleModal, setMenuType }: iProp) => {
   return (
     <Modal toggleModal={toggleModal}>
       <StyledRegForm>
@@ -198,7 +192,9 @@ export const ModalEditUser = ({ toggleModal }: iProp) => {
               </StyledButton>
               <StyledButton
                 tag="button"
-                onClick={() => toggleModal()}
+                onClick={() => {
+                  setMenuType("delete");
+                }}
                 buttonStyle="sm-modal"
                 buttonColor="alert"
               >

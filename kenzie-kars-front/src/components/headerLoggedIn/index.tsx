@@ -17,6 +17,7 @@ import { useLocation } from "react-router-dom";
 import { iUserResponse } from "../../contexts/userContext/types";
 import { StyledButton } from "../../styles/buttons";
 import { ModalEditUser } from "../modalEditUser";
+import { ModalDeleteUser } from "../modalDeleteUser";
 
 interface iProp {
   user: iUserResponse;
@@ -32,7 +33,9 @@ export function HeaderLoggedIn({ user }: iProp) {
   return (
     <Header id="header">
       {isOpenModal && modalType == "user" ? (
-        <ModalEditUser toggleModal={toggleModal} />
+        <ModalEditUser toggleModal={toggleModal} setMenuType={setMenuType} />
+      ) : isOpenModal && modalType == "delete" ? (
+        <ModalDeleteUser toggleModal={toggleModal} />
       ) : null}
       <DivHeader>
         <a href={location.pathname !== "/" ? "/" : ""}>
