@@ -18,6 +18,7 @@ import { iUserResponse } from "../../contexts/userContext/types";
 import { StyledButton } from "../../styles/buttons";
 import { ModalEditUser } from "../modalEditUser";
 import { ModalDeleteUser } from "../modalDeleteUser";
+import { ModalUpdateAddress } from "../modalUpdateAddress";
 
 interface iProp {
   user: iUserResponse;
@@ -36,6 +37,8 @@ export function HeaderLoggedIn({ user }: iProp) {
         <ModalEditUser toggleModal={toggleModal} setMenuType={setMenuType} />
       ) : isOpenModal && modalType == "delete" ? (
         <ModalDeleteUser toggleModal={toggleModal} />
+      ) : isOpenModal && modalType == "address" ? (
+        <ModalUpdateAddress toggleModal={toggleModal} />
       ) : null}
       <DivHeader>
         <a href={location.pathname !== "/" ? "/" : ""}>
@@ -70,6 +73,10 @@ export function HeaderLoggedIn({ user }: iProp) {
                   tag="button"
                   buttonStyle={"sm-header"}
                   buttonColor="link"
+                  onClick={() => {
+                    toggleModal();
+                    setMenuType("address");
+                  }}
                 >{`Editar endereço`}</StyledButton>
               </li>
               <li>
@@ -128,6 +135,10 @@ export function HeaderLoggedIn({ user }: iProp) {
                 tag="button"
                 buttonStyle={"sm-header"}
                 buttonColor="link"
+                onClick={() => {
+                  toggleModal();
+                  setMenuType("address");
+                }}
               >{`Editar endereço`}</StyledButton>
             </li>
             <li>
