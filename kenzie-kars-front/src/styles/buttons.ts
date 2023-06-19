@@ -26,6 +26,8 @@ export const Button = (buttonStyle: string) => {
         height: 38px;
         border-radius: var(--radius-2);
         width: 100%;
+        padding-left: 5px;
+        padding-right: 5px;
 
         font-family: var(--font-family-inter);
         font-weight: 600;
