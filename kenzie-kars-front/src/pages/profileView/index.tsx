@@ -43,7 +43,7 @@ export const ProfileView = () => {
         <ModalAddCar setVehicles={setVehicles} toggleModal={toggleModal} />
       )}
       <Container>
-        <HeaderLoggedIn />
+        <HeaderLoggedIn user={user} />
         <BlueBox />
         <PerfilBox>
           <div>
