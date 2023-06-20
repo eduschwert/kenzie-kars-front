@@ -126,9 +126,6 @@ export const DivBtns = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    min-width: 100%;
-  }
-  & > div > div {
-    width: 46%;
+    width: 100%;
   }
 `;

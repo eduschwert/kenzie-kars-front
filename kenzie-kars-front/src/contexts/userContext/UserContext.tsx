@@ -129,13 +129,11 @@ export const UserProvider = ({ children }: iChildren) => {
       setSpinner(true);
       reset();
     } catch (error) {
-      const currentError = error as AxiosError<iDefaultErrorResponse>;
       console.error(error);
       setErrorApi(true);
-      toast.error(`Ops! Algo deu errado: ${currentError.response?.data}`);
+      toast.error(`Ops! Algo deu errado.`);
     } finally {
       setSpinner(false);
-      reset();
     }
   }
   const logoutUser = () => {
@@ -156,6 +154,7 @@ export const UserProvider = ({ children }: iChildren) => {
         setSpinner,
         errorApi,
         setErrorApi,
+        setUser,
       }}
     >
       {children}

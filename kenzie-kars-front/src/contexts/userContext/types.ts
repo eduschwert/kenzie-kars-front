@@ -22,6 +22,15 @@ export interface iUserAddress {
   complement?: string;
 }
 
+export interface iUserAddressUpdate {
+  cep?: string;
+  state?: string;
+  city?: string;
+  street_name?: string;
+  street_number?: string;
+  complement?: string;
+}
+
 export interface iUserAddressResponse extends iUserAddress {
   id: string;
   createdAt: string;
@@ -53,7 +62,7 @@ export interface iUserResponse {
 
 export interface iUserProviderProps {
   user: iUserResponse;
-
+  setUser: (item: iUserResponse) => void;
   signInUser: (formData: iUserLoginInformation) => void;
   // loading: boolean;
   // setLoading: React.Dispatch<React.SetStateAction<boolean>>;

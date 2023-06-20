@@ -43,11 +43,11 @@ export const RegisterFormMui = () => {
     resolver: yupResolver(registerFormSchema),
   });
 
-  useEffect(() => {
-    if (isSubmitSuccessful) {
-      reset();
-    }
-  }, [isSubmitSuccessful, reset]);
+  // useEffect(() => {
+  //   if (isSubmitSuccessful) {
+  //     reset();
+  //   }
+  // }, [isSubmitSuccessful, reset]);
 
   useEffect(() => {
     setErrorApi(false);
@@ -125,6 +125,15 @@ export const RegisterFormMui = () => {
               : () => setErrorRegister(false)
           }
         />
+        {errorApi ? (
+          <StyledText
+            tag="p"
+            textColor="negative"
+            textStyle="body-2-500"
+          >{`Email já existente`}</StyledText>
+        ) : (
+          <></>
+        )}
 
         <CssTextField
           required
@@ -339,7 +348,6 @@ export const RegisterFormMui = () => {
           helperText={errors.confirmPassword && errors.confirmPassword.message}
         />
 
-        {/* {errorApi ? <ErrorMsg>Email já existente</ErrorMsg> : <></>} */}
         <SubmitButton>
           <StyledButton
             type="submit"

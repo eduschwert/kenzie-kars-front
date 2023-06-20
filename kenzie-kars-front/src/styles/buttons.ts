@@ -16,7 +16,7 @@ interface iStyledButtonProps {
     | "alert"
     | "success"
     | "brandDisable";
-  buttonStyle: "sm" | "sm-modal" | "bg" | "round";
+  buttonStyle: "sm" | "sm-modal" | "bg" | "round" | "bg-full" | "sm-modal-edit";
   width?: string;
 }
 
@@ -59,6 +59,20 @@ export const buttonCSS = css<iStyledButtonProps>`
 
           font-size: 16px;
         `;
+      case "bg-full":
+        return css`
+          width: 100%;
+          height: 48px;
+          padding: 14px 28px;
+          border-radius: var(--radius-2);
+          display: flex;
+          justify-content: center;
+
+          font-family: var(--font-family-inter);
+          font-weight: 600;
+          font-size: 16px;
+          font-size: 16px;
+        `;
       case "sm":
         return css`
           height: 38px;
@@ -72,6 +86,16 @@ export const buttonCSS = css<iStyledButtonProps>`
           height: 38px;
           border-radius: var(--radius-2);
           width: 100%;
+          padding-left: 5px;
+          padding-right: 5px;
+
+          font-size: 14px;
+        `;
+      case "sm-modal-edit":
+        return css`
+          height: 38px;
+          border-radius: var(--radius-2);
+          width: 45%;
           padding-left: 5px;
           padding-right: 5px;
 
