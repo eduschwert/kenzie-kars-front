@@ -6,7 +6,7 @@ import {
   StyledRegisterTitle,
   SellerOrBuyerButtons,
   SubmitButton,
-  SelectContainer,
+  SelectContainer
 } from "./style";
 import "react-toastify/dist/ReactToastify.css";
 import { StyledButton } from "../../../styles/buttons";
@@ -20,6 +20,7 @@ import { registerFormSchema } from "./schema";
 import { SyncLoader } from "react-spinners";
 import { iUserRegisterInformation } from "../../../contexts/userContext/types";
 import { iRegisterFormValues } from "./types";
+import ReactInputMask from "react-input-mask";
 
 export const RegisterFormMui = () => {
   const { spinner, setSpinner, errorApi, setErrorApi, registerUser } =
@@ -125,15 +126,8 @@ export const RegisterFormMui = () => {
               : () => setErrorRegister(false)
           }
         />
-        {errorApi ? (
-          <StyledText
-            tag="p"
-            textColor="negative"
-            textStyle="body-2-500"
-          >{`Email já existente`}</StyledText>
-        ) : (
-          <></>
-        )}
+
+    
 
         <CssTextField
           required
@@ -178,10 +172,12 @@ export const RegisterFormMui = () => {
           required
           label="Descrição"
           variant="outlined"
-          size="small"
+          size="medium"
           id="registerDescription"
           type="text"
           placeholder=""
+          multiline
+          rows={3}
           {...register("description")}
           error={!!errors.description}
           helperText={errors.description && errors.description.message}

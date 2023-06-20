@@ -52,10 +52,7 @@ export const UserProvider = ({ children }: iChildren) => {
     // setUser({ ...user, ...defaultValues });
     console.log("USER", user);
 
-
     const autologin = async () => {
-
-
       if (!token) {
         setLoadingProfileView(false);
         return;
@@ -112,7 +109,8 @@ export const UserProvider = ({ children }: iChildren) => {
       const currentError = error as AxiosError<iDefaultErrorResponse>;
       console.error(error);
       console.log("ERROR", currentError.message);
-      toast.error(`Ops! Algo deu errado: ${currentError.response?.data.error}`);
+      toast.error(`Ops! Algo deu errado.`);
+      setErrorApi(true);
     } finally {
       setSpinner(false);
     }

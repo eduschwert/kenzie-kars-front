@@ -1,7 +1,7 @@
 import { AiOutlineClose } from "react-icons/ai";
 import { StyledText } from "../../styles/tipography";
 import { Modal } from "../Modal";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {
   DivBtns,
@@ -9,82 +9,69 @@ import {
   DivTitle,
   SelectContainer,
   StyledTitle,
-  SubmitButton,
 } from "./style";
 import { StyledButton } from "../../styles/buttons";
 import { Form } from "../forms/style";
 import { CssTextField } from "../forms/muiStyle";
-import { Autocomplete, TextField } from "@mui/material";
+import { Autocomplete } from "@mui/material";
 import { useEffect } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { iUserAddressUpdate } from "../../contexts/userContext/types";
+import { useForm } from "react-hook-form";
 import { UserContext } from "../../contexts/userContext/UserContext";
-// import { CitiesContext } from "../../contexts/citiesContext/CitiesContext";
-import { UpdateAddressSchema } from "./schema";
+import { UpdateAddressSchema, iAddress, iSchema } from "./schema";
+import { CitiesContext } from "../../contexts/citiesContext/CitiesContext";
+import { SyncLoader } from "react-spinners";
+import { api } from "../../services/api";
+import { toast } from "react-toastify";
 
 interface iProp {
   toggleModal: () => void;
 }
 
 export const ModalUpdateAddress = ({ toggleModal }: iProp) => {
-  // const { spinner, setSpinner, errorApi, setErrorApi, registerUser } =
-  //   useContext(UserContext);
-  // const [loadingRegForm, setLoadingRegForm] = useState(false);
+  const { spinner, setSpinner, errorApi, setErrorApi, registerUser, setUser } =
+    useContext(UserContext);
 
-  // const { stateList, cityList, getStates, getCitiesOfState, setSelectedState } =
-  //   useContext(CitiesContext);
-  // const [errorRegister, setErrorRegister] = useState(false);
+  const { stateList, cityList, getStates, getCitiesOfState } =
+    useContext(CitiesContext);
 
-  // const [buyerActiveButton, setBuyerActiveButton] = useState<boolean>(true);
-  // const [sellerActiveButton, setSellerActiveButton] = useState<boolean>(false);
-  // const {
-  //   register,
-  //   handleSubmit,
-  //   trigger,
-  //   formState: { errors, isSubmitSuccessful },
-  //   reset,
-  // } = useForm<iUserAddressUpdate>({
-  //   mode: "onTouched",
-  //   resolver: yupResolver(UpdateAddressSchema),
-  // });
+  const {
+    register,
+    handleSubmit,
+    trigger,
+    formState: { errors, isSubmitSuccessful },
+    reset,
+  } = useForm<iAddress>({
+    mode: "onTouched",
+    resolver: yupResolver(UpdateAddressSchema),
+  });
 
-  // useEffect(() => {
-  //   if (isSubmitSuccessful) {
-  //     reset();
-  //   }
-  // }, [isSubmitSuccessful, reset]);
+  useEffect(() => {
+    if (isSubmitSuccessful) {
+      reset();
+    }
+  }, [isSubmitSuccessful, reset]);
 
-  // useEffect(() => {
-  //   setErrorApi(false);
-  //   setErrorRegister(false);
-  // }, [errorRegister]);
-
-  // const selectSeller = () => {
-  //   setBuyerActiveButton(false);
-  //   setSellerActiveButton(true);
-  // };
-  // const selectBuyer = () => {
-  //   setBuyerActiveButton(true);
-  //   setSellerActiveButton(false);
-  // };
-
-  // const submitForm: SubmitHandler<iRegisterFormValues> = (
-  //   formData: iRegisterFormValues
-  // ) => {
-  //   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  //   const { confirmPassword, ...dataWithoutConfirmPassword } = formData;
-  //   const data: iUserRegisterInformation = {
-  //     ...dataWithoutConfirmPassword,
-  //     is_seller: sellerActiveButton,
-  //   };
-  //   console.log("DATA", data);
-
-  //   setSpinner(true);
-  //   registerUser(data, reset);
-  // };
-  // useEffect(() => {
-  //   getStates();
-  // }, []);
+  async function submitForm(data: iAddress) {
+    setSpinner(true);
+    console.log(data);
+    const token = localStorage.getItem("@KenzieKars:token");
+    try {
+      const response = await api.patch("users", data, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
+      setSpinner(false);
+      toggleModal();
+      toast.success("Endereço atualizado com sucesso!");
+      setUser(response.data);
+    } catch (error) {
+      setSpinner(false);
+      console.error(error);
+      setErrorApi(true);
+      toast.error(`Ops! Algo deu errado.`);
+    }
+  }
   return (
     <Modal toggleModal={toggleModal}>
       <StyledTitle>
@@ -102,148 +89,142 @@ export const ModalUpdateAddress = ({ toggleModal }: iProp) => {
           {`Informações de endereço`}
         </StyledText>
       </StyledTitle>
-      <Form
-      // onSubmit={handleSubmit(submitForm)} noValidate
-      >
-        <CssTextField
-          required
-          label="CEP"
-          variant="outlined"
-          size="small"
-          id="registerCEP"
-          type="text"
-          placeholder="00000.000"
-          // {...register("address.cep")}
-          // error={!!errors.address?.cep}
-          // helperText={errors.address?.cep && errors.address.cep.message}
-        />
-        <SelectContainer>
-          <Autocomplete
-            disablePortal
-            id={`combo-box-state`}
-            // options={stateList}
+      <DivModalBody>
+        <Form onSubmit={handleSubmit(submitForm)} noValidate>
+          <CssTextField
+            required
+            label="CEP"
+            variant="outlined"
             size="small"
-            sx={{ width: "33%" }}
-            clearOnEscape={false}
-            clearIcon={null}
-            onChange={(event, value) => getCitiesOfState(event, value)}
-            onBlur={() => trigger("address.state")}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                label={"Estado"}
-                {...register("address.state")}
-                error={!!errors.address?.state}
-                helperText={
-                  errors.address?.state && errors.address.state.message
-                }
-              />
-            )}
+            id="registerCEP"
+            type="text"
+            placeholder="00000.000"
+            {...register("address.cep")}
+            error={!!errors.address?.cep}
+            helperText={errors.address?.cep && errors.address.cep.message}
+          />
+          <SelectContainer>
+            <Autocomplete
+              disablePortal
+              id={`combo-box-state`}
+              options={stateList}
+              size="small"
+              sx={{ width: "33%" }}
+              clearOnEscape={false}
+              clearIcon={null}
+              onChange={(event, value) => getCitiesOfState(event, value)}
+              onBlur={() => trigger("address.state")}
+              renderInput={(params) => (
+                <CssTextField
+                  {...params}
+                  label={"Estado"}
+                  InputLabelProps={{
+                    style: { fontSize: "12px", padding: "0.3rem 0" },
+                  }}
+                  {...register("address.state")}
+                  error={!!errors.address?.state}
+                  helperText={
+                    errors.address?.state && errors.address.state.message
+                  }
+                />
+              )}
+            />
+
+            <Autocomplete
+              disablePortal
+              id={`combo-box-city`}
+              options={cityList}
+              size="small"
+              sx={{ minWidth: "63%" }}
+              onBlur={() => trigger("address.city")}
+              renderInput={(params) => (
+                <CssTextField
+                  {...params}
+                  label={"Cidade"}
+                  InputLabelProps={{
+                    style: { fontSize: "12px", padding: "0.3rem 0" },
+                  }}
+                  {...register("address.city")}
+                  error={!!errors.address?.city}
+                  helperText={
+                    errors.address?.city && errors.address.city.message
+                  }
+                />
+              )}
+            />
+          </SelectContainer>
+
+          <CssTextField
+            required
+            label="Rua"
+            variant="outlined"
+            size="small"
+            id="registerRua"
+            type="text"
+            placeholder="Digite a rua..."
+            {...register("address.street_name")}
+            error={!!errors.address?.street_name}
+            helperText={
+              errors.address?.street_name && errors.address.street_name.message
+            }
           />
 
-          <Autocomplete
-            disablePortal
-            id={`combo-box-city`}
-            // options={cityList}
+          <CssTextField
+            required
+            label="Número"
+            variant="outlined"
             size="small"
-            sx={{ minWidth: "63%" }}
-            // onBlur={() => trigger("address.city")}
-            // renderInput={(params) => (
-            //   <TextField
-            //     {...params}
-            //     label={"Cidade"}
-            //     {...register("address.city")}
-            //     error={!!errors.address?.city}
-            //     helperText={errors.address?.city && errors.address.city.message}
-            //   />
-            // )}
+            id="registerNumero"
+            type="text"
+            placeholder="Digite o número"
+            {...register("address.street_number")}
+            error={!!errors.address?.street_number}
+            helperText={
+              errors.address?.street_number &&
+              errors.address.street_number.message
+            }
           />
-        </SelectContainer>
 
-        <SelectComboBox
-          optionsArray={stateList}
-          label="Estado"
-          onChange={getCitiesOfState}
-        />
+          <CssTextField
+            label="Complemento"
+            variant="outlined"
+            size="small"
+            id="registerComplement"
+            type="text"
+            placeholder="Digite o complemento"
+            {...register("address.complement")}
+            error={!!errors.address?.complement}
+            helperText={
+              errors.address?.complement && errors.address.complement.message
+            }
+          />
 
-        <CssTextField
-          required
-          label="Rua"
-          variant="outlined"
-          size="small"
-          id="registerRua"
-          type="text"
-          placeholder="Digite a rua..."
-          // {...register("address.street_name")}
-          // error={!!errors.address?.street_name}
-          // helperText={
-          //   errors.address?.street_name && errors.address.street_name.message
-          // }
-        />
-
-        <CssTextField
-          required
-          label="Número"
-          variant="outlined"
-          size="small"
-          id="registerNumero"
-          type="text"
-          placeholder="Digite o número"
-          // {...register("address.street_number")}
-          // error={!!errors.address?.street_number}
-          // helperText={
-          //   errors.address?.street_number &&
-          //   errors.address.street_number.message
-          // }
-        />
-
-        <CssTextField
-          label="Complemento"
-          variant="outlined"
-          size="small"
-          id="registerComplement"
-          type="text"
-          placeholder="Digite o complemento"
-          // {...register("address.complement")}
-          // error={!!errors.address?.complement}
-          // helperText={
-          //   errors.address?.complement && errors.address.complement.message
-          // }
-        />
-
-        <SubmitButton>
-          <StyledButton
-            type="submit"
-            buttonStyle="bg-full"
-            buttonColor="brand1"
-            // disabled={
-            //   !!(
-            //     errors.name ||
-            //     errors.email ||
-            //     errors.cpf ||
-            //     errors.phone ||
-            //     errors.birthdate ||
-            //     errors.description ||
-            //     errors.address?.cep ||
-            //     errors.address?.state ||
-            //     errors.address?.city ||
-            //     errors.address?.street_name ||
-            //     errors.address?.street_number ||
-            //     errors.address?.complement ||
-            //     errors.password ||
-            //     errors.confirmPassword
-            //   )
-            // }
-          >
-            {spinner ? (
-              <SyncLoader color="#FFFFFF" size={8} />
-            ) : (
-              "Finalizar cadastro"
-            )}
-          </StyledButton>
-        </SubmitButton>
-        {/* </Box> */}
-      </Form>
+          <DivBtns>
+            <div>
+              {" "}
+              <StyledButton
+                onClick={() => toggleModal()}
+                buttonStyle="sm-modal-edit"
+                buttonColor="negative"
+              >
+                Cancelar
+              </StyledButton>
+              <StyledButton
+                type="submit"
+                buttonStyle="sm-modal-edit"
+                buttonColor="brand1"
+                disabled={spinner}
+              >
+                {spinner ? (
+                  <SyncLoader color="#FFFFFF" size={8} />
+                ) : (
+                  "Salvar alterações"
+                )}
+              </StyledButton>
+            </div>
+          </DivBtns>
+        </Form>
+      </DivModalBody>
     </Modal>
   );
 };

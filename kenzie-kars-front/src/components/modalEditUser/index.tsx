@@ -7,11 +7,12 @@ import { StyledButton } from "../../styles/buttons";
 import { AiOutlineClose } from "react-icons/ai";
 import { iSchema, updateUserSchema } from "./schema";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../contexts/userContext/UserContext";
 import { SyncLoader } from "react-spinners";
 import { api } from "../../services/api";
 import { toast } from "react-toastify";
+import { setErrorMap } from "zod";
 
 interface iProp {
   toggleModal: () => void;
@@ -20,7 +21,8 @@ interface iProp {
 
 export const ModalEditUser = ({ toggleModal, setMenuType }: iProp) => {
   const [errorPatch, setErrorPatch] = useState(false);
-  const { spinner, setSpinner, errorApi, setUser } = useContext(UserContext);
+  const { spinner, setSpinner, errorApi, setUser, setErrorApi } =
+    useContext(UserContext);
   const {
     register,
     handleSubmit,
@@ -30,6 +32,12 @@ export const ModalEditUser = ({ toggleModal, setMenuType }: iProp) => {
     mode: "onTouched",
     resolver: yupResolver(updateUserSchema),
   });
+
+  useEffect(() => {
+    setErrorApi(false);
+    setErrorPatch(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [errorPatch]);
 
   async function submitForm(data: iSchema) {
     setSpinner(true);
@@ -48,7 +56,9 @@ export const ModalEditUser = ({ toggleModal, setMenuType }: iProp) => {
       toast.success("Perfil atualizado com sucesso!");
       setUser(response.data);
     } catch (error) {
+      setSpinner(false);
       console.error(error);
+      setErrorApi(true);
       toast.error(`Ops! Algo deu errado.`);
     }
   }
@@ -100,6 +110,15 @@ export const ModalEditUser = ({ toggleModal, setMenuType }: iProp) => {
               errorApi ? () => setErrorPatch(true) : () => setErrorPatch(false)
             }
           />
+          {errorApi ? (
+            <StyledText
+              tag="p"
+              textColor="negative"
+              textStyle="body-2-500"
+            >{`Email já existente`}</StyledText>
+          ) : (
+            <></>
+          )}
 
           <CssTextField
             required
@@ -146,6 +165,8 @@ export const ModalEditUser = ({ toggleModal, setMenuType }: iProp) => {
             variant="outlined"
             size="small"
             id="registerDescription"
+            multiline
+            rows={3}
             type="text"
             placeholder=""
             {...register("description")}

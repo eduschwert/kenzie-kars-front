@@ -7,6 +7,7 @@ import {
   SubmitButton,
   StyledForgotPassword,
   StyledMessage,
+  DivError,
 } from "./style";
 import "react-toastify/dist/ReactToastify.css";
 import { StyledButton, StyledLinkButton } from "../../../styles/buttons";
@@ -100,6 +101,17 @@ export const LoginFormMui = () => {
           </StyledText>
         </StyledForgotPassword>
 
+        {errorApi ? (
+          <DivError>
+            <StyledText
+              tag="p"
+              textColor="negative"
+              textStyle="body-2-500"
+            >{`Email ou senha inválidos`}</StyledText>
+          </DivError>
+        ) : (
+          <></>
+        )}
         <SubmitButton>
           <StyledButton
             type="submit"
