@@ -1,5 +1,56 @@
 import styled from "styled-components";
 
+export const StyledTitle = styled.div`
+  width: 100%;
+  margin-top: 0%.2rem;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: start;
+  gap: 1rem;
+
+  & > a {
+    text-decoration: underline;
+
+    :hover {
+      color: var(--color-grey100);
+    }
+  }
+`;
+export const DivTitle = styled.div`
+  display: flex;
+  min-width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  & > button {
+    background-color: transparent;
+    border: none;
+    padding: 5px;
+    border-radius: var(--radius-2);
+  }
+  & > button:hover {
+    background-color: var(--color-grey6);
+    transition: 0.2s ease;
+  }
+`;
+
+export const DivModalBody = styled.div`
+  width: 100%;
+  margin-top: 0%.2rem;
+  padding: 15px;
+`;
+
+export const DivBtns = styled.div`
+  margin-top: 15px;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+`;
+
+
 export const StyledRegForm = styled.div`
   width: 100%;
   display: flex;
@@ -30,14 +81,16 @@ export const HelperTextDiv = styled.div`
   }
 `;
 
-export const StyledTitle = styled.div`
-  width: 85%;
-  margin-top: 0%.2rem;
+export const StyledRegisterTitle = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: start;
-  gap: 1rem;
+  gap: 2rem;
+  padding: 0.5rem 0;
+  margin: 1rem 0;
+  margin-left: 2.5rem;
 
   & > a {
     text-decoration: underline;
@@ -71,61 +124,4 @@ export const SelectContainer = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-`;
-
-export const DivTitle = styled.div`
-  display: flex;
-  min-width: 100%;
-  align-items: center;
-  justify-content: space-between;
-  & > button {
-    background-color: transparent;
-    border: none;
-    padding: 5px;
-    border-radius: var(--radius-2);
-  }
-  & > button:hover {
-    background-color: var(--color-grey6);
-    transition: 0.2s ease;
-  }
-`;
-
-export const Form = styled.form`
-  width: 85%;
-  display: flex;
-  flex-direction: column;
-  margin-top: 15px;
-  gap: 18px;
-
-  & > button {
-    margin-top: 5px;
-    width: 100%;
-    height: 52px;
-    font-size: 18px;
-    border-radius: 4px;
-    background-color: var(--color-primary);
-    opacity: 0.9;
-    border: solid transparent;
-    color: var(--color-white);
-
-    &:hover {
-      opacity: 1;
-      border: solid transparent;
-    }
-  }
-`;
-
-export const DivBtns = styled.div`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 100%;
-  gap: 13px;
-  & > div {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-  }
 `;

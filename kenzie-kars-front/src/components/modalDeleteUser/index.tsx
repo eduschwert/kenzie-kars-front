@@ -3,12 +3,37 @@ import { StyledText } from "../../styles/tipography";
 import { Modal } from "../Modal";
 import { DivBtns, DivModalBody, DivTitle, StyledTitle } from "./style";
 import { StyledButton } from "../../styles/buttons";
+import { api } from "../../services/api";
+import { toast } from "react-toastify";
+import { AxiosError } from "axios";
+import { iDefaultErrorResponse } from "../../interfaces/global";
+import { Navigate, useNavigate } from "react-router-dom";
+import { useUser } from "../../hooks/useUser";
 
 interface iProp {
   toggleModal: () => void;
 }
 
 export const ModalDeleteUser = ({ toggleModal }: iProp) => {
+  const navigate = useNavigate();
+  const { logoutUser } = useUser();
+
+  async function deleteUser() {
+    const token = localStorage.getItem("@KenzieKars:token");
+    try {
+      await api.delete("users", {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
+      logoutUser();
+    } catch (error) {
+      console.error(error);
+      const currentError = error as AxiosError<iDefaultErrorResponse>;
+      toast.error(`Ops! Algo deu errado: ${currentError.response?.data.error}`);
+    }
+  }
+
   return (
     <Modal toggleModal={toggleModal}>
       <StyledTitle>
@@ -35,7 +60,6 @@ export const ModalDeleteUser = ({ toggleModal }: iProp) => {
         `}</StyledText>
         <DivBtns>
           <StyledButton
-            tag="button"
             onClick={() => toggleModal()}
             buttonStyle="sm-modal"
             buttonColor="negative"
@@ -43,10 +67,9 @@ export const ModalDeleteUser = ({ toggleModal }: iProp) => {
             Cancelar
           </StyledButton>
           <StyledButton
-            tag="button"
-            // onClick={() => {
-
-            // }}
+            onClick={() => {
+              deleteUser();
+            }}
             buttonStyle="sm-modal"
             buttonColor="alert"
           >

@@ -1,10 +1,17 @@
 import { StyledText } from "../../styles/tipography";
 import { Modal } from "../Modal";
 import { CssTextField } from "../forms/muiStyle";
-
+import { useForm } from "react-hook-form";
 import { DivBtns, DivTitle, Form, StyledRegForm, StyledTitle } from "./style";
 import { StyledButton } from "../../styles/buttons";
 import { AiOutlineClose } from "react-icons/ai";
+import { iSchema, updateUserSchema } from "./schema";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useContext, useState } from "react";
+import { UserContext } from "../../contexts/userContext/UserContext";
+import { SyncLoader } from "react-spinners";
+import { api } from "../../services/api";
+import { toast } from "react-toastify";
 
 interface iProp {
   toggleModal: () => void;
@@ -12,6 +19,39 @@ interface iProp {
 }
 
 export const ModalEditUser = ({ toggleModal, setMenuType }: iProp) => {
+  const [errorPatch, setErrorPatch] = useState(false);
+  const { spinner, setSpinner, errorApi, setUser } = useContext(UserContext);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<iSchema>({
+    mode: "onTouched",
+    resolver: yupResolver(updateUserSchema),
+  });
+
+  async function submitForm(data: iSchema) {
+    setSpinner(true);
+    if (data.hasOwnProperty("confirmPassword")) {
+      delete data.confirmPassword;
+    }
+    const token = localStorage.getItem("@KenzieKars:token");
+    try {
+      const response = await api.patch("users", data, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
+      setSpinner(false);
+      toggleModal();
+      toast.success("Perfil atualizado com sucesso!");
+      setUser(response.data);
+    } catch (error) {
+      console.error(error);
+      toast.error(`Ops! Algo deu errado.`);
+    }
+  }
   return (
     <Modal toggleModal={toggleModal}>
       <StyledRegForm>
@@ -31,9 +71,7 @@ export const ModalEditUser = ({ toggleModal, setMenuType }: iProp) => {
           </StyledText>
         </StyledTitle>
 
-        <Form
-        // onSubmit={handleSubmit(submitForm)} noValidate
-        >
+        <Form onSubmit={handleSubmit(submitForm)} noValidate>
           <CssTextField
             required
             label="Nome"
@@ -42,9 +80,9 @@ export const ModalEditUser = ({ toggleModal, setMenuType }: iProp) => {
             id="registerName"
             type="text"
             placeholder="Ex: Samuel Leão"
-            // {...register("name")}
-            // error={!!errors.name}
-            // helperText={errors.name && errors.name.message}
+            {...register("name")}
+            error={!!errors.name}
+            helperText={errors.name && errors.name.message}
           />
 
           <CssTextField
@@ -55,14 +93,12 @@ export const ModalEditUser = ({ toggleModal, setMenuType }: iProp) => {
             id="registerEmail"
             type="email"
             placeholder="ex: samuel@mail.com.br"
-            // {...register("email")}
-            // error={!!errors.email}
-            // helperText={errors.email && errors.email.message}
-            // onKeyUp={
-            //   errorApi
-            //     ? () => setErrorRegister(true)
-            //     : () => setErrorRegister(false)
-            // }
+            {...register("email")}
+            error={!!errors.email}
+            helperText={errors.email && errors.email.message}
+            onKeyUp={
+              errorApi ? () => setErrorPatch(true) : () => setErrorPatch(false)
+            }
           />
 
           <CssTextField
@@ -73,9 +109,9 @@ export const ModalEditUser = ({ toggleModal, setMenuType }: iProp) => {
             id="registerCPF"
             type="text"
             placeholder="000.000.000-00"
-            // {...register("cpf")}
-            // error={!!errors.cpf}
-            // helperText={errors.cpf && errors.cpf.message}
+            {...register("cpf")}
+            error={!!errors.cpf}
+            helperText={errors.cpf && errors.cpf.message}
           />
 
           <CssTextField
@@ -86,9 +122,9 @@ export const ModalEditUser = ({ toggleModal, setMenuType }: iProp) => {
             id="registerCelular"
             type="text"
             placeholder="(DDD)90000-0000"
-            // {...register("phone")}
-            // error={!!errors.phone}
-            // helperText={errors.phone && errors.phone.message}
+            {...register("phone")}
+            error={!!errors.phone}
+            helperText={errors.phone && errors.phone.message}
           />
           <CssTextField
             required
@@ -99,9 +135,9 @@ export const ModalEditUser = ({ toggleModal, setMenuType }: iProp) => {
             type="date"
             placeholder=""
             InputLabelProps={{ shrink: true }}
-            // {...register("birthdate")}
-            // error={!!errors.birthdate}
-            // helperText={errors.birthdate && errors.birthdate.message}
+            {...register("birthdate")}
+            error={!!errors.birthdate}
+            helperText={errors.birthdate && errors.birthdate.message}
           />
 
           <CssTextField
@@ -112,9 +148,9 @@ export const ModalEditUser = ({ toggleModal, setMenuType }: iProp) => {
             id="registerDescription"
             type="text"
             placeholder=""
-            // {...register("description")}
-            // error={!!errors.description}
-            // helperText={errors.description && errors.description.message}
+            {...register("description")}
+            error={!!errors.description}
+            helperText={errors.description && errors.description.message}
           />
 
           <CssTextField
@@ -125,9 +161,9 @@ export const ModalEditUser = ({ toggleModal, setMenuType }: iProp) => {
             id="registerPwd"
             type="password"
             placeholder="Digite a senha"
-            // {...register("password")}
-            // error={!!errors.password}
-            // helperText={errors.password && errors.password.message}
+            {...register("password")}
+            error={!!errors.password}
+            helperText={errors.password && errors.password.message}
           />
 
           <CssTextField
@@ -138,64 +174,27 @@ export const ModalEditUser = ({ toggleModal, setMenuType }: iProp) => {
             id="registerConfirmPwd"
             type="password"
             placeholder="Confirme a senha"
-            // {...register("confirmPassword")}
-            // error={!!errors.confirmPassword}
-            // helperText={
-            //   errors.confirmPassword && errors.confirmPassword.message
-            // }
+            {...register("confirmPassword")}
+            error={!!errors.confirmPassword}
+            helperText={
+              errors.confirmPassword && errors.confirmPassword.message
+            }
           />
-
-          {/* {errorApi ? <ErrorMsg>Email já existente</ErrorMsg> : <></>} */}
-          {/* <SubmitButton>
-            <StyledButton
-              tag="button"
-              type="submit"
-              buttonStyle="bg-full"
-              buttonColor="brand1"
-                disabled={
-                  !!(
-                    errors.name ||
-                    errors.email ||
-                    errors.cpf ||
-                    errors.phone ||
-                    errors.birthdate ||
-                    errors.description ||
-                    errors.address?.cep ||
-                    errors.address?.state ||
-                    errors.address?.city ||
-                    errors.address?.street_name ||
-                    errors.address?.street_number ||
-                    errors.address?.complement ||
-                    errors.password ||
-                    errors.confirmPassword
-                  )
-                }
-            >
-              
-              {spinner ? (
-                <SyncLoader color="#FFFFFF" size={8} />
-              ) : (
-                "Finalizar cadastro"
-              )} 
-             </StyledButton> */}
-          {/* </SubmitButton> */}
           <DivBtns>
             <div>
               {" "}
               <StyledButton
-                tag="button"
                 onClick={() => toggleModal()}
-                buttonStyle="sm-modal"
+                buttonStyle="sm-modal-edit"
                 buttonColor="negative"
               >
                 Cancelar
               </StyledButton>
               <StyledButton
-                tag="button"
                 onClick={() => {
                   setMenuType("delete");
                 }}
-                buttonStyle="sm-modal"
+                buttonStyle="sm-modal-edit"
                 buttonColor="alert"
               >
                 Excluir perfil
@@ -203,12 +202,16 @@ export const ModalEditUser = ({ toggleModal, setMenuType }: iProp) => {
             </div>
 
             <StyledButton
-              tag="button"
               type="submit"
               buttonStyle="sm-modal"
               buttonColor="brand1"
+              disabled={spinner}
             >
-              Salvar alterações
+              {spinner ? (
+                <SyncLoader color="#FFFFFF" size={8} />
+              ) : (
+                "Salvar alterações"
+              )}
             </StyledButton>
           </DivBtns>
         </Form>

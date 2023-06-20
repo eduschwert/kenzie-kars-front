@@ -18,6 +18,8 @@ import { iUserResponse } from "../../contexts/userContext/types";
 import { StyledButton } from "../../styles/buttons";
 import { ModalEditUser } from "../modalEditUser";
 import { ModalDeleteUser } from "../modalDeleteUser";
+import { ModalUpdateAddress } from "../modalUpdateAddress";
+import { useUser } from "../../hooks/useUser";
 
 interface iProp {
   user: iUserResponse;
@@ -29,6 +31,7 @@ export function HeaderLoggedIn({ user }: iProp) {
   const [modalType, setMenuType] = useState("user");
   const toggleModal = () => setIsOpenModal(!isOpenModal);
   const location = useLocation();
+  const { logoutUser } = useUser();
 
   return (
     <Header id="header">
@@ -36,6 +39,8 @@ export function HeaderLoggedIn({ user }: iProp) {
         <ModalEditUser toggleModal={toggleModal} setMenuType={setMenuType} />
       ) : isOpenModal && modalType == "delete" ? (
         <ModalDeleteUser toggleModal={toggleModal} />
+      ) : isOpenModal && modalType == "address" ? (
+        <ModalUpdateAddress toggleModal={toggleModal} />
       ) : null}
       <DivHeader>
         <a href={location.pathname !== "/" ? "/" : ""}>
@@ -56,8 +61,7 @@ export function HeaderLoggedIn({ user }: iProp) {
             <MenuList>
               <li>
                 <StyledButton
-                  tag="button"
-                  buttonStyle={"sm-header"}
+                  buttonStyle={"sm"}
                   buttonColor="link"
                   onClick={() => {
                     toggleModal();
@@ -67,22 +71,24 @@ export function HeaderLoggedIn({ user }: iProp) {
               </li>
               <li>
                 <StyledButton
-                  tag="button"
-                  buttonStyle={"sm-header"}
+                  buttonStyle={"sm"}
                   buttonColor="link"
+                  onClick={() => {
+                    toggleModal();
+                    setMenuType("address");
+                  }}
                 >{`Editar endereço`}</StyledButton>
               </li>
               <li>
                 <StyledButton
-                  tag="button"
-                  buttonStyle={"sm-header"}
+                  buttonStyle={"sm"}
                   buttonColor="link"
                 >{`Meus anúncios`}</StyledButton>
               </li>
               <li>
                 <StyledButton
-                  tag="button"
-                  buttonStyle={"sm-header"}
+                  onClick={() => logoutUser()}
+                  buttonStyle={"sm"}
                   buttonColor="link"
                 >{`Sair`}</StyledButton>
               </li>
@@ -114,8 +120,7 @@ export function HeaderLoggedIn({ user }: iProp) {
           <MenuUserItems>
             <li>
               <StyledButton
-                tag="button"
-                buttonStyle={"sm-header"}
+                buttonStyle={"sm"}
                 buttonColor="link"
                 onClick={() => {
                   toggleModal();
@@ -125,22 +130,24 @@ export function HeaderLoggedIn({ user }: iProp) {
             </li>
             <li>
               <StyledButton
-                tag="button"
-                buttonStyle={"sm-header"}
+                buttonStyle={"sm"}
                 buttonColor="link"
+                onClick={() => {
+                  toggleModal();
+                  setMenuType("address");
+                }}
               >{`Editar endereço`}</StyledButton>
             </li>
             <li>
               <StyledButton
-                tag="button"
-                buttonStyle={"sm-header"}
+                buttonStyle={"sm"}
                 buttonColor="link"
               >{`Meus anúncios`}</StyledButton>
             </li>
             <li>
               <StyledButton
-                tag="button"
-                buttonStyle={"sm-header"}
+                onClick={() => logoutUser()}
+                buttonStyle={"sm"}
                 buttonColor="link"
               >{`Sair`}</StyledButton>
             </li>
