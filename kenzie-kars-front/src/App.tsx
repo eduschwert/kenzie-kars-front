@@ -5,7 +5,9 @@ import { theme } from "./theme";
 import { RoutesMain } from "./routes";
 import { ToastContainer } from "react-toastify";
 
-function App() {
+
+const App = () => {
+
   return (
     <>
       <ThemeProvider theme={theme}>
@@ -27,6 +29,6 @@ function App() {
       </ThemeProvider>
     </>
   );
-}
+};
 
 export default App;

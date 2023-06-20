@@ -16,7 +16,7 @@ export const CarList = () => {
     <>
       {isNotEmpty ? (
         <StyledCarList>
-          <div>
+          {/* <div>
             <CardCar />
           </div>
           <div>
@@ -54,9 +54,8 @@ export const CarList = () => {
           </div>
           <div>
             <CardCar />
-          </div>
+          </div> */}
 
-          {/* <CardCar />
           <CardCar />
           <CardCar />
           <CardCar />
@@ -67,7 +66,8 @@ export const CarList = () => {
           <CardCar />
           <CardCar />
           <CardCar />
-          <CardCar /> */}
+          <CardCar />
+          <CardCar />
           {/* {filteredProducts.map((car, index) => (
             <CardCar
               key={index}

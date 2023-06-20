@@ -58,6 +58,16 @@ export const HomePage = () => {
             />
           </SectionHomePageMainMenu>
           <SectionHomePageMainProductGallery display={advertising}>
+            <AdvertisingButton>
+              {advertising && (
+                <StyledButton
+                  tag="button"
+                  onClick={() => setAdvertising((advertising) => !advertising)}
+                  buttonStyle={window.screen.width < 700 ? "sm" : "bg"}
+                  buttonColor="brand1"
+                >{`Filtros`}</StyledButton>
+              )}
+            </AdvertisingButton>
             <CarList />
             <AdvertisingButton>
               {advertising && (
