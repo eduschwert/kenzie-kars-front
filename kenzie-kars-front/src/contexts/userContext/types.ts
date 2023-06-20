@@ -41,10 +41,10 @@ export interface iUserRegisterInformation {
   email: string;
   cpf: string;
   phone: string;
-  birthdate: Date;
+  birthdate: string;
   description: string;
   is_seller: boolean;
-  createdAt: Date;
+  // createdAt?: Date;
 }
 
 export interface iUserResponse {

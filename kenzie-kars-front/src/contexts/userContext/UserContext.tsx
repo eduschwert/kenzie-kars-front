@@ -48,10 +48,14 @@ export const UserProvider = ({ children }: iChildren) => {
 
   useEffect(() => {
     const token = localStorage.getItem("@KenzieKars:token");
+
     // setUser({ ...user, ...defaultValues });
     console.log("USER", user);
 
+
     const autologin = async () => {
+
+
       if (!token) {
         setLoadingProfileView(false);
         return;
@@ -71,13 +75,10 @@ export const UserProvider = ({ children }: iChildren) => {
             navigate("/");
           }
         } catch (error) {
-          // localStorage.clear();
+          localStorage.clear();
+          setUser(defaultValues);
           navigate("/");
           console.error(error);
-          const currentError = error as AxiosError<iDefaultErrorResponse>;
-          toast.error(
-            `Ops! Algo deu errado: ${currentError.response?.data.error}`
-          );
         } finally {
           setLoadingProfileView(false);
         }
@@ -110,16 +111,17 @@ export const UserProvider = ({ children }: iChildren) => {
     } catch (error) {
       const currentError = error as AxiosError<iDefaultErrorResponse>;
       console.error(error);
+      console.log("ERROR", currentError.message);
       toast.error(`Ops! Algo deu errado: ${currentError.response?.data.error}`);
     } finally {
       setSpinner(false);
     }
   };
 
-  async function registerUser(
+  const registerUser = async (
     formData: iUserRegisterInformation,
     reset: () => void
-  ) {
+  ) => {
     try {
       console.log("REGISTER DATA", formData);
       const response = await api.post("users", formData);
@@ -135,7 +137,7 @@ export const UserProvider = ({ children }: iChildren) => {
     } finally {
       setSpinner(false);
     }
-  }
+  };
   const logoutUser = () => {
     window.localStorage.clear();
     setUser(defaultValues);

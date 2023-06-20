@@ -1,5 +1,6 @@
 import { SyntheticEvent, useEffect, useState } from "react";
 import { StyledText } from "../../styles/tipography";
+
 import { Modal } from "../Modal";
 import {
   Flex,
@@ -8,6 +9,7 @@ import {
   StyledForm,
   StyledHeaderModal,
 } from "./style";
+
 import { iModalAddCarProps, iVehicleFipeApi } from "./types";
 import { useForm, Controller } from "react-hook-form";
 import { StyledButton } from "../../styles/buttons";
