@@ -48,11 +48,13 @@ export const UserProvider = ({ children }: iChildren) => {
 
   useEffect(() => {
     const token = localStorage.getItem("@KenzieKars:token");
+
     // setUser({ ...user, ...defaultValues });
     console.log("USER", user);
 
 
     const autologin = async () => {
+
 
       if (!token) {
         setLoadingProfileView(false);
@@ -73,13 +75,10 @@ export const UserProvider = ({ children }: iChildren) => {
             navigate("/");
           }
         } catch (error) {
-          // localStorage.clear();
+          localStorage.clear();
+          setUser(defaultValues);
           navigate("/");
           console.error(error);
-          const currentError = error as AxiosError<iDefaultErrorResponse>;
-          toast.error(
-            `Ops! Algo deu errado: ${currentError.response?.data.error}`
-          );
         } finally {
           setLoadingProfileView(false);
         }
