@@ -7,6 +7,8 @@ interface iGallery {
 }
 
 export const ContainerHomePage = styled.div`
+  width: 100%;
+
   @media (min-width: 700px) {
     min-height: 100%;
     position: relative;
@@ -35,19 +37,17 @@ export const MaskImageDiv = styled.div`
   object-fit: cover;
   background-repeat: no-repeat;
   background-position: center;
-  /* -webkit-mask-image: linear-gradient(var(--color-grey0), transparent);
-  mask-image: linear-gradient(var(--color-grey0), transparent);
-  */
 
   & > div {
     height: 500px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
+    /* justify-content: flex-start; */
     text-align: center;
     gap: 2rem;
     margin: 0 auto;
+    padding: 0 2rem;
     padding-top: 3rem;
 
     @media (min-width: 700px) {
@@ -60,9 +60,7 @@ export const MaskImageDiv = styled.div`
 
 export const SectionHomePageHeader = styled.div<iDisplay>`
   margin-top: 80px;
-  /* display: none; */
   display: ${({ display }) => (display === true ? "flex" : " none")};
-  /* justify-content: space-between; */
   scroll-margin-top: 80px;
   width: 100%;
   height: 500px;

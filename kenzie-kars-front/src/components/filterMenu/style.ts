@@ -80,7 +80,7 @@ export const AdvertisingButton = styled.div`
   display: flex;
   justify-content: space-around;
   gap: 2rem;
-  margin-left: 1rem;
+  /* margin-left: 1rem; */
   margin-top: 1rem;
 
   @media (min-width: 700px) {
