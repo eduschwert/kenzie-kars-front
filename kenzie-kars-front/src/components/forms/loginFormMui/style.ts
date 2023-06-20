@@ -102,3 +102,9 @@ export const SelectContainer = styled.div`
   align-items: flex-start;
   justify-content: space-between;
 `;
+
+export const DivError = styled.div`
+  width: 100%;
+  margin-top: -10px;
+  text-align: center;
+`;

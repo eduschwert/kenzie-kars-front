@@ -21,11 +21,12 @@ export const ModalDeleteUser = ({ toggleModal }: iProp) => {
   async function deleteUser() {
     const token = localStorage.getItem("@KenzieKars:token");
     try {
-      await api.delete("users", {
+      const response = await api.delete("users", {
         headers: {
           authorization: `Bearer ${token}`,
         },
       });
+      console.log(response);
       logoutUser();
     } catch (error) {
       console.error(error);
