@@ -71,16 +71,12 @@ export function CardCar() {
           </DivCarDetails>
           <DivBtnsCard>
             {" "}
-            <StyledButton
-              tag="button"
-              buttonStyle={"sm"}
-              buttonColor="outline1"
-            >{`Filtros`}</StyledButton>
-            <StyledButton
-              tag="button"
-              buttonStyle={"sm"}
-              buttonColor="outline1"
-            >{`Ver detalhes`}</StyledButton>
+            <StyledButton buttonStyle={"sm"} buttonColor="outline1">
+              {`Filtros`}
+            </StyledButton>
+            <StyledButton buttonStyle={"sm"} buttonColor="outline1">
+              {`Ver detalhes`}
+            </StyledButton>
           </DivBtnsCard>
         </CardSection>
       </a>

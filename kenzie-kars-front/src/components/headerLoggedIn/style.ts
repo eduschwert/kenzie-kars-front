@@ -63,7 +63,7 @@ export const DivInfoHeader = styled.div`
     border-radius: var(--radius-2);
     top: 58px;
     color: green;
-    width: 170px;
+    width: 200px;
     box-shadow: 0px 4px 40px -10px rgba(0, 0, 0, 0.25);
   }
 
@@ -100,7 +100,7 @@ export const DivMenu = styled.div<iDiv>`
   width: 100vw;
   position: absolute;
   display: ${({ display }) => (display === true ? "flex" : " none")};
-
+  z-index: 300;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
 
   & > div {
@@ -132,7 +132,7 @@ export const DivMenu = styled.div<iDiv>`
 `;
 
 export const MenuList = styled.ul`
-  padding: 20px;
+  padding: 17px;
   display: flex;
   flex-direction: column;
   gap: 17px;
@@ -140,18 +140,6 @@ export const MenuList = styled.ul`
 
   & > li {
     min-width: 100%;
-  }
-  & > li > button {
-    min-width: 100%;
-    border: 0px;
-    background-color: transparent;
-    border-radius: var(--radius-2);
-    padding: 8px;
-  }
-
-  & > li > button:hover {
-    cursor: pointer;
-    background-color: var(--color-grey8);
   }
 `;
 

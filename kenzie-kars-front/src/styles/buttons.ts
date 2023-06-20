@@ -1,95 +1,89 @@
+import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
-import { BaseButton } from "./baseButton";
+
 interface iStyledButtonProps {
-  buttonColor?: string;
-  buttonStyle?: string;
-  type?: string;
-  disabled?: boolean;
+  buttonColor:
+    | "grey1"
+    | "negative"
+    | "brand1"
+    | "brandOpacity"
+    | "light"
+    | "outlineLight"
+    | "outline1"
+    | "outline2"
+    | "outlineBrand1"
+    | "link"
+    | "alert"
+    | "success"
+    | "brandDisable";
+  buttonStyle: "sm" | "sm-modal" | "bg" | "round";
+  width?: string;
 }
 
-//eslint-disable-next-line react-refresh/only-export-components
-export const Button = (buttonStyle: string) => {
-  switch (buttonStyle) {
-    case "sm":
-      return css`
-        height: 38px;
-        padding: 12px 20px;
-        border-radius: var(--radius-2);
-
-        font-family: var(--font-family-inter);
-        font-weight: 600;
-        font-size: 14px;
-        line-height: 0px;
-      `;
-    case "bg":
-      return css`
-        height: 48px;
-        padding: 14px 16px;
-        border-radius: var(--radius-2);
-
-        font-family: var(--font-family-inter);
-        font-weight: 600;
-        font-size: 16px;
-        font-size: 16px;
-
-        @media (min-width: 400px) {
-          padding: 12px 36px;
-        }
-      `;
-    case "sm-full":
-      return css`
-        width: 100%;
-        height: 38px;
-        padding: 12px 20px;
-        border-radius: var(--radius-2);
-
-        font-family: var(--font-family-inter);
-        font-weight: 600;
-        font-size: 14px;
-        line-height: 0px;
-      `;
-    case "bg-full":
-      return css`
-        width: 100%;
-        height: 48px;
-        padding: 14px 28px;
-        border-radius: var(--radius-2);
-        display: flex;
-        justify-content: center;
-
-        font-family: var(--font-family-inter);
-        font-weight: 600;
-        font-size: 16px;
-        font-size: 16px;
-      `;
-    case "sm-header":
-      return css`
-        height: 38px;
-        padding: 12px 27px;
-        border-radius: var(--radius-2);
-
-        font-family: var(--font-family-inter);
-        font-weight: 600;
-        font-size: 14px;
-        line-height: 0px;
-      `;
-
-    default:
-      return css`
-        height: 48px;
-        padding: 12px 28px;
-        border-radius: var(--radius-2);
-
-        font-family: var(--font-family-inter);
-        font-weight: 600;
-        font-size: 16px;
-        line-height: 0px;
-      `;
-  }
+type iStyledLinkButtonProps = iStyledButtonProps & {
+  disabled?: boolean;
 };
 
-export const StyledButton = styled(BaseButton)<iStyledButtonProps>`
-  ${({ buttonStyle }) => buttonStyle && Button(buttonStyle)}
+export const buttonCSS = css<iStyledButtonProps>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-family: var(--font-family-inter);
+  font-weight: 600;
+  white-space: nowrap;
+
+  transition: 150ms ease-in-out;
+
+  width: ${({ width }) => width || "auto"};
+
+  &:disabled {
+    background-color: var(--color-grey5);
+    color: var(--white-fixed);
+    border: solid 1.5px var(--color-grey5);
+    cursor: not-allowed;
+    &:hover {
+      background-color: var(--color-grey5);
+      color: var(--white-fixed);
+      border: solid 1.5px var(--color-grey5);
+    }
+  }
+
+  ${({ buttonStyle }) => {
+    switch (buttonStyle) {
+      case "bg":
+        return css`
+          height: 48px;
+          padding: 0 28px;
+          border-radius: var(--radius-2);
+
+          font-size: 16px;
+        `;
+      case "sm":
+        return css`
+          height: 38px;
+          padding: 0 20px;
+          border-radius: var(--radius-2);
+
+          font-size: 14px;
+        `;
+      case "sm-modal":
+        return css`
+          height: 38px;
+          border-radius: var(--radius-2);
+          width: 100%;
+          padding-left: 5px;
+          padding-right: 5px;
+
+          font-size: 14px;
+        `;
+      case "round":
+        return css`
+          width: 24px;
+          height: 24px;
+        `;
+    }
+  }}
 
   ${({ buttonColor }) => {
     switch (buttonColor) {
@@ -113,26 +107,8 @@ export const StyledButton = styled(BaseButton)<iStyledButtonProps>`
             background-color: var(--color-grey1);
           }
         `;
-      case "disable":
-        return css`
-          background-color: var(--color-grey5);
-          color: var(--white-fixed);
-          border: solid 1.5px var(--color-grey5);
-          padding: 12px 34px;
-        `;
       case "brand1":
         return css`
-          background-color: var(--color-brand1);
-          color: var(--white-fixed);
-          border: solid 1.5px var(--color-brand1);
-
-          :hover {
-            background-color: var(--color-brand2);
-          }
-        `;
-      case "brand1-100":
-        return css`
-          width: 100%;
           background-color: var(--color-brand1);
           color: var(--white-fixed);
           border: solid 1.5px var(--color-brand1);
@@ -169,7 +145,6 @@ export const StyledButton = styled(BaseButton)<iStyledButtonProps>`
           background-color: var(--color-grey10);
           color: var(--color-grey0);
           border: solid 1.5px var(--color-grey0);
-          padding: 12px 27px;
 
           :hover {
             background-color: var(--color-grey1);
@@ -236,38 +211,27 @@ export const StyledButton = styled(BaseButton)<iStyledButtonProps>`
           color: var(--color-brand4);
           border: solid 1.5px var(--color-brand3);
         `;
-
-      default:
-        return css`
-          background-color: var(--color-brand1);
-          color: var(--white-fixed);
-          border: solid 1.5px var(--color-brand1);
-
-          :hover {
-            background-color: var(--color-brand2);
-          }
-        `;
     }
   }}
+`;
 
-${({ disabled, type }) => {
-    if (disabled && type === "submit") {
+export const StyledButton = styled.button<iStyledButtonProps>`
+  ${buttonCSS}
+`;
+
+export const StyledLinkButton = styled(Link)<iStyledLinkButtonProps>`
+  ${buttonCSS}
+
+  ${({ disabled }) => {
+    if (disabled) {
       return css`
         background-color: var(--color-grey5);
         color: var(--white-fixed);
         border: solid 1.5px var(--color-grey5);
-        cursor: not-allowed;
-      `;
-    } else if (!disabled && type === "submit") {
-      return css`
-        background-color: var(--color-brand1);
-        color: var(--white-fixed);
-        border: solid 1.5px var(--color-brand1);
-
-        :hover {
-          background-color: var(--color-brand2);
-          border: solid 1.5px var(--color-brand2);
-          cursor: pointer;
+        &:hover {
+          background-color: var(--color-grey5);
+          color: var(--white-fixed);
+          border: solid 1.5px var(--color-grey5);
         }
       `;
     }

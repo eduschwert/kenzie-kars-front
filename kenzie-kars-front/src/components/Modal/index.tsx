@@ -12,12 +12,14 @@ export const Modal = ({ toggleModal, children, blockClosing }: ModalProps) => {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handleClick = (event: MouseEvent) => {
-      if (!ref.current) {
-        return;
+    const handleEscKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        toggleModal();
       }
+    };
 
-      if (!event.target) {
+    const handleClick = (event: MouseEvent) => {
+      if (!ref.current || blockClosing) {
         return;
       }
 
@@ -32,12 +34,24 @@ export const Modal = ({ toggleModal, children, blockClosing }: ModalProps) => {
       }
     };
 
+    const disableScroll = () => {
+      document.body.style.overflow = "hidden";
+    };
+
+    const enableScroll = () => {
+      document.body.style.overflow = "auto";
+    };
+
+    window.addEventListener("keydown", handleEscKey);
     window.addEventListener("mousedown", handleClick);
+    disableScroll();
 
     return () => {
+      window.removeEventListener("keydown", handleEscKey);
       window.removeEventListener("mousedown", handleClick);
+      enableScroll();
     };
-  }, [toggleModal]);
+  }, [toggleModal, blockClosing]);
 
   return createPortal(
     <Container>

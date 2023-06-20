@@ -50,7 +50,10 @@ export const UserProvider = ({ children }: iChildren) => {
     const token = localStorage.getItem("@KenzieKars:token");
     // setUser({ ...user, ...defaultValues });
     console.log("USER", user);
-    const loadUser = async () => {
+
+
+    const autologin = async () => {
+
       if (!token) {
         setLoadingProfileView(false);
         return;
@@ -83,9 +86,8 @@ export const UserProvider = ({ children }: iChildren) => {
       }
     };
 
-    loadUser();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [location.pathname]);
+    autologin();
+  }, []);
 
   console.log("User State", user);
 

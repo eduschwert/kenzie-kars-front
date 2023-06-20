@@ -1,9 +1,16 @@
 import { SyntheticEvent, useEffect, useState } from "react";
 import { StyledText } from "../../styles/tipography";
-import { Modal } from "../modal";
-import { Flex, StyledBodyModal, StyledForm, StyledHeaderModal } from "./style";
+
+import { Modal } from "../Modal";
+import {
+  Flex,
+  FlexEnd,
+  StyledBodyModal,
+  StyledForm,
+  StyledHeaderModal,
+} from "./style";
+
 import { iModalAddCarProps, iVehicleFipeApi } from "./types";
-import X from "../../assets/x.svg";
 import { useForm, Controller } from "react-hook-form";
 import { StyledButton } from "../../styles/buttons";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -13,6 +20,7 @@ import { AxiosResponse } from "axios";
 import { CssTextField } from "../forms/muiStyle";
 import { Autocomplete } from "@mui/material";
 import { api } from "../../services/api";
+import { AiOutlineClose } from "react-icons/ai";
 
 export const ModalAddCar = ({
   toggleModal,
@@ -25,7 +33,7 @@ export const ModalAddCar = ({
   const [fuel, setFuel] = useState(0);
   const [fipePrice, setFipePrice] = useState(0);
 
-  const fuelsOptions = ["gasolina", "álcool", "híbrido"];
+  const fuelsOptions = ["flex", "híbrido", "elétrico"];
 
   useEffect(() => {
     const fetchBrands = async () => {
@@ -106,12 +114,11 @@ export const ModalAddCar = ({
   };
 
   const onSubmit = async (data) => {
-    const fuelNumber = fuelsOptions.findIndex((fuel) => fuel === data.fuel);
     data = {
       ...data,
       fipe_price: fipePrice,
       year: year,
-      fuel: fuelNumber + 1,
+      fuel: fuel,
       mileage: Number(data.mileage),
       price: Number(data.price),
       images: [data.image1, data.image2],
@@ -139,7 +146,7 @@ export const ModalAddCar = ({
             Criar anúncio
           </StyledText>
           <button onClick={toggleModal} type="button">
-            <img src={X} alt="Fechar modal" />
+            <AiOutlineClose />
           </button>
         </StyledHeaderModal>
         <StyledBodyModal>
@@ -209,7 +216,7 @@ export const ModalAddCar = ({
               }}
             />
             <CssTextField
-              value={fuel}
+              value={fuel !== 0 ? fuelsOptions[fuel - 1] : ""}
               label="Combustível"
               variant="outlined"
               size="medium"
@@ -338,9 +345,20 @@ export const ModalAddCar = ({
               />
             )}
           />
-          <StyledButton tag="button" buttonStyle="bg" buttonColor="brand1">
-            Criar anúncio
-          </StyledButton>
+          <FlexEnd>
+            <StyledButton
+              onClick={toggleModal}
+              type="button"
+              buttonStyle="bg"
+              buttonColor="negative"
+              width="126px"
+            >
+              Cancelar
+            </StyledButton>
+            <StyledButton buttonStyle="bg" buttonColor="brand1" width="193px">
+              Criar anúncio
+            </StyledButton>
+          </FlexEnd>
         </StyledBodyModal>
       </StyledForm>
     </Modal>

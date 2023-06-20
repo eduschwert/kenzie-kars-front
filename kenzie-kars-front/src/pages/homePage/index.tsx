@@ -19,13 +19,20 @@ import {
 import { AdvertisingButton } from "../../components/filterMenu/style";
 import { StyledButton } from "../../styles/buttons";
 import { FooterComponent } from "../../components/footer";
+import { useUser } from "../../hooks/useUser";
+import { HeaderLoggedIn } from "../../components/headerLoggedIn";
 
 export const HomePage = () => {
   const [advertising, setAdvertising] = useState<boolean>(false);
+  const { user } = useUser();
   console.log(advertising);
   return (
     <ContainerHomePage>
-      <HeaderNotLoggedIn />
+      {user.name !== "" ? (
+        <HeaderLoggedIn user={user} />
+      ) : (
+        <HeaderNotLoggedIn />
+      )}
       <HomePageContainer>
         <SectionHomePageHeader id="advertising" display={advertising}>
           <MaskImageDiv>
@@ -65,7 +72,6 @@ export const HomePage = () => {
             <AdvertisingButton>
               {advertising && (
                 <StyledButton
-                  tag="button"
                   onClick={() => setAdvertising((advertising) => !advertising)}
                   buttonStyle={window.screen.width < 700 ? "sm" : "bg"}
                   buttonColor="brand1"

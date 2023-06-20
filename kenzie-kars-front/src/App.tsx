@@ -5,9 +5,11 @@ import { theme } from "./theme";
 import { RoutesMain } from "./routes";
 import { ToastContainer } from "react-toastify";
 
+
 const App = () => {
+
   return (
-    <div className="App">
+    <>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <RoutesMain />
@@ -25,7 +27,7 @@ const App = () => {
           theme="light"
         />
       </ThemeProvider>
-    </div>
+    </>
   );
 };
 

@@ -44,16 +44,16 @@ export const CarListProfileView = ({ vehicles }: iCarListProfileViewProps) => {
               </Flex>
               <Flex2>
                 <StyledButton
-                  tag="button"
                   buttonStyle="sm"
                   buttonColor="outline1"
+                  width="80px"
                 >
                   Editar
                 </StyledButton>
                 <StyledButton
-                  tag="button"
                   buttonStyle="sm"
                   buttonColor="outline1"
+                  width="126px"
                 >
                   Ver detalhes
                 </StyledButton>
