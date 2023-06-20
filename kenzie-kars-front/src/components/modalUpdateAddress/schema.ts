@@ -63,8 +63,6 @@ export interface iSchema {
   complement?: string;
 }
 
-
 export interface iAddress {
-  address:iSchema
-  }
-  
+  address: iSchema;
+}

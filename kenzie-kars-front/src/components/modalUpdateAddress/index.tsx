@@ -1,7 +1,7 @@
 import { AiOutlineClose } from "react-icons/ai";
 import { StyledText } from "../../styles/tipography";
 import { Modal } from "../Modal";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {
   DivBtns,
@@ -9,27 +9,26 @@ import {
   DivTitle,
   SelectContainer,
   StyledTitle,
-  SubmitButton,
 } from "./style";
 import { StyledButton } from "../../styles/buttons";
 import { Form } from "../forms/style";
 import { CssTextField } from "../forms/muiStyle";
-import { Autocomplete, TextField } from "@mui/material";
+import { Autocomplete } from "@mui/material";
 import { useEffect } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { iUserAddressUpdate } from "../../contexts/userContext/types";
+import { useForm } from "react-hook-form";
 import { UserContext } from "../../contexts/userContext/UserContext";
 import { UpdateAddressSchema, iAddress, iSchema } from "./schema";
 import { CitiesContext } from "../../contexts/citiesContext/CitiesContext";
-import { SelectComboBox } from "../selectComboBox";
 import { SyncLoader } from "react-spinners";
+import { api } from "../../services/api";
+import { toast } from "react-toastify";
 
 interface iProp {
   toggleModal: () => void;
 }
 
 export const ModalUpdateAddress = ({ toggleModal }: iProp) => {
-  const { spinner, setSpinner, errorApi, setErrorApi, registerUser } =
+  const { spinner, setSpinner, errorApi, setErrorApi, registerUser, setUser } =
     useContext(UserContext);
 
   const { stateList, cityList, getStates, getCitiesOfState } =
@@ -46,34 +45,33 @@ export const ModalUpdateAddress = ({ toggleModal }: iProp) => {
     resolver: yupResolver(UpdateAddressSchema),
   });
 
-  // useEffect(() => {
-  //   if (isSubmitSuccessful) {
-  //     reset();
-  //   }
-  // }, [isSubmitSuccessful, reset]);
+  useEffect(() => {
+    if (isSubmitSuccessful) {
+      reset();
+    }
+  }, [isSubmitSuccessful, reset]);
 
-  // useEffect(() => {
-  //   setErrorApi(false);
-  //   setErrorRegister(false);
-  // }, [errorRegister]);
-
-  // const submitForm: SubmitHandler<iRegisterFormValues> = (
-  //   formData: iRegisterFormValues
-  // ) => {
-  //   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  //   const { confirmPassword, ...dataWithoutConfirmPassword } = formData;
-  //   const data: iUserRegisterInformation = {
-  //     ...dataWithoutConfirmPassword,
-  //     is_seller: sellerActiveButton,
-  //   };
-  //   console.log("DATA", data);
-
-  //   setSpinner(true);
-  //   registerUser(data, reset);
-  // };
-  // useEffect(() => {
-  //   getStates();
-  // }, []);
+  async function submitForm(data: iAddress) {
+    setSpinner(true);
+    console.log(data);
+    const token = localStorage.getItem("@KenzieKars:token");
+    try {
+      const response = await api.patch("users", data, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
+      setSpinner(false);
+      toggleModal();
+      toast.success("Endereço atualizado com sucesso!");
+      setUser(response.data);
+    } catch (error) {
+      setSpinner(false);
+      console.error(error);
+      setErrorApi(true);
+      toast.error(`Ops! Algo deu errado.`);
+    }
+  }
   return (
     <Modal toggleModal={toggleModal}>
       <StyledTitle>
@@ -92,9 +90,7 @@ export const ModalUpdateAddress = ({ toggleModal }: iProp) => {
         </StyledText>
       </StyledTitle>
       <DivModalBody>
-        <Form
-        // onSubmit={handleSubmit(submitForm)} noValidate
-        >
+        <Form onSubmit={handleSubmit(submitForm)} noValidate>
           <CssTextField
             required
             label="CEP"
@@ -203,19 +199,30 @@ export const ModalUpdateAddress = ({ toggleModal }: iProp) => {
             }
           />
 
-          <SubmitButton>
-            <StyledButton
-              type="submit"
-              buttonStyle="bg-full"
-              buttonColor="brand1"
-            >
-              {spinner ? (
-                <SyncLoader color="#FFFFFF" size={8} />
-              ) : (
-                "Finalizar cadastro"
-              )}
-            </StyledButton>
-          </SubmitButton>
+          <DivBtns>
+            <div>
+              {" "}
+              <StyledButton
+                onClick={() => toggleModal()}
+                buttonStyle="sm-modal-edit"
+                buttonColor="negative"
+              >
+                Cancelar
+              </StyledButton>
+              <StyledButton
+                type="submit"
+                buttonStyle="sm-modal-edit"
+                buttonColor="brand1"
+                disabled={spinner}
+              >
+                {spinner ? (
+                  <SyncLoader color="#FFFFFF" size={8} />
+                ) : (
+                  "Salvar alterações"
+                )}
+              </StyledButton>
+            </div>
+          </DivBtns>
         </Form>
       </DivModalBody>
     </Modal>

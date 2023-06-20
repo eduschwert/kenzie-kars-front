@@ -45,12 +45,18 @@ export const DivModalBody = styled.div`
 `;
 
 export const DivBtns = styled.div`
-  margin-top: 15px;
   display: flex;
-  width: 100%;
   align-items: center;
-  justify-content: flex-end;
-  gap: 10px;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  gap: 13px;
+  & > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
 `;
 
 export const SubmitButton = styled.div`
