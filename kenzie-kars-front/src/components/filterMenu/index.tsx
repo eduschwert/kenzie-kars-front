@@ -11,6 +11,7 @@ import { iAdvertising } from "./types";
 import { StyledButton } from "../../styles/buttons";
 import { StyledText } from "../../styles/tipography";
 import { start } from "@popperjs/core";
+import { AiOutlineClose } from "react-icons/ai";
 
 export const FilterMenu = ({ advertising, setAdvertising }: iAdvertising) => {
   const carBrands = ["Porsche", "Ford", "Fiat", "Honda", "Toyota"];
@@ -104,8 +105,8 @@ export const FilterMenu = ({ advertising, setAdvertising }: iAdvertising) => {
           <StyledText tag="p" textStyle={"heading-7-500"}>
             {`Filtros`}
           </StyledText>
-          <StyledButton tag="button" buttonColor={"link"}>
-            {`X`}
+          <StyledButton buttonStyle={"round"} buttonColor={"link"}>
+            <AiOutlineClose color="var(--color-grey4)" />
           </StyledButton>
         </CancelFiltersNarrow>
         <List component="ul" disablePadding className="NavNestedListTitle">
@@ -186,7 +187,6 @@ export const FilterMenu = ({ advertising, setAdvertising }: iAdvertising) => {
         <AdvertisingButton>
           {!advertising && (
             <StyledButton
-              tag="button"
               onClick={() => setAdvertising((advertising) => !advertising)}
               // buttonStyle={window.screen.width < 700 ? "sm" : "bg"}
               buttonStyle="sm"
@@ -197,9 +197,9 @@ export const FilterMenu = ({ advertising, setAdvertising }: iAdvertising) => {
         <CancelFilters>
           {
             <StyledButton
-              tag="button"
               onClick={() => setAdvertising((advertising) => !advertising)}
-              buttonStyle={window.screen.width < 700 ? "sm" : "bg"}
+              // buttonStyle={window.screen.width < 600 ? "sm" : "bg"}
+              buttonStyle="sm"
               buttonColor="brand1"
             >{`Limpar Filtros`}</StyledButton>
           }

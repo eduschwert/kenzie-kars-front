@@ -5,7 +5,7 @@ interface iStyledTextProps {
   textStyle?: string;
 }
 
-export function text(textStyle: string) {
+export const text = (textStyle: string) => {
   switch (textStyle) {
     case "heading-1-700":
       return css`
@@ -154,7 +154,7 @@ export function text(textStyle: string) {
         font-family: var(--font-family-inter);
       `;
   }
-}
+};
 
 export const StyledText = styled(BaseText)<iStyledTextProps>`
   ${({ textColor }) => {
