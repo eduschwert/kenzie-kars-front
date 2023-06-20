@@ -199,7 +199,8 @@ export const FilterMenu = ({ advertising, setAdvertising }: iAdvertising) => {
             <StyledButton
               tag="button"
               onClick={() => setAdvertising((advertising) => !advertising)}
-              buttonStyle={window.screen.width < 700 ? "sm" : "bg"}
+              // buttonStyle={window.screen.width < 600 ? "sm" : "bg"}
+              buttonStyle="sm"
               buttonColor="brand1"
             >{`Limpar Filtros`}</StyledButton>
           }

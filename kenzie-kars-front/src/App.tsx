@@ -5,8 +5,7 @@ import { theme } from "./theme";
 import { RoutesMain } from "./routes";
 import { ToastContainer } from "react-toastify";
 
-
-function App() {
+const App = () => {
   return (
     <div className="App">
       <ThemeProvider theme={theme}>
@@ -25,10 +24,9 @@ function App() {
           pauseOnHover
           theme="light"
         />
-
       </ThemeProvider>
     </div>
   );
-}
+};
 
 export default App;

@@ -1,6 +1,6 @@
 import { SyntheticEvent, useEffect, useState } from "react";
 import { StyledText } from "../../styles/tipography";
-import { Modal } from "../Modal";
+import { Modal } from "../modal";
 import { Flex, StyledBodyModal, StyledForm, StyledHeaderModal } from "./style";
 import { iModalAddCarProps, iVehicleFipeApi } from "./types";
 import X from "../../assets/x.svg";

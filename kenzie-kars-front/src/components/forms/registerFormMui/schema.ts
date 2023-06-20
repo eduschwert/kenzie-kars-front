@@ -53,6 +53,7 @@ export const registerFormSchema = yup.object().shape({
   cpf: yup
     .string()
     .required("CPF é obrigatório")
-    .min(10, "CPF com 11 caracteres "),
+    .min(11, "CPF com 11 caracteres ")
+    .max(11, "CPF com 11 caracteres "),
   address: addressSchema.required(),
 });
