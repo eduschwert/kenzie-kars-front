@@ -24,6 +24,7 @@ export const Header = styled.header`
   align-items: center;
   background-color: var(--color-grey10);
   position: fixed;
+  z-index: 350;
   top: 0px;
   left: 0px;
   right: 0px;
@@ -102,7 +103,8 @@ export const DivMenu = styled.div<iDiv>`
   display: ${({ display }) => (display === true ? "flex" : " none")};
   z-index: 1500;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
-  background-color: white;
+  background-color: var(--white-fixed);
+
 
   & > div {
     padding: 25px 15px 25px 15px;
