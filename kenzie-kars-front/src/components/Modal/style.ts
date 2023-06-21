@@ -1,4 +1,5 @@
 import styled, { keyframes } from "styled-components";
+
 const animateModal = keyframes`
     0% {
        transform: translateY(-50%);
@@ -12,7 +13,7 @@ const animateModal = keyframes`
 
 `;
 
-export const Container = styled.div`
+export const ModalContainer = styled.div`
   inset: 0;
   background: rgba(0, 0, 0, 0.5);
   width: 100%;
@@ -23,13 +24,18 @@ export const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+export const ModalInnerContainer = styled.div`
+  overflow: hidden;
+  border-radius: var(--radius-1);
 
   > div {
-    margin: 60px 0;
+    /* margin: 60px 0; */
     background: var(--white-fixed);
     border-radius: var(--radius-1);
     width: 520px;
-    max-width: 90%;
+    max-width: 100%;
     padding: 0 0.6 2rem 0.6;
     overflow-y: auto;
     max-height: calc(100vh - 156px);
