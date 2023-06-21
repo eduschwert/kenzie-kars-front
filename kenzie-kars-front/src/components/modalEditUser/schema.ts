@@ -93,4 +93,3 @@ export interface iSchema {
   password?: string;
   confirmPassword?: string;
 }
-

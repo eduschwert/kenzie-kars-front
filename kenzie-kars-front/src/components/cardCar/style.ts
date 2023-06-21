@@ -98,3 +98,13 @@ export const DivBtnsCard = styled.div`
   justify-content: flex-start;
   gap: 15px;
 `;
+
+export const DivCardText = styled.div`
+  & > div > p {
+    display: -webkit-box;
+    text-align: justify;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+`;

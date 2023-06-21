@@ -9,6 +9,7 @@ import {
   CarTagInactive,
   CarTagGoodDeal,
   DivBtnsCard,
+  DivCardText,
 } from "./style";
 import { StyledText } from "../../styles/tipography";
 import { InitialsCircle } from "../initialsCircle";
@@ -43,9 +44,12 @@ export function CardCar() {
           <StyledText tag="p" textStyle="body-1-600" textColor="grey1">
             {`Product title stays here - max 1 line`}
           </StyledText>
-          <StyledText tag="p" textStyle="body-2-400" textColor="grey2">
-            {`Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem...`}
-          </StyledText>
+          <DivCardText>
+            <StyledText tag="p" textStyle="body-2-400" textColor="grey2">
+              {`Lorem Ipsum is simply dummy text of the printing and typesetting industry. LoremLorem Ipsum is simply dummy text of the printing and typesetting industry. LoremLorem Ipsum is simply dummy text of the printing and typesetting industry. LoremLorem Ipsum is simply dummy text of the printing and typesetting industry. LoremLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem`}
+            </StyledText>
+          </DivCardText>
+
           {/* <DivUserInfo>
             {" "}
             <div>
