@@ -17,7 +17,7 @@ import { Autocomplete } from "@mui/material";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { UserContext } from "../../contexts/userContext/UserContext";
-import { UpdateAddressSchema, iAddress, iSchema } from "./schema";
+import { UpdateAddressSchema, iAddress } from "./schema";
 import { CitiesContext } from "../../contexts/citiesContext/CitiesContext";
 import { SyncLoader } from "react-spinners";
 import { api } from "../../services/api";
@@ -56,7 +56,7 @@ export const ModalUpdateAddress = ({ toggleModal }: iProp) => {
     console.log(data);
     const token = localStorage.getItem("@KenzieKars:token");
     try {
-      const response = await api.patch("users", data, {
+      const response = await api.patch("users/address", data, {
         headers: {
           authorization: `Bearer ${token}`,
         },

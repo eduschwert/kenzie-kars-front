@@ -70,7 +70,7 @@ ISelectProps) => {
   };
 
   return (
-    <Box sx={{ fontSize: 3 }}>
+    <Box sx={{ fontSize: 3, zIndex: 2 }}>
       <ListItemButton onClick={onClickButton}>
         <ListItemText primary={primary} />
         {open ? <ExpandLess /> : <ExpandMore />}
@@ -79,7 +79,7 @@ ISelectProps) => {
         in={open}
         timeout="auto"
         unmountOnExit
-        style={{ maxInlineSize: 0.2 }}
+        style={{ maxInlineSize: 0.2, zIndex: 2 }}
       >
         <List component="ul" disablePadding>
           {arrayMap.map((e, index) => {
