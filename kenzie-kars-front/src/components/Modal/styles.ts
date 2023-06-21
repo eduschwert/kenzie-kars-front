@@ -19,7 +19,7 @@ export const Container = styled.div`
   height: 100vh;
   position: fixed;
   overflow: hidden;
-
+  z-index: 500;
   display: flex;
   justify-content: center;
   align-items: center;

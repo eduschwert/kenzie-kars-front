@@ -8,6 +8,7 @@ interface iGallery {
 
 export const ContainerHomePage = styled.div`
   width: 100%;
+  position: relative;
 
   @media (min-width: 700px) {
     min-height: 100%;
@@ -20,6 +21,8 @@ export const HomePageContainer = styled.main`
   max-width: 100%;
   min-height: 100%;
   margin-top: 80px;
+  position: relative;
+  z-index: 40;
 `;
 
 export const MaskImageDiv = styled.div`

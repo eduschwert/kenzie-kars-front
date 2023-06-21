@@ -61,7 +61,6 @@ export const HomePage = () => {
             <AdvertisingButton>
               {advertising && (
                 <StyledButton
-                  tag="button"
                   onClick={() => setAdvertising((advertising) => !advertising)}
                   buttonStyle={window.screen.width < 700 ? "sm" : "bg"}
                   buttonColor="brand1"
