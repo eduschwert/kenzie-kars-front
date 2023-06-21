@@ -15,8 +15,8 @@ const animateModal = keyframes`
 export const Container = styled.div`
   inset: 0;
   background: rgba(0, 0, 0, 0.5);
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   position: fixed;
   overflow: hidden;
   z-index: 500;
