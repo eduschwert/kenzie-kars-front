@@ -43,12 +43,12 @@ export const MaskImageDiv = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* justify-content: flex-start; */
     text-align: center;
     gap: 2rem;
     margin: 0 auto;
-    padding: 0 2rem;
-    padding-top: 3rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-top: 50%;
 
     @media (min-width: 700px) {
       display: flex;

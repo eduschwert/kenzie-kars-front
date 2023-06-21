@@ -100,8 +100,9 @@ export const DivMenu = styled.div<iDiv>`
   width: 100vw;
   position: absolute;
   display: ${({ display }) => (display === true ? "flex" : " none")};
-  z-index: 300;
+  z-index: 1500;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  background-color: white;
 
   & > div {
     padding: 25px 15px 25px 15px;
