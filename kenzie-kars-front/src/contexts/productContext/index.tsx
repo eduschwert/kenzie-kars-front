@@ -7,7 +7,9 @@ import {
   iFilterConditions,
   iProductItem,
   iProductProviderValue,
+  iSeller,
 } from "./types";
+import { api } from "../../services/api";
 
 export const ProductContext = createContext({} as iProductProviderValue);
 
@@ -20,6 +22,7 @@ export const ProductProvider = ({ children }: iChildren) => {
     mileage: false,
     price: false,
   });
+  const [carSeller, setCarSeller] = useState<iSeller>();
   const [loadingProducts, setLoadingProducts] = useState<boolean>(false);
   // const [actionOverCarBrand, setActionOverCarBrand] = useState<boolean>(false);
   // const [actionOverCarModel, setActionOverCarModel] = useState<boolean>(false);
@@ -34,9 +37,11 @@ export const ProductProvider = ({ children }: iChildren) => {
     const getProducts = async () => {
       try {
         setLoadingProducts(true);
-        const data: iProductItem[] = mockedProducts;
-        setProducts(data);
-        setFilteredProducts(data);
+        // const data: iProductItem[] = mockedProducts;
+        const carList = await api.get("vehicles");
+        console.log("CARLIST", carList.data);
+        setProducts(carList.data.data);
+        setFilteredProducts(carList.data.data);
       } catch (error) {
         console.error(error);
         const currentError = error as AxiosError<iDefaultErrorResponse>;
@@ -57,6 +62,7 @@ export const ProductProvider = ({ children }: iChildren) => {
         loadingProducts,
         filterConditions,
         setFilterConditions,
+        setCarSeller,
         // actionOverCarBrand,
         // setActionOverCarBrand,
         // actionOverCarModel,

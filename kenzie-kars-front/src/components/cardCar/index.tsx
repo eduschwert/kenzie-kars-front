@@ -14,76 +14,114 @@ import {
 import { StyledText } from "../../styles/tipography";
 import { InitialsCircle } from "../initialsCircle";
 import { StyledButton } from "../../styles/buttons";
+import { iProductItem } from "../../contexts/productContext/types";
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { ProductContext } from "../../contexts/productContext";
 
-export function CardCar() {
+export const CardCar = ({
+  id,
+  brand,
+  model,
+  color,
+  year,
+  fuel,
+  mileage,
+  price,
+  fipePrice,
+  coverImage,
+  description,
+  is_good_buy,
+  seller,
+}: iProductItem) => {
+  const showCarDetails = () => {
+    console.log("SHOW CAR DETAILS");
+    console.log(
+      id,
+      brand,
+      model,
+      color,
+      year,
+      fuel,
+      mileage,
+      price,
+      fipePrice,
+      coverImage,
+      description,
+      is_good_buy,
+      seller
+    );
+  };
+
+  const navigate = useNavigate();
+  const { setCarSeller } = useContext(ProductContext);
+
+  const setActionOverCarCard = () => {
+    console.log(seller);
+    setCarSeller(seller);
+    navigate("/anouncement");
+  };
+
   return (
-    <CardLi>
+    <CardLi id={`${id}`} onClick={() => setActionOverCarCard()}>
       <a>
-        {" "}
         <div>
-          <img src={car} />
-          {/* <CarTagActive>
-            {" "}
-            <StyledText tag="p" textStyle="body-2-500" textColor="white">
-              {`Ativo`}
-            </StyledText>
-          </CarTagActive> */}
-          {/* <CarTagInactive>
-            {" "}
-            <StyledText tag="p" textStyle="body-2-500" textColor="white">
-              {`Inativo`}
-            </StyledText>
-          </CarTagInactive> */}
-          <CarTagGoodDeal>
-            <StyledText tag="p" textStyle="body-2-500" textColor="white">
-              {`$`}
-            </StyledText>
-          </CarTagGoodDeal>
+          <img src={coverImage} />
+          {is_good_buy && (
+            <CarTagGoodDeal>
+              <StyledText tag="p" textStyle="body-2-500" textColor="white">
+                {`$`}
+              </StyledText>
+            </CarTagGoodDeal>
+          )}
         </div>
         <CardSection>
           <StyledText tag="p" textStyle="body-1-600" textColor="grey1">
-            {`Product title stays here - max 1 line`}
+            {`${brand} - ${model}`}
           </StyledText>
           <DivCardText>
             <StyledText tag="p" textStyle="body-2-400" textColor="grey2">
-              {`Lorem Ipsum is simply dummy text of the printing and typesetting industry. LoremLorem Ipsum is simply dummy text of the printing and typesetting industry. LoremLorem Ipsum is simply dummy text of the printing and typesetting industry. LoremLorem Ipsum is simply dummy text of the printing and typesetting industry. LoremLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem`}
+              {description}
             </StyledText>
           </DivCardText>
 
-          {/* <DivUserInfo>
+          <DivUserInfo>
             {" "}
             <div>
               <InitialsCircle text="SL" />
             </div>
             <StyledText tag="p" textStyle="body-1-400" textColor="grey2">
-              {`Samuel Leão`}
+              {seller.name}
             </StyledText>
-          </DivUserInfo> */}
+          </DivUserInfo>
           <DivCarDetails>
             <DivCarItems>
-              {" "}
               <StyledText tag="p" textStyle="body-2-500" textColor="brand1">
-                {`0 KM`}
+                {`${mileage} km`}
               </StyledText>
               <StyledText tag="p" textStyle="body-2-500" textColor="brand1">
-                {`2019`}
+                {year}
               </StyledText>
             </DivCarItems>
             <StyledText tag="p" textStyle="heading-7-600" textColor="grey1">
-              {`R$10.000,00`}
+              {`R$ ${price}`}
             </StyledText>
           </DivCarDetails>
-          <DivBtnsCard>
+          {/* <DivBtnsCard>
             {" "}
             <StyledButton buttonStyle={"sm"} buttonColor="outline1">
               {`Filtros`}
             </StyledButton>
-            <StyledButton buttonStyle={"sm"} buttonColor="outline1">
+            <StyledButton
+              buttonStyle={"sm"}
+              buttonColor="outline1"
+              onClick={showCarDetails}
+            >
               {`Ver detalhes`}
             </StyledButton>
-          </DivBtnsCard>
+          </DivBtnsCard> */}
         </CardSection>
       </a>
     </CardLi>
   );
-}
+};
