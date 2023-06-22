@@ -19,10 +19,8 @@ export interface iFilterConditions {
   color?: string;
   year?: string;
   fuel?: string;
-  minMileage?: number,
-  maxMileage?: number,
-  minPrice?: number,
-  maxPrice?: number,
+  mileage: boolean;
+  price: boolean;
 }
 
 export interface iProductProviderValue {
@@ -32,4 +30,18 @@ export interface iProductProviderValue {
   loadingProducts: boolean;
   filterConditions: iFilterConditions;
   setFilterConditions: React.Dispatch<React.SetStateAction<iFilterConditions>>;
+  //   actionOverCarBrand: boolean;
+  //   setActionOverCarBrand: React.Dispatch<React.SetStateAction<boolean>>;
+  //   actionOverCarModel: boolean;
+  //   setActionOverCarModel: React.Dispatch<React.SetStateAction<boolean>>;
+  //   actionOverCarColor: boolean;
+  //   setActionOverCarColor: React.Dispatch<React.SetStateAction<boolean>>;
+  //   actionOverCarYear: boolean;
+  //   setActionOverCarYear: React.Dispatch<React.SetStateAction<boolean>>;
+  //   actionOverCarFuel: boolean;
+  //   setActionOverCarFuel: React.Dispatch<React.SetStateAction<boolean>>;
+  //   actionOverCarMileage: boolean;
+  //   setActionOverCarMileage: React.Dispatch<React.SetStateAction<boolean>>;
+  //   actionOverCarPrice: boolean;
+  //   setActionOverCarPrice: React.Dispatch<React.SetStateAction<boolean>>;
 }
