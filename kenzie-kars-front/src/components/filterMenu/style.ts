@@ -113,3 +113,11 @@ export const CancelFiltersNarrow = styled.div`
     display: none;
   }
 `;
+
+export const stylesItems = {
+  textAlign: 'left',
+  fontSize: 20,
+  fontFamily: 'Lexend',
+  fontWeight: 600,
+  color: '#000000',
+};
