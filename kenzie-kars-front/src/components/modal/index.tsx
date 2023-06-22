@@ -1,6 +1,9 @@
 import { createPortal } from "react-dom";
 import { ReactNode, useEffect, useRef } from "react";
-import { Container } from "./styles";
+import {
+  ModalContainer,
+  ModalInnerContainer,
+} from "../../../src/components/modal/style";
 
 interface ModalProps {
   toggleModal: () => void;
@@ -54,9 +57,11 @@ export const Modal = ({ toggleModal, children, blockClosing }: ModalProps) => {
   }, [toggleModal, blockClosing]);
 
   return createPortal(
-    <Container>
-      <div ref={blockClosing ? null : ref}>{children}</div>
-    </Container>,
+    <ModalContainer>
+      <ModalInnerContainer>
+        <div ref={blockClosing ? null : ref}>{children}</div>
+      </ModalInnerContainer>
+    </ModalContainer>,
     document.body
   );
 };

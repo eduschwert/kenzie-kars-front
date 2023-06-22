@@ -6,81 +6,33 @@ import { StyledCarList, StyledNoCarsFound } from "./style";
 
 export const CarList = () => {
   const { filteredProducts, setFilteredProducts } = useContext(ProductContext);
-  //   const isNotEmpty = filteredProducts.length;
 
   console.log("%BBBBB", filteredProducts);
 
-  const isNotEmpty = true;
+  const isNotEmpty = filteredProducts.length;
 
   return (
     <>
       {isNotEmpty ? (
         <StyledCarList>
-          {/* <div>
-            <CardCar />
-          </div>
-          <div>
-            <CardCar />
-          </div>
-          <div>
-            <CardCar />
-          </div>
-          <div>
-            <CardCar />
-          </div>
-          <div>
-            <CardCar />
-          </div>
-          <div>
-            <CardCar />
-          </div>
-          <div>
-            <CardCar />
-          </div>
-          <div>
-            <CardCar />
-          </div>
-          <div>
-            <CardCar />
-          </div>
-          <div>
-            <CardCar />
-          </div>
-          <div>
-            <CardCar />
-          </div>
-          <div>
-            <CardCar />
-          </div>
-          <div>
-            <CardCar />
-          </div> */}
-
-          <CardCar />
-          <CardCar />
-          <CardCar />
-          <CardCar />
-          <CardCar />
-          <CardCar />
-          <CardCar />
-          <CardCar />
-          <CardCar />
-          <CardCar />
-          <CardCar />
-          <CardCar />
-          {/* {filteredProducts.map((car, index) => (
+          {filteredProducts.map((car) => (
             <CardCar
-              key={index}
-              //   id={car.id}
-              //   brand={car.brand}
-              //   model={car.model}
-              //   price={car.price}
-              //   year={car.year}
-              //   fuel={car.fuel}
-              //   description{car.description}
-              //   image={car.img}
-            ></CardCar>
-          ))} */}
+              key={car.id}
+              id={car.id}
+              brand={car.brand}
+              model={car.model}
+              price={car.price}
+              year={car.year}
+              fuel={car.fuel}
+              description={car.description}
+              mileage={car.mileage}
+              coverImage={car.coverImage}
+              color={car.color}
+              fipePrice={car.fipePrice}
+              is_good_buy={car.is_good_buy}
+              seller={car.seller}
+            />
+          ))}
         </StyledCarList>
       ) : (
         <StyledNoCarsFound>

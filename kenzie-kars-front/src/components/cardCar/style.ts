@@ -2,6 +2,8 @@ import styled from "styled-components";
 
 export const CardLi = styled.li`
   width: 285px;
+  min-height: 340px;
+  cursor: pointer;
   &:hover {
     box-shadow: 0px 4px 40px -10px rgba(0, 0, 0, 0.25);
   }
@@ -32,6 +34,7 @@ export const CardSection = styled.section`
   flex-direction: column;
   gap: 10px;
   & > div > p {
+    min-height: 48px;
     line-height: 24px;
   }
 `;
@@ -101,6 +104,7 @@ export const DivBtnsCard = styled.div`
 
 export const DivCardText = styled.div`
   & > div > p {
+    min-height: 48px;
     display: -webkit-box;
     text-align: justify;
     -webkit-line-clamp: 2;

@@ -1,3 +1,15 @@
+export interface iSeller {
+  name: string;
+  email: string;
+  cpf: string;
+  phone: string;
+  birthdate: string;
+  description: string;
+  is_seller: string;
+  id: string;
+  createdAt: string;
+}
+
 export interface iProductItem {
   id: string;
   brand: string;
@@ -10,7 +22,8 @@ export interface iProductItem {
   fipePrice: number;
   coverImage: string;
   description: string;
-  sellerId: string;
+  is_good_buy: boolean;
+  seller: iSeller;
 }
 
 export interface iFilterConditions {
@@ -30,6 +43,7 @@ export interface iProductProviderValue {
   filteredProducts: iProductItem[];
   setFilteredProducts: React.Dispatch<React.SetStateAction<iProductItem[]>>;
   loadingProducts: boolean;
+  setCarSeller: React.Dispatch<React.SetStateAction<iSeller | undefined>>;
   filterConditions: iFilterConditions;
   setFilterConditions: React.Dispatch<React.SetStateAction<iFilterConditions>>;
 }

@@ -113,7 +113,7 @@ export const ModalAddCar = ({
     }
   };
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data: any) => {
     data = {
       ...data,
       fipe_price: fipePrice,
@@ -123,6 +123,7 @@ export const ModalAddCar = ({
       price: Number(data.price),
       images: [data.image1, data.image2],
     };
+    console.log("DADOS DO ANUNCIO", data);
     try {
       const token = localStorage.getItem("@KenzieKars:token");
       api.defaults.headers.common.authorization = `Bearer ${token}`;
