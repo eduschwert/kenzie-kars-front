@@ -15,11 +15,12 @@ import { useState } from "react";
 import { InitialsCircle } from "../initialsCircle";
 import { useLocation } from "react-router-dom";
 import { iUserResponse } from "../../contexts/userContext/types";
-import { StyledButton } from "../../styles/buttons";
+import { StyledButton, StyledLinkButton } from "../../styles/buttons";
 import { ModalEditUser } from "../modalEditUser";
 import { ModalDeleteUser } from "../modalDeleteUser";
 import { ModalUpdateAddress } from "../modalUpdateAddress";
 import { useUser } from "../../hooks/useUser";
+import { Link } from "react-router-dom";
 
 interface iProp {
   user: iUserResponse;
@@ -43,9 +44,9 @@ export function HeaderLoggedIn({ user }: iProp) {
         <ModalUpdateAddress toggleModal={toggleModal} />
       ) : null}
       <DivHeader>
-        <a href={location.pathname !== "/" ? "/" : ""}>
+        <Link to={"/"}>
           <img src={logo_blue}></img>
-        </a>
+        </Link>
 
         <DivInfoHeader>
           <div>
@@ -81,10 +82,11 @@ export function HeaderLoggedIn({ user }: iProp) {
               </li>
               {user.is_seller ? (
                 <li>
-                  <StyledButton
+                  <StyledLinkButton
+                    to={"/profileview"}
                     buttonStyle={"sm"}
                     buttonColor="link"
-                  >{`Meus anúncios`}</StyledButton>
+                  >{`Meus anúncios`}</StyledLinkButton>
                 </li>
               ) : (
                 <></>
@@ -145,10 +147,11 @@ export function HeaderLoggedIn({ user }: iProp) {
             </li>
             {user.is_seller ? (
               <li>
-                <StyledButton
+                <StyledLinkButton
+                  to={"/profileview"}
                   buttonStyle={"sm"}
                   buttonColor="link"
-                >{`Meus anúncios`}</StyledButton>
+                >{`Meus anúncios`}</StyledLinkButton>
               </li>
             ) : (
               <></>
