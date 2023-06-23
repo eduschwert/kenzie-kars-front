@@ -3,10 +3,8 @@ import { HomePageMenuButtons, MinMaxButtons } from "./style";
 import { iMinMax } from "./type";
 
 export const MinMaxMenuButtons = ({ type }: iMinMax) => {
-  console.log(type);
   return (
-    <>
-      <HomePageMenuButtons>
+    <HomePageMenuButtons>
         <StyledText tag="h3" textStyle={"heading-7-600"} textColor="black">
           {`${type}`}
         </StyledText>
@@ -14,7 +12,6 @@ export const MinMaxMenuButtons = ({ type }: iMinMax) => {
           <button type="button">Mínimo </button>
           <button type="button">Máximo </button>
         </MinMaxButtons>
-      </HomePageMenuButtons>
-    </>
+    </HomePageMenuButtons>
   );
 };

@@ -49,7 +49,6 @@ export const LoginFormMui = () => {
   const submitForm: SubmitHandler<iUserLoginFormValues> = (
     formData: iUserLoginFormValues
   ) => {
-    console.log("DATA", formData);
     setSpinner(true);
     signInUser(formData);
   };

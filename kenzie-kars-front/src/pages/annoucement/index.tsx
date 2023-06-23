@@ -31,9 +31,6 @@ export const AnnoucementPage = () => {
   const navigate = useNavigate();
 
   const actionOverAllAnnouncements = () => {
-    console.log("ALL ANNOUNCEMENTS");
-    console.log("CAR SELLER", carSeller);
-    console.log("USER", user);
     if (carSeller?.seller.id === user.id) {
       navigate("/profileviewadmin");
     } else {

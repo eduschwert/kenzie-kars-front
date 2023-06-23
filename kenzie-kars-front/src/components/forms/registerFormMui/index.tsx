@@ -74,15 +74,12 @@ export const RegisterFormMui = () => {
       ...dataWithoutConfirmPassword,
       is_seller: sellerActiveButton,
     };
-    console.log("DATA", data);
-
     setSpinner(true);
     registerUser(data, reset);
   };
   useEffect(() => {
     getStates();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    console.log("NEW STATE LIST", stateList);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

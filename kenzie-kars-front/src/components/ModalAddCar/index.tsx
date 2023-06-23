@@ -123,7 +123,6 @@ export const ModalAddCar = ({
       price: Number(data.price),
       images: [data.image1, data.image2],
     };
-    console.log("DADOS DO ANUNCIO", data);
     try {
       const token = localStorage.getItem("@KenzieKars:token");
       api.defaults.headers.common.authorization = `Bearer ${token}`;

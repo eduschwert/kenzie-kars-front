@@ -82,10 +82,7 @@ export const FilterMenu = ({ advertising, setAdvertising }: iAdvertising) => {
     const possibleCarFuel = ["Flex", "Híbrido", "Elétrico"];
 
     const callbackHandleFilterOptionsYearAndFuel = async () => {
-      const yearAndFuel = await handleFilterOptionsYearAndFuel(
-        filterConditions
-      );
-      console.log(yearAndFuel?.availableYears);
+      const yearAndFuel = await handleFilterOptionsYearAndFuel(filterConditions);
       if (yearAndFuel) {
         setYear(yearAndFuel.availableYears);
         const fuelNames = yearAndFuel.availableFuel.map(

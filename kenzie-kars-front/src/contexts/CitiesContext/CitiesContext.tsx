@@ -21,28 +21,22 @@ export const CitiesProvider = ({ children }: iDefaultPropsProvider) => {
   const getStates = async () => {
     try {
       const states = await statesAPI.get("");
-      console.log("STATES DATA", states.data);
       const listOfStates: string[] = [];
       states.data.map((state: iStatesList) => {
         listOfStates.push(state.sigla);
       });
-      console.log(listOfStates);
       setStateList(listOfStates);
       setStatesList(states.data);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
   useEffect(() => {
     getStates();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    console.log("NEW STATE LIST", stateList);
   }, []);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const getCitiesOfState = async (e: any, value: string | null) => {
-    console.log("estado selecionado", value);
-    console.log("SELECT STATES");
     try {
       if (value !== "0" || !CSSNumericValue) {
         // if (e.target.value !== "0") {
@@ -51,19 +45,17 @@ export const CitiesProvider = ({ children }: iDefaultPropsProvider) => {
           `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${value}/distritos?orderBy=nome`
         );
         const res = await response.json();
-        console.log(res);
         const listOfCities: string[] = [];
         res.map((city: iCitiesList) => {
           listOfCities.push(city.nome);
         });
         setCityList(listOfCities);
         setCitiesList(res);
-        console.log(listOfCities);
       } else {
         setDisable(true);
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 

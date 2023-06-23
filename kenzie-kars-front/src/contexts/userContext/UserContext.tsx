@@ -10,7 +10,7 @@ import {
   iUserResponse,
 } from "./types";
 import { iChildren } from "../../interfaces/global";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { AxiosError } from "axios";
 // import { AiOutlineConsoleSql } from "react-icons/ai";
 
@@ -44,13 +44,9 @@ export const UserProvider = ({ children }: iChildren) => {
   const [spinner, setSpinner] = useState<boolean>(false);
   const [errorApi, setErrorApi] = useState<boolean>(false);
   const navigate = useNavigate();
-  const location = useLocation();
 
   useEffect(() => {
     const token = localStorage.getItem("@KenzieKars:token");
-
-    // setUser({ ...user, ...defaultValues });
-    console.log("USER", user);
 
     const autologin = async () => {
       if (!token) {
@@ -63,7 +59,6 @@ export const UserProvider = ({ children }: iChildren) => {
               authorization: `Bearer ${token}`,
             },
           });
-          console.log(data);
           setUser(data);
 
           if (data.is_seller) {
@@ -85,8 +80,6 @@ export const UserProvider = ({ children }: iChildren) => {
     autologin();
   }, []);
 
-  console.log("User State", user);
-
   const signInUser = async (formData: iUserLoginInformation) => {
     try {
       setSpinner(true);
@@ -106,9 +99,8 @@ export const UserProvider = ({ children }: iChildren) => {
 
       // navigate("/");
     } catch (error) {
-      const currentError = error as AxiosError<iDefaultErrorResponse>;
+      error as AxiosError<iDefaultErrorResponse>;
       console.error(error);
-      console.log("ERROR", currentError.message);
       toast.error(`Ops! Algo deu errado.`);
       setErrorApi(true);
     } finally {
@@ -121,10 +113,8 @@ export const UserProvider = ({ children }: iChildren) => {
     reset: () => void
   ) => {
     try {
-      console.log("REGISTER DATA", formData);
       const response = await api.post("users", formData);
-      response.statusText === "Created" &&
-        toast.success("Conta criada com sucesso");
+      response.statusText === "Created" && toast.success("Conta criada com sucesso");
       navigate("/login");
       setSpinner(true);
       reset();

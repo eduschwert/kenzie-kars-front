@@ -7,8 +7,6 @@ import { StyledCarList, StyledNoCarsFound } from "./style";
 export const CarList = () => {
   const { filteredProducts } = useContext(ProductContext);
 
-  console.log("%BBBBB", filteredProducts);
-
   const isNotEmpty = filteredProducts.length;
 
   return (
