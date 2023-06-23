@@ -24,6 +24,7 @@ export const StyledCarList = styled.div`
 export const StyledCar = styled.li`
   width: 312px;
   max-width: 100%;
+  /* background-color: var(--color-grey8); */
 `;
 
 export const ImageBox = styled.div<iImageBoxProps>`
@@ -60,10 +61,14 @@ export const ImageBox = styled.div<iImageBoxProps>`
 `;
 
 export const TextBox = styled.div`
-  padding-top: 16px;
+  padding: 1rem 0.2rem;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 0.5rem;
+
+  > div {
+    min-height: 48px;
+  }
 `;
 
 export const Flex = styled.div`
@@ -71,13 +76,14 @@ export const Flex = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  > div {
+  & > div {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 0.5rem;
+    background-color: none;
 
-    > div {
-      background: var(--color-brand4);
+    & > div {
+      background-color: var(--color-brand4);
       border-radius: var(--radius-2);
       padding: 4px 8px;
       font-family: var(--font-family-inter);

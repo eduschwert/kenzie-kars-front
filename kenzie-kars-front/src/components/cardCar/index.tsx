@@ -25,14 +25,15 @@ export const CardCar = (car: iProductItem) => {
 
   const setActionOverCarCard = () => {
     setCarSeller(car);
-    navigate("/profileview");
+    // navigate("/profileview");
+    navigate("/anouncement");
   };
 
   return (
     <CardLi id={`${car.id}`} onClick={() => setActionOverCarCard()}>
       <a>
         <div>
-          <img src={car.coverImage} />
+          <img src={car.cover_image} />
           {car.is_good_buy && (
             <CarTagGoodDeal>
               <StyledText tag="p" textStyle="body-2-500" textColor="white">

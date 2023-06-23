@@ -5,7 +5,7 @@ import { CardCar } from "../cardCar";
 import { StyledCarList, StyledNoCarsFound } from "./style";
 
 export const CarList = () => {
-  const { filteredProducts, setFilteredProducts } = useContext(ProductContext);
+  const { filteredProducts } = useContext(ProductContext);
 
   console.log("%BBBBB", filteredProducts);
 
@@ -26,11 +26,12 @@ export const CarList = () => {
               fuel={car.fuel}
               description={car.description}
               mileage={car.mileage}
-              coverImage={car.coverImage}
+              cover_image={car.cover_image}
               color={car.color}
-              fipePrice={car.fipePrice}
+              fipe_price={car.fipe_price}
               is_good_buy={car.is_good_buy}
               seller={car.seller}
+              is_active={car.is_active}
             />
           ))}
         </StyledCarList>

@@ -12,7 +12,7 @@ export const ContainerHomePage = styled.div`
 
   @media (min-width: 700px) {
     min-height: 100%;
-    position: relative;
+    /* position: relative; */
   }
 `;
 

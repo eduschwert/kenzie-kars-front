@@ -21,10 +21,9 @@ export const ProductProvider = ({ children }: iChildren) => {
     [] as iProductItem[]
   );
 
-  const [filterConditions, setFilterConditions] = useState<iFilterConditions>({
-    mileage: false,
-    price: false,
-  });
+  const [filterConditions, setFilterConditions] = useState<iFilterConditions>(
+    {}
+  );
 
   const [carSeller, setCarSeller] = useState<iProductItem | null>(null);
 
@@ -34,7 +33,7 @@ export const ProductProvider = ({ children }: iChildren) => {
     const getProducts = async () => {
       try {
         setLoadingProducts(true);
-        // const data: iProductItem[] = mockedProducts;
+
         const carList = await api.get("vehicles");
         console.log("CARLIST", carList.data);
         setProducts(carList.data.data);
@@ -50,6 +49,54 @@ export const ProductProvider = ({ children }: iChildren) => {
     getProducts();
   }, []);
 
+  useEffect(() => {
+    const getFilteredProducts = async () => {
+      let getURL = "vehicles";
+      console.log("FILTER CONDITIONS", filterConditions);
+      filterConditions && (getURL = `${getURL}?`);
+
+      filterConditions.brand &&
+        (getURL = `${getURL}&brand=${filterConditions.brand}`);
+
+      filterConditions.model &&
+        (getURL = `${getURL}&model=${filterConditions.model}`);
+
+      filterConditions.year &&
+        (getURL = `${getURL}&year=${filterConditions.year}`);
+
+      filterConditions.fuel &&
+        (getURL = `${getURL}&fuel=${filterConditions.fuel}`);
+
+      filterConditions.minMileage &&
+        (getURL = `${getURL}&minMileage=${filterConditions.minMileage}`);
+
+      filterConditions.maxMileage &&
+        (getURL = `${getURL}&maxMileage=${filterConditions.maxMileage}`);
+      console.log(getURL);
+
+      filterConditions.minPrice &&
+        (getURL = `${getURL}&minPrice=${filterConditions.minPrice}`);
+
+      filterConditions.maxPrice &&
+        (getURL = `${getURL}&maxPrice=${filterConditions.maxPrice}`);
+      console.log("URL", getURL);
+
+      try {
+        const response = await api.get(`${getURL}`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("@Token:EazyHome")}`,
+          },
+        });
+        console.log(response.data.data);
+        setFilteredProducts(response.data.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    getFilteredProducts();
+  }, [filterConditions]);
+
   return (
     <ProductContext.Provider
       value={{
@@ -61,20 +108,6 @@ export const ProductProvider = ({ children }: iChildren) => {
         setFilterConditions,
         carSeller,
         setCarSeller,
-        // actionOverCarBrand,
-        // setActionOverCarBrand,
-        // actionOverCarModel,
-        // setActionOverCarModel,
-        // actionOverCarColor,
-        // setActionOverCarColor,
-        // actionOverCarYear,
-        // setActionOverCarYear,
-        // actionOverCarFuel,
-        // setActionOverCarFuel,
-        // actionOverCarMileage,
-        // setActionOverCarMileage,
-        // actionOverCarPrice,
-        // setActionOverCarPrice,
       }}
     >
       {children}

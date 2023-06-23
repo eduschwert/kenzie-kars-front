@@ -67,7 +67,7 @@ export const UserProvider = ({ children }: iChildren) => {
           setUser(data);
 
           if (data.is_seller) {
-            navigate("/profileview");
+            navigate("/profileviewadmin");
           } else {
             navigate("/");
           }
@@ -99,7 +99,7 @@ export const UserProvider = ({ children }: iChildren) => {
       const { data } = await api.get<iUserResponse>("/users");
       setUser(data);
       if (data.is_seller) {
-        navigate("/profileview");
+        navigate("/profileviewadmin");
       } else {
         navigate("/");
       }

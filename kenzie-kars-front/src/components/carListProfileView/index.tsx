@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { useUser } from "../../hooks/useUser";
 import { StyledButton } from "../../styles/buttons";
 import { StyledText } from "../../styles/tipography";
@@ -10,6 +11,8 @@ import {
   TextBox,
 } from "./style";
 import { iCarListProfileViewProps } from "./types";
+import { useProduct } from "../../hooks/useProduct";
+import { iProductItem } from "../../contexts/productContext/types";
 
 export const CarListProfileView = ({ vehicles }: iCarListProfileViewProps) => {
   const formatteNumber = (value: number) =>
@@ -17,8 +20,15 @@ export const CarListProfileView = ({ vehicles }: iCarListProfileViewProps) => {
       style: "currency",
       currency: "BRL",
     });
+  const navigate = useNavigate();
 
   const { user } = useUser();
+  const { setCarSeller } = useProduct();
+
+  const actionOverDetails = (vehicle: iProductItem) => {
+    navigate("/anouncement");
+    setCarSeller(vehicle);
+  };
 
   return (
     <StyledCarList>
@@ -30,20 +40,48 @@ export const CarListProfileView = ({ vehicles }: iCarListProfileViewProps) => {
               <img src={vehicle.cover_image} alt="" />
             </ImageBox>
             <TextBox>
-              <StyledText tag="h4" textStyle="heading-7-600" textColor="grey1">
-                {vehicle.model}
-              </StyledText>
-              <StyledText tag="p" textStyle="body-2-400" textColor="grey2">
-                {vehicle.description}
-              </StyledText>
+              <div>
+                <StyledText
+                  tag="h4"
+                  textStyle="heading-7-600"
+                  textColor="grey1"
+                >
+                  {vehicle.model}
+                </StyledText>
+              </div>
+              <div>
+                <StyledText tag="p" textStyle="body-2-400" textColor="grey2">
+                  {vehicle.description}
+                </StyledText>
+              </div>
               <Flex>
                 <div>
-                  <div>{vehicle.mileage}</div>
-                  <div>{vehicle.year}</div>
+                  <div>
+                    <StyledText
+                      tag="p"
+                      textStyle="heading-7-500"
+                      textColor="brand1"
+                    >
+                      {`${vehicle.mileage} km`}
+                    </StyledText>
+                  </div>
+                  <div>
+                    <StyledText
+                      tag="p"
+                      textStyle="heading-7-500"
+                      textColor="brand1"
+                    >
+                      {vehicle.year}
+                    </StyledText>
+                  </div>
+                  {/* <div>{vehicle.mileage}</div> */}
+                  {/* <div>{vehicle.year}</div> */}
                 </div>
+                {/* <div> */}
                 <StyledText tag="p" textStyle="heading-7-500" textColor="grey1">
                   {formatteNumber(vehicle.price)}
                 </StyledText>
+                {/* </div> */}
               </Flex>
               {user.id === vehicle.seller.id && (
                 <Flex2>
@@ -58,6 +96,7 @@ export const CarListProfileView = ({ vehicles }: iCarListProfileViewProps) => {
                     buttonStyle="sm"
                     buttonColor="outline1"
                     width="126px"
+                    onClick={() => actionOverDetails(vehicle)}
                   >
                     Ver detalhes
                   </StyledButton>
