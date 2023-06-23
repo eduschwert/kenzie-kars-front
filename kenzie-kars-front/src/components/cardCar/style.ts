@@ -112,3 +112,13 @@ export const DivCardText = styled.div`
     overflow: hidden;
   }
 `;
+export const DivCardTitle = styled.div`
+  & > div > p {
+    min-height: 48px;
+    display: -webkit-box;
+    text-align: justify;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+`;

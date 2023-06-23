@@ -10,6 +10,7 @@ import {
   CarTagGoodDeal,
   DivBtnsCard,
   DivCardText,
+  DivCardTitle,
 } from "./style";
 import { StyledText } from "../../styles/tipography";
 import { InitialsCircle } from "../initialsCircle";
@@ -18,6 +19,7 @@ import { iProductItem } from "../../contexts/productContext/types";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { ProductContext } from "../../contexts/productContext";
+import carImage from "../../assets/car.png";
 
 export const CardCar = (car: iProductItem) => {
   const navigate = useNavigate();
@@ -33,7 +35,7 @@ export const CardCar = (car: iProductItem) => {
     <CardLi id={`${car.id}`} onClick={() => setActionOverCarCard()}>
       <a>
         <div>
-          <img src={car.cover_image} />
+          <img src={carImage} />
           {car.is_good_buy && (
             <CarTagGoodDeal>
               <StyledText tag="p" textStyle="body-2-500" textColor="white">
@@ -43,9 +45,11 @@ export const CardCar = (car: iProductItem) => {
           )}
         </div>
         <CardSection>
-          <StyledText tag="p" textStyle="body-1-600" textColor="grey1">
-            {`${car.brand} - ${car.model}`}
-          </StyledText>
+          <DivCardTitle>
+            <StyledText tag="p" textStyle="body-1-600" textColor="grey1">
+              {`${car.brand} - ${car.model}`}
+            </StyledText>
+          </DivCardTitle>
           <DivCardText>
             <StyledText tag="p" textStyle="body-2-400" textColor="grey2">
               {car.description}

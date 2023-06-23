@@ -3,14 +3,20 @@ import {
   ContainerAnnoucement,
   ContentAnnoucement,
   ContentDescriptionComment,
+  ContentImgs,
   ContentPhotosCar,
   DescriptionCar,
-  DivImagemCar,
+  DivImageCar,
+  ImageAndDescription,
   InformationCar,
-  InputAndButtonForComment,
+  InformationCarDetails,
+  InputAndButtonFormComment,
+  PhotoAndProfile,
   PhotosCar,
   ProfileComment,
+  ProfileInitials,
   ProfileUser,
+  YearMileage,
 } from "./style";
 import exteriorCarro from "../../imagensMock/exterior-carro.png";
 import { HeaderLoggedIn } from "../../components/headerLoggedIn";
@@ -21,12 +27,13 @@ import { StyledButton } from "../../styles/buttons";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { ProductContext } from "../../contexts/productContext";
-import { UserContext } from "../../contexts/userContext/UserContext";
+// import { UserContext } from "../../contexts/userContext/UserContext";
 import { StyledText } from "../../styles/tipography";
+import carImage from "../../assets/car.png";
 
 export const AnnoucementPage = () => {
-  // const { user } = useUser();
-  const { user } = useContext(UserContext);
+  const { user } = useUser();
+  // const { user } = useContext(UserContext);
   const { carSeller } = useContext(ProductContext);
   const navigate = useNavigate();
 
@@ -46,21 +53,53 @@ export const AnnoucementPage = () => {
         <HeaderNotLoggedIn />
       )}
       <ContentAnnoucement>
-        <div className="contentImgs">
-          <div className="responsiveImgsAndDescription">
-            <DivImagemCar>
-              <img src={exteriorCarro} alt="" className="externalCar" />
-            </DivImagemCar>
+        <ContentImgs>
+          <ImageAndDescription>
+            <DivImageCar>
+              <img src={carImage} alt="" />
+            </DivImageCar>
             <InformationCar>
-              <span>{carSeller?.model}</span>
-              <div className="infosPriceYearKm">
-                <div className="yearAndKm">
-                  <p>{carSeller?.year}</p>
-                  <p>{`${carSeller?.mileage}Km`}</p>
-                </div>
-                <p>{carSeller?.price}</p>
-              </div>
-              <button>Comprar</button>
+              <StyledText tag="p" textStyle={"heading-6-600"} textColor="grey1">
+                {carSeller?.model}
+              </StyledText>
+              {/* <span>{carSeller?.model}</span> */}
+              <YearMileage>
+                <InformationCarDetails>
+                  <StyledText
+                    tag="p"
+                    textStyle={"heading-7-500"}
+                    textColor="brand1"
+                  >
+                    {carSeller?.year}
+                  </StyledText>
+                  {/* <p>{carSeller?.year}</p> */}
+                  <StyledText
+                    tag="p"
+                    textStyle={"heading-7-500"}
+                    textColor="brand1"
+                  >
+                    {`${carSeller?.mileage}Km`}
+                  </StyledText>
+                  {/* <p>{`${carSeller?.mileage}Km`}</p> */}
+                </InformationCarDetails>
+                <StyledText
+                  tag="p"
+                  textStyle={"heading-7-500"}
+                  textColor="grey1"
+                >
+                  {`R$ ${carSeller?.price}`}
+                </StyledText>
+                {/* <p>{carSeller?.price}</p> */}
+              </YearMileage>
+              <StyledButton
+                // onClick={() =>  }
+                buttonStyle={"sm"}
+                buttonColor="brand1"
+                width="7rem"
+              >
+                {`Comprar`}
+              </StyledButton>
+              {/* <button>Comprar</button> */}
             </InformationCar>
             <DescriptionCar>
               <div>
@@ -87,44 +126,63 @@ export const AnnoucementPage = () => {
                 </span> */}
               </div>
             </DescriptionCar>
-          </div>
-          <div className="responsivePhotosAndProfile">
+          </ImageAndDescription>
+          <PhotoAndProfile>
+            {/* <div className="responsivePhotosAndProfile"> */}
             <ContentPhotosCar>
-              <h2>Fotos</h2>
+              <StyledText
+                tag="h2"
+                textStyle={"heading-6-600"}
+                textColor="grey1"
+              >
+                {`Fotos`}
+              </StyledText>
+              {/* <h2>Fotos</h2> */}
               <PhotosCar>
                 <div>
-                  <img src={exteriorCarro} alt="" className="photoCar" />
+                  <img src={exteriorCarro} alt="" />
                 </div>
                 <div>
-                  <img src={exteriorCarro} alt="" className="photoCar" />
+                  <img src={exteriorCarro} alt="" />
                 </div>
                 <div>
-                  <img src={exteriorCarro} alt="" className="photoCar" />
+                  <img src={exteriorCarro} alt="" />
                 </div>
                 <div>
-                  <img src={exteriorCarro} alt="" className="photoCar" />
+                  <img src={exteriorCarro} alt="" />
                 </div>
                 <div>
-                  <img src={exteriorCarro} alt="" className="photoCar" />
+                  <img src={exteriorCarro} alt="" />
                 </div>
                 <div>
-                  <img src={exteriorCarro} alt="" className="photoCar" />
+                  <img src={exteriorCarro} alt="" />
                 </div>
               </PhotosCar>
             </ContentPhotosCar>
             <ProfileUser>
               <div>
                 <div className="photoProfile">
-                  <h4>SL</h4>
+                  <StyledText
+                    tag="h4"
+                    textStyle={"heading-2-600"}
+                    textColor="white"
+                  >
+                    {carSeller?.seller.name
+                      ? carSeller?.seller.name.substring(0, 2).toUpperCase()
+                      : ""}
+                    {/* {carSeller?.seller.name} */}
+                  </StyledText>
+                  {/* <h4>SL</h4> */}
                 </div>
+
+                {/* <p>Samuel Leão</p> */}
                 <StyledText
-                  tag="p"
-                  textStyle={"heading-6-600"}
+                  tag="span"
+                  textStyle={"heading-5-500"}
                   textColor="grey1"
                 >
                   {carSeller?.seller.name}
                 </StyledText>
-                {/* <p>Samuel Leão</p> */}
                 <StyledText
                   tag="span"
                   textStyle={"body-2-400"}
@@ -148,8 +206,8 @@ export const AnnoucementPage = () => {
                 {/* <button>Ver todos os anúncios</button> */}
               </div>
             </ProfileUser>
-          </div>
-        </div>
+          </PhotoAndProfile>
+        </ContentImgs>
         <ContentDescriptionComment>
           <CommentsAboutCar>
             <StyledText tag="h2" textStyle={"heading-6-600"} textColor="grey1">
@@ -205,12 +263,19 @@ export const AnnoucementPage = () => {
               </p>
             </div>
           </CommentsAboutCar>
-          <InputAndButtonForComment>
-            <div className="allignProfileAndInput">
+          <InputAndButtonFormComment>
+            <div>
               <ProfileComment>
-                <div className="photoProfileComment">
-                  <h2>SL</h2>
-                </div>
+                <ProfileInitials>
+                  <StyledText
+                    tag="h2"
+                    textStyle={"heading-7-600"}
+                    textColor="white"
+                  >
+                    {`SL`}
+                  </StyledText>
+                  {/* <h2>SL</h2> */}
+                </ProfileInitials>
                 <StyledText
                   tag="p"
                   textStyle={"heading-6-600"}
@@ -223,7 +288,7 @@ export const AnnoucementPage = () => {
               <textarea placeholder="Digite um comentário..." />
               <button>Comentar</button>
             </div>
-          </InputAndButtonForComment>
+          </InputAndButtonFormComment>
         </ContentDescriptionComment>
       </ContentAnnoucement>
       <FooterComponent />
