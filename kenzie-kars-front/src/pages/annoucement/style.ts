@@ -8,6 +8,8 @@ export const ContainerAnnoucement = styled.div`
     var(--color-grey7) 530px,
     var(--color-grey7) 100%
   );
+  position: relative;
+  margin-bottom: 2rem;
 `;
 
 export const ContentAnnoucement = styled.div`
@@ -45,7 +47,7 @@ export const ContentAnnoucement = styled.div`
 
 export const DivImagemCar = styled.div`
   display: flex;
-  width: 100%;
+  width: 810px;
   height: 355px;
   background: var(--color-grey10);
   border-radius: var(--radius-2);
@@ -138,6 +140,7 @@ export const PhotosCar = styled.div`
 
 export const ProfileUser = styled.div`
   background-color: var(--color-grey10);
+  border-radius: var(--radius-2);
   width: 440px;
   height: 426px;
   display: flex;
@@ -205,10 +208,11 @@ export const DescriptionCar = styled.div`
   border-radius: var(--radius-2);
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
+  padding: 2rem;
   div {
-    max-width: 90%;
+    /* max-width: 90%; */
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -289,7 +293,7 @@ export const InputAndButtonForComment = styled.div`
   justify-content: center;
   align-items: center;
   padding: 36px 44px;
-  margin-bottom: 50px;
+  margin-bottom: 8rem;
   .allignProfileAndInput {
     display: flex;
     flex-direction: column;

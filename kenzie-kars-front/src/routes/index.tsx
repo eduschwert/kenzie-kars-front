@@ -4,8 +4,8 @@ import { Register } from "../pages/register";
 import { Login } from "../pages/login";
 import { ProfileViewAdmin } from "../pages/profileViewAdmin";
 import { AnnoucementPage } from "../pages/annoucement";
-import { ProtectedRoutes } from "../components/ProtectedRoutes";
 import { ProfileView } from "../pages/profileView";
+import { ProtectedRoutes } from "../components/protectedRoutes";
 
 export const RoutesMain = () => {
   return (

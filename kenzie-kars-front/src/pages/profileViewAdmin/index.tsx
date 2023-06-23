@@ -15,12 +15,14 @@ import { CarListProfileView } from "../../components/carListProfileView";
 import { useUser } from "../../hooks/useUser";
 import { api } from "../../services/api";
 import { iVehicle } from "./types";
+import { iProductItem } from "../../contexts/productContext/types";
 
 export const ProfileViewAdmin = () => {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const toggleModal = () => setIsOpenModal(!isOpenModal);
 
-  const [vehicles, setVehicles] = useState<Array<iVehicle> | null>(null);
+  const [vehicles, setVehicles] = useState<Array<iProductItem> | null>(null);
+  // const [vehicles, setVehicles] = useState<Array<iProductItem> | null>(null);
 
   const { user } = useUser();
 
@@ -50,12 +52,12 @@ export const ProfileViewAdmin = () => {
             <Circle>{initials}</Circle>
             <Flex>
               <StyledText tag="h1" textColor="grey1" textStyle="heading-6-600">
-                {user?.name}
+                {user && user.name}
               </StyledText>
               <StyledDiv>Anunciante</StyledDiv>
             </Flex>
             <StyledText tag="p" textStyle="body-1-400" textColor="grey2">
-              {user?.description}
+              {user && user.description}
             </StyledText>
             <StyledButton
               onClick={toggleModal}
