@@ -1,3 +1,5 @@
+import { date, number } from "yup";
+
 export interface iSeller {
   name: string;
   email: string;
@@ -15,27 +17,35 @@ export interface iProductItem {
   brand: string;
   model: string;
   color: string;
-  year: number;
-  fuel: string;
+  year: string;
+  fuel: number;
   mileage: number;
   price: number;
-  fipePrice: number;
-  coverImage: string;
+  is_active: boolean;
+  fipe_price: number;
+  cover_image: string;
+  images?: Array<iImage>;
   description: string;
   is_good_buy: boolean;
   seller: iSeller;
 }
 
+interface iImage {
+  id: number;
+  image_number: number;
+  image_url: string;
+  createdAt: Date;
+}
 export interface iFilterConditions {
   brand?: string;
   model?: string;
   color?: string;
   year?: string;
   fuel?: string;
-  minMileage?: number,
-  maxMileage?: number,
-  minPrice?: number,
-  maxPrice?: number,
+  minMileage?: number;
+  maxMileage?: number;
+  minPrice?: number;
+  maxPrice?: number;
 }
 
 export interface iProductProviderValue {
@@ -43,7 +53,8 @@ export interface iProductProviderValue {
   filteredProducts: iProductItem[];
   setFilteredProducts: React.Dispatch<React.SetStateAction<iProductItem[]>>;
   loadingProducts: boolean;
-  setCarSeller: React.Dispatch<React.SetStateAction<iSeller | undefined>>;
+  carSeller: iProductItem | null;
+  setCarSeller: React.Dispatch<React.SetStateAction<iProductItem | null>>;
   filterConditions: iFilterConditions;
   setFilterConditions: React.Dispatch<React.SetStateAction<iFilterConditions>>;
 }

@@ -12,7 +12,6 @@ import {
 } from "./types";
 import { api } from "../../services/api";
 
-
 export const ProductContext = createContext({} as iProductProviderValue);
 
 export const ProductProvider = ({ children }: iChildren) => {
@@ -21,11 +20,13 @@ export const ProductProvider = ({ children }: iChildren) => {
   const [filteredProducts, setFilteredProducts] = useState(
     [] as iProductItem[]
   );
+
   const [filterConditions, setFilterConditions] = useState<iFilterConditions>({
     mileage: false,
     price: false,
   });
-  const [carSeller, setCarSeller] = useState<iSeller>();
+
+  const [carSeller, setCarSeller] = useState<iProductItem | null>(null);
 
   const [loadingProducts, setLoadingProducts] = useState<boolean>(false);
 
@@ -50,7 +51,6 @@ export const ProductProvider = ({ children }: iChildren) => {
   }, []);
 
   return (
-
     <ProductContext.Provider
       value={{
         products,
@@ -59,6 +59,7 @@ export const ProductProvider = ({ children }: iChildren) => {
         loadingProducts,
         filterConditions,
         setFilterConditions,
+        carSeller,
         setCarSeller,
         // actionOverCarBrand,
         // setActionOverCarBrand,
@@ -76,7 +77,6 @@ export const ProductProvider = ({ children }: iChildren) => {
         // setActionOverCarPrice,
       }}
     >
-
       {children}
     </ProductContext.Provider>
   );

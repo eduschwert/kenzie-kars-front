@@ -15,47 +15,56 @@ import { CarListProfileView } from "../../components/carListProfileView";
 import { useUser } from "../../hooks/useUser";
 import { api } from "../../services/api";
 import { iVehicle } from "./types";
-import { useProduct } from "../../hooks/useProduct";
-import { iProductItem } from "../../contexts/productContext/types";
-import { HeaderNotLoggedIn } from "../../components/headerNotLoggedIn";
 
-export const ProfileView = () => {
-  const [vehicles, setVehicles] = useState<Array<iProductItem> | null>(null);
+export const ProfileViewAdmin = () => {
+  const [isOpenModal, setIsOpenModal] = useState(false);
+  const toggleModal = () => setIsOpenModal(!isOpenModal);
+
+  const [vehicles, setVehicles] = useState<Array<iVehicle> | null>(null);
+
   const { user } = useUser();
-  const { carSeller } = useProduct();
 
-  const initials = carSeller?.seller.name.substring(0, 2)?.toUpperCase();
+  const initials = user?.name?.substring(0, 2)?.toUpperCase();
 
   useEffect(() => {
-    const fetchSellerCars = async () => {
-      const response = await api.get(`vehicles/user/${carSeller?.seller.id}`);
+    const fetchUserCars = async () => {
+      const token = localStorage.getItem("@KenzieKars:token");
+      api.defaults.headers.common.authorization = `Bearer ${token}`;
+
+      const response = await api.get("users/user_vehicles");
       setVehicles(response.data.data);
     };
-    fetchSellerCars();
-  }, [carSeller]);
+    fetchUserCars();
+  }, []);
 
   return (
     <>
+      {isOpenModal && (
+        <ModalAddCar setVehicles={setVehicles} toggleModal={toggleModal} />
+      )}
       <Container>
-        {user.name !== "" ? (
-          <HeaderLoggedIn user={user} />
-        ) : (
-          <HeaderNotLoggedIn />
-        )}
-
+        <HeaderLoggedIn user={user} />
         <BlueBox />
         <PerfilBox>
           <div>
             <Circle>{initials}</Circle>
             <Flex>
               <StyledText tag="h1" textColor="grey1" textStyle="heading-6-600">
-                {carSeller?.seller?.name}
+                {user?.name}
               </StyledText>
               <StyledDiv>Anunciante</StyledDiv>
             </Flex>
             <StyledText tag="p" textStyle="body-1-400" textColor="grey2">
-              {carSeller?.seller?.description}
+              {user?.description}
             </StyledText>
+            <StyledButton
+              onClick={toggleModal}
+              buttonStyle="bg"
+              buttonColor="outlineBrand1"
+              width="160px"
+            >
+              Criar anuncio
+            </StyledButton>
           </div>
         </PerfilBox>
         <CarListProfileView vehicles={vehicles} />
