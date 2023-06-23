@@ -14,7 +14,6 @@ import { ModalAddCar } from "../../components/ModalAddCar";
 import { CarListProfileView } from "../../components/carListProfileView";
 import { useUser } from "../../hooks/useUser";
 import { api } from "../../services/api";
-import { iVehicle } from "./types";
 import { useProduct } from "../../hooks/useProduct";
 import { iProductItem } from "../../contexts/productContext/types";
 import { HeaderNotLoggedIn } from "../../components/headerNotLoggedIn";

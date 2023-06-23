@@ -73,7 +73,9 @@ export const HomePage = () => {
                   onClick={() => setAdvertising((advertising) => !advertising)}
                   buttonStyle={window.screen.width < 700 ? "sm" : "bg"}
                   buttonColor="brand1"
-                >{`Filtros`}</StyledButton>
+                >
+                  {`Filtros`}
+                </StyledButton>
               )}
             </AdvertisingButton>
           </SectionHomePageMainProductGallery>
