@@ -1,7 +1,7 @@
-import { iVehicle } from "../../pages/profileView/types";
+import { iProductItem } from "../../contexts/productContext/types";
 
 export interface iCarListProfileViewProps {
-  vehicles: Array<iVehicle> | null;
+  vehicles: Array<iProductItem> | null;
 }
 
 export interface iImageBoxProps {

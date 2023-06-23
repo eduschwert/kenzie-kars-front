@@ -1,3 +1,4 @@
+import { useUser } from "../../hooks/useUser";
 import { StyledButton } from "../../styles/buttons";
 import { StyledText } from "../../styles/tipography";
 import {
@@ -16,6 +17,8 @@ export const CarListProfileView = ({ vehicles }: iCarListProfileViewProps) => {
       style: "currency",
       currency: "BRL",
     });
+
+  const { user } = useUser();
 
   return (
     <StyledCarList>
@@ -42,22 +45,24 @@ export const CarListProfileView = ({ vehicles }: iCarListProfileViewProps) => {
                   {formatteNumber(vehicle.price)}
                 </StyledText>
               </Flex>
-              <Flex2>
-                <StyledButton
-                  buttonStyle="sm"
-                  buttonColor="outline1"
-                  width="80px"
-                >
-                  Editar
-                </StyledButton>
-                <StyledButton
-                  buttonStyle="sm"
-                  buttonColor="outline1"
-                  width="126px"
-                >
-                  Ver detalhes
-                </StyledButton>
-              </Flex2>
+              {user.id === vehicle.seller.id && (
+                <Flex2>
+                  <StyledButton
+                    buttonStyle="sm"
+                    buttonColor="outline1"
+                    width="80px"
+                  >
+                    Editar
+                  </StyledButton>
+                  <StyledButton
+                    buttonStyle="sm"
+                    buttonColor="outline1"
+                    width="126px"
+                  >
+                    Ver detalhes
+                  </StyledButton>
+                </Flex2>
+              )}
             </TextBox>
           </StyledCar>
         ))}

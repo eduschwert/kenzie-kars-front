@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import { iVehicle } from "../../pages/profileView/types";
+import { iVehicle } from "../../pages/profileViewAdmin/types";
 
 export interface iModalAddCarProps {
   toggleModal: () => void;

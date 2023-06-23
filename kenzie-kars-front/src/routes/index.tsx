@@ -1,10 +1,11 @@
 import { Route, Routes } from "react-router-dom";
-import { ProtectedRoutes } from "../components/protectedRoutes";
 import { HomePage } from "../pages/homePage";
 import { Register } from "../pages/register";
 import { Login } from "../pages/login";
-import { ProfileView } from "../pages/profileView";
+import { ProfileViewAdmin } from "../pages/profileViewAdmin";
 import { AnnoucementPage } from "../pages/annoucement";
+import { ProtectedRoutes } from "../components/ProtectedRoutes";
+import { ProfileView } from "../pages/profileView";
 
 export const RoutesMain = () => {
   return (
@@ -13,8 +14,9 @@ export const RoutesMain = () => {
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
       <Route path="/anouncement" element={<AnnoucementPage />} />
+      <Route path="/profileview" element={<ProfileView />} />
       <Route element={<ProtectedRoutes />}>
-        <Route path="/profileview" element={<ProfileView />} />
+        <Route path="/profileviewadmin" element={<ProfileViewAdmin />} />
       </Route>
       <Route path="*" element={<Login />} />
     </Routes>

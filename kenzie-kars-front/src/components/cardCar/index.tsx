@@ -19,55 +19,21 @@ import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { ProductContext } from "../../contexts/productContext";
 
-export const CardCar = ({
-  id,
-  brand,
-  model,
-  color,
-  year,
-  fuel,
-  mileage,
-  price,
-  fipePrice,
-  coverImage,
-  description,
-  is_good_buy,
-  seller,
-}: iProductItem) => {
-  const showCarDetails = () => {
-    console.log("SHOW CAR DETAILS");
-    console.log(
-      id,
-      brand,
-      model,
-      color,
-      year,
-      fuel,
-      mileage,
-      price,
-      fipePrice,
-      coverImage,
-      description,
-      is_good_buy,
-      seller
-    );
-  };
-
+export const CardCar = (car: iProductItem) => {
   const navigate = useNavigate();
   const { setCarSeller } = useContext(ProductContext);
 
   const setActionOverCarCard = () => {
-    console.log(seller);
-    setCarSeller(seller);
-    navigate("/anouncement");
+    setCarSeller(car);
+    navigate("/profileview");
   };
 
   return (
-    <CardLi id={`${id}`} onClick={() => setActionOverCarCard()}>
+    <CardLi id={`${car.id}`} onClick={() => setActionOverCarCard()}>
       <a>
         <div>
-          <img src={coverImage} />
-          {is_good_buy && (
+          <img src={car.coverImage} />
+          {car.is_good_buy && (
             <CarTagGoodDeal>
               <StyledText tag="p" textStyle="body-2-500" textColor="white">
                 {`$`}
@@ -77,11 +43,11 @@ export const CardCar = ({
         </div>
         <CardSection>
           <StyledText tag="p" textStyle="body-1-600" textColor="grey1">
-            {`${brand} - ${model}`}
+            {`${car.brand} - ${car.model}`}
           </StyledText>
           <DivCardText>
             <StyledText tag="p" textStyle="body-2-400" textColor="grey2">
-              {description}
+              {car.description}
             </StyledText>
           </DivCardText>
 
@@ -91,20 +57,20 @@ export const CardCar = ({
               <InitialsCircle text="SL" />
             </div>
             <StyledText tag="p" textStyle="body-1-400" textColor="grey2">
-              {seller.name}
+              {car.seller.name}
             </StyledText>
           </DivUserInfo>
           <DivCarDetails>
             <DivCarItems>
               <StyledText tag="p" textStyle="body-2-500" textColor="brand1">
-                {`${mileage} km`}
+                {`${car.mileage} km`}
               </StyledText>
               <StyledText tag="p" textStyle="body-2-500" textColor="brand1">
-                {year}
+                {car.year}
               </StyledText>
             </DivCarItems>
             <StyledText tag="p" textStyle="heading-7-600" textColor="grey1">
-              {`R$ ${price}`}
+              {`R$ ${car.price}`}
             </StyledText>
           </DivCarDetails>
           {/* <DivBtnsCard>
