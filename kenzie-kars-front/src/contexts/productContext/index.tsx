@@ -35,7 +35,6 @@ export const ProductProvider = ({ children }: iChildren) => {
         setLoadingProducts(true);
 
         const carList = await api.get("vehicles");
-        console.log("CARLIST", carList.data);
         setProducts(carList.data.data);
         setFilteredProducts(carList.data.data);
       } catch (error) {
@@ -52,7 +51,6 @@ export const ProductProvider = ({ children }: iChildren) => {
   useEffect(() => {
     const getFilteredProducts = async () => {
       let getURL = "vehicles";
-      console.log("FILTER CONDITIONS", filterConditions);
       filterConditions && (getURL = `${getURL}?`);
 
       filterConditions.brand &&
@@ -72,14 +70,12 @@ export const ProductProvider = ({ children }: iChildren) => {
 
       filterConditions.maxMileage &&
         (getURL = `${getURL}&maxMileage=${filterConditions.maxMileage}`);
-      console.log(getURL);
 
       filterConditions.minPrice &&
         (getURL = `${getURL}&minPrice=${filterConditions.minPrice}`);
 
       filterConditions.maxPrice &&
         (getURL = `${getURL}&maxPrice=${filterConditions.maxPrice}`);
-      console.log("URL", getURL);
 
       try {
         const response = await api.get(`${getURL}`, {
@@ -87,7 +83,6 @@ export const ProductProvider = ({ children }: iChildren) => {
             Authorization: `Bearer ${localStorage.getItem("@Token:EazyHome")}`,
           },
         });
-        console.log(response.data.data);
         setFilteredProducts(response.data.data);
       } catch (error) {
         console.error(error);

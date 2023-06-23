@@ -53,7 +53,6 @@ export const ModalUpdateAddress = ({ toggleModal }: iProp) => {
 
   async function submitForm(data: iAddress) {
     setSpinner(true);
-    console.log(data);
     const token = localStorage.getItem("@KenzieKars:token");
     try {
       const response = await api.patch("users/address", data, {

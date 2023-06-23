@@ -7,7 +7,6 @@ import { api } from "../../services/api";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import { iDefaultErrorResponse } from "../../interfaces/global";
-import { Navigate, useNavigate } from "react-router-dom";
 import { useUser } from "../../hooks/useUser";
 
 interface iProp {
@@ -15,18 +14,16 @@ interface iProp {
 }
 
 export const ModalDeleteUser = ({ toggleModal }: iProp) => {
-  const navigate = useNavigate();
   const { logoutUser } = useUser();
 
   async function deleteUser() {
     const token = localStorage.getItem("@KenzieKars:token");
     try {
-      const response = await api.delete("users", {
+      await api.delete("users", {
         headers: {
           authorization: `Bearer ${token}`,
         },
       });
-      console.log(response);
       logoutUser();
     } catch (error) {
       console.error(error);

@@ -25,7 +25,6 @@ import { HeaderLoggedIn } from "../../components/headerLoggedIn";
 export const HomePage = () => {
   const [advertising, setAdvertising] = useState<boolean>(false);
   const { user } = useUser();
-  console.log(advertising);
   return (
     <ContainerHomePage>
       {user.name !== "" ? (
