@@ -18,11 +18,12 @@ import { Form } from "../style";
 import { SyncLoader } from "react-spinners";
 import { iUserLoginFormValues } from "./types";
 import { loginFormSchema } from "./schema";
+import { useNavigate } from "react-router-dom";
 
 export const LoginFormMui = () => {
   const { spinner, setSpinner, errorApi, setErrorApi, signInUser } =
     useContext(UserContext);
-
+  const navigate = useNavigate();
   const [errorLogin, setErrorLogin] = useState<boolean>(false);
   const {
     register,
@@ -94,7 +95,7 @@ export const LoginFormMui = () => {
           }
         />
 
-        <StyledForgotPassword>
+        <StyledForgotPassword onClick={() => navigate("/resetPassword")}>
           <StyledText tag="p" textStyle="body-2-500">
             {`Esqueci minha senha`}
           </StyledText>

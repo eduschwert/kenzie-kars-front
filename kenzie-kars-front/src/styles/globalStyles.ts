@@ -56,4 +56,15 @@ html {
   --radius-2: 4px;
   --radius-50:50%;
 }
+@keyframes slide-bottom {
+  0% {
+    -webkit-transform: translateY(-100px);
+            transform: translateY(-100px);
+  }
+  100% {
+    -webkit-transform: translateY(0px);
+            transform: translateY(0px);
+  }
+}
+
 `;
