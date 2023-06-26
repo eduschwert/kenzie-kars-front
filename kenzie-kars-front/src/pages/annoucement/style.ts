@@ -9,8 +9,6 @@ export const ContainerAnnoucement = styled.div`
     var(--color-grey7) 100%
   );
   position: relative;
-
-  margin-bottom: 1rem;
   width: 100%;
 `;
 
@@ -278,114 +276,18 @@ export const CommentsAboutCar = styled.div`
   border-radius: var(--radius-2);
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  justify-content: space-between;
   padding: 36px 44px;
   gap: 40px;
-
-  .allignCommentAndProfile {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
 `;
 
-export const ProfileComment = styled.div`
+export const ProfileComments = styled.ul`
   display: flex;
-  gap: 10px;
   align-items: center;
-  padding: 1.5rem;
-
-  /* > div {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 32px;
-    height: 32px;
-    background: #e34d8c;
-    border-radius: 150px;
-    font-weight: 500;
-    font-size: 8px;
-    line-height: 0px;
-    color: #ffffff;
-  } */
-
-  p {
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 24px;
-    color: #212529;
-  }
-
-  span {
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 24px;
-    color: #868e96;
-  }
-`;
-
-export const InputAndButtonFormComment = styled.div`
-  background-color: var(--color-grey10);
-  max-width: 100%;
-  height: 315px;
-  border-radius: var(--radius-2);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 2rem 1rem;
-  margin-bottom: 8rem;
-  position: relative;
-
-  > div {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 20px;
-    width: 100%;
-    padding: 1rem;
-    position: absolute;
-  }
-
-  textarea {
-    width: 90%;
-    height: 128px;
-    border-radius: var(--radius-2);
-    padding: 15px;
-    resize: none;
-    margin-left: 1.5rem;
-
-    @media (min-width: 700px) {
-      width: 90%;
-      margin-left: 2rem;
-    }
-  }
-
-  button {
-    width: 108px;
-    height: 38px;
-    position: relative;
-    margin-left: 55%;
-    bottom: 72px;
-    background: var(--color-brand1);
-    border: 1.5px solid var(--color-brand1);
-    border-radius: var(--radius-2);
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 0px;
-    color: #ffffff;
-
-    @media (min-width: 700px) {
-      margin-left: 70%;
-    }
-
-    @media (min-width: 1000px) {
-      margin-left: 74%;
-    }
-
-    @media (min-width: 1400px) {
-      margin-left: 78%;
-    }
-  }
+  flex-direction: column;
+  gap: 35px;
+  max-height: 100vh;
+  overflow-y: scroll;
 `;
 
 export const ProfileInitials = styled.div`
@@ -413,4 +315,95 @@ export const ProfileInitials = styled.div`
   font-size: 8px;
   line-height: 0px;
   color: #ffffff;
+`;
+
+export const NameDiv = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  margin-bottom: 15px;
+`;
+
+export const InputAndButtonFormComment = styled.div`
+  width: 100%;
+  min-height: 350px;
+  background-color: var(--color-grey10);
+
+  & > div {
+    border-radius: var(--radius-2);
+
+    padding: 36px 44px;
+  }
+  /* background-color: var(--color-grey10);
+  max-width: 100%;
+  height: 315px;
+  border-radius: var(--radius-2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 1rem;
+  margin-bottom: 8rem;
+  position: relative;
+
+  > div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    width: 100%;
+    padding: 1rem;
+    position: absolute;
+  } */
+
+  /* textarea {
+    width: 90%;
+    height: 128px;
+    border-radius: var(--radius-2);
+    padding: 15px;
+    resize: none;
+    margin-left: 1.5rem;*/
+
+  /* button {
+    width: 108px;
+    height: 38px;
+    position: relative;
+    margin-left: 55%;
+    bottom: 72px;
+    background: var(--color-brand1);
+    border: 1.5px solid var(--color-brand1);
+    border-radius: var(--radius-2);
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 0px;
+    color: #ffffff;
+
+    @media (min-width: 700px) {
+      margin-left: 70%;
+    }
+
+    @media (min-width: 1000px) {
+      margin-left: 74%;
+    }
+
+    @media (min-width: 1400px) {
+      margin-left: 78%;
+    }
+  } */
+`;
+
+export const FormComment = styled.form`
+  position: relative;
+
+  & > textarea {
+    resize: none;
+    width: 100%;
+    height: 125px;
+    margin-top: 15px;
+  }
+  & > button {
+    position: absolute;
+    top: 60%;
+    right: 20px;
+  }
 `;
