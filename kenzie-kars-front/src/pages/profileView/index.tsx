@@ -1,26 +1,27 @@
 import { useEffect, useState } from "react";
 import { HeaderLoggedIn } from "../../components/headerLoggedIn";
-import { StyledButton } from "../../styles/buttons";
 import { StyledText } from "../../styles/tipography";
 import {
   BlueBox,
   Circle,
   Container,
+  ContainerList,
   Flex,
   PerfilBox,
   StyledDiv,
 } from "./style";
-import { ModalAddCar } from "../../components/ModalAddCar";
-import { CarListProfileView } from "../../components/carListProfileView";
 import { useUser } from "../../hooks/useUser";
 import { api } from "../../services/api";
-import { iVehicle } from "./types";
 import { useProduct } from "../../hooks/useProduct";
 import { iProductItem } from "../../contexts/productContext/types";
 import { HeaderNotLoggedIn } from "../../components/headerNotLoggedIn";
+import { CarList } from "../../components/carList";
+import { FooterComponent } from "../../components/footer";
 
 export const ProfileView = () => {
-  const [vehicles, setVehicles] = useState<Array<iProductItem> | null>(null);
+  const [vehicles, setVehicles] = useState<Array<iProductItem>>(
+    [] as iProductItem[]
+  );
   const { user } = useUser();
   const { carSeller } = useProduct();
 
@@ -37,12 +38,7 @@ export const ProfileView = () => {
   return (
     <>
       <Container>
-        {user.name !== "" ? (
-          <HeaderLoggedIn user={user} />
-        ) : (
-          <HeaderNotLoggedIn />
-        )}
-
+        {user ? <HeaderLoggedIn /> : <HeaderNotLoggedIn />}
         <BlueBox />
         <PerfilBox>
           <div>
@@ -58,7 +54,10 @@ export const ProfileView = () => {
             </StyledText>
           </div>
         </PerfilBox>
-        <CarListProfileView vehicles={vehicles} />
+        <ContainerList>
+          <CarList cars={vehicles} />
+        </ContainerList>
+        <FooterComponent />
       </Container>
     </>
   );

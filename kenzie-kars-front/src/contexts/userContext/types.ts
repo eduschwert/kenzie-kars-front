@@ -61,12 +61,10 @@ export interface iUserResponse {
 }
 
 export interface iUserProviderProps {
-  user: iUserResponse;
+  user: iUserResponse | null;
   setUser: (item: iUserResponse) => void;
+  globalLoading: boolean;
   signInUser: (formData: iUserLoginInformation) => void;
-  // loading: boolean;
-  // setLoading: React.Dispatch<React.SetStateAction<boolean>>;
-  loadingProfileView: boolean;
   registerUser: (formData: iUserRegisterInformation, reset: () => void) => void;
   logoutUser: () => void;
   spinner: boolean;

@@ -2,27 +2,20 @@ import { DivFooter, Footer, LinkFooter } from "./style";
 import { MdKeyboardDoubleArrowUp } from "react-icons/md";
 import logo from "../../assets/logo.png";
 import { StyledText } from "../../styles/tipography";
-import { useLocation } from "react-router-dom";
 
 export function FooterComponent() {
-  const location = useLocation();
+  const handleScrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   return (
     <Footer>
       <DivFooter>
-        <img src={logo}></img>
+        <img src={logo} alt="Logo" />
         <StyledText tag="p" textStyle="body-2-400" textColor="white">
-          {`@ 2022 - Todos os direitos reservados`}
+          @ 2022 - Todos os direitos reservados
         </StyledText>
-        <LinkFooter
-          href={
-            location.pathname == "/"
-              ? "#advertising"
-              : location.pathname == "/login"
-              ? "#form_login"
-              : "#form_register"
-          }
-        >
+        <LinkFooter onClick={handleScrollToTop}>
           <MdKeyboardDoubleArrowUp size="16px" color="#FFFFFF" />
         </LinkFooter>
       </DivFooter>

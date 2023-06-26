@@ -1,5 +1,3 @@
-import { date, number } from "yup";
-
 export interface iSeller {
   name: string;
   email: string;

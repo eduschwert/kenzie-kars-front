@@ -4,10 +4,10 @@ import { UserContext } from "../../contexts/userContext/UserContext";
 import { StyledText } from "../../styles/tipography";
 
 export const ProtectedRoutes = () => {
-  const { loadingProfileView, user } = useContext(UserContext);
+  const { globalLoading, user } = useContext(UserContext);
   const navigate = useNavigate();
 
-  if (loadingProfileView) {
+  if (globalLoading) {
     return (
       <StyledText tag="h2" textStyle="tiheading-2-600tle1">
         Carregando...
@@ -15,9 +15,9 @@ export const ProtectedRoutes = () => {
     );
   }
 
-  if (!user.is_seller) {
+  if (!user?.is_seller) {
     navigate("/");
+  } else {
+    return <Outlet />;
   }
-
-  return <Outlet />;
 };

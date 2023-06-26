@@ -13,35 +13,12 @@ import {
 import { iChildren } from "../../interfaces/global";
 import { useNavigate } from "react-router-dom";
 import { AxiosError } from "axios";
-// import { AiOutlineConsoleSql } from "react-icons/ai";
 
 export const UserContext = createContext({} as iUserProviderProps);
 
 export const UserProvider = ({ children }: iChildren) => {
-  const defaultValues = {
-    name: "",
-    email: "",
-    cpf: "",
-    phone: "",
-    birthdate: "",
-    description: "",
-    address: {
-      cep: "",
-      state: "",
-      city: "",
-      street_name: "",
-      street_number: "",
-      complement: "",
-      id: "",
-      createdAt: "",
-    },
-    is_seller: false,
-    id: "",
-    createdAt: "",
-  };
-
-  const [user, setUser] = useState({} as iUserResponse);
-  const [loadingProfileView, setLoadingProfileView] = useState<boolean>(false);
+  const [user, setUser] = useState<iUserResponse | null>(null);
+  const [globalLoading, setGlobalLoading] = useState<boolean>(true);
   const [spinner, setSpinner] = useState<boolean>(false);
   const [errorApi, setErrorApi] = useState<boolean>(false);
   const [newInputToken, setNewInputToken] = useState<boolean>(false);
@@ -49,39 +26,39 @@ export const UserProvider = ({ children }: iChildren) => {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
+  const autologin = async () => {
     const token = localStorage.getItem("@KenzieKars:token");
+    if (!token) {
+      setGlobalLoading(false);
+      return;
+    }
 
-    const autologin = async () => {
-      if (!token) {
-        setLoadingProfileView(false);
-        return;
+    try {
+      const { data } = await api.get("users", {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
+      setUser(data);
+      api.defaults.headers.common.authorization = `Bearer ${token}`;
+      if ("is_seller" in data && data.is_seller) {
+        navigate("/profileviewadmin");
       } else {
-        try {
-          const { data } = await api.get("users", {
-            headers: {
-              authorization: `Bearer ${token}`,
-            },
-          });
-          setUser(data);
-
-          if (data.is_seller) {
-            navigate("/profileviewadmin");
-          } else {
-            navigate("/");
-          }
-        } catch (error) {
-          localStorage.clear();
-          setUser(defaultValues);
-          navigate("/");
-          console.error(error);
-        } finally {
-          setLoadingProfileView(false);
-        }
+        navigate("/");
       }
-    };
+    } catch (error) {
+      localStorage.clear();
+      setUser(null);
+      navigate("/");
+      console.error(error);
+    } finally {
+      setGlobalLoading(false);
+    }
+  };
 
+  useEffect(() => {
     autologin();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const signInUser = async (formData: iUserLoginInformation) => {
@@ -100,8 +77,6 @@ export const UserProvider = ({ children }: iChildren) => {
       } else {
         navigate("/");
       }
-
-      // navigate("/");
     } catch (error) {
       error as AxiosError<iDefaultErrorResponse>;
       console.error(error);
@@ -133,7 +108,7 @@ export const UserProvider = ({ children }: iChildren) => {
   };
   const logoutUser = () => {
     window.localStorage.clear();
-    setUser(defaultValues);
+    setUser(null);
     navigate("/");
   };
 
@@ -176,7 +151,7 @@ export const UserProvider = ({ children }: iChildren) => {
       value={{
         user,
         signInUser,
-        loadingProfileView,
+        globalLoading,
         registerUser,
         logoutUser,
         spinner,
