@@ -10,7 +10,6 @@ const App = () => {
     <>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-        <div id="top"></div>
         <RoutesMain />
 
         <ToastContainer

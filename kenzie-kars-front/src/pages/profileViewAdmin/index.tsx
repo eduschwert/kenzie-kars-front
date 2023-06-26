@@ -22,9 +22,7 @@ export const ProfileViewAdmin = () => {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const toggleModal = () => setIsOpenModal(!isOpenModal);
 
-  const [vehicles, setVehicles] = useState<Array<iProductItem>>(
-    [] as iProductItem[]
-  );
+  const [vehicles, setVehicles] = useState<Array<iProductItem> | null>(null);
 
   const { user } = useUser();
 

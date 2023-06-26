@@ -17,11 +17,7 @@ export const ContainerHomePage = styled.div`
 `;
 
 export const HomePageContainer = styled.main`
-  min-width: 100%;
-  max-width: 100%;
-  min-height: 100%;
   margin-top: 80px;
-  position: relative;
   z-index: 40;
 `;
 

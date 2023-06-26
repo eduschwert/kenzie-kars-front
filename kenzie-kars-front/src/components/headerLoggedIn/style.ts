@@ -27,7 +27,6 @@ export const Header = styled.header`
   z-index: 350;
   top: 0px;
   left: 0px;
-  right: 0px;
 `;
 
 export const DivHeader = styled.div`
@@ -104,7 +103,6 @@ export const DivMenu = styled.div<iDiv>`
   z-index: 1500;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
   background-color: var(--white-fixed);
-
 
   & > div {
     padding: 25px 15px 25px 15px;

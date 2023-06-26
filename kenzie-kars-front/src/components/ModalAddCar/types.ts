@@ -3,7 +3,7 @@ import { iProductItem } from "../../contexts/productContext/types";
 
 export interface iModalAddCarProps {
   toggleModal: () => void;
-  setVehicles: Dispatch<SetStateAction<Array<iProductItem>>>;
+  setVehicles: Dispatch<SetStateAction<Array<iProductItem> | null>>;
 }
 
 export interface iVehicleFipeApi {
