@@ -71,6 +71,17 @@ export interface iUserProviderProps {
   setSpinner: React.Dispatch<React.SetStateAction<boolean>>;
   errorApi: boolean;
   setErrorApi: React.Dispatch<React.SetStateAction<boolean>>;
+  newInputToken: boolean;
+  setNewInputToken: React.Dispatch<React.SetStateAction<boolean>>;
+  tokenForResetPasswordUser: (email: string) => void;
+  resetPasswordUser: (formData: iFormDataResetPassword) => void;
+  showButton: boolean;
+  setShowButton: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export interface iFormDataResetPassword {
+  password: string;
+  tokenResetPassword: string;
 }
 
 export interface iDefaultErrorResponse {

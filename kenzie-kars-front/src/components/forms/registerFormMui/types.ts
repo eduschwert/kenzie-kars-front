@@ -21,3 +21,9 @@ export interface iUserRegisterValues {
 export interface iRegisterFormValues extends iUserRegisterValues {
   confirmPassword?: string;
 }
+
+export interface iEmailResetPassword {
+  email: string;
+  token?: string;
+  password?: string;
+}

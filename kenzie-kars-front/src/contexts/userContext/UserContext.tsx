@@ -8,6 +8,7 @@ import {
   iUserRegisterInformation,
   iDefaultErrorResponse,
   iUserResponse,
+  iFormDataResetPassword,
 } from "./types";
 import { iChildren } from "../../interfaces/global";
 import { useNavigate } from "react-router-dom";
@@ -20,6 +21,9 @@ export const UserProvider = ({ children }: iChildren) => {
   const [globalLoading, setGlobalLoading] = useState<boolean>(true);
   const [spinner, setSpinner] = useState<boolean>(false);
   const [errorApi, setErrorApi] = useState<boolean>(false);
+  const [newInputToken, setNewInputToken] = useState<boolean>(false);
+  const [showButton, setShowButton] = useState(true);
+
   const navigate = useNavigate();
 
   const autologin = async () => {
@@ -108,6 +112,40 @@ export const UserProvider = ({ children }: iChildren) => {
     navigate("/");
   };
 
+  const tokenForResetPasswordUser = async (email: string) => {
+    try {
+      const response = await api.post("users/sendToken", { email });
+
+      if (response.status == 200) {
+        setNewInputToken(true);
+        setSpinner(false);
+        setShowButton(false);
+        toast.success("Email enviado com sucesso");
+      }
+    } catch (error) {
+      toast.error(`Ops! Algo deu errado`);
+      setSpinner(false);
+    }
+  };
+
+  const resetPasswordUser = async (formData: iFormDataResetPassword) => {
+    try {
+      const response = await api.post("users/resetPassword", formData);
+
+      if (response.status == 200) {
+        setSpinner(false);
+        setNewInputToken(false);
+        setShowButton(true);
+        toast.success("Senha alterada com sucesso");
+
+        navigate("/login");
+      }
+    } catch (error) {
+      toast.error(`Senha não pode ser alterada`);
+      setSpinner(false);
+    }
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -121,6 +159,12 @@ export const UserProvider = ({ children }: iChildren) => {
         errorApi,
         setErrorApi,
         setUser,
+        newInputToken,
+        setNewInputToken,
+        tokenForResetPasswordUser,
+        showButton,
+        setShowButton,
+        resetPasswordUser,
       }}
     >
       {children}

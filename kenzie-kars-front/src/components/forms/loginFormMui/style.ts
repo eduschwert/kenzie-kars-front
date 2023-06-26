@@ -59,9 +59,9 @@ export const StyledForgotPassword = styled.div`
   gap: 2rem;
   margin-bottom: 1rem;
 
-  & > a {
+  p {
     text-decoration: underline;
-
+    cursor: pointer;
     :hover {
       color: var(--color-grey100);
     }
