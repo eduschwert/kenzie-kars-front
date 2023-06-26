@@ -1,6 +1,6 @@
 import { AiOutlineClose } from "react-icons/ai";
 import { StyledText } from "../../styles/tipography";
-import { Modal } from "../Modal";
+import { Modal } from "../modal";
 import { useContext } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {

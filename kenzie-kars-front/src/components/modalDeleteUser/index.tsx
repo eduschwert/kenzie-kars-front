@@ -1,6 +1,6 @@
 import { AiOutlineClose } from "react-icons/ai";
 import { StyledText } from "../../styles/tipography";
-import { Modal } from "../Modal";
+import { Modal } from "../modal";
 import { DivBtns, DivModalBody, DivTitle, StyledTitle } from "./style";
 import { StyledButton } from "../../styles/buttons";
 import { api } from "../../services/api";

@@ -21,17 +21,18 @@ import { StyledButton } from "../../styles/buttons";
 import { FooterComponent } from "../../components/footer";
 import { useUser } from "../../hooks/useUser";
 import { HeaderLoggedIn } from "../../components/headerLoggedIn";
+import { useProduct } from "../../hooks/useProduct";
 
 export const HomePage = () => {
   const [advertising, setAdvertising] = useState<boolean>(false);
+
+  const { filteredProducts } = useProduct();
+
   const { user } = useUser();
+
   return (
     <ContainerHomePage>
-      {user.name !== "" ? (
-        <HeaderLoggedIn user={user} />
-      ) : (
-        <HeaderNotLoggedIn />
-      )}
+      {user ? <HeaderLoggedIn /> : <HeaderNotLoggedIn />}
       <HomePageContainer>
         <SectionHomePageHeader id="advertising" display={advertising}>
           <MaskImageDiv>
@@ -66,7 +67,7 @@ export const HomePage = () => {
                 >{`Filtros`}</StyledButton>
               )}
             </AdvertisingButton>
-            <CarList />
+            <CarList cars={filteredProducts} />
             <AdvertisingButton>
               {advertising && (
                 <StyledButton
