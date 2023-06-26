@@ -1,5 +1,5 @@
 import { StyledText } from "../../styles/tipography";
-import { Modal } from "../Modal";
+import { Modal } from "../modal";
 import { CssTextField } from "../forms/muiStyle";
 import { useForm } from "react-hook-form";
 import { DivBtns, DivTitle, Form, StyledRegForm, StyledTitle } from "./style";

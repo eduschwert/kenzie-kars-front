@@ -6,23 +6,25 @@ import {
   BlueBox,
   Circle,
   Container,
+  ContainerList,
   Flex,
   PerfilBox,
   StyledDiv,
 } from "./style";
-import { ModalAddCar } from "../../components/ModalAddCar";
-import { CarListProfileView } from "../../components/carListProfileView";
+import { ModalAddCar } from "../../components/modalAddCar";
 import { useUser } from "../../hooks/useUser";
 import { api } from "../../services/api";
-import { iVehicle } from "./types";
 import { iProductItem } from "../../contexts/productContext/types";
+import { CarListAdmin } from "../../components/carListAdmin";
+import { FooterComponent } from "../../components/footer";
 
 export const ProfileViewAdmin = () => {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const toggleModal = () => setIsOpenModal(!isOpenModal);
 
-  const [vehicles, setVehicles] = useState<Array<iProductItem> | null>(null);
-  // const [vehicles, setVehicles] = useState<Array<iProductItem> | null>(null);
+  const [vehicles, setVehicles] = useState<Array<iProductItem>>(
+    [] as iProductItem[]
+  );
 
   const { user } = useUser();
 
@@ -45,7 +47,7 @@ export const ProfileViewAdmin = () => {
         <ModalAddCar setVehicles={setVehicles} toggleModal={toggleModal} />
       )}
       <Container>
-        <HeaderLoggedIn user={user} />
+        <HeaderLoggedIn />
         <BlueBox />
         <PerfilBox>
           <div>
@@ -69,7 +71,10 @@ export const ProfileViewAdmin = () => {
             </StyledButton>
           </div>
         </PerfilBox>
-        <CarListProfileView vehicles={vehicles} />
+        <ContainerList>
+          <CarListAdmin cars={vehicles} />
+        </ContainerList>
+        <FooterComponent />
       </Container>
     </>
   );

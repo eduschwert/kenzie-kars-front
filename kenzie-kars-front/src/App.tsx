@@ -5,13 +5,12 @@ import { theme } from "./theme";
 import { RoutesMain } from "./routes";
 import { ToastContainer } from "react-toastify";
 
-
 const App = () => {
-
   return (
     <>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
+        <div id="top"></div>
         <RoutesMain />
 
         <ToastContainer

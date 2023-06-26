@@ -13,8 +13,6 @@ import { StyledText } from "../../styles/tipography";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { useState } from "react";
 import { InitialsCircle } from "../initialsCircle";
-import { useLocation } from "react-router-dom";
-import { iUserResponse } from "../../contexts/userContext/types";
 import { StyledButton, StyledLinkButton } from "../../styles/buttons";
 import { ModalEditUser } from "../modalEditUser";
 import { ModalDeleteUser } from "../modalDeleteUser";
@@ -22,17 +20,12 @@ import { ModalUpdateAddress } from "../modalUpdateAddress";
 import { useUser } from "../../hooks/useUser";
 import { Link } from "react-router-dom";
 
-interface iProp {
-  user: iUserResponse;
-}
-
-export function HeaderLoggedIn({ user }: iProp) {
+export function HeaderLoggedIn() {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [menu, setMenu] = useState(false);
   const [modalType, setMenuType] = useState("user");
   const toggleModal = () => setIsOpenModal(!isOpenModal);
-  const location = useLocation();
-  const { logoutUser } = useUser();
+  const { logoutUser, user } = useUser();
 
   return (
     <Header id="header">
@@ -52,11 +45,11 @@ export function HeaderLoggedIn({ user }: iProp) {
           <div>
             {" "}
             <InitialsCircle
-              text={user.name ? user.name.substring(0, 2).toUpperCase() : ""}
+              text={user?.name ? user.name.substring(0, 2).toUpperCase() : ""}
             />{" "}
           </div>
           <StyledText tag="p" textStyle="body-1-400" textColor="grey2">
-            {user.name}
+            {user?.name}
           </StyledText>
           <section>
             <MenuList>
@@ -80,7 +73,7 @@ export function HeaderLoggedIn({ user }: iProp) {
                   }}
                 >{`Editar endereço`}</StyledButton>
               </li>
-              {user.is_seller ? (
+              {user?.is_seller ? (
                 <li>
                   <StyledLinkButton
                     to={"/profileview"}
@@ -116,11 +109,11 @@ export function HeaderLoggedIn({ user }: iProp) {
             <div>
               {" "}
               <InitialsCircle
-                text={user.name ? user.name.substring(0, 2).toUpperCase() : ""}
+                text={user?.name ? user.name.substring(0, 2).toUpperCase() : ""}
               />{" "}
             </div>
             <StyledText tag="p" textStyle="body-1-400" textColor="grey2">
-              {user.name}
+              {user?.name}
             </StyledText>
           </MenuUserInfo>
 
@@ -145,7 +138,7 @@ export function HeaderLoggedIn({ user }: iProp) {
                 }}
               >{`Editar endereço`}</StyledButton>
             </li>
-            {user.is_seller ? (
+            {user?.is_seller ? (
               <li>
                 <StyledLinkButton
                   to={"/profileview"}

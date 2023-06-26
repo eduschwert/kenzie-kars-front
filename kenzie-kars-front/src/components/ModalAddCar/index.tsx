@@ -1,7 +1,7 @@
 import { SyntheticEvent, useEffect, useState } from "react";
 import { StyledText } from "../../styles/tipography";
 
-import { Modal } from "../Modal";
+import { Modal } from "../modal";
 import {
   Flex,
   FlexEnd,
@@ -172,7 +172,8 @@ export const ModalAddCar = ({
                   />
                 )}
                 onChange={(event, value) => {
-                  field.onChange(value);
+                  const selectedValue = typeof value === "string" ? value : "";
+                  field.onChange(selectedValue);
                   handleBrandChange(event, value);
                 }}
               />
@@ -197,7 +198,8 @@ export const ModalAddCar = ({
                   />
                 )}
                 onChange={(event, value) => {
-                  field.onChange(value);
+                  const selectedValue = typeof value === "string" ? value : "";
+                  field.onChange(selectedValue);
                   handleModelChange(event, value);
                 }}
                 disabled={!watch("brand")}

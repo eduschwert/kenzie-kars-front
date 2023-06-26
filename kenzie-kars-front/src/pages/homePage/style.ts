@@ -132,6 +132,10 @@ export const SectionHomePageMainProductGallery = styled.div<iDisplay>`
   gap: 2rem;
   margin-bottom: 2rem;
 
+  ul {
+    margin-top: 50px;
+  }
+
   @media (min-width: 700px) {
     min-width: 65%;
     display: flex;

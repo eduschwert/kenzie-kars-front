@@ -38,7 +38,7 @@ export const AnnoucementPage = () => {
   const navigate = useNavigate();
 
   const actionOverAllAnnouncements = () => {
-    if (carSeller?.seller.id === user.id) {
+    if (carSeller?.seller.id === user?.id) {
       navigate("/profileviewadmin");
     } else {
       navigate("/profileview");
@@ -47,11 +47,7 @@ export const AnnoucementPage = () => {
 
   return (
     <ContainerAnnoucement>
-      {user.name !== "" ? (
-        <HeaderLoggedIn user={user} />
-      ) : (
-        <HeaderNotLoggedIn />
-      )}
+      {user ? <HeaderLoggedIn /> : <HeaderNotLoggedIn />}
       <ContentAnnoucement>
         <ContentImgs>
           <ImageAndDescription>
@@ -167,8 +163,8 @@ export const AnnoucementPage = () => {
                     textStyle={"heading-2-600"}
                     textColor="white"
                   >
-                    {carSeller?.seller.name
-                      ? carSeller?.seller.name.substring(0, 2).toUpperCase()
+                    {carSeller?.seller?.name
+                      ? carSeller?.seller?.name?.substring(0, 2).toUpperCase()
                       : ""}
                     {/* {carSeller?.seller.name} */}
                   </StyledText>
@@ -181,14 +177,14 @@ export const AnnoucementPage = () => {
                   textStyle={"heading-5-500"}
                   textColor="grey1"
                 >
-                  {carSeller?.seller.name}
+                  {carSeller?.seller?.name}
                 </StyledText>
                 <StyledText
                   tag="span"
                   textStyle={"body-2-400"}
                   textColor="grey1"
                 >
-                  {carSeller?.seller.description}
+                  {carSeller?.seller?.description}
                 </StyledText>
                 {/* <span>
                   Lorem Ipsum is simply dummy text of the printing and
@@ -281,7 +277,7 @@ export const AnnoucementPage = () => {
                   textStyle={"heading-6-600"}
                   textColor="grey1"
                 >
-                  {user.name}
+                  {user?.name}
                 </StyledText>
                 {/* <p>Samuel Leão</p> */}
               </ProfileComment>
