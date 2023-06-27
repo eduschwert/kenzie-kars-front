@@ -5,7 +5,7 @@ export const Container = styled.div`
   min-width: 100%;
 
   @media (min-width: 700px) {
-    min-height: 100%;
+    min-height: 100vh;
   }
 
   position: relative;
@@ -29,6 +29,7 @@ export const PerfilBox = styled.div`
     border-radius: var(--radius-2);
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     gap: 24px;
 
     @media (min-width: 700px) {
@@ -84,9 +85,14 @@ export const ContainerList = styled.div`
   padding: 16px;
   margin: 0 auto;
 
-  ul {
-    @media (min-width: 700px) {
-      padding-bottom: 120px;
-    }
+  @media (min-width: 700px) {
+    padding-bottom: 120px;
   }
+`;
+
+export const NoVehiclesContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
 `;

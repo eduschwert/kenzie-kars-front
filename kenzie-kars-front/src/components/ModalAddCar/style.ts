@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
-  padding: 1rem;
+  padding: 16px;
 `;
 
 export const StyledHeaderModal = styled.div`
@@ -14,14 +14,15 @@ export const StyledHeaderModal = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  button {
-    background: transparent;
+  & > button {
+    background-color: transparent;
     border: none;
-    cursor: pointer;
-    transition: 150ms ease-in-out;
-    &:hover {
-      transform: scale(1.2);
-    }
+    padding: 5px;
+    border-radius: var(--radius-2);
+  }
+  & > button:hover {
+    background-color: var(--color-grey6);
+    transition: 0.2s ease;
   }
 `;
 
@@ -50,4 +51,10 @@ export const FlexEnd = styled.div`
   @media (min-width: 400px) {
     justify-content: flex-end;
   }
+`;
+
+export const StyledDivButton = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
 `;

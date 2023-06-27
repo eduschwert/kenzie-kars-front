@@ -22,4 +22,20 @@ export const vehicleSchema = z.object({
     if (!image2 || typeof image2 !== "string") return undefined;
     return image2 === "" ? undefined : image2;
   }, z.string().optional()),
+  image3: z.preprocess((image2) => {
+    if (!image2 || typeof image2 !== "string") return undefined;
+    return image2 === "" ? undefined : image2;
+  }, z.string().optional()),
+  image4: z.preprocess((image2) => {
+    if (!image2 || typeof image2 !== "string") return undefined;
+    return image2 === "" ? undefined : image2;
+  }, z.string().optional()),
+  image5: z.preprocess((image2) => {
+    if (!image2 || typeof image2 !== "string") return undefined;
+    return image2 === "" ? undefined : image2;
+  }, z.string().optional()),
+  image6: z.preprocess((image2) => {
+    if (!image2 || typeof image2 !== "string") return undefined;
+    return image2 === "" ? undefined : image2;
+  }, z.string().optional()),
 });

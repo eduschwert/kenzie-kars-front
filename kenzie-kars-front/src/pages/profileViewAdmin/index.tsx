@@ -8,6 +8,7 @@ import {
   Container,
   ContainerList,
   Flex,
+  NoVehiclesContainer,
   PerfilBox,
   StyledDiv,
 } from "./style";
@@ -63,14 +64,25 @@ export const ProfileViewAdmin = () => {
               onClick={toggleModal}
               buttonStyle="bg"
               buttonColor="outlineBrand1"
-              width="160px"
             >
               Criar anuncio
             </StyledButton>
           </div>
         </PerfilBox>
         <ContainerList>
-          <CarListAdmin cars={vehicles} />
+          {vehicles && vehicles.length > 0 ? (
+            <CarListAdmin cars={vehicles} />
+          ) : (
+            <NoVehiclesContainer>
+              <StyledText
+                tag="span"
+                textStyle={"heading-5-500"}
+                textColor="black"
+              >
+                Você ainda não possui nenhum anúncio cadastrado.
+              </StyledText>
+            </NoVehiclesContainer>
+          )}
         </ContainerList>
         <FooterComponent />
       </Container>

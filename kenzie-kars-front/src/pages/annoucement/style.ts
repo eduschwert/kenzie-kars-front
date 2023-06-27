@@ -219,7 +219,6 @@ export const ProfileUser = styled.div`
   }
 
   button {
-    width: 206px;
     height: 48px;
     background: #0b0d0d;
     border: 1.5px solid #0b0d0d;
