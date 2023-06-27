@@ -1,16 +1,17 @@
 import { SyntheticEvent, useEffect, useState } from "react";
 import { StyledText } from "../../styles/tipography";
 
-import { Modal } from "../Modal";
+import { Modal } from "../modal";
 import {
   Flex,
   FlexEnd,
   StyledBodyModal,
+  StyledDivButton,
   StyledForm,
   StyledHeaderModal,
 } from "./style";
 
-import { iModalAddCarProps, iVehicleFipeApi } from "./types";
+import { iFormData, iModalAddCarProps, iVehicleFipeApi } from "./types";
 import { useForm, Controller } from "react-hook-form";
 import { StyledButton } from "../../styles/buttons";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -21,6 +22,9 @@ import { CssTextField } from "../forms/muiStyle";
 import { Autocomplete } from "@mui/material";
 import { api } from "../../services/api";
 import { AiOutlineClose } from "react-icons/ai";
+import { useUser } from "../../hooks/useUser";
+import { SyncLoader } from "react-spinners";
+import { toast } from "react-toastify";
 
 export const ModalAddCar = ({
   toggleModal,
@@ -32,6 +36,10 @@ export const ModalAddCar = ({
   const [year, setYear] = useState("");
   const [fuel, setFuel] = useState(0);
   const [fipePrice, setFipePrice] = useState(0);
+
+  const [imagesNumber, setImagesNumber] = useState(2);
+
+  const { spinner, setSpinner } = useUser();
 
   const fuelsOptions = ["flex", "híbrido", "elétrico"];
 
@@ -51,7 +59,7 @@ export const ModalAddCar = ({
   const {
     control,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
     setValue,
     watch,
   } = useForm({
@@ -68,6 +76,10 @@ export const ModalAddCar = ({
       cover_image: "",
       image1: "",
       image2: "",
+      image3: "",
+      image4: "",
+      image5: "",
+      image6: "",
     },
   });
 
@@ -100,6 +112,9 @@ export const ModalAddCar = ({
     value: string | null
   ) => {
     setValue("model", value || "");
+    setYear("");
+    setFuel(0);
+    setFipePrice(0);
 
     let car;
     if (value) {
@@ -113,21 +128,27 @@ export const ModalAddCar = ({
     }
   };
 
-  const onSubmit = async (data: any) => {
-    data = {
+  const onSubmit = async (data: iFormData) => {
+    const images = Object.keys(data)
+      .filter((key) => key.startsWith("image"))
+      .map((key) => data[key])
+      .filter((value) => value);
+
+    const newData = {
       ...data,
       fipe_price: fipePrice,
       year: year,
       fuel: fuel,
       mileage: Number(data.mileage),
       price: Number(data.price),
-      images: [data.image1, data.image2],
+      images: images,
     };
     try {
+      setSpinner(true);
       const token = localStorage.getItem("@KenzieKars:token");
       api.defaults.headers.common.authorization = `Bearer ${token}`;
 
-      const response = await api.post("vehicles", data);
+      const response = await api.post("vehicles", newData);
       setVehicles((previousVehicles) => [
         ...(previousVehicles || []),
         response.data,
@@ -135,6 +156,9 @@ export const ModalAddCar = ({
       toggleModal();
     } catch (error) {
       console.error(error);
+      toast.error("Ops,algo deu errado!");
+    } finally {
+      setSpinner(false);
     }
   };
 
@@ -146,7 +170,7 @@ export const ModalAddCar = ({
             Criar anúncio
           </StyledText>
           <button onClick={toggleModal} type="button">
-            <AiOutlineClose />
+            <AiOutlineClose size={22} color={"#0b0d0d"} />
           </button>
         </StyledHeaderModal>
         <StyledBodyModal>
@@ -172,7 +196,8 @@ export const ModalAddCar = ({
                   />
                 )}
                 onChange={(event, value) => {
-                  field.onChange(value);
+                  const selectedValue = typeof value === "string" ? value : "";
+                  field.onChange(selectedValue);
                   handleBrandChange(event, value);
                 }}
               />
@@ -197,7 +222,8 @@ export const ModalAddCar = ({
                   />
                 )}
                 onChange={(event, value) => {
-                  field.onChange(value);
+                  const selectedValue = typeof value === "string" ? value : "";
+                  field.onChange(selectedValue);
                   handleModelChange(event, value);
                 }}
                 disabled={!watch("brand")}
@@ -260,7 +286,7 @@ export const ModalAddCar = ({
           </Flex>
           <Flex>
             <CssTextField
-              value={fipePrice}
+              value={fipePrice === 0 ? "" : fipePrice}
               label="Preço tabela FIPE"
               variant="outlined"
               size="medium"
@@ -292,6 +318,8 @@ export const ModalAddCar = ({
               <CssTextField
                 {...field}
                 label="Descrição"
+                multiline
+                rows={3}
                 error={!!errors.description}
                 helperText={errors.description?.message}
                 variant="outlined"
@@ -321,7 +349,7 @@ export const ModalAddCar = ({
             render={({ field }) => (
               <CssTextField
                 {...field}
-                label="Primeira imagem da galeria"
+                label="1° Imagem da galeria"
                 error={!!errors.image1}
                 helperText={errors.image1?.message}
                 variant="outlined"
@@ -336,7 +364,7 @@ export const ModalAddCar = ({
             render={({ field }) => (
               <CssTextField
                 {...field}
-                label="Segunda imagem da galeria"
+                label="2° Imagem da galeria"
                 error={!!errors.image2}
                 helperText={errors.image2?.message}
                 variant="outlined"
@@ -345,18 +373,105 @@ export const ModalAddCar = ({
               />
             )}
           />
+          {imagesNumber >= 3 && (
+            <Controller
+              control={control}
+              name="image3"
+              render={({ field }) => (
+                <CssTextField
+                  {...field}
+                  label="3° Imagem da galeria"
+                  error={!!errors.image3}
+                  helperText={errors.image3?.message}
+                  variant="outlined"
+                  size="medium"
+                  type="text"
+                />
+              )}
+            />
+          )}
+          {imagesNumber >= 4 && (
+            <Controller
+              control={control}
+              name="image4"
+              render={({ field }) => (
+                <CssTextField
+                  {...field}
+                  label="4° Imagem da galeria"
+                  error={!!errors.image4}
+                  helperText={errors.image4?.message}
+                  variant="outlined"
+                  size="medium"
+                  type="text"
+                />
+              )}
+            />
+          )}
+          {imagesNumber >= 5 && (
+            <Controller
+              control={control}
+              name="image5"
+              render={({ field }) => (
+                <CssTextField
+                  {...field}
+                  label="5° Imagem da galeria"
+                  error={!!errors.image5}
+                  helperText={errors.image5?.message}
+                  variant="outlined"
+                  size="medium"
+                  type="text"
+                />
+              )}
+            />
+          )}
+          {imagesNumber >= 6 && (
+            <Controller
+              control={control}
+              name="image6"
+              render={({ field }) => (
+                <CssTextField
+                  {...field}
+                  label="6° Imagem da galeria"
+                  error={!!errors.image6}
+                  helperText={errors.image6?.message}
+                  variant="outlined"
+                  size="medium"
+                  type="text"
+                />
+              )}
+            />
+          )}
+          <StyledDivButton>
+            <StyledButton
+              type="button"
+              buttonStyle="sm"
+              buttonColor="brandOpacity"
+              disabled={imagesNumber === 6}
+              onClick={() => setImagesNumber((prevNumber) => prevNumber + 1)}
+            >
+              Adicionar campo para imagem da galeria
+            </StyledButton>
+          </StyledDivButton>
           <FlexEnd>
             <StyledButton
               onClick={toggleModal}
               type="button"
               buttonStyle="bg"
               buttonColor="negative"
-              width="126px"
             >
               Cancelar
             </StyledButton>
-            <StyledButton buttonStyle="bg" buttonColor="brand1" width="193px">
-              Criar anúncio
+            <StyledButton
+              disabled={!isValid}
+              buttonStyle="bg"
+              buttonColor="brand1"
+              width="162px"
+            >
+              {spinner ? (
+                <SyncLoader color="#FFFFFF" size={8} />
+              ) : (
+                "Criar anúncio"
+              )}
             </StyledButton>
           </FlexEnd>
         </StyledBodyModal>

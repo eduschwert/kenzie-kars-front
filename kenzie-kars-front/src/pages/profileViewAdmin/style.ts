@@ -3,7 +3,12 @@ import styled from "styled-components";
 export const Container = styled.div`
   background: var(--color-grey8);
   min-width: 100%;
-  min-height: 100vh;
+
+  @media (min-width: 700px) {
+    min-height: 100vh;
+  }
+
+  position: relative;
 `;
 
 export const BlueBox = styled.div`
@@ -16,7 +21,7 @@ export const PerfilBox = styled.div`
   width: 1240px;
   max-width: 100%;
   padding: 0 16px;
-  margin: -215px auto 0 auto;
+  margin: -215px auto 76px auto;
 
   > div {
     padding: 29px 40px 22px 40px;
@@ -24,11 +29,11 @@ export const PerfilBox = styled.div`
     border-radius: var(--radius-2);
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     gap: 24px;
 
     @media (min-width: 700px) {
       padding: 41px 44px 70px 44px;
-      margin: -215px auto 76px auto;
     }
   }
   p {
@@ -72,4 +77,22 @@ export const StyledDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+export const ContainerList = styled.div`
+  width: 1332px;
+  max-width: 100%;
+  padding: 16px;
+  margin: 0 auto;
+
+  @media (min-width: 700px) {
+    padding-bottom: 120px;
+  }
+`;
+
+export const NoVehiclesContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
 `;

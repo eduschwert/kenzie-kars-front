@@ -1,19 +1,16 @@
-import { useContext } from "react";
-import { ProductContext } from "../../contexts/productContext";
 import { StyledText } from "../../styles/tipography";
 import { CardCar } from "../cardCar";
 import { StyledCarList, StyledNoCarsFound } from "./style";
+import { iCardCarProps } from "./types";
 
-export const CarList = () => {
-  const { filteredProducts } = useContext(ProductContext);
-
-  const isNotEmpty = filteredProducts.length;
+export const CarList = ({ cars }: iCardCarProps) => {
+  const isNotEmpty = cars.length;
 
   return (
     <>
       {isNotEmpty ? (
         <StyledCarList>
-          {filteredProducts.map((car) => (
+          {cars.map((car) => (
             <CardCar
               key={car.id}
               id={car.id}

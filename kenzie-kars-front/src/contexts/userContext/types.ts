@@ -61,18 +61,27 @@ export interface iUserResponse {
 }
 
 export interface iUserProviderProps {
-  user: iUserResponse;
+  user: iUserResponse | null;
   setUser: (item: iUserResponse) => void;
+  globalLoading: boolean;
   signInUser: (formData: iUserLoginInformation) => void;
-  // loading: boolean;
-  // setLoading: React.Dispatch<React.SetStateAction<boolean>>;
-  loadingProfileView: boolean;
   registerUser: (formData: iUserRegisterInformation, reset: () => void) => void;
   logoutUser: () => void;
   spinner: boolean;
   setSpinner: React.Dispatch<React.SetStateAction<boolean>>;
   errorApi: boolean;
   setErrorApi: React.Dispatch<React.SetStateAction<boolean>>;
+  newInputToken: boolean;
+  setNewInputToken: React.Dispatch<React.SetStateAction<boolean>>;
+  tokenForResetPasswordUser: (email: string) => void;
+  resetPasswordUser: (formData: iFormDataResetPassword) => void;
+  showButton: boolean;
+  setShowButton: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export interface iFormDataResetPassword {
+  password: string;
+  tokenResetPassword: string;
 }
 
 export interface iDefaultErrorResponse {

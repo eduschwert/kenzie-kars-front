@@ -6,7 +6,7 @@ import {
   StyledRegisterTitle,
   SellerOrBuyerButtons,
   SubmitButton,
-  SelectContainer
+  SelectContainer,
 } from "./style";
 import "react-toastify/dist/ReactToastify.css";
 import { StyledButton } from "../../../styles/buttons";
@@ -123,8 +123,6 @@ export const RegisterFormMui = () => {
               : () => setErrorRegister(false)
           }
         />
-
-    
 
         <CssTextField
           required

@@ -1,10 +1,8 @@
 import { Dispatch, SetStateAction } from "react";
-import { iVehicle } from "../../pages/profileViewAdmin/types";
 import { iProductItem } from "../../contexts/productContext/types";
 
 export interface iModalAddCarProps {
   toggleModal: () => void;
-  // setVehicles: Dispatch<SetStateAction<Array<iVehicle> | null>>;
   setVehicles: Dispatch<SetStateAction<Array<iProductItem> | null>>;
 }
 
@@ -15,4 +13,21 @@ export interface iVehicleFipeApi {
   year: string;
   fuel: number;
   value: number;
+}
+
+export interface iFormData {
+  brand: string;
+  model: string;
+  mileage: string;
+  color: string;
+  price: string;
+  description: string;
+  cover_image: string;
+  image1?: string;
+  image2?: string;
+  image3?: string;
+  image4?: string;
+  image5?: string;
+  image6?: string;
+  [key: string]: string | undefined;
 }

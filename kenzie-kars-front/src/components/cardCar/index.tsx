@@ -1,29 +1,29 @@
-import car from "../../assets/car.png";
 import {
   CardSection,
   CardLi,
   DivUserInfo,
   DivCarDetails,
   DivCarItems,
-  CarTagActive,
-  CarTagInactive,
   CarTagGoodDeal,
-  DivBtnsCard,
   DivCardText,
   DivCardTitle,
 } from "./style";
 import { StyledText } from "../../styles/tipography";
 import { InitialsCircle } from "../initialsCircle";
-import { StyledButton } from "../../styles/buttons";
-import { iProductItem } from "../../contexts/productContext/types";
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import { ProductContext } from "../../contexts/productContext";
 import carImage from "../../assets/car.png";
+import { iProductItem } from "../../contexts/productContext/types";
+import { useProduct } from "../../hooks/useProduct";
 
 export const CardCar = (car: iProductItem) => {
+  const formatteNumber = (value: number) =>
+    value.toLocaleString("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    });
+
   const navigate = useNavigate();
-  const { setCarSeller } = useContext(ProductContext);
+  const { setCarSeller } = useProduct();
 
   const setActionOverCarCard = (selectedCar: iProductItem) => {
     console.log("SELECTED CAR", selectedCar);
@@ -58,7 +58,6 @@ export const CardCar = (car: iProductItem) => {
           </DivCardText>
 
           <DivUserInfo>
-            {" "}
             <div>
               <InitialsCircle text="SL" />
             </div>
@@ -76,22 +75,9 @@ export const CardCar = (car: iProductItem) => {
               </StyledText>
             </DivCarItems>
             <StyledText tag="p" textStyle="heading-7-600" textColor="grey1">
-              {`R$ ${car.price}`}
+              {formatteNumber(car.price)}
             </StyledText>
           </DivCarDetails>
-          {/* <DivBtnsCard>
-            {" "}
-            <StyledButton buttonStyle={"sm"} buttonColor="outline1">
-              {`Filtros`}
-            </StyledButton>
-            <StyledButton
-              buttonStyle={"sm"}
-              buttonColor="outline1"
-              onClick={showCarDetails}
-            >
-              {`Ver detalhes`}
-            </StyledButton>
-          </DivBtnsCard> */}
         </CardSection>
       </a>
     </CardLi>

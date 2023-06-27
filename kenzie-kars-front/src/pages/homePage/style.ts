@@ -17,11 +17,7 @@ export const ContainerHomePage = styled.div`
 `;
 
 export const HomePageContainer = styled.main`
-  min-width: 100%;
-  max-width: 100%;
-  min-height: 100%;
   margin-top: 80px;
-  position: relative;
   z-index: 40;
 `;
 
@@ -131,6 +127,10 @@ export const SectionHomePageMainProductGallery = styled.div<iDisplay>`
   overflow-x: auto;
   gap: 2rem;
   margin-bottom: 2rem;
+
+  ul {
+    margin-top: 50px;
+  }
 
   @media (min-width: 700px) {
     min-width: 65%;

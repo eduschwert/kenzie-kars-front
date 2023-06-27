@@ -6,16 +6,18 @@ import {
   BlueBox,
   Circle,
   Container,
+  ContainerList,
   Flex,
+  NoVehiclesContainer,
   PerfilBox,
   StyledDiv,
 } from "./style";
-import { ModalAddCar } from "../../components/ModalAddCar";
-import { CarListProfileView } from "../../components/carListProfileView";
+import { ModalAddCar } from "../../components/modalAddCar";
 import { useUser } from "../../hooks/useUser";
 import { api } from "../../services/api";
-// import { iVehicle } from "./types";
 import { iProductItem } from "../../contexts/productContext/types";
+import { CarListAdmin } from "../../components/carListAdmin";
+import { FooterComponent } from "../../components/footer";
 
 export const ProfileViewAdmin = () => {
   const [isOpenModal, setIsOpenModal] = useState(false);
@@ -44,7 +46,7 @@ export const ProfileViewAdmin = () => {
         <ModalAddCar setVehicles={setVehicles} toggleModal={toggleModal} />
       )}
       <Container>
-        <HeaderLoggedIn user={user} />
+        <HeaderLoggedIn />
         <BlueBox />
         <PerfilBox>
           <div>
@@ -62,13 +64,27 @@ export const ProfileViewAdmin = () => {
               onClick={toggleModal}
               buttonStyle="bg"
               buttonColor="outlineBrand1"
-              width="160px"
             >
               Criar anuncio
             </StyledButton>
           </div>
         </PerfilBox>
-        <CarListProfileView vehicles={vehicles} />
+        <ContainerList>
+          {vehicles && vehicles.length > 0 ? (
+            <CarListAdmin cars={vehicles} />
+          ) : (
+            <NoVehiclesContainer>
+              <StyledText
+                tag="span"
+                textStyle={"heading-5-500"}
+                textColor="black"
+              >
+                Você ainda não possui nenhum anúncio cadastrado.
+              </StyledText>
+            </NoVehiclesContainer>
+          )}
+        </ContainerList>
+        <FooterComponent />
       </Container>
     </>
   );

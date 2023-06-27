@@ -25,29 +25,36 @@ export const Container = styled.div`
   align-items: center;
 
   > div {
-    margin: 60px 0;
     background: var(--white-fixed);
     border-radius: var(--radius-1);
     width: 520px;
     max-width: 90%;
-    padding: 0 0.6 2rem 0.6;
-    overflow-y: auto;
-    max-height: calc(100vh - 156px);
+    overflow: hidden;
     animation-name: ${animateModal};
     animation-iteration-count: 1;
     animation-duration: 1s;
+    padding: 5px;
 
-    ::-webkit-scrollbar {
-      width: 8px;
-    }
+    > div {
+      overflow-y: auto;
+      max-height: calc(100vh - 30px);
 
-    ::-webkit-scrollbar-thumb {
-      background-color: var(--color-grey6);
-      border-radius: var(--radius-2);
-    }
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
 
-    ::-webkit-scrollbar-track {
-      background-color: var(--white-fixed);
+      ::-webkit-scrollbar-thumb {
+        background-color: var(--color-grey6);
+        border-radius: var(--radius-2);
+      }
+
+      ::-webkit-scrollbar-track {
+        background-color: var(--white-fixed);
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background-color: var(--color-grey4);
+      }
     }
   }
 `;
