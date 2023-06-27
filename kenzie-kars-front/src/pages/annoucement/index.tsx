@@ -274,7 +274,6 @@ export const AnnoucementPage = () => {
                   type="button"
                   buttonStyle="sm"
                   buttonColor="grey1"
-                  width="126px"
                   onClick={() => actionOverAllAnnouncements()}
                 >
                   Ver todos os anúncios

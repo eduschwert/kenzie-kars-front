@@ -76,7 +76,7 @@ export function HeaderLoggedIn() {
               {user?.is_seller ? (
                 <li>
                   <StyledLinkButton
-                    to={"/profileview"}
+                    to={"/profileviewadmin"}
                     buttonStyle={"sm"}
                     buttonColor="link"
                   >{`Meus anúncios`}</StyledLinkButton>
@@ -141,7 +141,7 @@ export function HeaderLoggedIn() {
             {user?.is_seller ? (
               <li>
                 <StyledLinkButton
-                  to={"/profileview"}
+                  to={"/profileviewadmin"}
                   buttonStyle={"sm"}
                   buttonColor="link"
                 >{`Meus anúncios`}</StyledLinkButton>

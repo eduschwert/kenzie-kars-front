@@ -55,7 +55,9 @@ export const Modal = ({ toggleModal, children, blockClosing }: ModalProps) => {
 
   return createPortal(
     <Container>
-      <div ref={blockClosing ? null : ref}>{children}</div>
+      <div>
+        <div ref={blockClosing ? null : ref}>{children}</div>
+      </div>
     </Container>,
     document.body
   );

@@ -56,13 +56,12 @@ export const CardCarAdmin = ({ car }: iCardCarAdminProps) => {
           </StyledText>
         </Flex>
         <Flex2>
-          <StyledButton buttonStyle="sm" buttonColor="outline1" width="80px">
+          <StyledButton buttonStyle="sm" buttonColor="outline1">
             Editar
           </StyledButton>
           <StyledButton
             buttonStyle="sm"
             buttonColor="outline1"
-            width="126px"
             onClick={() => actionOverDetails(car)}
           >
             Ver detalhes

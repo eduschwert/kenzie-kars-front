@@ -31,7 +31,6 @@ export const buttonCSS = css<iStyledButtonProps>`
 
   font-family: var(--font-family-inter);
   font-weight: 600;
-  white-space: nowrap;
 
   transition: 150ms ease-in-out;
 
@@ -139,6 +138,17 @@ export const buttonCSS = css<iStyledButtonProps>`
 
           :hover {
             background-color: var(--color-brand2);
+          }
+
+          &:disabled {
+            background-color: var(--color-brand3);
+            color: var(--color-brand4);
+            border: solid 1.5px var(--color-brand3);
+            &:hover {
+              background-color: var(--color-brand3);
+              color: var(--color-brand4);
+              border: solid 1.5px var(--color-brand3);
+            }
           }
         `;
       case "brandOpacity":
