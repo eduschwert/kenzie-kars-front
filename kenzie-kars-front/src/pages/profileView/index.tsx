@@ -36,11 +36,7 @@ export const ProfileView = () => {
   return (
     <>
       <Container>
-        {user.name !== "" ? (
-          <HeaderLoggedIn user={user} />
-        ) : (
-          <HeaderNotLoggedIn />
-        )}
+        {user.name ? <HeaderLoggedIn user={user} /> : <HeaderNotLoggedIn />}
 
         <BlueBox />
         <PerfilBox>

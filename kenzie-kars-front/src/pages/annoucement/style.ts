@@ -140,7 +140,7 @@ export const ContentPhotosCar = styled.div`
   background: var(--color-grey10);
 `;
 
-export const PhotosCar = styled.div`
+export const PhotosCar = styled.ul`
   width: auto;
   max-width: 390px;
   max-height: 380px;
@@ -152,7 +152,7 @@ export const PhotosCar = styled.div`
     grid-template-columns: repeat(3, 1fr);
   }
 
-  > div {
+  > li {
     background-color: var(--color-grey7);
     width: 90px;
     height: 90px;
@@ -162,6 +162,17 @@ export const PhotosCar = styled.div`
     -webkit-box-pack: center;
     justify-content: center;
     border-radius: var(--radius-2);
+
+    :hover {
+      border: 2px solid var(--color-brand1);
+      cursor: pointer;
+    }
+
+    & > img {
+      max-width: 100%;
+      max-height: 100%;
+      display: block;
+    }
 
     @media (min-width: 800px) {
       width: 120px;

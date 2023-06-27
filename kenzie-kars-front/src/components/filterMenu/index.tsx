@@ -22,7 +22,8 @@ import {
 import { ProductContext } from "../../contexts/productContext";
 
 export const FilterMenu = ({ advertising, setAdvertising }: iAdvertising) => {
-  const { filterConditions, setFilterConditions } = useContext(ProductContext);
+  const { filterConditions, setFilterConditions, filteredProducts } =
+    useContext(ProductContext);
 
   // States to get values for Nested List
   const [brands, setBrands] = useState([] as Array<string>);
@@ -82,7 +83,9 @@ export const FilterMenu = ({ advertising, setAdvertising }: iAdvertising) => {
     const possibleCarFuel = ["Flex", "Híbrido", "Elétrico"];
 
     const callbackHandleFilterOptionsYearAndFuel = async () => {
-      const yearAndFuel = await handleFilterOptionsYearAndFuel(filterConditions);
+      const yearAndFuel = await handleFilterOptionsYearAndFuel(
+        filterConditions
+      );
       if (yearAndFuel) {
         setYear(yearAndFuel.availableYears);
         const fuelNames = yearAndFuel.availableFuel.map(
@@ -107,17 +110,25 @@ export const FilterMenu = ({ advertising, setAdvertising }: iAdvertising) => {
   const [actionOverCarFuel, setActionOverCarFuel] = useState<boolean>(false);
   const [selectedOption, setSelectedOption] = useState<string>("");
 
-  const [kmValue, setKmValue] = useState<number[]>([0, 100]);
-  const [priceValue, setPriceValue] = useState<number[]>([10, 1000]);
+  //  const [priceRange, setPriceRange] = useState([0, 100])
+  const maxValueOfPrice = 200000;
+  const maxValueOfMileage = 150000;
 
-  const maxPrice = 1000.0;
-  const minPrice = 10.0;
-  const minKm = 0;
-  const maxKm = 100;
+  const minPrice = 0;
+  const maxPrice = maxValueOfPrice;
 
-  const kmMarks = [
-    { value: minKm, label: `${minKm}` },
-    { value: maxKm, label: `${maxKm}` },
+  const minMileage = 0;
+  const maxMileage = maxValueOfMileage;
+
+  const [mileageRange, setMileageRange] = useState<number[]>([
+    minMileage,
+    maxMileage,
+  ]);
+  const [priceRange, setPriceRange] = useState<number[]>([minPrice, maxPrice]);
+
+  const mileageMarks = [
+    { value: minMileage, label: `${minMileage}` },
+    { value: maxMileage, label: `${maxMileage}` },
   ];
 
   const priceMarks = [
@@ -150,15 +161,35 @@ export const FilterMenu = ({ advertising, setAdvertising }: iAdvertising) => {
     setSelectedOption("fuel");
   };
 
-  const handleSliderKmChange = (e: any, newKmValue: number[] | number) => {
-    Array.isArray(newKmValue) && setKmValue(newKmValue);
+  const handleSliderMileageChange = (
+    e: any,
+    newMileageRange: number[] | number
+  ) => {
+    if (Array.isArray(newMileageRange)) {
+      setMileageRange(newMileageRange);
+      const newFilterConditions = {
+        ...filterConditions,
+        minMileage: newMileageRange[0],
+        maxMileage: newMileageRange[1],
+      };
+      setFilterConditions(newFilterConditions);
+    }
   };
 
   const handleSliderPriceChange = (
     e: any,
-    newPriceValue: number[] | number
+    newPriceRange: number[] | number
   ) => {
-    Array.isArray(newPriceValue) && setPriceValue(newPriceValue);
+    // Array.isArray(newPriceRange) && setPriceRange(newPriceRange);
+    if (Array.isArray(newPriceRange)) {
+      setPriceRange(newPriceRange);
+      const newFilterConditions = {
+        ...filterConditions,
+        minPrice: newPriceRange[0],
+        maxPrice: newPriceRange[1],
+      };
+      setFilterConditions(newFilterConditions);
+    }
   };
 
   useEffect(() => {
@@ -174,6 +205,8 @@ export const FilterMenu = ({ advertising, setAdvertising }: iAdvertising) => {
 
   const clearFilters = () => {
     setFilterConditions({});
+    setMileageRange([minMileage, maxMileage]);
+    setPriceRange([minPrice, maxPrice]);
   };
 
   return (
@@ -259,14 +292,14 @@ export const FilterMenu = ({ advertising, setAdvertising }: iAdvertising) => {
         </Box>
         <Box width="80%" mx="auto" mt={3} ml={4}>
           <Slider
-            value={kmValue}
-            onChange={handleSliderKmChange}
+            value={mileageRange}
+            onChange={handleSliderMileageChange}
             valueLabelDisplay="on"
             color="secondary"
-            marks={kmMarks}
+            marks={mileageMarks}
             size="small"
-            min={0}
-            max={maxKm}
+            min={minMileage}
+            max={maxMileage}
           />
         </Box>
         <Box width="100%" mx="auto" mt={3} ml={2}>
@@ -276,7 +309,7 @@ export const FilterMenu = ({ advertising, setAdvertising }: iAdvertising) => {
         </Box>
         <Box width="80%" mx="auto" mt={3} ml={4}>
           <Slider
-            value={priceValue}
+            value={priceRange}
             onChange={handleSliderPriceChange}
             valueLabelDisplay="on"
             color="secondary"

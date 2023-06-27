@@ -2,13 +2,13 @@ import { AxiosError } from "axios";
 import { createContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { iChildren, iDefaultErrorResponse } from "../../interfaces/global";
-import mockedProducts from "./mockedDatabase";
+// import mockedProducts from "./mockedDatabase";
 
 import {
   iFilterConditions,
   iProductItem,
   iProductProviderValue,
-  iSeller,
+  // iSeller,
 } from "./types";
 import { api } from "../../services/api";
 

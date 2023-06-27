@@ -1,4 +1,4 @@
-import { date, number } from "yup";
+// import { date, number } from "yup";
 
 export interface iSeller {
   name: string;
@@ -30,7 +30,7 @@ export interface iProductItem {
   seller: iSeller;
 }
 
-interface iImage {
+export interface iImage {
   id: number;
   image_number: number;
   image_url: string;

@@ -30,6 +30,7 @@ export const CarList = () => {
               is_good_buy={car.is_good_buy}
               seller={car.seller}
               is_active={car.is_active}
+              images={car.images}
             />
           ))}
         </StyledCarList>

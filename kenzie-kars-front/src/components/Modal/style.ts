@@ -31,7 +31,6 @@ export const ModalInnerContainer = styled.div`
   border-radius: var(--radius-1);
 
   > div {
-    /* margin: 60px 0; */
     background: var(--white-fixed);
     border-radius: var(--radius-1);
     width: 520px;

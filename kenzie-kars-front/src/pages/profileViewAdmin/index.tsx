@@ -14,7 +14,7 @@ import { ModalAddCar } from "../../components/ModalAddCar";
 import { CarListProfileView } from "../../components/carListProfileView";
 import { useUser } from "../../hooks/useUser";
 import { api } from "../../services/api";
-import { iVehicle } from "./types";
+// import { iVehicle } from "./types";
 import { iProductItem } from "../../contexts/productContext/types";
 
 export const ProfileViewAdmin = () => {
@@ -22,7 +22,6 @@ export const ProfileViewAdmin = () => {
   const toggleModal = () => setIsOpenModal(!isOpenModal);
 
   const [vehicles, setVehicles] = useState<Array<iProductItem> | null>(null);
-  // const [vehicles, setVehicles] = useState<Array<iProductItem> | null>(null);
 
   const { user } = useUser();
 

@@ -27,11 +27,7 @@ export const HomePage = () => {
   const { user } = useUser();
   return (
     <ContainerHomePage>
-      {user.name !== "" ? (
-        <HeaderLoggedIn user={user} />
-      ) : (
-        <HeaderNotLoggedIn />
-      )}
+      {user.name ? <HeaderLoggedIn user={user} /> : <HeaderNotLoggedIn />}
       <HomePageContainer>
         <SectionHomePageHeader id="advertising" display={advertising}>
           <MaskImageDiv>
