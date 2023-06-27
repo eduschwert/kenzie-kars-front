@@ -141,164 +141,162 @@ export const AnnoucementPage = () => {
   });
 
   return (
-    // {isOpenImageModal && (
-    //   <ModalShowCarImage
-    //     carImage={carSelectedImage}
-    //     toggleImageModal={toggleImageModal}
-    //   />
-    // )}
-
-    <ContainerAnnoucement>
-      {user ? <HeaderLoggedIn /> : <HeaderNotLoggedIn />}
-      <ContentAnnoucement>
-        <ContentImgs>
-          <ImageAndDescription>
-            <DivImageCar>
-              <img src={carSeller?.cover_image} alt="" />
-            </DivImageCar>
-            <InformationCar>
-              <StyledText tag="p" textStyle={"heading-6-600"} textColor="grey1">
-                {carSeller?.model}
-              </StyledText>
-              {/* <span>{carSeller?.model}</span> */}
-              <YearMileage>
-                <InformationCarDetails>
-                  <StyledText
-                    tag="p"
-                    textStyle={"heading-7-500"}
-                    textColor="brand1"
-                  >
-                    {carSeller?.year}
-                  </StyledText>
-                  {/* <p>{carSeller?.year}</p> */}
-                  <StyledText
-                    tag="p"
-                    textStyle={"heading-7-500"}
-                    textColor="brand1"
-                  >
-                    {`${carSeller?.mileage}Km`}
-                  </StyledText>
-                  {/* <p>{`${carSeller?.mileage}Km`}</p> */}
-                </InformationCarDetails>
-                <StyledText
-                  tag="p"
-                  textStyle={"heading-7-500"}
-                  textColor="grey1"
-                >
-                  {`R$ ${carSeller?.price}`}
-                </StyledText>
-                {/* <p>{carSeller?.price}</p> */}
-              </YearMileage>
-              <StyledButton
-                // onClick={() =>  }
-                buttonStyle={"sm"}
-                buttonColor="brand1"
-                width="7rem"
-              >
-                {`Comprar`}
-              </StyledButton>
-              {/* <button>Comprar</button> */}
-            </InformationCar>
-            <DescriptionCar>
-              <div>
+    <>
+      //{" "}
+      {isOpenImageModal && (
+        <ModalShowCarImage
+          carImage={carSelectedImage}
+          toggleImageModal={toggleImageModal}
+        />
+      )}
+      <ContainerAnnoucement>
+        {user ? <HeaderLoggedIn /> : <HeaderNotLoggedIn />}
+        <ContentAnnoucement>
+          <ContentImgs>
+            <ImageAndDescription>
+              <DivImageCar>
+                <img src={carSeller?.cover_image} alt="" />
+              </DivImageCar>
+              <InformationCar>
                 <StyledText
                   tag="p"
                   textStyle={"heading-6-600"}
                   textColor="grey1"
                 >
-                  {`Descrição`}
+                  {carSeller?.model}
                 </StyledText>
-                {/* <p>Descrição</p> */}
+                {/* <span>{carSeller?.model}</span> */}
+                <YearMileage>
+                  <InformationCarDetails>
+                    <StyledText
+                      tag="p"
+                      textStyle={"heading-7-500"}
+                      textColor="brand1"
+                    >
+                      {carSeller?.year}
+                    </StyledText>
+                    {/* <p>{carSeller?.year}</p> */}
+                    <StyledText
+                      tag="p"
+                      textStyle={"heading-7-500"}
+                      textColor="brand1"
+                    >
+                      {`${carSeller?.mileage}Km`}
+                    </StyledText>
+                    {/* <p>{`${carSeller?.mileage}Km`}</p> */}
+                  </InformationCarDetails>
+                  <StyledText
+                    tag="p"
+                    textStyle={"heading-7-500"}
+                    textColor="grey1"
+                  >
+                    {`R$ ${carSeller?.price}`}
+                  </StyledText>
+                  {/* <p>{carSeller?.price}</p> */}
+                </YearMileage>
+                <StyledButton
+                  // onClick={() =>  }
+                  buttonStyle={"sm"}
+                  buttonColor="brand1"
+                  width="7rem"
+                >
+                  {`Comprar`}
+                </StyledButton>
+                {/* <button>Comprar</button> */}
+              </InformationCar>
+              <DescriptionCar>
                 <div>
+                  <StyledText
+                    tag="p"
+                    textStyle={"heading-6-600"}
+                    textColor="grey1"
+                  >
+                    {`Descrição`}
+                  </StyledText>
+                  {/* <p>Descrição</p> */}
+                  <div>
+                    <StyledText
+                      tag="span"
+                      textStyle={"body-2-400"}
+                      textColor="grey1"
+                    >
+                      {carSeller?.description}
+                    </StyledText>
+                  </div>
+                  {/* <span>
+                  {carSeller?.description}
+                  
+                </span> */}
+                </div>
+              </DescriptionCar>
+            </ImageAndDescription>
+            <PhotoAndProfile>
+              {/* <div className="responsivePhotosAndProfile"> */}
+              <ContentPhotosCar>
+                <StyledText
+                  tag="h2"
+                  textStyle={"heading-6-600"}
+                  textColor="grey1"
+                >
+                  {`Fotos`}
+                </StyledText>
+                {/* <h2>Fotos</h2> */}
+                <PhotosCar>
+                  {carSeller?.images &&
+                    carSeller.images.map((image) => (
+                      <li
+                        id={`${image.id}`}
+                        onClick={() => setActionOverCarImage(image)}
+                      >
+                        <img src={image.image_url} alt={`${image.id}`} />
+                      </li>
+                    ))}
+                </PhotosCar>
+              </ContentPhotosCar>
+              <ProfileUser>
+                <div>
+                  <div className="photoProfile">
+                    <StyledText
+                      tag="h4"
+                      textStyle={"heading-2-600"}
+                      textColor="white"
+                    >
+                      {carSeller?.seller.name
+                        ? carSeller?.seller.name.substring(0, 2).toUpperCase()
+                        : ""}
+                    </StyledText>
+                  </div>
+
+                  <StyledText
+                    tag="span"
+                    textStyle={"heading-5-500"}
+                    textColor="grey1"
+                  >
+                    {carSeller?.seller.name}
+                  </StyledText>
                   <StyledText
                     tag="span"
                     textStyle={"body-2-400"}
                     textColor="grey1"
                   >
-                    {carSeller?.description}
+                    {carSeller?.seller.description}
                   </StyledText>
-                </div>
-                {/* <span>
-                  {carSeller?.description}
-                  
-                </span> */}
-              </div>
-            </DescriptionCar>
-          </ImageAndDescription>
-          <PhotoAndProfile>
-            {/* <div className="responsivePhotosAndProfile"> */}
-            <ContentPhotosCar>
-              <StyledText
-                tag="h2"
-                textStyle={"heading-6-600"}
-                textColor="grey1"
-              >
-                {`Fotos`}
-              </StyledText>
-              {/* <h2>Fotos</h2> */}
-              <PhotosCar>
-                {carSeller?.images &&
-                  carSeller.images.map((image) => (
-                    <li
-                      id={`${image.id}`}
-                      onClick={() => setActionOverCarImage(image)}
-                    >
-                      <img src={image.image_url} alt={`${image.id}`} />
-                    </li>
-                  ))}
-              </PhotosCar>
-            </ContentPhotosCar>
-            <ProfileUser>
-              <div>
-                <div className="photoProfile">
-                  <StyledText
-                    tag="h4"
-                    textStyle={"heading-2-600"}
-                    textColor="white"
-                  >
-                    {carSeller?.seller.name
-                      ? carSeller?.seller.name.substring(0, 2).toUpperCase()
-                      : ""}
-                    {/* {carSeller?.seller.name} */}
-                  </StyledText>
-                  {/* <h4>SL</h4> */}
-                </div>
 
-                {/* <p>Samuel Leão</p> */}
-                <StyledText
-                  tag="span"
-                  textStyle={"heading-5-500"}
-                  textColor="grey1"
-                >
-                  {carSeller?.seller.name}
-                </StyledText>
-                <StyledText
-                  tag="span"
-                  textStyle={"body-2-400"}
-                  textColor="grey1"
-                >
-                  {carSeller?.seller.description}
-                </StyledText>
-                {/* <span>
-                  Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry. Lorem Ipsum has been the industry's
-                </span> */}
-                <StyledButton
-                  type="button"
-                  buttonStyle="sm"
-                  buttonColor="grey1"
-                  width="126px"
-                  onClick={() => actionOverAllAnnouncements()}
-                >
-                  Ver todos os anúncios
-                </StyledButton>
-                {/* <button>Ver todos os anúncios</button> */}
-              </div>
-            </ProfileUser>
-          </PhotoAndProfile>
-        </ContentImgs>
-        {/* <ContentDescriptionComment> */}
-        {/* <CommentsAboutCar>
+                  <StyledButton
+                    type="button"
+                    buttonStyle="sm"
+                    buttonColor="grey1"
+                    max-width="80%"
+                    onClick={() => actionOverAllAnnouncements()}
+                  >
+                    Ver todos os anúncios
+                  </StyledButton>
+                </div>
+              </ProfileUser>
+            </PhotoAndProfile>
+          </ContentImgs>
+          {/* <ContentDescriptionComment> */}
+          {/* <CommentsAboutCar>
               <StyledText
                 tag="h2"
                 textStyle={"heading-6-600"}
@@ -309,128 +307,133 @@ export const AnnoucementPage = () => {
             
               
             </ContentPhotosCar> */}
-        <ProfileUser>
-          <div>
-            <div className="photoProfile">
+          {/* <ProfileUser>
+            <div>
+              <div className="photoProfile">
+                <StyledText
+                  tag="h4"
+                  textStyle={"heading-2-600"}
+                  textColor="white"
+                >
+                  {carSeller?.seller?.name
+                    ? carSeller?.seller?.name?.substring(0, 2).toUpperCase()
+                    : ""}
+                </StyledText>
+              </div>
+
               <StyledText
-                tag="h4"
-                textStyle={"heading-2-600"}
-                textColor="white"
+                tag="span"
+                textStyle={"heading-5-500"}
+                textColor="grey1"
               >
-                {carSeller?.seller?.name
-                  ? carSeller?.seller?.name?.substring(0, 2).toUpperCase()
-                  : ""}
-                {/* {carSeller?.seller.name} */}
+                {carSeller?.seller?.name}
               </StyledText>
-              {/* <h4>SL</h4> */}
+              <StyledText tag="span" textStyle={"body-2-400"} textColor="grey1">
+                {carSeller?.seller?.description}
+              </StyledText>
+
+              <StyledButton
+                type="button"
+                buttonStyle="sm"
+                buttonColor="grey1"
+                onClick={() => actionOverAllAnnouncements()}
+              >
+                Ver todos os anúncios
+              </StyledButton>
             </div>
-
-            {/* <p>Samuel Leão</p> */}
-            <StyledText
-              tag="span"
-              textStyle={"heading-5-500"}
-              textColor="grey1"
-            >
-              {carSeller?.seller?.name}
-            </StyledText>
-            <StyledText tag="span" textStyle={"body-2-400"} textColor="grey1">
-              {carSeller?.seller?.description}
-            </StyledText>
-            {/* <span>
-                  Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry. Lorem Ipsum has been the industry's
-                </span> */}
-            <StyledButton
-              type="button"
-              buttonStyle="sm"
-              buttonColor="grey1"
-              onClick={() => actionOverAllAnnouncements()}
-            >
-              Ver todos os anúncios
-            </StyledButton>
-            {/* <button>Ver todos os anúncios</button> */}
-          </div>
-        </ProfileUser>
-        {/* </PhotoAndProfile>
+          </ProfileUser> */}
+          {/* </PhotoAndProfile>
         </ContentImgs> */}
-        <ContentDescriptionComment>
-          <CommentsAboutCar>
-            <StyledText tag="h2" textStyle={"heading-6-600"} textColor="grey1">
-              {`Comentários`}
-            </StyledText>
+          <ContentDescriptionComment>
+            <CommentsAboutCar>
+              <StyledText
+                tag="h2"
+                textStyle={"heading-6-600"}
+                textColor="grey1"
+              >
+                {`Comentários`}
+              </StyledText>
 
-            <ProfileComments>
-              {comments.length == 0 ? (
-                <li>
+              <ProfileComments>
+                {comments.length == 0 ? (
+                  <li>
+                    <StyledText
+                      tag="p"
+                      textStyle={"body-1-600"}
+                      textColor="grey3"
+                    >
+                      {`Veículo ainda não possui comentários`}
+                    </StyledText>
+                  </li>
+                ) : (
+                  comments.map((item) => {
+                    return (
+                      <CommentItemLi
+                        name={item.owner.name}
+                        content={item.content}
+                        date={item.createdAt}
+                      />
+                    );
+                  })
+                )}
+              </ProfileComments>
+            </CommentsAboutCar>
+
+            <InputAndButtonFormComment>
+              <div>
+                <NameDiv>
+                  <InitialsCircle
+                    text={user ? user.name.substring(0, 2).toUpperCase() : ""}
+                  />
                   <StyledText
                     tag="p"
                     textStyle={"body-1-600"}
-                    textColor="grey3"
+                    textColor="grey1"
                   >
-                    {`Veículo ainda não possui comentários`}
+                    {user ? user.name : ""}
                   </StyledText>
-                </li>
-              ) : (
-                comments.map((item) => {
-                  return (
-                    <CommentItemLi
-                      name={item.owner.name}
-                      content={item.content}
-                      date={item.createdAt}
-                    />
-                  );
-                })
-              )}
-            </ProfileComments>
-          </CommentsAboutCar>
-
-          <InputAndButtonFormComment>
-            <div>
-              <NameDiv>
-                <InitialsCircle
-                  text={user ? user.name.substring(0, 2).toUpperCase() : ""}
-                />
-                <StyledText tag="p" textStyle={"body-1-600"} textColor="grey1">
-                  {user ? user.name : ""}
-                </StyledText>
-              </NameDiv>
-              <div>
-                <FormComment onSubmit={handleSubmit(createComment)} noValidate>
-                  <CssTextField
-                    required
-                    label="Descrição"
-                    variant="outlined"
-                    size="medium"
-                    id="registerDescription"
-                    type="text"
-                    placeholder="Digite um comentário..."
-                    multiline
-                    rows={4}
-                    {...register("content")}
-                    error={!!errors.content}
-                    helperText={errors.content && errors.content.message}
-                  />
-
-                  <StyledButton
-                    buttonStyle={"sm"}
-                    buttonColor="brand1"
-                    type="submit"
-                    disabled={loading}
+                </NameDiv>
+                <div>
+                  <FormComment
+                    onSubmit={handleSubmit(createComment)}
+                    noValidate
                   >
-                    {" "}
-                    {loading ? (
-                      <SyncLoader color="#FFFFFF" size={8} />
-                    ) : (
-                      "Comentar"
-                    )}
-                  </StyledButton>
-                </FormComment>
+                    <CssTextField
+                      required
+                      label="Descrição"
+                      variant="outlined"
+                      size="medium"
+                      id="registerDescription"
+                      type="text"
+                      placeholder="Digite um comentário..."
+                      multiline
+                      rows={4}
+                      {...register("content")}
+                      error={!!errors.content}
+                      helperText={errors.content && errors.content.message}
+                    />
+
+                    <StyledButton
+                      buttonStyle={"sm"}
+                      buttonColor="brand1"
+                      type="submit"
+                      disabled={loading}
+                    >
+                      {" "}
+                      {loading ? (
+                        <SyncLoader color="#FFFFFF" size={8} />
+                      ) : (
+                        "Comentar"
+                      )}
+                    </StyledButton>
+                  </FormComment>
+                </div>
               </div>
-            </div>
-          </InputAndButtonFormComment>
-        </ContentDescriptionComment>
-      </ContentAnnoucement>
-      <FooterComponent />
-    </ContainerAnnoucement>
+            </InputAndButtonFormComment>
+          </ContentDescriptionComment>
+        </ContentAnnoucement>
+        <FooterComponent />
+      </ContainerAnnoucement>
+    </>
   );
 };

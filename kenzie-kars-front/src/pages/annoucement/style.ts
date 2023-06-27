@@ -28,7 +28,8 @@ export const ContentImgs = styled.div`
   gap: 15px;
   flex-wrap: wrap;
   -webkit-box-pack: center;
-  justify-content: space-between;
+  /* justify-content: space-between; */
+  justify-content: center;
   margin-top: 50px;
 
   @media (min-width: 700px) {
@@ -48,15 +49,36 @@ export const ImageAndDescription = styled.div`
   }
 `;
 export const PhotoAndProfile = styled.div`
-  max-width: 34%;
+  width: 100%;
+  /* max-width: 320px; */
   display: flex;
   flex-direction: column;
   gap: 20px;
+
+  @media (min-width: 700px) {
+    /* display: none; */
+    width: 34%;
+    max-width: 320px;
+  }
+`;
+
+export const PhotoAndProfileWide = styled.div`
+  width: 100%;
+  display: none;
+  flex-direction: column;
+  gap: 20px;
+
+  @media (min-width: 700px) {
+    width: 34%;
+    max-width: 320px;
+    display: flex;
+  }
 `;
 
 export const DivImageCar = styled.div`
   display: flex;
   width: 100%;
+
   height: 355px;
   background: var(--color-grey10);
   border-radius: var(--radius-2);
@@ -64,26 +86,9 @@ export const DivImageCar = styled.div`
   justify-content: center;
   margin: 0 auto;
 
-  /* @media (min-width: 700px) {
-    min-width: 476px;
-    width: 62%;
-  }
-
-  @media (min-width: 1000px) {
-    min-width: 640px;
-    width: 62%;
-  }
-
-  @media (min-width: 1200px) {
-    min-width: 775px;
-  }
-
-  @media (min-width: 1400px) {
-    min-width: 810px;
-  } */
-  */ img {
-    width: 440px;
-    height: 224px;
+  img {
+    max-width: 90%;
+    max-height: 90%;
     object-fit: contain;
   }
 `;
@@ -133,9 +138,14 @@ export const ContentPhotosCar = styled.div`
   justify-content: center;
   min-width: 320px;
   max-height: 460px;
+  width: 100%;
   gap: 1rem;
   border-radius: var(--radius-2);
   background: var(--color-grey10);
+
+  @media (min-width: 700px) {
+    max-width: 280px;
+  }
 `;
 
 export const PhotosCar = styled.ul`
@@ -143,6 +153,7 @@ export const PhotosCar = styled.ul`
   max-width: 390px;
   max-height: 380px;
   display: grid;
+  justify-items: center;
   grid-template-columns: repeat(2, 1fr);
   gap: 10px;
 
@@ -189,6 +200,7 @@ export const ProfileUser = styled.div`
   border-radius: var(--radius-2);
   min-width: 320px;
   max-height: 380px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -210,6 +222,10 @@ export const ProfileUser = styled.div`
       font-size: 20px;
       line-height: 25px;
       color: #212529;
+    }
+
+    @media (min-width: 700px) {
+      max-width: 280px;
     }
   }
 
@@ -244,8 +260,24 @@ export const ContentDescriptionComment = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
-  width: 62%;
+
   min-width: 320px;
+  width: 100%;
+
+  @media (min-width: 700px) {
+    margin-left: 0.5rem;
+    width: 62%;
+  }
+
+  @media (min-width: 1000px) {
+    margin-left: 1.75rem;
+    width: 62%;
+  }
+
+  @media (min-width: 1400px) {
+    margin-left: 5rem;
+    width: 62%;
+  }
 `;
 
 export const DescriptionCar = styled.div`
@@ -339,10 +371,9 @@ export const InputAndButtonFormComment = styled.div`
   width: 100%;
   min-height: 350px;
   background-color: var(--color-grey10);
+  border-radius: var(--radius-2);
 
   & > div {
-    border-radius: var(--radius-2);
-
     padding: 36px 44px;
   }
   /* background-color: var(--color-grey10);
