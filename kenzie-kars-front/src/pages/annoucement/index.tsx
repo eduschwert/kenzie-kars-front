@@ -28,7 +28,7 @@ import { HeaderNotLoggedIn } from "../../components/headerNotLoggedIn";
 import { useUser } from "../../hooks/useUser";
 import { StyledButton } from "../../styles/buttons";
 import { useNavigate } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { ProductContext } from "../../contexts/productContext";
 // import { UserContext } from "../../contexts/userContext/UserContext";
 import { StyledText } from "../../styles/tipography";
@@ -42,6 +42,8 @@ import { CssTextField } from "../../components/forms/muiStyle";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { commentSchema } from "./schema";
 import { SyncLoader } from "react-spinners";
+import { iImage } from "../../contexts/productContext/types";
+import { ModalShowCarImage } from "../../components/modalShowCarImage";
 
 interface iComment {
   content: string;
@@ -62,7 +64,12 @@ export const AnnoucementPage = () => {
   const { user } = useUser();
   // const { user } = useContext(UserContext);
   const { carSeller } = useContext(ProductContext);
+  const [isOpenImageModal, setIsOpenImageModal] = useState(false);
+
+  const [carSelectedImage, setCarSelectedImage] = useState<string>("");
   const navigate = useNavigate();
+
+  const toggleImageModal = () => setIsOpenImageModal(!isOpenImageModal);
 
   const actionOverAllAnnouncements = () => {
     if (carSeller?.seller.id === user?.id) {
@@ -71,6 +78,30 @@ export const AnnoucementPage = () => {
       navigate("/profileview");
     }
   };
+  const setActionOverCarImage = (carImage: iImage) => {
+    setCarSelectedImage(carImage.image_url);
+    toggleImageModal();
+  };
+
+  async function getComments() {
+    const token = localStorage.getItem("@KenzieKars:token");
+    try {
+      const response = await api.get(`comments/${carSeller?.id}`, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
+      reset();
+      setComments(response.data);
+    } catch (error) {
+      console.error(error);
+      toast.error(`Ops! Algo deu errado.`);
+    }
+  }
+
+  useEffect(() => {
+    getComments();
+  }, []);
 
   async function createComment(data: iComment) {
     setLoading(true);
@@ -95,22 +126,6 @@ export const AnnoucementPage = () => {
     }
   }
 
-  async function getComments() {
-    const token = localStorage.getItem("@KenzieKars:token");
-    try {
-      const response = await api.get(`comments/${carSeller?.id}`, {
-        headers: {
-          authorization: `Bearer ${token}`,
-        },
-      });
-      reset();
-      setComments(response.data);
-    } catch (error) {
-      console.error(error);
-      toast.error(`Ops! Algo deu errado.`);
-    }
-  }
-
   useEffect(() => {
     getComments();
   }, []);
@@ -126,13 +141,20 @@ export const AnnoucementPage = () => {
   });
 
   return (
+    // {isOpenImageModal && (
+    //   <ModalShowCarImage
+    //     carImage={carSelectedImage}
+    //     toggleImageModal={toggleImageModal}
+    //   />
+    // )}
+
     <ContainerAnnoucement>
       {user ? <HeaderLoggedIn /> : <HeaderNotLoggedIn />}
       <ContentAnnoucement>
         <ContentImgs>
           <ImageAndDescription>
             <DivImageCar>
-              <img src={carImage} alt="" />
+              <img src={carSeller?.cover_image} alt="" />
             </DivImageCar>
             <InformationCar>
               <StyledText tag="p" textStyle={"heading-6-600"} textColor="grey1">
@@ -215,24 +237,15 @@ export const AnnoucementPage = () => {
               </StyledText>
               {/* <h2>Fotos</h2> */}
               <PhotosCar>
-                <div>
-                  <img src={exteriorCarro} alt="" />
-                </div>
-                <div>
-                  <img src={exteriorCarro} alt="" />
-                </div>
-                <div>
-                  <img src={exteriorCarro} alt="" />
-                </div>
-                <div>
-                  <img src={exteriorCarro} alt="" />
-                </div>
-                <div>
-                  <img src={exteriorCarro} alt="" />
-                </div>
-                <div>
-                  <img src={exteriorCarro} alt="" />
-                </div>
+                {carSeller?.images &&
+                  carSeller.images.map((image) => (
+                    <li
+                      id={`${image.id}`}
+                      onClick={() => setActionOverCarImage(image)}
+                    >
+                      <img src={image.image_url} alt={`${image.id}`} />
+                    </li>
+                  ))}
               </PhotosCar>
             </ContentPhotosCar>
             <ProfileUser>
@@ -243,8 +256,8 @@ export const AnnoucementPage = () => {
                     textStyle={"heading-2-600"}
                     textColor="white"
                   >
-                    {carSeller?.seller?.name
-                      ? carSeller?.seller?.name?.substring(0, 2).toUpperCase()
+                    {carSeller?.seller.name
+                      ? carSeller?.seller.name.substring(0, 2).toUpperCase()
                       : ""}
                     {/* {carSeller?.seller.name} */}
                   </StyledText>
@@ -257,14 +270,14 @@ export const AnnoucementPage = () => {
                   textStyle={"heading-5-500"}
                   textColor="grey1"
                 >
-                  {carSeller?.seller?.name}
+                  {carSeller?.seller.name}
                 </StyledText>
                 <StyledText
                   tag="span"
                   textStyle={"body-2-400"}
                   textColor="grey1"
                 >
-                  {carSeller?.seller?.description}
+                  {carSeller?.seller.description}
                 </StyledText>
                 {/* <span>
                   Lorem Ipsum is simply dummy text of the printing and
@@ -274,6 +287,7 @@ export const AnnoucementPage = () => {
                   type="button"
                   buttonStyle="sm"
                   buttonColor="grey1"
+                  width="126px"
                   onClick={() => actionOverAllAnnouncements()}
                 >
                   Ver todos os anúncios
@@ -283,6 +297,62 @@ export const AnnoucementPage = () => {
             </ProfileUser>
           </PhotoAndProfile>
         </ContentImgs>
+        {/* <ContentDescriptionComment> */}
+        {/* <CommentsAboutCar>
+              <StyledText
+                tag="h2"
+                textStyle={"heading-6-600"}
+                textColor="grey1"
+              >
+                {`Comentários`}
+              </StyledText>
+            
+              
+            </ContentPhotosCar> */}
+        <ProfileUser>
+          <div>
+            <div className="photoProfile">
+              <StyledText
+                tag="h4"
+                textStyle={"heading-2-600"}
+                textColor="white"
+              >
+                {carSeller?.seller?.name
+                  ? carSeller?.seller?.name?.substring(0, 2).toUpperCase()
+                  : ""}
+                {/* {carSeller?.seller.name} */}
+              </StyledText>
+              {/* <h4>SL</h4> */}
+            </div>
+
+            {/* <p>Samuel Leão</p> */}
+            <StyledText
+              tag="span"
+              textStyle={"heading-5-500"}
+              textColor="grey1"
+            >
+              {carSeller?.seller?.name}
+            </StyledText>
+            <StyledText tag="span" textStyle={"body-2-400"} textColor="grey1">
+              {carSeller?.seller?.description}
+            </StyledText>
+            {/* <span>
+                  Lorem Ipsum is simply dummy text of the printing and
+                  typesetting industry. Lorem Ipsum has been the industry's
+                </span> */}
+            <StyledButton
+              type="button"
+              buttonStyle="sm"
+              buttonColor="grey1"
+              onClick={() => actionOverAllAnnouncements()}
+            >
+              Ver todos os anúncios
+            </StyledButton>
+            {/* <button>Ver todos os anúncios</button> */}
+          </div>
+        </ProfileUser>
+        {/* </PhotoAndProfile>
+        </ContentImgs> */}
         <ContentDescriptionComment>
           <CommentsAboutCar>
             <StyledText tag="h2" textStyle={"heading-6-600"} textColor="grey1">

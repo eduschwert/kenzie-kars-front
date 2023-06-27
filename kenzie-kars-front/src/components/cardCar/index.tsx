@@ -25,13 +25,15 @@ export const CardCar = (car: iProductItem) => {
   const navigate = useNavigate();
   const { setCarSeller } = useProduct();
 
-  const setActionOverCarCard = () => {
-    setCarSeller(car);
+  const setActionOverCarCard = (selectedCar: iProductItem) => {
+    console.log("SELECTED CAR", selectedCar);
+    setCarSeller(selectedCar);
+    // navigate("/profileview");
     navigate("/anouncement");
   };
 
   return (
-    <CardLi id={`${car.id}`} onClick={() => setActionOverCarCard()}>
+    <CardLi id={`${car.id}`} onClick={() => setActionOverCarCard(car)}>
       <a>
         <div>
           <img src={carImage} />
