@@ -47,6 +47,16 @@ export const theme = createTheme({
         },
       },
     },
+    // Mui: {
+    //   styleOverrides: {
+    //     root: {
+    //       "&$selected": {
+    //         color: "#5126ea",
+    //         backgroundColor: "#b0a6f0",
+    //       },
+    //     },
+    //   },
+    // },
   },
   typography: {
     fontFamily: "Lexand, sans-serif",
@@ -54,30 +64,15 @@ export const theme = createTheme({
   },
   palette: {
     primary: {
-      light: "#FF6600",
-      main: "#B33F00",
-      dark: "#662400",
+      light: "#b0a6f0",
+      main: "#5126ea",
+      dark: "#4529e6",
       contrastText: "#fff",
     },
     secondary: {
-      light: "#00B3AD",
-      main: "#006663",
+      light: "#868e96",
+      main: "#495057",
       contrastText: "#000",
     },
   },
 });
-
-// palette: {
-//   primary: {
-//     light: '#757ce8',
-//     main: '#3f50b5',
-//     dark: '#002884',
-//     contrastText: '#fff',
-//   },
-//   secondary: {
-//     light: '#ff7961',
-//     main: '#f44336',
-//     dark: '#ba000d',
-//     contrastText: '#000',
-//   },
-// },
