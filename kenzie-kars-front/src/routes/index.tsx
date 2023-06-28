@@ -6,7 +6,7 @@ import { ProfileViewAdmin } from "../pages/profileViewAdmin";
 import { AnnoucementPage } from "../pages/annoucement";
 import { ProfileView } from "../pages/profileView";
 import { ResetPasswordPage } from "../pages/resetPassword";
-import { ProtectedRoutes } from "../components/ProtectedRoutes";
+import { ProtectedRoutes } from "../components/protectedRoutes";
 
 export const RoutesMain = () => {
   return (

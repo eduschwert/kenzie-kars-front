@@ -1,5 +1,5 @@
 import { iSeller } from "../../contexts/productContext/types";
-import { iUserRegisterInformation } from "../../contexts/userContext/types";
+// import { iUserRegisterInformation } from "../../contexts/userContext/types";
 
 interface iImage {
   id: string;

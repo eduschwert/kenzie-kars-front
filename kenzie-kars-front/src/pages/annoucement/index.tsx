@@ -16,12 +16,11 @@ import {
   PhotoAndProfile,
   PhotosCar,
   ProfileComments,
-  ProfileInitials,
   ProfileUser,
   YearMileage,
 } from "./style";
-import { SubmitHandler, useForm } from "react-hook-form";
-import exteriorCarro from "../../imagensMock/exterior-carro.png";
+import { useForm } from "react-hook-form";
+// import exteriorCarro from "../../imagensMock/exterior-carro.png";
 import { HeaderLoggedIn } from "../../components/headerLoggedIn";
 import { FooterComponent } from "../../components/footer";
 import { HeaderNotLoggedIn } from "../../components/headerNotLoggedIn";
@@ -32,9 +31,9 @@ import { useContext, useState, useEffect } from "react";
 import { ProductContext } from "../../contexts/productContext";
 // import { UserContext } from "../../contexts/userContext/UserContext";
 import { StyledText } from "../../styles/tipography";
-import carImage from "../../assets/car.png";
+// import carImage from "../../assets/car.png";
 import { InitialsCircle } from "../../components/initialsCircle";
-import Textarea, { TextareaAutosize } from "@mui/material";
+// import Textarea, { TextareaAutosize } from "@mui/material";
 import { api } from "../../services/api";
 import { toast } from "react-toastify";
 import { CommentItemLi } from "../../components/vehicleComment";
