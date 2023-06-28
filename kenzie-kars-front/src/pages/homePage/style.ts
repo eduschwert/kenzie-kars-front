@@ -2,9 +2,9 @@ import styled from "styled-components";
 import homeheader from "./../../assets/homeheader.svg";
 import { iDisplay } from "./types";
 
-interface iGallery {
-  display: boolean;
-}
+// interface iGallery {
+//   display: boolean;
+// }
 
 export const ContainerHomePage = styled.div`
   width: 100%;

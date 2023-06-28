@@ -1,6 +1,6 @@
 import { StyledText } from "../../styles/tipography";
+import { HelperTextDiv } from "../modalEditUser/style";
 import { StyledSelectDiv, StyledSelect } from "./style";
-import { HelperTextDiv } from "../inputComponent/style";
 import { iSelect } from "./types";
 
 export const SelectInput = ({

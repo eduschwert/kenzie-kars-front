@@ -28,11 +28,9 @@ interface iProp {
 }
 
 export const ModalUpdateAddress = ({ toggleModal }: iProp) => {
-  const { spinner, setSpinner, errorApi, setErrorApi, registerUser, setUser } =
-    useContext(UserContext);
+  const { spinner, setSpinner, setErrorApi, setUser } = useContext(UserContext);
 
-  const { stateList, cityList, getStates, getCitiesOfState } =
-    useContext(CitiesContext);
+  const { stateList, cityList, getCitiesOfState } = useContext(CitiesContext);
 
   const {
     register,
