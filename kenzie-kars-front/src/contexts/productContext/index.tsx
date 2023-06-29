@@ -16,6 +16,7 @@ export const ProductContext = createContext({} as iProductProviderValue);
 
 export const ProductProvider = ({ children }: iChildren) => {
   const [products, setProducts] = useState([] as iProductItem[]);
+  const [totalPages, setTotalPages] = useState(0);
 
   const [vehiclesProfileViewAdmin, setVehiclesProfileViewAdmin] =
     useState<Array<iProductItem> | null>(null);
@@ -50,6 +51,20 @@ export const ProductProvider = ({ children }: iChildren) => {
     };
     getProducts();
   }, []);
+
+  const getProductsPagination = async (perPage: number, page: number) => {
+    try {
+      setLoadingProducts(true);
+      const response = await api.get(
+        `vehicles?perPage=${perPage}&page=${page}`
+      );
+
+      setFilteredProducts(response.data.data);
+      setTotalPages(response.data.totalPages);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
     const getFilteredProducts = async () => {
@@ -108,6 +123,8 @@ export const ProductProvider = ({ children }: iChildren) => {
         setFilterConditions,
         carSeller,
         setCarSeller,
+        getProductsPagination,
+        totalPages,
       }}
     >
       {children}

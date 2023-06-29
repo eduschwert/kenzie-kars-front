@@ -22,6 +22,7 @@ import { FooterComponent } from "../../components/footer";
 import { useUser } from "../../hooks/useUser";
 import { HeaderLoggedIn } from "../../components/headerLoggedIn";
 import { useProduct } from "../../hooks/useProduct";
+import { CustomIconsPagination } from "../../components/pagination";
 
 export const HomePage = () => {
   const [advertising, setAdvertising] = useState<boolean>(false);
@@ -79,6 +80,7 @@ export const HomePage = () => {
                 </StyledButton>
               )}
             </AdvertisingButton>
+            <CustomIconsPagination />
           </SectionHomePageMainProductGallery>
         </SectionHomePageMain>
       </HomePageContainer>

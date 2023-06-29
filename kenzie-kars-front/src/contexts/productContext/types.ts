@@ -1,5 +1,7 @@
 // import { date, number } from "yup";
 
+import { iCardCarProps } from "../../components/carList/types";
+
 export interface iSeller {
   name: string;
   email: string;
@@ -61,4 +63,6 @@ export interface iProductProviderValue {
   setCarSeller: React.Dispatch<React.SetStateAction<iProductItem | null>>;
   filterConditions: iFilterConditions;
   setFilterConditions: React.Dispatch<React.SetStateAction<iFilterConditions>>;
+  getProductsPagination: (perPage: number, page: number) => void;
+  totalPages: number;
 }

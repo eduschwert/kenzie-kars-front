@@ -26,7 +26,6 @@ export const CardCar = (car: iProductItem) => {
   const { setCarSeller } = useProduct();
 
   const setActionOverCarCard = (selectedCar: iProductItem) => {
-    console.log("SELECTED CAR", selectedCar);
     setCarSeller(selectedCar);
     // navigate("/profileview");
     navigate("/anouncement");
