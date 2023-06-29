@@ -52,6 +52,10 @@ export interface iProductProviderValue {
   products: iProductItem[];
   filteredProducts: iProductItem[];
   setFilteredProducts: React.Dispatch<React.SetStateAction<iProductItem[]>>;
+  vehiclesProfileViewAdmin: iProductItem[] | null;
+  setVehiclesProfileViewAdmin: React.Dispatch<
+    React.SetStateAction<iProductItem[] | null>
+  >;
   loadingProducts: boolean;
   carSeller: iProductItem | null;
   setCarSeller: React.Dispatch<React.SetStateAction<iProductItem | null>>;

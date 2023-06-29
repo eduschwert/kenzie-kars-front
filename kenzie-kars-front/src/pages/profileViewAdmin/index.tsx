@@ -15,15 +15,16 @@ import {
 import { ModalAddCar } from "../../components/modalAddCar";
 import { useUser } from "../../hooks/useUser";
 import { api } from "../../services/api";
-import { iProductItem } from "../../contexts/productContext/types";
 import { CarListAdmin } from "../../components/carListAdmin";
 import { FooterComponent } from "../../components/footer";
+import { useProduct } from "../../hooks/useProduct";
 
 export const ProfileViewAdmin = () => {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const toggleModal = () => setIsOpenModal(!isOpenModal);
 
-  const [vehicles, setVehicles] = useState<Array<iProductItem> | null>(null);
+  const { vehiclesProfileViewAdmin, setVehiclesProfileViewAdmin } =
+    useProduct();
 
   const { user } = useUser();
 
@@ -35,16 +36,15 @@ export const ProfileViewAdmin = () => {
       api.defaults.headers.common.authorization = `Bearer ${token}`;
 
       const response = await api.get("users/user_vehicles");
-      setVehicles(response.data.data);
+      setVehiclesProfileViewAdmin(response.data.data);
     };
     fetchUserCars();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <>
-      {isOpenModal && (
-        <ModalAddCar setVehicles={setVehicles} toggleModal={toggleModal} />
-      )}
+      {isOpenModal && <ModalAddCar toggleModal={toggleModal} />}
       <Container>
         <HeaderLoggedIn />
         <BlueBox />
@@ -70,8 +70,8 @@ export const ProfileViewAdmin = () => {
           </div>
         </PerfilBox>
         <ContainerList>
-          {vehicles && vehicles.length > 0 ? (
-            <CarListAdmin cars={vehicles} />
+          {vehiclesProfileViewAdmin && vehiclesProfileViewAdmin.length > 0 ? (
+            <CarListAdmin />
           ) : (
             <NoVehiclesContainer>
               <StyledText
