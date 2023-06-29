@@ -15,12 +15,12 @@ import { StyledText } from "../../../styles/tipography";
 import { CitiesContext } from "../../../contexts/citiesContext/CitiesContext";
 import { CssTextField } from "../muiStyle";
 import { Form } from "../style";
-import { Autocomplete, TextField } from "@mui/material";
+import { Autocomplete } from "@mui/material";
 import { registerFormSchema } from "./schema";
 import { SyncLoader } from "react-spinners";
 import { iUserRegisterInformation } from "../../../contexts/userContext/types";
 import { iRegisterFormValues } from "./types";
-import ReactInputMask from "react-input-mask";
+// import ReactInputMask from "react-input-mask";
 
 export const RegisterFormMui = () => {
   const { spinner, setSpinner, errorApi, setErrorApi, registerUser } =
@@ -37,7 +37,7 @@ export const RegisterFormMui = () => {
     register,
     handleSubmit,
     trigger,
-    formState: { errors, isSubmitSuccessful },
+    formState: { errors },
     reset,
   } = useForm<iRegisterFormValues>({
     mode: "onTouched",

@@ -17,6 +17,7 @@ export const ProtectedRoutes = () => {
 
   if (!user?.is_seller) {
     navigate("/");
+    return <></>;
   } else {
     return <Outlet />;
   }

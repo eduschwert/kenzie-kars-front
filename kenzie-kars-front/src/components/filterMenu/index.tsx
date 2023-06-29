@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { List, Box, Typography, Slider } from "@mui/material";
 import {
   AdvertisingButton,
@@ -162,7 +163,7 @@ export const FilterMenu = ({ advertising, setAdvertising }: iAdvertising) => {
   };
 
   const handleSliderMileageChange = (
-    e: any,
+    _e: any,
     newMileageRange: number[] | number
   ) => {
     if (Array.isArray(newMileageRange)) {
@@ -177,7 +178,7 @@ export const FilterMenu = ({ advertising, setAdvertising }: iAdvertising) => {
   };
 
   const handleSliderPriceChange = (
-    e: any,
+    _e: any,
     newPriceRange: number[] | number
   ) => {
     // Array.isArray(newPriceRange) && setPriceRange(newPriceRange);
