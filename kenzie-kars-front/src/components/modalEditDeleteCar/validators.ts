@@ -4,7 +4,7 @@ export const vehicleSchema = z.object({
   brand: z.preprocess((brand) => {
     if (!brand || typeof brand !== "string") return "";
     return brand;
-  }, z.string().nonempty()),
+  }, z.string().nonempty("A marca é obrigatória")),
   model: z.preprocess((model) => {
     if (!model || typeof model !== "string") return "";
     return model;
