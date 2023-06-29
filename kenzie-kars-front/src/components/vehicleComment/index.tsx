@@ -21,16 +21,26 @@ export function CommentItemLi({ name, date, content }: iProp) {
     const commentDate: any = new Date(date);
 
     const totalDistance = Math.abs(today - commentDate);
-    const daysDistance = Math.ceil(totalDistance / (1000 * 60 * 60 * 24));
-    const monthsDistance = Math.ceil(daysDistance / 30);
+    const daysDistance = Math.floor(totalDistance / (1000 * 60 * 60 * 24));
+    const hoursDistance = Math.floor(totalDistance / (1000 * 60 * 60));
+    const minutesDistance = Math.floor(totalDistance / (1000 * 60));
+    const monthsDistance = Math.floor(daysDistance / 30);
 
-    if (daysDistance < 1) {
-      return "hoje";
-    } else if (totalDistance === 1) {
+    if (minutesDistance < 1) {
+      return "agora mesmo";
+    } else if (minutesDistance === 1) {
+      return "1 minuto atrás";
+    } else if (hoursDistance < 1) {
+      return `${minutesDistance} minutos atrás`;
+    } else if (hoursDistance === 1) {
+      return "1 hora atrás";
+    } else if (daysDistance < 1) {
+      return `${hoursDistance} horas atrás`;
+    } else if (daysDistance === 1) {
       return "1 dia atrás";
     } else if (daysDistance < 30) {
       return `${daysDistance} dias atrás`;
-    } else if (monthsDistance === 1) {
+    } else if (daysDistance < 60) {
       return "1 mês atrás";
     } else {
       return `${monthsDistance} meses atrás`;
