@@ -17,6 +17,7 @@ import { iProductItem } from "../../contexts/productContext/types";
 import { HeaderNotLoggedIn } from "../../components/headerNotLoggedIn";
 import { CarList } from "../../components/carList";
 import { FooterComponent } from "../../components/footer";
+import { CustomIconsPagination } from "../../components/pagination";
 
 export const ProfileView = () => {
   const [vehicles, setVehicles] = useState<Array<iProductItem>>(
@@ -24,6 +25,7 @@ export const ProfileView = () => {
   );
   const { user } = useUser();
   const { carSeller } = useProduct();
+  const [totalPages, setTotalPages] = useState(0);
 
   const initials = carSeller?.seller.name.substring(0, 2)?.toUpperCase();
 
@@ -34,6 +36,22 @@ export const ProfileView = () => {
     };
     fetchSellerCars();
   }, [carSeller]);
+
+  const getVehiclesPaginationProfile = async (
+    perPage: number,
+    page: number
+  ) => {
+    try {
+      const response = await api.get(
+        `vehicles/user/${carSeller?.seller.id}?perPage=${perPage}&page=${page}`
+      );
+
+      setVehicles(response.data.data);
+      setTotalPages(response.data.totalPages);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <>
@@ -56,6 +74,10 @@ export const ProfileView = () => {
         </PerfilBox>
         <ContainerList>
           <CarList cars={vehicles} />
+          <CustomIconsPagination
+            getVehiclesPaginationProfile={getVehiclesPaginationProfile}
+            totalPagesOtherPage={totalPages}
+          />
         </ContainerList>
         <FooterComponent />
       </Container>

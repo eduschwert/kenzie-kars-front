@@ -18,10 +18,13 @@ import { api } from "../../services/api";
 import { iProductItem } from "../../contexts/productContext/types";
 import { CarListAdmin } from "../../components/carListAdmin";
 import { FooterComponent } from "../../components/footer";
+import { CustomIconsPagination } from "../../components/pagination";
 
 export const ProfileViewAdmin = () => {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const toggleModal = () => setIsOpenModal(!isOpenModal);
+
+  const [totalPages, setTotalPages] = useState(0);
 
   const [vehicles, setVehicles] = useState<Array<iProductItem> | null>(null);
 
@@ -39,6 +42,24 @@ export const ProfileViewAdmin = () => {
     };
     fetchUserCars();
   }, []);
+
+  const getVehiclesPaginationProfileAdm = async (
+    perPage: number,
+    page: number
+  ) => {
+    try {
+      const token = localStorage.getItem("@KenzieKars:token");
+      api.defaults.headers.common.authorization = `Bearer ${token}`;
+      const response = await api.get(
+        `users/user_vehicles?perPage=${perPage}&page=${page}`
+      );
+
+      setVehicles(response.data.data);
+      setTotalPages(response.data.totalPages);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <>
@@ -83,6 +104,10 @@ export const ProfileViewAdmin = () => {
               </StyledText>
             </NoVehiclesContainer>
           )}
+          <CustomIconsPagination
+            getVehiclesPaginationProfileAdm={getVehiclesPaginationProfileAdm}
+            totalPagesOtherPage={totalPages}
+          />
         </ContainerList>
         <FooterComponent />
       </Container>

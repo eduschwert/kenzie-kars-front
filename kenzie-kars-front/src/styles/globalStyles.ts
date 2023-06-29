@@ -66,5 +66,15 @@ html {
             transform: translateY(0px);
   }
 }
+@keyframes animateCardHome {
+	0% {
+		opacity: 0;
+		transform: translateX(250px);
+	}
 
+	100% {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
 `;

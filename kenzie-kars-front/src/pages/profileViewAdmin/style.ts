@@ -84,6 +84,7 @@ export const ContainerList = styled.div`
   max-width: 100%;
   padding: 16px;
   margin: 0 auto;
+  animation: animateCardHome 1s ease 0s 1 normal forwards;
 
   @media (min-width: 700px) {
     padding-bottom: 120px;
