@@ -381,9 +381,20 @@ export const AnnoucementPage = () => {
             <InputAndButtonFormComment>
               <div>
                 <NameDiv>
-                  <InitialsCircle
-                    text={user ? user.name.substring(0, 2).toUpperCase() : ""}
-                  />
+                  {user ? (
+                    <InitialsCircle
+                      text={user.name.substring(0, 2).toUpperCase()}
+                    />
+                  ) : (
+                    <StyledText
+                      tag="p"
+                      textStyle={"body-1-600"}
+                      textColor="grey1"
+                    >
+                      É necessário fazer login para registrar comentários
+                    </StyledText>
+                  )}
+
                   <StyledText
                     tag="p"
                     textStyle={"body-1-600"}

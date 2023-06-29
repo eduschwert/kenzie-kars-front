@@ -1,7 +1,11 @@
 import styled from "styled-components";
 
-export const CircleDiv = styled.div`
-  background-color: var(--color-brand1);
+interface iDiv {
+  color: string;
+}
+
+export const CircleDiv = styled.div<iDiv>`
+  background-color: #${({ color }) => color};
   width: 35px;
   height: 35px;
   display: flex;
