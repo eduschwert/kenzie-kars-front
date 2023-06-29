@@ -1,12 +1,13 @@
 import { StyledCarList } from "./style";
 
 import { CardCarAdmin } from "../cardCarAdmin";
-import { iCarListAdminProps } from "./types";
+import { useProduct } from "../../hooks/useProduct";
 
-export const CarListAdmin = ({ cars }: iCarListAdminProps) => {
+export const CarListAdmin = () => {
+  const { vehiclesProfileViewAdmin } = useProduct();
   return (
     <StyledCarList>
-      {cars?.map((car) => (
+      {vehiclesProfileViewAdmin?.map((car) => (
         <CardCarAdmin key={car.id} car={car} />
       ))}
     </StyledCarList>

@@ -12,7 +12,6 @@ import { UserContext } from "../../contexts/userContext/UserContext";
 import { SyncLoader } from "react-spinners";
 import { api } from "../../services/api";
 import { toast } from "react-toastify";
-import { setErrorMap } from "zod";
 
 interface iProp {
   toggleModal: () => void;
@@ -27,7 +26,6 @@ export const ModalEditUser = ({ toggleModal, setMenuType }: iProp) => {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm<iSchema>({
     mode: "onTouched",
     resolver: yupResolver(updateUserSchema),

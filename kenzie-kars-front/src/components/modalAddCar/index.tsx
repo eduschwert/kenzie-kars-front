@@ -25,11 +25,9 @@ import { AiOutlineClose } from "react-icons/ai";
 import { useUser } from "../../hooks/useUser";
 import { SyncLoader } from "react-spinners";
 import { toast } from "react-toastify";
+import { useProduct } from "../../hooks/useProduct";
 
-export const ModalAddCar = ({
-  toggleModal,
-  setVehicles,
-}: iModalAddCarProps) => {
+export const ModalAddCar = ({ toggleModal }: iModalAddCarProps) => {
   const [cars, setCars] = useState([] as Array<iVehicleFipeApi>);
   const [brands, setBrands] = useState([] as Array<string>);
   const [models, setModels] = useState([] as Array<string>);
@@ -40,6 +38,8 @@ export const ModalAddCar = ({
   const [imagesNumber, setImagesNumber] = useState(2);
 
   const { spinner, setSpinner } = useUser();
+
+  const { setVehiclesProfileViewAdmin } = useProduct();
 
   const fuelsOptions = ["flex", "híbrido", "elétrico"];
 
@@ -63,8 +63,7 @@ export const ModalAddCar = ({
     setValue,
     watch,
   } = useForm({
-    mode: "onSubmit",
-    reValidateMode: "onChange",
+    mode: "onTouched",
     resolver: zodResolver(vehicleSchema),
     defaultValues: {
       brand: "",
@@ -149,7 +148,7 @@ export const ModalAddCar = ({
       api.defaults.headers.common.authorization = `Bearer ${token}`;
 
       const response = await api.post("vehicles", newData);
-      setVehicles((previousVehicles) => [
+      setVehiclesProfileViewAdmin((previousVehicles) => [
         ...(previousVehicles || []),
         response.data,
       ]);
@@ -188,6 +187,7 @@ export const ModalAddCar = ({
                   <CssTextField
                     {...params}
                     label="Marca"
+                    required
                     error={!!errors.brand}
                     helperText={errors.brand?.message}
                     variant="outlined"
@@ -214,6 +214,7 @@ export const ModalAddCar = ({
                   <CssTextField
                     {...params}
                     label="Modelo"
+                    required
                     error={!!errors.model}
                     helperText={errors.model?.message}
                     variant="outlined"
@@ -234,21 +235,29 @@ export const ModalAddCar = ({
             <CssTextField
               value={year}
               label="Ano"
+              required
               variant="outlined"
               size="medium"
               type="text"
               InputProps={{
                 readOnly: true,
               }}
+              InputLabelProps={{
+                shrink: true,
+              }}
             />
             <CssTextField
               value={fuel !== 0 ? fuelsOptions[fuel - 1] : ""}
               label="Combustível"
+              required
               variant="outlined"
               size="medium"
               type="text"
               InputProps={{
                 readOnly: true,
+              }}
+              InputLabelProps={{
+                shrink: true,
               }}
             />
           </Flex>
@@ -260,11 +269,12 @@ export const ModalAddCar = ({
                 <CssTextField
                   {...field}
                   label="Quilometragem"
+                  required
                   error={!!errors.mileage}
                   helperText={errors.mileage?.message}
                   variant="outlined"
                   size="medium"
-                  type="text"
+                  type="number"
                 />
               )}
             />
@@ -275,6 +285,7 @@ export const ModalAddCar = ({
                 <CssTextField
                   {...field}
                   label="Cor"
+                  required
                   error={!!errors.color}
                   helperText={errors.color?.message}
                   variant="outlined"
@@ -288,11 +299,15 @@ export const ModalAddCar = ({
             <CssTextField
               value={fipePrice === 0 ? "" : fipePrice}
               label="Preço tabela FIPE"
+              required
               variant="outlined"
               size="medium"
-              type="text"
+              type="number"
               InputProps={{
                 readOnly: true,
+              }}
+              InputLabelProps={{
+                shrink: true,
               }}
             />
             <Controller
@@ -302,11 +317,12 @@ export const ModalAddCar = ({
                 <CssTextField
                   {...field}
                   label="Preço"
+                  required
                   error={!!errors.price}
                   helperText={errors.price?.message}
                   variant="outlined"
                   size="medium"
-                  type="text"
+                  type="number"
                 />
               )}
             />
@@ -318,6 +334,7 @@ export const ModalAddCar = ({
               <CssTextField
                 {...field}
                 label="Descrição"
+                required
                 multiline
                 rows={3}
                 error={!!errors.description}
@@ -335,6 +352,7 @@ export const ModalAddCar = ({
               <CssTextField
                 {...field}
                 label="Imagem de capa"
+                required
                 error={!!errors.cover_image}
                 helperText={errors.cover_image?.message}
                 variant="outlined"

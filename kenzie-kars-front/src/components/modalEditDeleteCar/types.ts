@@ -1,5 +1,8 @@
-export interface iModalAddCarProps {
+import { iProductItem } from "../../contexts/productContext/types";
+
+export interface iModalEditCarProps {
   toggleModal: () => void;
+  selectedVehicle: iProductItem;
 }
 
 export interface iVehicleFipeApi {

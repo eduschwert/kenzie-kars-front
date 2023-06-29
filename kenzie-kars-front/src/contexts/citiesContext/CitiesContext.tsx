@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState, createContext, useEffect } from "react";
 import { statesAPI } from "../../services/statesApi";
 import {
@@ -17,7 +18,7 @@ export const CitiesProvider = ({ children }: iDefaultPropsProvider) => {
   const [cityList, setCityList] = useState<string[]>([]);
   const [disable, setDisable] = useState<boolean>(true);
   const [errorApi, setErrorApi] = useState<boolean>(false);
-
+  console.log(selectedState);
   const getStates = async () => {
     try {
       const states = await statesAPI.get("");
@@ -36,9 +37,10 @@ export const CitiesProvider = ({ children }: iDefaultPropsProvider) => {
   }, []);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const getCitiesOfState = async (e: any, value: string | null) => {
+  const getCitiesOfState = async (_e: any, value: string | null) => {
     try {
-      if (value !== "0" || !CSSNumericValue) {
+      // if (value !== "0" || !CSSNumericValue) {
+      if (value !== "0") {
         // if (e.target.value !== "0") {
         setDisable(false);
         const response = await fetch(

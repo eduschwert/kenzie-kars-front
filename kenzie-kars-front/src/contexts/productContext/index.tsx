@@ -18,6 +18,9 @@ export const ProductProvider = ({ children }: iChildren) => {
   const [products, setProducts] = useState([] as iProductItem[]);
   const [totalPages, setTotalPages] = useState(0);
 
+  const [vehiclesProfileViewAdmin, setVehiclesProfileViewAdmin] =
+    useState<Array<iProductItem> | null>(null);
+
   const [filteredProducts, setFilteredProducts] = useState(
     [] as iProductItem[]
   );
@@ -113,6 +116,8 @@ export const ProductProvider = ({ children }: iChildren) => {
         products,
         filteredProducts,
         setFilteredProducts,
+        vehiclesProfileViewAdmin,
+        setVehiclesProfileViewAdmin,
         loadingProducts,
         filterConditions,
         setFilterConditions,
