@@ -8,14 +8,19 @@ import {
   NameDiv,
   TitleComment,
 } from "./style";
+import { useContext } from "react";
+import { UserContext } from "../../contexts/userContext/UserContext";
 
 interface iProp {
+  owner: string;
   name: string;
   date: string;
   content: string;
 }
 
-export function CommentItemLi({ name, date, content }: iProp) {
+export function CommentItemLi({ owner, name, date, content }: iProp) {
+  const { user } = useContext(UserContext);
+
   function compareDatesComment(date: string) {
     const today: any = new Date();
     const commentDate: any = new Date(date);

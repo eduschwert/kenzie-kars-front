@@ -368,6 +368,7 @@ export const AnnoucementPage = () => {
                   comments.map((item) => {
                     return (
                       <CommentItemLi
+                        owner={item.owner.id}
                         name={item.owner.name}
                         content={item.content}
                         date={item.createdAt}
