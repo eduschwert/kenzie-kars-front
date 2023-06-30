@@ -20,6 +20,12 @@ export const CardLi = styled.li`
     border: 2px solid transparent;
     position: relative;
   }
+
+  & > a > div > img {
+    max-width: 260px;
+    min-height: 150px;
+    max-height: 150px;
+  }
   @media (min-width: 800px) {
     width: 300px;
   }

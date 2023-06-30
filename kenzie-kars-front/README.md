@@ -2,14 +2,14 @@
 
 <h1 align="center">Kenzie Kars</h1>
 
-The KenzieKars application is a vehicle advertisement playaform for purchase/sale.
+The KenzieKars application is a vehicle advertisement platform for purchase/sale.
 <br/>
 
 <h2>Features</h2>
 
 - Buyer or advertiser registration
 - AutoLogin
-- View ads page with filter options (dinamic filter) by brand, model, color, year, fuel, mileage range and price range (no need to be logged in).
+- View ads page with filter options (dynamic filter) by brand, model, color, year, fuel, mileage range and price range (no need to be logged in).
 - Ads details can be seen by clickng on the ad card
 - Create, edit and delete vehicle ads (logged in as advertiser)
 - Create, edit and delete vehicle ad comments (logged in as buyer or advertiser). If user is not logged in, will be redirected to login page.

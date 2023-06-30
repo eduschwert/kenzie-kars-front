@@ -41,10 +41,14 @@ export const SelectList = ({
         break;
       }
       case "Cor": {
-        const newFilterConditions = { ...filterConditions, color: element };
+        const newFilterConditions = {
+          ...filterConditions,
+          color: element.toLowerCase(),
+        };
         setFilterConditions(newFilterConditions);
         setActionOverCarColor(false);
         setActionOverCarYear(true);
+        console.log("FILTER", filterConditions);
         break;
       }
       case "Ano": {

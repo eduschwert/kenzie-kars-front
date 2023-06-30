@@ -35,7 +35,7 @@ export const CardCar = (car: iProductItem) => {
     <CardLi id={`${car.id}`} onClick={() => setActionOverCarCard(car)}>
       <a>
         <div>
-          <img src={carImage} />
+          <img src={car.cover_image} />
           {car.is_good_buy && (
             <CarTagGoodDeal>
               <StyledText tag="p" textStyle="body-2-500" textColor="white">

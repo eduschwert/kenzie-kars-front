@@ -10,6 +10,7 @@ export const ContainerAnnoucement = styled.div`
   );
   position: relative;
   width: 100%;
+  min-width: 100%;
 `;
 
 export const ContentAnnoucement = styled.div`
@@ -22,13 +23,26 @@ export const ContentAnnoucement = styled.div`
   width: 100%;
 `;
 
-export const ContentImgs = styled.div`
+export const FirstColumn = styled.div`
   display: flex;
+  max-width: 100%;
   flex-direction: column;
   gap: 15px;
   flex-wrap: wrap;
   -webkit-box-pack: center;
-  /* justify-content: space-between; */
+  justify-content: center;
+
+  @media (min-width: 700px) {
+    flex-direction: row;
+  }
+`;
+
+export const ContentImgs = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  /* flex-wrap: wrap; */
+  -webkit-box-pack: center;
   justify-content: center;
   margin-top: 50px;
 
@@ -39,24 +53,25 @@ export const ContentImgs = styled.div`
 
 export const ImageAndDescription = styled.div`
   max-width: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 20px;
 
-  @media (min-width: 700px) {
+  /* @media (min-width: 700px) {
     max-width: 65%;
     width: 62%;
-  }
+  } */
 `;
 export const PhotoAndProfile = styled.div`
   width: 100%;
-  /* max-width: 320px; */
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+
+  display: none;
 
   @media (min-width: 700px) {
-    /* display: none; */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
     width: 34%;
     max-width: 320px;
   }
@@ -64,14 +79,14 @@ export const PhotoAndProfile = styled.div`
 
 export const PhotoAndProfileWide = styled.div`
   width: 100%;
-  display: none;
+  display: flex;
   flex-direction: column;
   gap: 20px;
 
   @media (min-width: 700px) {
+    display: none;
     width: 34%;
     max-width: 320px;
-    display: flex;
   }
 `;
 
@@ -79,7 +94,7 @@ export const DivImageCar = styled.div`
   display: flex;
   width: 100%;
 
-  height: 355px;
+  height: auto;
   background: var(--color-grey10);
   border-radius: var(--radius-2);
   align-items: center;
@@ -260,16 +275,15 @@ export const ContentDescriptionComment = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
-
   min-width: 320px;
   width: 100%;
 
   @media (min-width: 700px) {
-    margin-left: 0.5rem;
-    width: 62%;
+    /* margin-left: 0.5rem; */
+    /* width: 62%; */
   }
 
-  @media (min-width: 1000px) {
+  /* @media (min-width: 1000px) {
     margin-left: 1.75rem;
     width: 62%;
   }
@@ -277,7 +291,7 @@ export const ContentDescriptionComment = styled.div`
   @media (min-width: 1400px) {
     margin-left: 5rem;
     width: 62%;
-  }
+  } */
 `;
 
 export const DescriptionCar = styled.div`

@@ -62,7 +62,7 @@ export interface iUserResponse {
 
 export interface iUserProviderProps {
   user: iUserResponse | null;
-  setUser: (item: iUserResponse) => void;
+  setUser: (item: iUserResponse | null) => void;
   globalLoading: boolean;
   signInUser: (formData: iUserLoginInformation) => void;
   registerUser: (formData: iUserRegisterInformation, reset: () => void) => void;
