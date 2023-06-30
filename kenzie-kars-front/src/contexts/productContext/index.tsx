@@ -43,8 +43,9 @@ export const ProductProvider = ({ children }: iChildren) => {
         setFilteredProducts(carList.data.data);
       } catch (error) {
         console.error(error);
-        const currentError = error as AxiosError<iDefaultErrorResponse>;
-        toast.error(`Ops! Algo deu errado: ${currentError.response?.data}`);
+        // const currentError = error as AxiosError<iDefaultErrorResponse>;
+        // toast.error(`Ops! Algo deu errado: ${currentError.response?.data}`);
+        toast.error(`Ops! Products could not be uploaded`);
       } finally {
         setLoadingProducts(false);
       }

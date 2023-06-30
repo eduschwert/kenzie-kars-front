@@ -61,6 +61,7 @@ export const FilterMenu = ({ advertising, setAdvertising }: iAdvertising) => {
     const fetchBrands = async () => {
       try {
         const response = await fipeApi.get("/cars");
+        console.log("FIPE", response.data);
         const brandsRes = Object.keys(response.data);
         const brands = brandsRes.map(
           (str) => str.charAt(0).toUpperCase() + str.slice(1)
@@ -205,7 +206,7 @@ export const FilterMenu = ({ advertising, setAdvertising }: iAdvertising) => {
   }, [selectedOption]);
 
   const clearFilters = () => {
-    setFilterConditions({});
+    setFilterConditions({ brand: "" });
     setMileageRange([minMileage, maxMileage]);
     setPriceRange([minPrice, maxPrice]);
   };
@@ -324,7 +325,6 @@ export const FilterMenu = ({ advertising, setAdvertising }: iAdvertising) => {
           {!advertising && (
             <StyledButton
               onClick={() => setAdvertising((advertising) => !advertising)}
-              // buttonStyle={window.screen.width < 700 ? "sm" : "bg"}
               buttonStyle="sm"
               buttonColor="brand1"
             >{`Ver anúncio`}</StyledButton>

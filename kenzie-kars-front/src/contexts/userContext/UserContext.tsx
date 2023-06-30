@@ -32,7 +32,6 @@ export const UserProvider = ({ children }: iChildren) => {
       setGlobalLoading(false);
       return;
     }
-
     try {
       const { data } = await api.get("users", {
         headers: {
@@ -80,7 +79,7 @@ export const UserProvider = ({ children }: iChildren) => {
     } catch (error) {
       error as AxiosError<iDefaultErrorResponse>;
       console.error(error);
-      toast.error(`Ops! Algo deu errado.`);
+      toast.error(`Ops! Algo deu errado no login.`);
       setErrorApi(true);
     } finally {
       setSpinner(false);
@@ -101,7 +100,7 @@ export const UserProvider = ({ children }: iChildren) => {
     } catch (error) {
       console.error(error);
       setErrorApi(true);
-      toast.error(`Ops! Algo deu errado.`);
+      toast.error(`Ops! Algo deu errado.Could not register`);
     } finally {
       setSpinner(false);
     }
@@ -123,7 +122,7 @@ export const UserProvider = ({ children }: iChildren) => {
         toast.success("Email enviado com sucesso");
       }
     } catch (error) {
-      toast.error(`Ops! Algo deu errado`);
+      toast.error(`Ops! Algo deu errado ao resetar a senha.`);
       setSpinner(false);
     }
   };
