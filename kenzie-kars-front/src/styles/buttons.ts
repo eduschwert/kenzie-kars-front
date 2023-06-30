@@ -255,6 +255,8 @@ export const StyledButton = styled.button<iStyledButtonProps>`
 
 export const StyledLinkButton = styled(Link)<iStyledLinkButtonProps>`
   ${buttonCSS}
+  text-align: end;
+  width: max-content;
 
   ${({ disabled }) => {
     if (disabled) {
