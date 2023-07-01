@@ -22,13 +22,16 @@ export const registerFormSchema = yup.object().shape({
   email: yup.string().required("Email é obrigatorio").email("Email inválido"),
   password: yup
     .string()
-    .required("Senha é obrigatória")
+    .required("A senha é obrigatória")
+    .min(8, "A senha é obrigatória e precisa ter no mínimo 8 caracteres")
+    .max(120, "A senha pode ter no máximo 100 caracteres")
+    .matches(/(?=.*?[A-Z])/, "É necessário ao menos uma letra maiúscula")
+    .matches(/(?=.*?[a-z])/, "É necessário ao menos uma letra minúscula")
     .matches(/(?=.*?[0-9])/, "É necessário pelo menos um número.")
     .matches(
       /(?=.*?[#?!@$%^&*-])/,
       "É necessário pelo menos um caractere especial"
-    )
-    .min(6, "Senha precisa ter mais de 6 caracteres"),
+    ),
   confirmPassword: yup
     .string()
     .required("Campo obrigatório")
