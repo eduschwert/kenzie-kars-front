@@ -5,5 +5,5 @@ export const StyledCarList = styled.ul`
   display: grid;
   grid-gap: 30px;
   grid-template-columns: repeat(auto-fit, minmax(298px, 1fr));
-  justify-items: center;
+  justify-items: start;
 `;

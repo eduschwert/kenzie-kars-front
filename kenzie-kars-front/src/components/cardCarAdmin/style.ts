@@ -1,26 +1,6 @@
 import styled from "styled-components";
 import { iImageBoxProps } from "./types";
 
-export const StyledCarList = styled.div`
-  width: 1392px;
-  max-width: 100%;
-  margin: 0 auto;
-  padding: 0 30px;
-
-  > ul {
-    padding-bottom: 2rem;
-    display: flex;
-    flex-direction: column;
-    align-content: stretch;
-    gap: 24px;
-
-    @media (min-width: 700px) {
-      flex-direction: row;
-      flex-wrap: wrap;
-    }
-  }
-`;
-
 export const StyledCar = styled.li`
   width: 312px;
   max-width: 100%;
