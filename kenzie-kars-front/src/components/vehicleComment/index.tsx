@@ -5,20 +5,29 @@ import {
   BodyComment,
   CommentItem,
   DateComment,
+  DivBtns,
   NameDiv,
   TitleComment,
 } from "./style";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "../../contexts/userContext/UserContext";
+import { StyledButton } from "../../styles/buttons";
+import { BsFillPencilFill, BsFillTrashFill } from "react-icons/bs";
+import { ModalDeleteComment } from "../modalDeleteComment";
 
 interface iProp {
   owner: string;
   name: string;
   date: string;
   content: string;
+  id: string;
 }
 
-export function CommentItemLi({ owner, name, date, content }: iProp) {
+export function CommentItemLi({ owner, name, date, content, id }: iProp) {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [typeModal, setTypeModal] = useState("none");
+  const [commentId, setCommentId] = useState("");
+  const toggleModal = () => setModalOpen(!modalOpen);
   const { user } = useContext(UserContext);
 
   function compareDatesComment(date: string) {
@@ -53,6 +62,13 @@ export function CommentItemLi({ owner, name, date, content }: iProp) {
   }
   return (
     <CommentItem>
+      {modalOpen && typeModal == "delete" ? (
+        <ModalDeleteComment toggleModal={toggleModal} id={commentId} />
+      ) 
+      // :   modalOpen && typeModal == "edit" ? (
+      //   <ModalDeleteUser toggleModal={toggleModal} id={commentId} />
+      // )
+       : null}
       <TitleComment>
         {" "}
         <NameDiv>
@@ -72,6 +88,35 @@ export function CommentItemLi({ owner, name, date, content }: iProp) {
         <StyledText tag="p" textStyle={"body-2-400"} textColor="grey2">
           {content}
         </StyledText>
+        {owner == user?.id ? (
+          <DivBtns>
+            <StyledButton
+              onClick={() => {
+                toggleModal();
+                setTypeModal("edit");
+                setCommentId(id);
+              }}
+              buttonStyle={"sm-comment"}
+              buttonColor="outlineBrand1"
+            >
+              {<BsFillPencilFill size={20} color={"#4529e6"} />}
+            </StyledButton>
+
+            <StyledButton
+              onClick={() => {
+                toggleModal();
+                setTypeModal("delete");
+                setCommentId(id);
+              }}
+              buttonStyle={"sm-comment"}
+              buttonColor="outlineBrand1"
+            >
+              {<BsFillTrashFill size={20} color={"#4529e6"} />}
+            </StyledButton>
+          </DivBtns>
+        ) : (
+          ""
+        )}
       </BodyComment>
     </CommentItem>
   );

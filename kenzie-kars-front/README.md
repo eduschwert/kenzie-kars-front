@@ -2,14 +2,14 @@
 
 <h1 align="center">Kenzie Kars</h1>
 
-The KenzieKars application is a vehicle advertisement playaform for purchase/sale.
+The KenzieKars application is a vehicle advertisement platform for purchase/sale.
 <br/>
 
 <h2>Features</h2>
 
 - Buyer or advertiser registration
 - AutoLogin
-- View ads page with filter options (dinamic filter) by brand, model, color, year, fuel, mileage range and price range (no need to be logged in).
+- View ads page with filter options (dynamic filter) by brand, model, color, year, fuel, mileage range and price range (no need to be logged in).
 - Ads details can be seen by clickng on the ad card
 - Create, edit and delete vehicle ads (logged in as advertiser)
 - Create, edit and delete vehicle ad comments (logged in as buyer or advertiser). If user is not logged in, will be redirected to login page.
@@ -82,35 +82,35 @@ The following tools were used to build this application:
 <p>Douglas Fernandes Santos  </p>
 <img style="border-radius: 50%" width="50" src="https://avatars.githubusercontent.com/u/33332097?v=4"/>
 <a href="https://www.linkedin.com/in/douglas-santos-0525b4216/"><img src="https://img.shields.io/badge/-Douglas-%230A66C2?logo=linkedin"/></a>
-<a href="mailto:eduardoschwert@yahoo.com.br"><img src="https://img.shields.io/badge/dougbmth%40hotmail.com-blue?logo=microsoftoutlook
-"/></a>
+<a href="mailto:dougbmth@hotmail.com"><img src="https://img.shields.io/badge/-dougbmth%40hotmail.com-blue?logo=microsoftoutlook
+" alt="dougbmth@hotmail.com"/></a>
 
 <br/>
 <p>Eduardo Schwert de Freitas</p>
 <img style="border-radius: 50%" width="50" src="https://avatars.githubusercontent.com/u/106620111?s=400&u=d29e7cd5bdcadc0a09721f69115d267054018be7&v=4"/>
 <a href="https://www.linkedin.com/in/eduardoschwert/"><img src="https://img.shields.io/badge/-Eduardo-%230A66C2?logo=linkedin"/></a>
-<a href="mailto:eduardoschwert@yahoo.com.br"><img src="https://img.shields.io/badge/-eduardoschwert%40yahoo.com.br-%236001D2?logo=yahoo"/></a>
+<a href="mailto:eduardoschwert@yahoo.com.br"><img src="https://img.shields.io/badge/-eduardoschwert%40yahoo.com.br-%236001D2?logo=yahoo" alt="eduardoschwert@yahoo.com.br"/></a>
 
 <br/>
 <p>Juliana Serrano do Carmo Ferraz</p>
 <img style="border-radius: 50%" width="50" src="https://avatars.githubusercontent.com/u/110045459?s=400&u=f78f09d76322238fe1e6ba930246950c74e809c6&v=4"/>
 <a href="https://www.linkedin.com/in/juliana-serrano-do-carmo-ferraz-964839111/"><img src="https://img.shields.io/badge/-Juliana-%230A66C2?logo=linkedin"/></a>
-<a href="mailto:ferrazjsc@gmail.com"><img src="https://img.shields.io/badge/ferrazjsc%40gmail.com-red?logo=google&logoColor=%23ffffff
-"/></a>
+<a href="mailto:ferrazjsc@gmail.com"><img src="https://img.shields.io/badge/-ferrazjsc%40gmail.com-red?logo=google&logoColor=%23ffffff
+" alt="ferrazjsc@gmail.com"/></a>
 
 <br/>
 <p>Natália Badilho de Carvalho</p>
 <img style="border-radius: 50%" width="50" src="https://avatars.githubusercontent.com/u/109743554?v=4"/>
 <a href="https://www.linkedin.com/in/eduardoschwert/"><img src="https://img.shields.io/badge/-Natalia-%230A66C2?logo=linkedin"/></a>
-<a href="mailto:nbadilho@gmail.com"><img src="https://img.shields.io/badge/nbadilho%40gmail.com-red?logo=google&logoColor=%23ffffff
-"/></a>
+<a href="mailto:nbadilho@gmail.com"><img src="https://img.shields.io/badge/-nbadilho%40gmail.com-red?logo=google&logoColor=%23ffffff
+" alt="nbadilho@gmail.com"/></a>
 
 <br/>
 <p>Wesley Ricarte</p>
 <img style="border-radius: 50%" width="50" src="https://avatars.githubusercontent.com/u/110259771?v=4"/>
 <a href="https://www.linkedin.com/in/wesleyricarte/"><img src="https://img.shields.io/badge/-Wesley-%230A66C2?logo=linkedin"/></a>
-<a href="mailto:wesley.ricarte97@gmail.com"><img src="https://img.shields.io/badge/wesley.ricarte97%40gmail.com-red?logo=google&logoColor=%23ffffff
-"/></a>
+<a href="mailto:wesley.ricarte97@gmail.com"><img src="https://img.shields.io/badge/-wesley.ricarte97%40gmail.com-red?logo=google&logoColor=%23ffffff
+" alt="wesley.ricarte97@gmail.com"/></a>
 
 <br/>
 <h2>Available Scripts</h2>

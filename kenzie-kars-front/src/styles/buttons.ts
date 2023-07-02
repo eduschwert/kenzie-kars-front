@@ -16,7 +16,14 @@ interface iStyledButtonProps {
     | "alert"
     | "success"
     | "brandDisable";
-  buttonStyle: "sm" | "sm-modal" | "bg" | "round" | "bg-full" | "sm-modal-edit";
+  buttonStyle:
+    | "sm"
+    | "sm-modal"
+    | "bg"
+    | "round"
+    | "bg-full"
+    | "sm-modal-edit"
+    | "sm-comment";
   width?: string;
 }
 
@@ -99,6 +106,12 @@ export const buttonCSS = css<iStyledButtonProps>`
           padding-right: 5px;
 
           font-size: 14px;
+        `;
+      case "sm-comment":
+        return css`
+          height: 30px;
+          border-radius: var(--radius-2);
+          min-width: 30px;
         `;
       case "round":
         return css`
