@@ -56,7 +56,7 @@ export const ProfileViewAdmin = () => {
         `users/user_vehicles?perPage=${perPage}&page=${page}`
       );
 
-      setVehicles(response.data.data);
+      setVehiclesProfileViewAdmin(response.data.data);
       setTotalPages(response.data.totalPages);
     } catch (error) {
       console.error(error);
