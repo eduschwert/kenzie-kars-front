@@ -1,3 +1,4 @@
+import { HTMLAttributeAnchorTarget } from "react";
 import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
 
