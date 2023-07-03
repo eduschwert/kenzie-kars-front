@@ -5,12 +5,14 @@ import { iChildren, iDefaultErrorResponse } from "../../interfaces/global";
 // import mockedProducts from "./mockedDatabase";
 
 import {
+  iComment,
   iFilterConditions,
   iProductItem,
   iProductProviderValue,
   // iSeller,
 } from "./types";
 import { api } from "../../services/api";
+import { useNavigate } from "react-router-dom";
 
 export const ProductContext = createContext({} as iProductProviderValue);
 
@@ -32,6 +34,8 @@ export const ProductProvider = ({ children }: iChildren) => {
   const [carSeller, setCarSeller] = useState<iProductItem | null>(null);
 
   const [loadingProducts, setLoadingProducts] = useState<boolean>(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getProducts = async () => {
@@ -111,6 +115,22 @@ export const ProductProvider = ({ children }: iChildren) => {
     getFilteredProducts();
   }, [filterConditions]);
 
+  const [comments, setComments] = useState<iComment[]>([]);
+
+  async function getComments() {
+    try {
+      if (!carSeller?.id) {
+        navigate("/");
+      } else {
+        const response = await api.get(`comments/${carSeller?.id}`);
+        setComments(response.data);
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error(`Ops! Algo deu errado ao obter os comentários.`);
+    }
+  }
+
   return (
     <ProductContext.Provider
       value={{
@@ -126,6 +146,9 @@ export const ProductProvider = ({ children }: iChildren) => {
         setCarSeller,
         getProductsPagination,
         totalPages,
+        getComments,
+        setComments,
+        comments,
       }}
     >
       {children}
