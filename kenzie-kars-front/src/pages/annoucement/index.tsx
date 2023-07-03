@@ -167,15 +167,31 @@ export const AnnoucementPage = () => {
                     </StyledText>
                     {/* <p>{carSeller?.price}</p> */}
                   </YearMileage>
-                  <StyledButton
-                    // onClick={() =>  }
-                    buttonStyle={"sm"}
-                    buttonColor="brand1"
-                    width="7rem"
-                  >
-                    {`Comprar`}
-                  </StyledButton>
-                  {/* <button>Comprar</button> */}
+
+                  {user ? (
+                    <>
+                      <a
+                        target="_blank"
+                        href={`https://wa.me/${carSeller?.seller.phone}?text=Ol%C3%A1%2C+venho+por+meio+do+seu+an%C3%BAncio%2C+para+negociarmos+o+ve%C3%ADculo+${carSeller?.model}`}
+                      >
+                        <StyledButton
+                          buttonStyle={"sm"}
+                          buttonColor="brand1"
+                          width="7rem"
+                        >
+                          {`Comprar`}
+                        </StyledButton>
+                      </a>
+                    </>
+                  ) : (
+                    <StyledButton
+                      buttonStyle={"sm"}
+                      buttonColor="brand1"
+                      width="7rem"
+                    >
+                      {`Faça o Login para entrar em contato`}
+                    </StyledButton>
+                  )}
                 </InformationCar>
                 <DescriptionCar>
                   <div>
