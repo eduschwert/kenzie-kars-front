@@ -43,28 +43,16 @@ import { CssTextField } from "../../components/forms/muiStyle";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { commentSchema } from "./schema";
 import { SyncLoader } from "react-spinners";
-import { iImage } from "../../contexts/productContext/types";
+import { iComment, iImage } from "../../contexts/productContext/types";
 import { ModalShowCarImage } from "../../components/modalShowCarImage";
 
-interface iComment {
-  content: string;
-  id: string;
-  createdAt: string;
-  owner: {
-    name: string;
-    id: string;
-  };
-  vehicle: {
-    id: string;
-  };
-}
-
 export const AnnoucementPage = () => {
-  const [comments, setComments] = useState<iComment[]>([]);
+  // const [comments, setComments] = useState<iComment[]>([]);
   const [loading, setLoading] = useState(false);
   const { user } = useUser();
   // const { user, setUser } = useContext(UserContext);
-  const { carSeller } = useContext(ProductContext);
+  const { carSeller, comments, getComments, setComments } =
+    useContext(ProductContext);
   const [isOpenImageModal, setIsOpenImageModal] = useState(false);
 
   const [carSelectedImage, setCarSelectedImage] = useState<string>("");
@@ -83,21 +71,6 @@ export const AnnoucementPage = () => {
     setCarSelectedImage(carImage.image_url);
     toggleImageModal();
   };
-
-  async function getComments() {
-    try {
-      if (!carSeller?.id) {
-        navigate("/");
-      } else {
-        const response = await api.get(`comments/${carSeller?.id}`);
-        reset();
-        setComments(response.data);
-      }
-    } catch (error) {
-      console.error(error);
-      toast.error(`Ops! Algo deu errado ao obter os comentários.`);
-    }
-  }
 
   useEffect(() => {
     getComments();
@@ -318,9 +291,11 @@ export const AnnoucementPage = () => {
                       comments.map((item) => {
                         return (
                           <CommentItemLi
+                            owner={item.owner.id}
                             name={item.owner.name}
                             content={item.content}
                             date={item.createdAt}
+                            id={item.id}
                           />
                         );
                       })

@@ -50,6 +50,19 @@ export interface iFilterConditions {
   maxPrice?: number;
 }
 
+export interface iComment {
+  content: string;
+  id: string;
+  createdAt: string;
+  owner: {
+    name: string;
+    id: string;
+  };
+  vehicle: {
+    id: string;
+  };
+}
+
 export interface iProductProviderValue {
   products: iProductItem[];
   filteredProducts: iProductItem[];
@@ -65,4 +78,7 @@ export interface iProductProviderValue {
   setFilterConditions: React.Dispatch<React.SetStateAction<iFilterConditions>>;
   getProductsPagination: (perPage: number, page: number) => void;
   totalPages: number;
+  comments: iComment[];
+  setComments: React.Dispatch<React.SetStateAction<iComment[]>>;
+  getComments: () => void;
 }

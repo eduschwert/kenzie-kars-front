@@ -25,3 +25,15 @@ export const DateComment = styled.div`
 export const BodyComment = styled.div`
   margin-top: 10px;
 `;
+
+export const DivBtns = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 12px;
+  gap: 7px;
+
+  @media (min-width: 500px) {
+    justify-content: flex-start;
+  }
+`;
