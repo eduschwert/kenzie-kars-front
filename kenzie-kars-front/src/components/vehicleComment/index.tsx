@@ -14,6 +14,7 @@ import { UserContext } from "../../contexts/userContext/UserContext";
 import { StyledButton } from "../../styles/buttons";
 import { BsFillPencilFill, BsFillTrashFill } from "react-icons/bs";
 import { ModalDeleteComment } from "../modalDeleteComment";
+import { ModalPatchComment } from "../modalPatchComment";
 
 interface iProp {
   owner: string;
@@ -65,9 +66,9 @@ export function CommentItemLi({ owner, name, date, content, id }: iProp) {
       {modalOpen && typeModal == "delete" ? (
         <ModalDeleteComment toggleModal={toggleModal} id={commentId} />
       ) 
-      // :   modalOpen && typeModal == "edit" ? (
-      //   <ModalDeleteUser toggleModal={toggleModal} id={commentId} />
-      // )
+      :   modalOpen && typeModal == "edit" ? (
+        <ModalPatchComment toggleModal={toggleModal} id={commentId} content={content} />
+      )
        : null}
       <TitleComment>
         {" "}
