@@ -203,7 +203,8 @@ export const AnnoucementPage = () => {
                     <StyledButton
                       buttonStyle={"sm"}
                       buttonColor="brand1"
-                      width="7rem"
+                      width="12rem"
+                      onClick={() => navigate("/login")}
                     >
                       {`Faça o Login para entrar em contato`}
                     </StyledButton>
