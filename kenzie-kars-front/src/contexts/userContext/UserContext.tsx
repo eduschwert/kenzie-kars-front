@@ -12,7 +12,7 @@ import {
 } from "./types";
 import { iChildren } from "../../interfaces/global";
 import { useNavigate } from "react-router-dom";
-import { AxiosError } from "axios";
+import axios, { AxiosError } from "axios";
 
 export const UserContext = createContext({} as iUserProviderProps);
 
@@ -111,36 +111,64 @@ export const UserProvider = ({ children }: iChildren) => {
     navigate("/");
   };
 
-  const tokenForResetPasswordUser = async (email: string) => {
+  const sendEmailResetPassword = async (email: string) => {
     try {
-      const response = await api.post("users/sendToken", { email });
-
-      if (response.status == 200) {
-        setNewInputToken(true);
-        setSpinner(false);
-        setShowButton(false);
-        toast.success("Email enviado com sucesso");
+      setSpinner(true);
+      await api.post("users/resetPassword", { email });
+      toast.success(
+        "Enviamos um e-mail para o seu endereço de e-mail registrado com um link para redefinir a sua senha. Por favor, verifique a sua caixa de entrada.",
+        { autoClose: 5000 }
+      );
+    } catch (error: unknown) {
+      console.error(error);
+      if (axios.isAxiosError(error)) {
+        const axiosError = error as AxiosError;
+        if (axiosError.response) {
+          const status = axiosError.response.status;
+          if (status === 400) {
+            toast.error(
+              "Erro no endereço de e-mail. Verifique se o e-mail fornecido é válido e tente novamente.",
+              { autoClose: 5000 }
+            );
+          } else if (status === 404) {
+            toast.error("Email não encontrado");
+          } else if (status === 500) {
+            toast.error(
+              "Ocorreu um erro. Por favor, tente novamente mais tarde."
+            );
+          }
+        } else if (axiosError.code === "ECONNABORTED") {
+          toast.error("Erro de timeout. Tente novamente mais tarde.");
+        }
       }
-    } catch (error) {
-      toast.error(`Ops! Algo deu errado ao resetar a senha.`);
+    } finally {
       setSpinner(false);
     }
   };
 
-  const resetPasswordUser = async (formData: iFormDataResetPassword) => {
+  const resetPasswordUser = async (password: string, token: string) => {
     try {
-      const response = await api.post("users/resetPassword", formData);
-
-      if (response.status == 200) {
-        setSpinner(false);
-        setNewInputToken(false);
-        setShowButton(true);
-        toast.success("Senha alterada com sucesso");
-
-        navigate("/login");
+      setSpinner(true);
+      await api.post(`users/resetPassword/${token}`, { password });
+      toast.success("Senha alterada com sucesso");
+      navigate("/login");
+    } catch (error: unknown) {
+      console.error(error);
+      if (axios.isAxiosError(error)) {
+        const axiosError = error as AxiosError;
+        if (axiosError.response) {
+          const status = axiosError.response.status;
+          if (status === 400 || status === 404) {
+            toast.error("Link inválido ou expirado.");
+            navigate("/");
+          } else {
+            toast.error(
+              "A senha não pôde ser alterada. Tente novamente mais tarde"
+            );
+          }
+        }
       }
-    } catch (error) {
-      toast.error(`Senha não pode ser alterada`);
+    } finally {
       setSpinner(false);
     }
   };
@@ -160,7 +188,7 @@ export const UserProvider = ({ children }: iChildren) => {
         setUser,
         newInputToken,
         setNewInputToken,
-        tokenForResetPasswordUser,
+        sendEmailResetPassword,
         showButton,
         setShowButton,
         resetPasswordUser,

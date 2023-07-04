@@ -20,6 +20,7 @@ import { registerFormSchema } from "./schema";
 import { SyncLoader } from "react-spinners";
 import { iUserRegisterInformation } from "../../../contexts/userContext/types";
 import { iRegisterFormValues } from "./types";
+import { zodResolver } from "@hookform/resolvers/zod";
 // import ReactInputMask from "react-input-mask";
 
 export const RegisterFormMui = () => {
@@ -41,7 +42,7 @@ export const RegisterFormMui = () => {
     reset,
   } = useForm<iRegisterFormValues>({
     mode: "onTouched",
-    resolver: yupResolver(registerFormSchema),
+    resolver: zodResolver(registerFormSchema),
   });
 
   // useEffect(() => {

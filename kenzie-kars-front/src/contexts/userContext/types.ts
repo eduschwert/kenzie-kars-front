@@ -73,8 +73,8 @@ export interface iUserProviderProps {
   setErrorApi: React.Dispatch<React.SetStateAction<boolean>>;
   newInputToken: boolean;
   setNewInputToken: React.Dispatch<React.SetStateAction<boolean>>;
-  tokenForResetPasswordUser: (email: string) => void;
-  resetPasswordUser: (formData: iFormDataResetPassword) => void;
+  sendEmailResetPassword: (email: string) => void;
+  resetPasswordUser: (password: string, token: string) => void;
   showButton: boolean;
   setShowButton: React.Dispatch<React.SetStateAction<boolean>>;
 }

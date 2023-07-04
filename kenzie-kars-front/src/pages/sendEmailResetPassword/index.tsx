@@ -1,20 +1,16 @@
-import { Navigate, useParams } from "react-router-dom";
 import { FooterComponent } from "../../components/footer";
-import { ResetPasswordForm } from "../../components/forms/resetPasswordForm";
 import { HeaderNotLoggedIn } from "../../components/headerNotLoggedIn";
 import { ContainerResetPassword, ContentResetPassword } from "./style";
+import { SendEmailResetPasswordForm } from "../../components/forms/sendEmailResetPasswordForm";
 
-export const ResetPasswordPage = () => {
-  const { token } = useParams();
-  return token ? (
+export const SendEmailResetPasswordPage = () => {
+  return (
     <ContainerResetPassword>
       <HeaderNotLoggedIn />
       <ContentResetPassword>
-        <ResetPasswordForm token={token} />
+        <SendEmailResetPasswordForm />
       </ContentResetPassword>
       <FooterComponent />
     </ContainerResetPassword>
-  ) : (
-    <Navigate to="/" replace={true} />
   );
 };

@@ -10,7 +10,7 @@ export const Register = () => {
       <HeaderNotLoggedIn />
       <main>
         <RegisterSection>
-          <RegisterFormDiv id="form_register">
+          <RegisterFormDiv>
             <RegisterFormMui />
           </RegisterFormDiv>
         </RegisterSection>

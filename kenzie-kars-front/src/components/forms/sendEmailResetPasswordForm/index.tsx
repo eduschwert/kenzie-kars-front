@@ -6,52 +6,40 @@ import { UserContext } from "../../../contexts/userContext/UserContext";
 import { StyledText } from "../../../styles/tipography";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { iPasswordRequest, passwordSchema } from "./schema";
-import { iResetPasswordFormProps } from "./types";
+
 import { StyledButton } from "../../../styles/buttons";
 import { SyncLoader } from "react-spinners";
-import { useUser } from "../../../hooks/useUser";
+import { emailSchema, iEmailRequest } from "./schema";
 
-export const ResetPasswordForm = ({ token }: { token: string }) => {
-  const { resetPasswordUser, spinner } = useUser();
+export const SendEmailResetPasswordForm = () => {
+  const { sendEmailResetPassword, spinner } = useContext(UserContext);
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
-  } = useForm<iPasswordRequest>({
+  } = useForm<iEmailRequest>({
     mode: "onTouched",
-    resolver: zodResolver(passwordSchema),
+    resolver: zodResolver(emailSchema),
   });
-  const submit: SubmitHandler<iPasswordRequest> = (data) => {
-    const { password } = data;
-    resetPasswordUser(password, token);
+  const submit: SubmitHandler<iEmailRequest> = (data) => {
+    sendEmailResetPassword(data.email);
   };
 
   return (
     <FormReset onSubmit={handleSubmit(submit)}>
       <ContainerFormReset>
         <StyledText tag="p" textStyle="heading-4-500" textColor="grey2">
-          {`Digite a sua nova senha`}
+          {`Insira o seu endereço de e-mail registrado abaixo e enviaremos um link para redefinir a sua senha`}
         </StyledText>
         <CssTextField
           required
-          label="Senha"
+          label="Email"
           variant="outlined"
           size="small"
-          type="password"
-          {...register("password")}
-          error={!!errors.password}
-          helperText={errors.password && errors.password.message}
-        />
-        <CssTextField
-          required
-          label="Confirmar senha"
-          variant="outlined"
-          size="small"
-          type="password"
-          {...register("passwordConfirm")}
-          error={!!errors.passwordConfirm}
-          helperText={errors.passwordConfirm && errors.passwordConfirm.message}
+          type="email"
+          {...register("email")}
+          error={!!errors.email}
+          helperText={errors.email && errors.email.message}
         />
         <StyledButton
           type="submit"

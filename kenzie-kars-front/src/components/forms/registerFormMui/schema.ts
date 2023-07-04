@@ -1,61 +1,53 @@
-import * as yup from "yup";
+import { z } from "zod";
 
-const addressSchema = yup.object().shape({
-  cep: yup
+export const addressSchema = z.object({
+  cep: z
     .string()
-    .required("CEP é obrigatório")
-    .max(8, "CEP com max de 8 caracteres"),
-  state: yup.string().required("Estado é obrigatório"),
-  city: yup.string().required("Cidade é obrigatória"),
-  street_name: yup
+    .min(1, "CEP é obrigatório")
+    .max(8, "CEP deve ter no máximo 8 caracteres"),
+  state: z.string().min(1, "Estado é obrigatório"),
+  city: z.string().min(1, "Cidade é obrigatória"),
+  street_name: z
     .string()
-    .required("Rua é obrigatória")
-    .max(60, "Rua com max de 60 caracteres"),
-  street_number: yup
+    .min(1, "Rua é obrigatória")
+    .max(60, "Rua deve ter no máximo 60 caracteres"),
+  street_number: z
     .string()
-    .required("Número é obrigatório")
-    .max(10, "Número com max de 10 caracteres"),
-  complement: yup.string().max(8, "Número com max de 8 caracteres"),
+    .min(1, "Número é obrigatório")
+    .max(10, "Número deve ter no máximo 10 caracteres"),
+  complement: z.string().max(8, "Complemento deve ter no máximo 8 caracteres"),
 });
 
-export const registerFormSchema = yup.object().shape({
-  email: yup.string().required("Email é obrigatorio").email("Email inválido"),
-  password: yup
-    .string()
-    .required("A senha é obrigatória")
-    .min(8, "A senha é obrigatória e precisa ter no mínimo 8 caracteres")
-    .max(120, "A senha pode ter no máximo 100 caracteres")
-    .matches(/(?=.*?[A-Z])/, "É necessário ao menos uma letra maiúscula")
-    .matches(/(?=.*?[a-z])/, "É necessário ao menos uma letra minúscula")
-    .matches(/(?=.*?[0-9])/, "É necessário pelo menos um número.")
-    .matches(
-      /(?=.*?[#?!@$%^&*-])/,
-      "É necessário pelo menos um caractere especial"
-    ),
-  confirmPassword: yup
-    .string()
-    .required("Campo obrigatório")
-    .oneOf([yup.ref("password")], "Senhas não conferem"),
-  name: yup
-    .string()
-    .required("Nome é obrigatório")
-    .min(2, "Nome precisa ter mais de 2 caracteres "),
-  description: yup
-    .string()
-    .required("Descrição é obrigatória")
-    .min(2, "Descrição precisa ter mais de 2 caracteres "),
-  phone: yup
-    .string()
-    .required("Contato é obrigatório")
-    .min(10, "Telefone precisa ter mais de 10 caracteres ")
-    .max(11, "Telefone precisa ter menos de 12 caracteres "),
-  birthdate: yup
-    .string()
-    .required("Data de nascimento obrigatória")
-    .min(10, "Data de nascimento com 10 caracteres "),
-  cpf: yup
-    .string()
-    .required("CPF é obrigatório")
-    .max(11, "CPF com máximo 11 caracteres"),
-  address: addressSchema.required(),
-});
+export const registerFormSchema = z
+  .object({
+    email: z.string().min(1, "Email é obrigatório").email("Email inválido"),
+    password: z
+      .string()
+      .min(6, "A senha é obrigatória e precisa ter no mínimo 6 caracteres")
+      .max(100, "A senha pode ter no máximo 100 caracteres")
+      .regex(
+        /^(?=.*[a-zA-Z])(?=.*\d)/,
+        "A senha deve conter pelo menos 1 letra e 1 número"
+      ),
+    confirmPassword: z.string().nonempty("Campo obrigatório"),
+    name: z.string().min(2, "Nome precisa ter mais de 2 caracteres"),
+    description: z
+      .string()
+      .min(2, "Descrição precisa ter mais de 2 caracteres"),
+    phone: z
+      .string()
+      .min(10, "Telefone precisa ter mais de 10 caracteres")
+      .max(11, "Telefone precisa ter menos de 12 caracteres"),
+    birthdate: z
+      .string()
+      .min(10, "Data de nascimento precisa ter 10 caracteres"),
+    cpf: z.string().min(11, "CPF com máximo 11 caracteres"),
+    address: addressSchema,
+  })
+  .refine(({ password, confirmPassword }) => password === confirmPassword, {
+    message: "As senhas não conferem",
+    path: ["confirmPassword"],
+  });
+
+export type iUserRequest = z.infer<typeof registerFormSchema>;
+export type iAddressRequest = z.infer<typeof addressSchema>;
