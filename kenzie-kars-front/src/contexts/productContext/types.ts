@@ -80,5 +80,6 @@ export interface iProductProviderValue {
   totalPages: number;
   comments: iComment[];
   setComments: React.Dispatch<React.SetStateAction<iComment[]>>;
+  getVehicleId: (vehicleId: string) => void;
   getComments: () => void;
 }

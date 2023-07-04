@@ -4,7 +4,7 @@ import { StyledCarList, StyledNoCarsFound } from "./style";
 import { iCardCarProps } from "./types";
 
 export const CarList = ({ cars }: iCardCarProps) => {
-  const isNotEmpty = cars.length;
+  const isNotEmpty = cars?.length;
 
   return (
     <>

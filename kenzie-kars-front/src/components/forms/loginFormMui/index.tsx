@@ -28,7 +28,7 @@ export const LoginFormMui = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitSuccessful },
+    formState: { errors, isSubmitSuccessful, isValid },
     reset,
   } = useForm<iUserLoginFormValues>({
     mode: "onTouched",
@@ -118,7 +118,7 @@ export const LoginFormMui = () => {
             buttonStyle={"bg"}
             buttonColor={"brand1"}
             width="100%"
-            disabled={!!(errors.email || errors.password)}
+            disabled={!isValid}
           >
             {spinner ? <SyncLoader color="#FFFFFF" size={8} /> : "Entrar"}
           </StyledButton>

@@ -8,7 +8,6 @@ import {
   iUserRegisterInformation,
   iDefaultErrorResponse,
   iUserResponse,
-  iFormDataResetPassword,
 } from "./types";
 import { iChildren } from "../../interfaces/global";
 import { useNavigate } from "react-router-dom";
@@ -33,18 +32,13 @@ export const UserProvider = ({ children }: iChildren) => {
       return;
     }
     try {
-      const { data } = await api.get("users", {
+      const { data } = await api.get<iUserResponse>("users", {
         headers: {
           authorization: `Bearer ${token}`,
         },
       });
       setUser(data);
       api.defaults.headers.common.authorization = `Bearer ${token}`;
-      if ("is_seller" in data && data.is_seller) {
-        navigate("/profileviewadmin");
-      } else {
-        navigate("/");
-      }
     } catch (error) {
       localStorage.clear();
       setUser(null);
@@ -138,7 +132,7 @@ export const UserProvider = ({ children }: iChildren) => {
             );
           }
         } else if (axiosError.code === "ECONNABORTED") {
-          toast.error("Erro de timeout. Tente novamente mais tarde.");
+          toast.error("Servidor demorou para responder");
         }
       }
     } finally {

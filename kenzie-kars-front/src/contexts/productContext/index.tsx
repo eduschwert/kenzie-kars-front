@@ -1,4 +1,4 @@
-import { AxiosError } from "axios";
+import axios, { AxiosError } from "axios";
 import { createContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { iChildren, iDefaultErrorResponse } from "../../interfaces/global";
@@ -131,6 +131,33 @@ export const ProductProvider = ({ children }: iChildren) => {
     }
   }
 
+  const getVehicleId = async (vehicleId: string) => {
+    try {
+      setLoadingProducts(true);
+      const response = await api.get<iProductItem>(`vehicles/${vehicleId}`);
+      setCarSeller(response.data);
+
+      const responseComments = await api.get(`comments/${vehicleId}`);
+      setComments(responseComments.data);
+    } catch (error: unknown) {
+      console.error(error);
+      if (axios.isAxiosError(error)) {
+        const axiosError = error as AxiosError;
+        if (axiosError.response) {
+          const status = axiosError.response.status;
+          if (status === 404 || status === 400) {
+            toast.error("Anúncio não encontrado");
+          } else if (axiosError.code === "ECONNABORTED") {
+            toast.error("Erro de timeout. Tente novamente mais tarde.");
+          }
+        }
+      }
+      navigate("/");
+    } finally {
+      setLoadingProducts(false);
+    }
+  };
+
   return (
     <ProductContext.Provider
       value={{
@@ -148,6 +175,7 @@ export const ProductProvider = ({ children }: iChildren) => {
         totalPages,
         getComments,
         setComments,
+        getVehicleId,
         comments,
       }}
     >

@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import carImage from "../../assets/car.png";
 import { iProductItem } from "../../contexts/productContext/types";
 import { useProduct } from "../../hooks/useProduct";
+import { Link } from "react-router-dom";
 
 export const CardCar = (car: iProductItem) => {
   const formatteNumber = (value: number) =>
@@ -22,18 +23,9 @@ export const CardCar = (car: iProductItem) => {
       currency: "BRL",
     });
 
-  const navigate = useNavigate();
-  const { setCarSeller } = useProduct();
-
-  const setActionOverCarCard = (selectedCar: iProductItem) => {
-    setCarSeller(selectedCar);
-    // navigate("/profileview");
-    navigate("/anouncement");
-  };
-
   return (
-    <CardLi id={`${car.id}`} onClick={() => setActionOverCarCard(car)}>
-      <a>
+    <CardLi id={`${car.id}`}>
+      <Link to={`/anouncement/${car.id}`}>
         <div>
           <img src={car.cover_image} />
           {car.is_good_buy && (
@@ -78,7 +70,7 @@ export const CardCar = (car: iProductItem) => {
             </StyledText>
           </DivCarDetails>
         </CardSection>
-      </a>
+      </Link>
     </CardLi>
   );
 };

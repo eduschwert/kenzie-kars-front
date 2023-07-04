@@ -38,7 +38,7 @@ export const RegisterFormMui = () => {
     register,
     handleSubmit,
     trigger,
-    formState: { errors },
+    formState: { errors, isValid },
     reset,
   } = useForm<iRegisterFormValues>({
     mode: "onTouched",
@@ -346,24 +346,7 @@ export const RegisterFormMui = () => {
             buttonStyle="bg"
             buttonColor="brand1"
             width="100%"
-            disabled={
-              !!(
-                errors.name ||
-                errors.email ||
-                errors.cpf ||
-                errors.phone ||
-                errors.birthdate ||
-                errors.description ||
-                errors.address?.cep ||
-                errors.address?.state ||
-                errors.address?.city ||
-                errors.address?.street_name ||
-                errors.address?.street_number ||
-                errors.address?.complement ||
-                errors.password ||
-                errors.confirmPassword
-              )
-            }
+            disabled={!isValid}
           >
             {spinner ? (
               <SyncLoader color="#FFFFFF" size={8} />

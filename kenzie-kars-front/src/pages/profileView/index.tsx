@@ -18,24 +18,51 @@ import { HeaderNotLoggedIn } from "../../components/headerNotLoggedIn";
 import { CarList } from "../../components/carList";
 import { FooterComponent } from "../../components/footer";
 import { CustomIconsPagination } from "../../components/pagination";
+import { useNavigate, useParams } from "react-router-dom";
+import axios, { AxiosError } from "axios";
+import { toast } from "react-toastify";
 
 export const ProfileView = () => {
-  const [vehicles, setVehicles] = useState<Array<iProductItem>>(
-    [] as iProductItem[]
-  );
+  const [vehicles, setVehicles] = useState<null | iProductItem[]>(null);
   const { user } = useUser();
-  const { carSeller } = useProduct();
   const [totalPages, setTotalPages] = useState(0);
 
-  const initials = carSeller?.seller.name.substring(0, 2)?.toUpperCase();
+  const navigate = useNavigate();
+
+  const initials =
+    vehicles && vehicles[0]?.seller.name.substring(0, 2)?.toUpperCase();
+
+  const { userId } = useParams();
 
   useEffect(() => {
-    const fetchSellerCars = async () => {
-      const response = await api.get(`vehicles/user/${carSeller?.seller.id}`);
-      setVehicles(response.data.data);
-    };
-    fetchSellerCars();
-  }, [carSeller]);
+    if (!userId) {
+      navigate("/");
+    } else {
+      const fetchSellerCars = async () => {
+        try {
+          const response = await api.get(`vehicles/user/${userId}`);
+          setVehicles(response.data.data);
+        } catch (error: unknown) {
+          console.error(error);
+          if (axios.isAxiosError(error)) {
+            console.log("dasdsadsadasdas");
+            const axiosError = error as AxiosError;
+            if (axiosError.response) {
+              const status = axiosError.response.status;
+              if (status === 404 || status === 400) {
+                toast.error("Usuário não encontrado");
+              } else if (axiosError.code === "ECONNABORTED") {
+                toast.error("Erro de timeout. Tente novamente mais tarde.");
+              }
+            }
+          }
+          navigate("/");
+        }
+      };
+      fetchSellerCars();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const getVehiclesPaginationProfile = async (
     perPage: number,
@@ -43,7 +70,7 @@ export const ProfileView = () => {
   ) => {
     try {
       const response = await api.get(
-        `vehicles/user/${carSeller?.seller.id}?perPage=${perPage}&page=${page}`
+        `vehicles/user/${userId}?perPage=${perPage}&page=${page}`
       );
 
       setVehicles(response.data.data);
@@ -52,7 +79,7 @@ export const ProfileView = () => {
       console.error(error);
     }
   };
-
+  console.log();
   return (
     <>
       <Container>
@@ -63,12 +90,12 @@ export const ProfileView = () => {
             <Circle>{initials}</Circle>
             <Flex>
               <StyledText tag="h1" textColor="grey1" textStyle="heading-6-600">
-                {carSeller?.seller?.name}
+                {vehicles && vehicles[0]?.seller.name}
               </StyledText>
               <StyledDiv>Anunciante</StyledDiv>
             </Flex>
             <StyledText tag="p" textStyle="body-1-400" textColor="grey2">
-              {carSeller?.seller?.description}
+              {vehicles && vehicles[0]?.seller.description}
             </StyledText>
           </div>
         </PerfilBox>

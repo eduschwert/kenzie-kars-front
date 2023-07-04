@@ -27,8 +27,8 @@ import { HeaderLoggedIn } from "../../components/headerLoggedIn";
 import { FooterComponent } from "../../components/footer";
 import { HeaderNotLoggedIn } from "../../components/headerNotLoggedIn";
 import { useUser } from "../../hooks/useUser";
-import { StyledButton } from "../../styles/buttons";
-import { useNavigate } from "react-router-dom";
+import { StyledButton, StyledLinkButton } from "../../styles/buttons";
+import { useNavigate, useParams } from "react-router-dom";
 import { useContext, useState, useEffect } from "react";
 import { ProductContext } from "../../contexts/productContext";
 // import { UserContext } from "../../contexts/userContext/UserContext";
@@ -51,8 +51,15 @@ export const AnnoucementPage = () => {
   const [loading, setLoading] = useState(false);
   const { user } = useUser();
   // const { user, setUser } = useContext(UserContext);
-  const { carSeller, comments, getComments, setComments } =
-    useContext(ProductContext);
+  const {
+    carSeller,
+    setCarSeller,
+    comments,
+    getComments,
+    setComments,
+    getVehicleId,
+    filteredProducts,
+  } = useContext(ProductContext);
   const [isOpenImageModal, setIsOpenImageModal] = useState(false);
 
   const [carSelectedImage, setCarSelectedImage] = useState<string>("");
@@ -72,8 +79,22 @@ export const AnnoucementPage = () => {
     toggleImageModal();
   };
 
+  const { vehicleId } = useParams();
+
   useEffect(() => {
-    getComments();
+    if (!vehicleId) {
+      navigate("/");
+    } else {
+      const findVehicle = filteredProducts.find(
+        (vehicle) => vehicle.id === vehicleId
+      );
+      if (findVehicle) {
+        setCarSeller(findVehicle);
+      } else {
+        getVehicleId(vehicleId);
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   async function createComment(data: iComment) {
@@ -99,10 +120,6 @@ export const AnnoucementPage = () => {
     }
   }
 
-  useEffect(() => {
-    getComments();
-  }, []);
-
   const {
     register,
     handleSubmit,
@@ -112,7 +129,6 @@ export const AnnoucementPage = () => {
     mode: "onTouched",
     resolver: yupResolver(commentSchema),
   });
-
   return (
     <>
       {isOpenImageModal && (
@@ -270,15 +286,15 @@ export const AnnoucementPage = () => {
                       {carSeller?.seller.description}
                     </StyledText>
 
-                    <StyledButton
+                    <StyledLinkButton
+                      to={`/profileview/${carSeller?.seller.id}`}
                       type="button"
                       buttonStyle="sm"
                       buttonColor="grey1"
                       max-width="80%"
-                      onClick={() => actionOverAllAnnouncements()}
                     >
                       Ver todos os anúncios
-                    </StyledButton>
+                    </StyledLinkButton>
                   </div>
                 </ProfileUser>
               </PhotoAndProfileWide>
@@ -434,15 +450,15 @@ export const AnnoucementPage = () => {
                     {carSeller?.seller.description}
                   </StyledText>
 
-                  <StyledButton
+                  <StyledLinkButton
+                    to={`/profileview/${carSeller?.seller.id}`}
                     type="button"
                     buttonStyle="sm"
                     buttonColor="grey1"
                     max-width="80%"
-                    onClick={() => actionOverAllAnnouncements()}
                   >
                     Ver todos os anúncios
-                  </StyledButton>
+                  </StyledLinkButton>
                 </div>
               </ProfileUser>
             </PhotoAndProfile>

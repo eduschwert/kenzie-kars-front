@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { StyledButton } from "../../styles/buttons";
+import { StyledButton, StyledLinkButton } from "../../styles/buttons";
 import { StyledText } from "../../styles/tipography";
 import { Flex, Flex2, ImageBox, StyledCar, TextBox } from "./style";
 import { useProduct } from "../../hooks/useProduct";
@@ -80,13 +80,13 @@ export const CardCarAdmin = ({ car }: iCardCarAdminProps) => {
             >
               Editar
             </StyledButton>
-            <StyledButton
+            <StyledLinkButton
+              to={`/anouncement/${car.id}`}
               buttonStyle="sm"
               buttonColor="outline1"
-              onClick={() => actionOverDetails(car)}
             >
               Ver detalhes
-            </StyledButton>
+            </StyledLinkButton>
           </Flex2>
         </TextBox>
       </StyledCar>

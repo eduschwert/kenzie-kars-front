@@ -17,8 +17,8 @@ export const RoutesMain = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/resetPassword" element={<SendEmailResetPasswordPage />} />
       <Route path="/resetPassword/:token" element={<ResetPasswordPage />} />
-      <Route path="/anouncement" element={<AnnoucementPage />} />
-      <Route path="/profileview" element={<ProfileView />} />
+      <Route path="/anouncement/:vehicleId" element={<AnnoucementPage />} />
+      <Route path="/profileview/:userId" element={<ProfileView />} />
       <Route element={<ProtectedRoutes />}>
         <Route path="/profileviewadmin" element={<ProfileViewAdmin />} />
       </Route>
