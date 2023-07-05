@@ -10,10 +10,7 @@ import {
 } from "./style";
 import { StyledText } from "../../styles/tipography";
 import { InitialsCircle } from "../initialsCircle";
-import { useNavigate } from "react-router-dom";
-import carImage from "../../assets/car.png";
 import { iProductItem } from "../../contexts/productContext/types";
-import { useProduct } from "../../hooks/useProduct";
 import { Link } from "react-router-dom";
 
 export const CardCar = (car: iProductItem) => {

@@ -44,7 +44,6 @@ export interface iUserRegisterInformation {
   birthdate: string;
   description: string;
   is_seller: boolean;
-  // createdAt?: Date;
 }
 
 export interface iUserResponse {

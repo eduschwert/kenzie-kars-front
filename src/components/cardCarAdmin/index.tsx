@@ -1,9 +1,6 @@
-import { useNavigate } from "react-router-dom";
 import { StyledButton, StyledLinkButton } from "../../styles/buttons";
 import { StyledText } from "../../styles/tipography";
 import { Flex, Flex2, ImageBox, StyledCar, TextBox } from "./style";
-import { useProduct } from "../../hooks/useProduct";
-import { iProductItem } from "../../contexts/productContext/types";
 import { iCardCarAdminProps } from "./types";
 import { useState } from "react";
 import { ModalEditCar } from "../modalEditDeleteCar";
@@ -17,14 +14,6 @@ export const CardCarAdmin = ({ car }: iCardCarAdminProps) => {
       style: "currency",
       currency: "BRL",
     });
-  const navigate = useNavigate();
-
-  const { setCarSeller } = useProduct();
-
-  const actionOverDetails = (car: iProductItem) => {
-    navigate("/anouncement");
-    setCarSeller(car);
-  };
 
   return (
     <>

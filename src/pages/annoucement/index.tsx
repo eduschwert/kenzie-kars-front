@@ -22,7 +22,6 @@ import {
   YearMileage,
 } from "./style";
 import { useForm } from "react-hook-form";
-// import exteriorCarro from "../../imagensMock/exterior-carro.png";
 import { HeaderLoggedIn } from "../../components/headerLoggedIn";
 import { FooterComponent } from "../../components/footer";
 import { HeaderNotLoggedIn } from "../../components/headerNotLoggedIn";
@@ -31,32 +30,26 @@ import { StyledButton, StyledLinkButton } from "../../styles/buttons";
 import { useNavigate, useParams } from "react-router-dom";
 import { useContext, useState, useEffect } from "react";
 import { ProductContext } from "../../contexts/productContext";
-// import { UserContext } from "../../contexts/userContext/UserContext";
 import { StyledText } from "../../styles/tipography";
-// import carImage from "../../assets/car.png";
 import { InitialsCircle } from "../../components/initialsCircle";
-// import Textarea, { TextareaAutosize } from "@mui/material";
 import { api } from "../../services/api";
 import { toast } from "react-toastify";
 import { CommentItemLi } from "../../components/vehicleComment";
 import { CssTextField } from "../../components/forms/muiStyle";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { commentSchema } from "./schema";
 import { SyncLoader } from "react-spinners";
 import { iComment, iImage } from "../../contexts/productContext/types";
 import { ModalShowCarImage } from "../../components/modalShowCarImage";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { commentSchemaZod } from "./validators";
 
 export const AnnoucementPage = () => {
-  // const [comments, setComments] = useState<iComment[]>([]);
   const [loading, setLoading] = useState(false);
   const { user } = useUser();
-  // const { user, setUser } = useContext(UserContext);
   const {
     carSeller,
     setCarSeller,
     comments,
     getComments,
-    setComments,
     getVehicleId,
     filteredProducts,
   } = useContext(ProductContext);
@@ -67,13 +60,6 @@ export const AnnoucementPage = () => {
 
   const toggleImageModal = () => setIsOpenImageModal(!isOpenImageModal);
 
-  const actionOverAllAnnouncements = () => {
-    if (carSeller?.seller.id === user?.id) {
-      navigate("/profileviewadmin");
-    } else {
-      navigate("/profileview");
-    }
-  };
   const setActionOverCarImage = (carImage: iImage) => {
     setCarSelectedImage(carImage.image_url);
     toggleImageModal();
@@ -85,6 +71,7 @@ export const AnnoucementPage = () => {
     if (!vehicleId) {
       navigate("/");
     } else {
+      getComments();
       const findVehicle = filteredProducts.find(
         (vehicle) => vehicle.id === vehicleId
       );
@@ -124,10 +111,9 @@ export const AnnoucementPage = () => {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm<iComment>({
     mode: "onTouched",
-    resolver: yupResolver(commentSchema),
+    resolver: zodResolver(commentSchemaZod),
   });
   return (
     <>
@@ -154,7 +140,7 @@ export const AnnoucementPage = () => {
                   >
                     {carSeller?.model}
                   </StyledText>
-                  {/* <span>{carSeller?.model}</span> */}
+
                   <YearMileage>
                     <InformationCarDetails>
                       <StyledText
@@ -164,7 +150,7 @@ export const AnnoucementPage = () => {
                       >
                         {carSeller?.year}
                       </StyledText>
-                      {/* <p>{carSeller?.year}</p> */}
+
                       <StyledText
                         tag="p"
                         textStyle={"heading-7-500"}
@@ -172,7 +158,6 @@ export const AnnoucementPage = () => {
                       >
                         {`${carSeller?.mileage}Km`}
                       </StyledText>
-                      {/* <p>{`${carSeller?.mileage}Km`}</p> */}
                     </InformationCarDetails>
                     <StyledText
                       tag="p"
@@ -181,7 +166,6 @@ export const AnnoucementPage = () => {
                     >
                       {`R$ ${carSeller?.price}`}
                     </StyledText>
-                    {/* <p>{carSeller?.price}</p> */}
                   </YearMileage>
 
                   {user ? (
@@ -219,7 +203,7 @@ export const AnnoucementPage = () => {
                     >
                       {`Descrição`}
                     </StyledText>
-                    {/* <p>Descrição</p> */}
+
                     <div>
                       <StyledText
                         tag="span"
@@ -229,10 +213,6 @@ export const AnnoucementPage = () => {
                         {carSeller?.description}
                       </StyledText>
                     </div>
-                    {/* <span>
-                  {carSeller?.description}
-                  
-                </span> */}
                   </div>
                 </DescriptionCar>
               </ImageAndDescription>
@@ -245,7 +225,7 @@ export const AnnoucementPage = () => {
                   >
                     {`Fotos`}
                   </StyledText>
-                  {/* <h2>Fotos</h2> */}
+
                   <PhotosCar>
                     {carSeller?.images &&
                       carSeller.images.map((image) => (
@@ -409,7 +389,7 @@ export const AnnoucementPage = () => {
                 >
                   {`Fotos`}
                 </StyledText>
-                {/* <h2>Fotos</h2> */}
+
                 <PhotosCar>
                   {carSeller?.images &&
                     carSeller.images.map((image) => (
@@ -452,7 +432,11 @@ export const AnnoucementPage = () => {
                   </StyledText>
 
                   <StyledLinkButton
-                    to={`/profileview/${carSeller?.seller.id}`}
+                    to={
+                      carSeller?.seller.id === user?.id
+                        ? `/profileviewadmin`
+                        : `/profileview/${carSeller?.seller.id}`
+                    }
                     type="button"
                     buttonStyle="sm"
                     buttonColor="grey1"

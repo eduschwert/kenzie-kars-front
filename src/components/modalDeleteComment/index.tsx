@@ -6,7 +6,6 @@ import { StyledButton } from "../../styles/buttons";
 import { api } from "../../services/api";
 import { toast } from "react-toastify";
 import { useContext } from "react";
-import { iDefaultErrorResponse } from "../../interfaces/global";
 import { ProductContext } from "../../contexts/productContext";
 
 interface iProp {

@@ -1,13 +1,9 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { CssTextField } from "../muiStyle";
 import { ContainerFormReset, FormReset } from "./style";
-import { useContext } from "react";
-import { UserContext } from "../../../contexts/userContext/UserContext";
 import { StyledText } from "../../../styles/tipography";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import { iPasswordRequest, passwordSchema } from "./schema";
-import { iResetPasswordFormProps } from "./types";
 import { StyledButton } from "../../../styles/buttons";
 import { SyncLoader } from "react-spinners";
 import { useUser } from "../../../hooks/useUser";

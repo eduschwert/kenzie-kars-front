@@ -182,7 +182,6 @@ export const FilterMenu = ({ advertising, setAdvertising }: iAdvertising) => {
     _e: any,
     newPriceRange: number[] | number
   ) => {
-    // Array.isArray(newPriceRange) && setPriceRange(newPriceRange);
     if (Array.isArray(newPriceRange)) {
       setPriceRange(newPriceRange);
       const newFilterConditions = {
@@ -333,10 +332,7 @@ export const FilterMenu = ({ advertising, setAdvertising }: iAdvertising) => {
         <CancelFilters>
           {
             <StyledButton
-              onClick={
-                () => clearFilters()
-                // setAdvertising((advertising) => !advertising)
-              }
+              onClick={() => clearFilters()}
               buttonStyle={window.screen.width < 700 ? "sm" : "bg"}
               buttonColor="brand1"
             >{`Limpar Filtros`}</StyledButton>

@@ -2,17 +2,12 @@ import styled from "styled-components";
 import homeheader from "./../../assets/homeheader.svg";
 import { iDisplay } from "./types";
 
-// interface iGallery {
-//   display: boolean;
-// }
-
 export const ContainerHomePage = styled.div`
   width: 100%;
   position: relative;
 
   @media (min-width: 700px) {
     min-height: 100%;
-    /* position: relative; */
   }
 `;
 
@@ -92,7 +87,7 @@ export const SectionHomePageMainMenu = styled.div<iDisplay>`
   flex-direction: row;
   align-items: space-between;
   justify-content: space-between;
-  /* text-align: center; */
+
   gap: 2rem;
   padding: 2rem;
 

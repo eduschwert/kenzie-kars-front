@@ -2,7 +2,6 @@ import { AiOutlineClose } from "react-icons/ai";
 import { StyledText } from "../../styles/tipography";
 import { Modal } from "../modal";
 import { useContext } from "react";
-import { yupResolver } from "@hookform/resolvers/yup";
 import {
   DivBtns,
   DivModalBody,
@@ -17,11 +16,12 @@ import { Autocomplete } from "@mui/material";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { UserContext } from "../../contexts/userContext/UserContext";
-import { UpdateAddressSchema, iAddress } from "./schema";
 import { CitiesContext } from "../../contexts/citiesContext/CitiesContext";
 import { SyncLoader } from "react-spinners";
 import { api } from "../../services/api";
 import { toast } from "react-toastify";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { UpdateAddressSchemaZod, iAddress } from "./validators";
 
 interface iProp {
   toggleModal: () => void;
@@ -40,7 +40,8 @@ export const ModalUpdateAddress = ({ toggleModal }: iProp) => {
     reset,
   } = useForm<iAddress>({
     mode: "onTouched",
-    resolver: yupResolver(UpdateAddressSchema),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    resolver: zodResolver(UpdateAddressSchemaZod),
   });
 
   useEffect(() => {

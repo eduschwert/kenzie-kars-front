@@ -39,9 +39,7 @@ export const CitiesProvider = ({ children }: iDefaultPropsProvider) => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const getCitiesOfState = async (_e: any, value: string | null) => {
     try {
-      // if (value !== "0" || !CSSNumericValue) {
       if (value !== "0") {
-        // if (e.target.value !== "0") {
         setDisable(false);
         const response = await fetch(
           `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${value}/distritos?orderBy=nome`

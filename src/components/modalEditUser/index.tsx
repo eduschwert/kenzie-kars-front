@@ -5,13 +5,14 @@ import { useForm } from "react-hook-form";
 import { DivBtns, DivTitle, Form, StyledRegForm, StyledTitle } from "./style";
 import { StyledButton } from "../../styles/buttons";
 import { AiOutlineClose } from "react-icons/ai";
-import { iSchema, updateUserSchema } from "./schema";
-import { yupResolver } from "@hookform/resolvers/yup";
+
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../contexts/userContext/UserContext";
 import { SyncLoader } from "react-spinners";
 import { api } from "../../services/api";
 import { toast } from "react-toastify";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { updateUserSchemaZod, iSchema } from "./validators";
 
 interface iProp {
   toggleModal: () => void;
@@ -28,7 +29,7 @@ export const ModalEditUser = ({ toggleModal, setMenuType }: iProp) => {
     formState: { errors },
   } = useForm<iSchema>({
     mode: "onTouched",
-    resolver: yupResolver(updateUserSchema),
+    resolver: zodResolver(updateUserSchemaZod),
   });
 
   useEffect(() => {
@@ -39,9 +40,7 @@ export const ModalEditUser = ({ toggleModal, setMenuType }: iProp) => {
 
   async function submitForm(data: iSchema) {
     setSpinner(true);
-    if (data.hasOwnProperty("confirmPassword")) {
-      delete data.confirmPassword;
-    }
+    data.confirmPassword && delete data.confirmPassword;
     const token = localStorage.getItem("@KenzieKars:token");
     try {
       const response = await api.patch("users", data, {
