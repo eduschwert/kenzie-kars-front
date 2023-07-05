@@ -41,7 +41,6 @@ export const ContentImgs = styled.div`
   display: flex;
   flex-direction: column;
   gap: 15px;
-  /* flex-wrap: wrap; */
   -webkit-box-pack: center;
   justify-content: center;
   margin-top: 50px;
@@ -57,11 +56,6 @@ export const ImageAndDescription = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
-
-  /* @media (min-width: 700px) {
-    max-width: 65%;
-    width: 62%;
-  } */
 `;
 export const PhotoAndProfile = styled.div`
   width: 100%;
@@ -171,10 +165,6 @@ export const PhotosCar = styled.ul`
   justify-items: center;
   grid-template-columns: repeat(2, 1fr);
   gap: 10px;
-
-  @media (min-width: 1100px) {
-    grid-template-columns: repeat(3, 1fr);
-  }
 
   > li {
     background-color: var(--color-grey7);
