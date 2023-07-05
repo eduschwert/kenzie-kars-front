@@ -16,7 +16,7 @@ export const CustomIconsPagination = ({
   const { totalPages, getProductsPagination } = useProduct();
   const location = useLocation();
   const perPage = 10;
-  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+  const handleChange = (_event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
   };
 

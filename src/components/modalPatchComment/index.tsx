@@ -7,8 +7,7 @@ import { StyledButton } from "../../styles/buttons";
 import { AiOutlineClose } from "react-icons/ai";
 import { commentSchema, iComment } from "./schema";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useContext, useEffect, useState } from "react";
-import { UserContext } from "../../contexts/userContext/UserContext";
+import { useContext, useState } from "react";
 import { SyncLoader } from "react-spinners";
 import { api } from "../../services/api";
 import { toast } from "react-toastify";
@@ -37,7 +36,7 @@ export function ModalPatchComment({ toggleModal, id, content }: iProp) {
     setSpinner(true);
     const token = localStorage.getItem("@KenzieKars:token");
     try {
-      const response = await api.put(`comments/${id}`, data, {
+      await api.put(`comments/${id}`, data, {
         headers: {
           authorization: `Bearer ${token}`,
         },

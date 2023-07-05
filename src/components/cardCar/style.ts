@@ -18,11 +18,15 @@ export const CardLi = styled.li`
     min-height: 30%;
     background-color: var(--color-grey7);
     border: 2px solid transparent;
+    display: flex;
+    justify-content: center;
     position: relative;
   }
 
   & > a > div > img {
-    max-width: 260px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     min-height: 150px;
     max-height: 150px;
   }

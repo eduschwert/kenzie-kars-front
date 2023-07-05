@@ -12,7 +12,6 @@ import {
 } from "./style";
 import { useUser } from "../../hooks/useUser";
 import { api } from "../../services/api";
-import { useProduct } from "../../hooks/useProduct";
 import { iProductItem } from "../../contexts/productContext/types";
 import { HeaderNotLoggedIn } from "../../components/headerNotLoggedIn";
 import { CarList } from "../../components/carList";

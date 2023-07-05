@@ -1,15 +1,13 @@
 import axios, { AxiosError } from "axios";
 import { createContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { iChildren, iDefaultErrorResponse } from "../../interfaces/global";
-// import mockedProducts from "./mockedDatabase";
+import { iChildren } from "../../interfaces/global";
 
 import {
   iComment,
   iFilterConditions,
   iProductItem,
   iProductProviderValue,
-  // iSeller,
 } from "./types";
 import { api } from "../../services/api";
 import { useNavigate } from "react-router-dom";
@@ -47,8 +45,6 @@ export const ProductProvider = ({ children }: iChildren) => {
         setFilteredProducts(carList.data.data);
       } catch (error) {
         console.error(error);
-        // const currentError = error as AxiosError<iDefaultErrorResponse>;
-        // toast.error(`Ops! Algo deu errado: ${currentError.response?.data}`);
         toast.error(`Ops! Products could not be uploaded`);
       } finally {
         setLoadingProducts(false);
