@@ -47,16 +47,6 @@ export const theme = createTheme({
         },
       },
     },
-    // Mui: {
-    //   styleOverrides: {
-    //     root: {
-    //       "&$selected": {
-    //         color: "#5126ea",
-    //         backgroundColor: "#b0a6f0",
-    //       },
-    //     },
-    //   },
-    // },
   },
   typography: {
     fontFamily: "Lexand, sans-serif",

@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from "react";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { SubmitHandler, useForm } from "react-hook-form";
 import {
   StyledRegForm,
@@ -21,12 +20,10 @@ import { SyncLoader } from "react-spinners";
 import { iUserRegisterInformation } from "../../../contexts/userContext/types";
 import { iRegisterFormValues } from "./types";
 import { zodResolver } from "@hookform/resolvers/zod";
-// import ReactInputMask from "react-input-mask";
 
 export const RegisterFormMui = () => {
   const { spinner, setSpinner, errorApi, setErrorApi, registerUser } =
     useContext(UserContext);
-  // const [loadingRegForm, setLoadingRegForm] = useState(false);
 
   const { stateList, cityList, getStates, getCitiesOfState } =
     useContext(CitiesContext);
@@ -44,12 +41,6 @@ export const RegisterFormMui = () => {
     mode: "onTouched",
     resolver: zodResolver(registerFormSchema),
   });
-
-  // useEffect(() => {
-  //   if (isSubmitSuccessful) {
-  //     reset();
-  //   }
-  // }, [isSubmitSuccessful, reset]);
 
   useEffect(() => {
     setErrorApi(false);
@@ -80,7 +71,7 @@ export const RegisterFormMui = () => {
   };
   useEffect(() => {
     getStates();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

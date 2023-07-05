@@ -1,20 +1,6 @@
-// import { SelectChangeEvent } from "@mui/material";
-
 export interface iDefaultPropsProvider {
   children: React.ReactNode;
 }
-
-// export interface iCitiesContext {
-//   getStates: () => void;
-//   statesList: [] | iStatesList[];
-//   citiesList: [] | iCitiesList[];
-//   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-//   selectState: (e: any) => void;
-//   disable: boolean;
-//   errorApi: boolean;
-//   setErrorApi: React.Dispatch<React.SetStateAction<boolean>>;
-//   // servicesCategories: iCategoriesList[];
-// }
 
 export interface iStatesList {
   id: number;
@@ -72,10 +58,6 @@ export interface iCitiesList {
   };
 }
 
-// interface iCategoriesList {
-//   image: string;
-//   name: string;
-// }
 export interface iCitiesContext {
   getStates: () => void;
   statesList: [] | iStatesList[];

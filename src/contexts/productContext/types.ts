@@ -1,7 +1,3 @@
-// import { date, number } from "yup";
-
-import { iCardCarProps } from "../../components/carList/types";
-
 export interface iSeller {
   name: string;
   email: string;

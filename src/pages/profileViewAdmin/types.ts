@@ -1,5 +1,4 @@
 import { iSeller } from "../../contexts/productContext/types";
-// import { iUserRegisterInformation } from "../../contexts/userContext/types";
 
 interface iImage {
   id: string;
@@ -25,6 +24,5 @@ export interface iVehicle {
   images: Array<iImage>;
   createdAt: Date;
   updatedAt: Date;
-  // seller: iUserRegisterInformation;
   seller: iSeller;
 }

@@ -1,10 +1,6 @@
-// import { useEffect, useState } from "react";
-// s
 import { useState } from "react";
 import { CarList } from "../../components/carList";
-
 import { FilterMenu } from "../../components/filterMenu";
-
 import { HeaderNotLoggedIn } from "../../components/headerNotLoggedIn";
 import { StyledText } from "../../styles/tipography";
 import {

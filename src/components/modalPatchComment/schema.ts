@@ -7,5 +7,5 @@ export const commentSchema = yup.object().shape({
 });
 
 export interface iComment {
-  content: string;
+  content: string | undefined;
 }
