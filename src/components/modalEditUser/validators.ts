@@ -16,7 +16,7 @@ export const updateUserSchemaZod = z
         .min(6, "A senha é obrigatória e precisa ter no mínimo 6 caracteres")
         .max(100, "A senha pode ter no máximo 100 caracteres")
         .regex(
-          /^(?=.*[a-zA-Z])(?=.*\d)/,
+          /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d!@#$%^&*]*$/,
           "A senha deve conter pelo menos 1 letra e 1 número"
         )
         .optional()
