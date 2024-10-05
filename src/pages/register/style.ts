@@ -1,26 +1,26 @@
 import styled from "styled-components";
 
-export const RegisterSection = styled.div`
+export const StyledDivFullPage = styled.div`
+  width: 100%;
+  min-height: 100vh;
   display: flex;
-  justify-content: center;
-  background-color: var(--color-grey6);
-  @media (min-width: 700px) {
-    padding-bottom: 6rem;
-  }
-`;
-export const RegisterFormDiv = styled.div`
-  margin-top: 100px;
-  margin-bottom: 50px;
-  display: flex;
-  justify-content: center;
-  /* width: 100%; */
-  min-width: 343px;
-  /* border: 1px solid var(--color-grey2); */
-  background-color: var(--color-grey10);
-  border-radius: var(--radius-2);
-  padding: 1rem;
+  flex-direction: column;
+  gap: 4rem;
+  justify-content: space-between;
+  align-items: center;
 
-  @media (min-width: 400px) {
-    min-width: 411px;
+  > .headerHeight {
+    height: 8rem;
+  }
+
+  > .form {
+    background-color: ${({ theme }) => theme.colors.whiteFixed};
+    width: 95%;
+    max-width: 42rem;
+    display: flex;
+    border-radius: ${({ theme }) => theme.borderRadius.small};
+    padding: 4.4rem 0px;
+    display: flex;
+    justify-content: center;
   }
 `;

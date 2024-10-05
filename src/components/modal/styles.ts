@@ -1,60 +1,66 @@
-import styled, { keyframes } from "styled-components";
-const animateModal = keyframes`
-    0% {
-       transform: translateY(-50%);
-       opacity: 0;
-     }
+import styled from "styled-components";
 
-     100% {
-       transform: translateY(0);
-       opacity: 1;
-     }
+import { animateModalClose, animateModalOpen } from "../../styles/animations";
 
-`;
-
-export const Container = styled.div`
+export const StyledDivModal = styled.div<{ $isClosing: boolean }>`
   inset: 0;
   background: rgba(0, 0, 0, 0.5);
   width: 100%;
   height: 100%;
   position: fixed;
   overflow: hidden;
-  z-index: 500;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 5vh;
+
+  > div {
+    background: ${({ theme }) => theme.colors.whiteFixed};
+    border-radius: ${({ theme }) => theme.borderRadius.medium};
+    max-width: 54rem;
+    width: 100%;
+    animation-name: ${({ $isClosing }) =>
+      $isClosing ? animateModalClose : animateModalOpen};
+    animation-iteration-count: 1;
+    animation-duration: 0.5s;
+    padding: 0px 1.5rem 2rem 1.5rem;
+    overflow: hidden auto;
+    max-height: 90vh;
+
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    & > .modalHeader {
+      width: 100%;
+      height: 5.6rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+  }
+`;
+
+export const StyledButtonCloseModal = styled.button`
+  height: 4.6rem;
+  width: 4.6rem;
+  padding: 0 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
 
-  > div {
-    background: var(--white-fixed);
-    border-radius: var(--radius-1);
-    width: 520px;
-    max-width: 90%;
-    overflow: hidden;
-    animation-name: ${animateModal};
-    animation-iteration-count: 1;
-    animation-duration: 1s;
-    padding: 5px;
+  & > img {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
 
-    > div {
-      overflow-y: auto;
-      max-height: calc(100vh - 30px);
-
-      ::-webkit-scrollbar {
-        width: 8px;
-      }
-
-      ::-webkit-scrollbar-thumb {
-        background-color: var(--color-grey6);
-        border-radius: var(--radius-2);
-      }
-
-      ::-webkit-scrollbar-track {
-        background-color: var(--white-fixed);
-      }
-
-      ::-webkit-scrollbar-thumb:hover {
-        background-color: var(--color-grey4);
-      }
-    }
+  background-color: transparent;
+  border: none;
+  transition: 150ms ease-in-out;
+  :hover {
+    background-color: ${({ theme }) => theme.colors.grey8};
   }
 `;

@@ -1,20 +1,28 @@
 import { createPortal } from "react-dom";
 import { ReactNode, useEffect, useRef } from "react";
-import { Container } from "./styles";
 
-interface ModalProps {
-  toggleModal: () => void;
+import { StyledButtonCloseModal, StyledDivModal } from "./styles";
+import { StyledText } from "../../styles/tipography";
+import x from "../../assets/xmark.svg";
+import { useModal } from "../../hooks/useContexts";
+
+export const Modal = ({
+  children,
+  blockClosing,
+  title,
+}: {
   blockClosing?: boolean;
   children: ReactNode;
-}
-
-export const Modal = ({ toggleModal, children, blockClosing }: ModalProps) => {
+  title: string;
+}) => {
   const ref = useRef<HTMLDivElement>(null);
+
+  const { closeModal, isClosing } = useModal();
 
   useEffect(() => {
     const handleEscKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
-        toggleModal();
+        closeModal();
       }
     };
 
@@ -30,7 +38,7 @@ export const Modal = ({ toggleModal, children, blockClosing }: ModalProps) => {
           event.target.className.includes("Mui")
         )
       ) {
-        toggleModal();
+        closeModal();
       }
     };
 
@@ -51,14 +59,22 @@ export const Modal = ({ toggleModal, children, blockClosing }: ModalProps) => {
       window.removeEventListener("mousedown", handleClick);
       enableScroll();
     };
-  }, [toggleModal, blockClosing]);
+  }, [closeModal, blockClosing]);
 
   return createPortal(
-    <Container>
-      <div>
-        <div ref={blockClosing ? null : ref}>{children}</div>
+    <StyledDivModal $isClosing={isClosing}>
+      <div ref={blockClosing ? null : ref}>
+        <div className="modalHeader">
+          <StyledText tag="h4" $textStyle="heading-7-500" $textColor="grey1">
+            {title}
+          </StyledText>
+          <StyledButtonCloseModal onClick={closeModal}>
+            <img src={x} alt="" />
+          </StyledButtonCloseModal>
+        </div>
+        <div className="modalBody">{children}</div>
       </div>
-    </Container>,
+    </StyledDivModal>,
     document.body
   );
 };

@@ -1,14 +1,13 @@
-import { CitiesProvider } from "./citiesContext/CitiesContext";
-import { ProductProvider } from "./productContext";
-import { iDefaultPropsProvider } from "./types";
-import { UserProvider } from "./userContext/UserContext";
+import { FipeApiProvider } from "./fipeApiContext";
+import { ModalProvider } from "./modalContext";
+import { UserProvider } from "./userContext";
 
-export const Providers = ({ children }: iDefaultPropsProvider) => {
+export const Providers = ({ children }: { children: React.ReactNode }) => {
   return (
-    <CitiesProvider>
-      <UserProvider>
-        <ProductProvider>{children}</ProductProvider>
-      </UserProvider>
-    </CitiesProvider>
+    <FipeApiProvider>
+      <ModalProvider>
+        <UserProvider>{children}</UserProvider>
+      </ModalProvider>
+    </FipeApiProvider>
   );
 };

@@ -1,6 +1,6 @@
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL: "https://kenzie-kars-api-7s9s.onrender.com/",
-  timeout: 5000,
+  baseURL: "http://localhost:3000/",
+  timeout: 7000,
 });

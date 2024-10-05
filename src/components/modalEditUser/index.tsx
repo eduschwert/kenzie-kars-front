@@ -1,239 +1,174 @@
-import { StyledText } from "../../styles/tipography";
-import { Modal } from "../modal";
-import { CssTextField } from "../forms/muiStyle";
-import { useForm } from "react-hook-form";
-import { DivBtns, DivTitle, Form, StyledRegForm, StyledTitle } from "./style";
-import { StyledButton } from "../../styles/buttons";
-import { AiOutlineClose } from "react-icons/ai";
-
-import { useContext, useEffect, useState } from "react";
-import { UserContext } from "../../contexts/userContext/UserContext";
-import { SyncLoader } from "react-spinners";
-import { api } from "../../services/api";
-import { toast } from "react-toastify";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { updateUserSchemaZod, iSchema } from "./validators";
+import { ClipLoader } from "react-spinners";
 
-interface iProp {
-  toggleModal: () => void;
-  setMenuType: (item: string) => void;
-}
+import { StyledText } from "../../styles/tipography";
+import { iUserRequestWithoutIsSeller, userRequestSchema } from "./schema";
+import { useModal, useUser } from "../../hooks/useContexts";
+import { removeMask } from "../../utils";
+import { StyledFormFlexCol } from "./style";
+import { Modal } from "../modal";
+import { Input } from "../input";
+import { StyledButton } from "../../styles/buttons";
 
-export const ModalEditUser = ({ toggleModal, setMenuType }: iProp) => {
-  const [errorPatch, setErrorPatch] = useState(false);
-  const { spinner, setSpinner, errorApi, setUser, setErrorApi } =
-    useContext(UserContext);
+export const ModalEditUser = () => {
+  const { updateUser, loading, user } = useUser();
+
+  const { closeModal, setModalType } = useModal();
+
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
-  } = useForm<iSchema>({
+  } = useForm<iUserRequestWithoutIsSeller>({
+    resolver: zodResolver(userRequestSchema),
     mode: "onTouched",
-    resolver: zodResolver(updateUserSchemaZod),
+    defaultValues: {
+      name: user?.name,
+      email: user?.email,
+      cpf: user?.cpf
+        ? `${user.cpf.slice(0, 3)}.${user.cpf.slice(3, 6)}.${user.cpf.slice(
+            6,
+            9
+          )}-${user.cpf.slice(9, 11)}`
+        : "",
+      phone: user?.phone
+        ? `(${user.phone.slice(0, 2)}) ${user.phone.slice(
+            2,
+            7
+          )}-${user.phone.slice(7, 11)}`
+        : "",
+      birthdate: user?.birthdate
+        ? user.birthdate.split("-").reverse().join("-")
+        : "",
+      description: user?.description,
+    },
   });
 
-  useEffect(() => {
-    setErrorApi(false);
-    setErrorPatch(false);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [errorPatch]);
+  const submit: SubmitHandler<iUserRequestWithoutIsSeller> = (data) => {
+    const cleanedData = {
+      ...data,
+      cpf: removeMask(data.cpf),
+      phone: removeMask(data.phone),
+    };
 
-  async function submitForm(data: iSchema) {
-    setSpinner(true);
-    data.confirmPassword && delete data.confirmPassword;
-    const token = localStorage.getItem("@KenzieKars:token");
-    try {
-      const response = await api.patch("users", data, {
-        headers: {
-          authorization: `Bearer ${token}`,
-        },
-      });
-      setSpinner(false);
-      toggleModal();
-      toast.success("Perfil atualizado com sucesso!");
-      setUser(response.data);
-    } catch (error) {
-      setSpinner(false);
-      console.error(error);
-      setErrorApi(true);
-      toast.error(`Ops! Algo deu errado.`);
-    }
-  }
+    updateUser(cleanedData);
+  };
+
   return (
-    <Modal toggleModal={toggleModal}>
-      <StyledRegForm>
-        <StyledTitle>
-          <DivTitle>
-            <StyledText
-              tag="h3"
-              textStyle="heading-6-500"
-            >{`Editar perfil`}</StyledText>
-            <button onClick={() => toggleModal()}>
-              <AiOutlineClose size={22} color={"#0b0d0d"} />
-            </button>
-          </DivTitle>
-
-          <StyledText tag="p" textStyle="heading-7-500">
-            {`Informações pessoais`}
-          </StyledText>
-        </StyledTitle>
-
-        <Form onSubmit={handleSubmit(submitForm)} noValidate>
-          <CssTextField
-            required
-            label="Nome"
-            variant="outlined"
-            size="small"
-            id="registerName"
-            type="text"
-            placeholder="Ex: Samuel Leão"
-            {...register("name")}
-            error={!!errors.name}
-            helperText={errors.name && errors.name.message}
-          />
-
-          <CssTextField
-            required
-            label="E-mail"
-            variant="outlined"
-            size="small"
-            id="registerEmail"
-            type="email"
-            placeholder="ex: samuel@mail.com.br"
-            {...register("email")}
-            error={!!errors.email}
-            helperText={errors.email && errors.email.message}
-            onKeyUp={
-              errorApi ? () => setErrorPatch(true) : () => setErrorPatch(false)
-            }
-          />
-          {errorApi ? (
-            <StyledText
-              tag="p"
-              textColor="negative"
-              textStyle="body-2-500"
-            >{`Email já existente`}</StyledText>
-          ) : (
-            <></>
+    <Modal title="Editar Perfil">
+      <StyledFormFlexCol onSubmit={handleSubmit(submit)} noValidate>
+        <StyledText tag="p" $textStyle="body-2-500" $textColor="grey1">
+          Infomações pessoais
+        </StyledText>
+        <Input
+          id="name"
+          label="Nome"
+          type="text"
+          register={register("name")}
+          error={errors.name}
+          disabled={loading}
+        />
+        <Input
+          id="email"
+          label="Email"
+          type="email"
+          register={register("email")}
+          error={errors.email}
+          disabled={loading}
+        />
+        <Controller
+          name="cpf"
+          control={control}
+          render={({ field }) => (
+            <Input
+              field={field}
+              id="cpf"
+              label="CPF"
+              type="text"
+              error={errors.cpf}
+              disabled={loading}
+              mask="999.999.999-99"
+            />
           )}
+        />
+        <Controller
+          name="phone"
+          control={control}
+          render={({ field }) => (
+            <Input
+              id="phone"
+              label="Celular"
+              field={field}
+              type="text"
+              error={errors.phone}
+              disabled={loading}
+              mask="(99) 99999-9999"
+            />
+          )}
+        />
+        <Controller
+          name="birthdate"
+          control={control}
+          render={({ field }) => (
+            <Input
+              id="birthdate"
+              label="Data de nascimento"
+              field={field}
+              type="text"
+              error={errors.birthdate}
+              disabled={loading}
+              mask="99-99-9999"
+            />
+          )}
+        />
 
-          <CssTextField
-            required
-            label="CPF"
-            variant="outlined"
-            size="small"
-            id="registerCPF"
-            type="text"
-            placeholder="000.000.000-00"
-            {...register("cpf")}
-            error={!!errors.cpf}
-            helperText={errors.cpf && errors.cpf.message}
-          />
-
-          <CssTextField
-            required
-            label="Celular"
-            variant="outlined"
-            size="small"
-            id="registerCelular"
-            type="text"
-            placeholder="(DDD)90000-0000"
-            {...register("phone")}
-            error={!!errors.phone}
-            helperText={errors.phone && errors.phone.message}
-          />
-          <CssTextField
-            required
-            label="Data de nascimento"
-            variant="outlined"
-            size="small"
-            id="registerBirthdate"
-            type="date"
-            placeholder=""
-            InputLabelProps={{ shrink: true }}
-            {...register("birthdate")}
-            error={!!errors.birthdate}
-            helperText={errors.birthdate && errors.birthdate.message}
-          />
-
-          <CssTextField
-            required
+        {user?.isSeller && (
+          <Input
+            id="description"
             label="Descrição"
-            variant="outlined"
-            size="small"
-            id="registerDescription"
-            multiline
-            rows={3}
             type="text"
-            placeholder=""
-            {...register("description")}
-            error={!!errors.description}
-            helperText={errors.description && errors.description.message}
+            placeHolder="Digitar descrição"
+            register={register("description")}
+            error={errors.description}
+            disabled={loading}
+            textarea={true}
           />
-
-          <CssTextField
-            required
-            label="Senha"
-            variant="outlined"
-            size="small"
-            id="registerPwd"
-            type="password"
-            placeholder="Digite a senha"
-            {...register("password")}
-            error={!!errors.password}
-            helperText={errors.password && errors.password.message}
-          />
-
-          <CssTextField
-            required
-            label="Confirmar senha"
-            variant="outlined"
-            size="small"
-            id="registerConfirmPwd"
-            type="password"
-            placeholder="Confirme a senha"
-            {...register("confirmPassword")}
-            error={!!errors.confirmPassword}
-            helperText={
-              errors.confirmPassword && errors.confirmPassword.message
-            }
-          />
-          <DivBtns>
-            <div>
-              {" "}
-              <StyledButton
-                onClick={() => toggleModal()}
-                buttonStyle="sm-modal-edit"
-                buttonColor="negative"
-              >
-                Cancelar
-              </StyledButton>
-              <StyledButton
-                onClick={() => {
-                  setMenuType("delete");
-                }}
-                buttonStyle="sm-modal-edit"
-                buttonColor="alert"
-              >
-                Excluir perfil
-              </StyledButton>
-            </div>
-
-            <StyledButton
-              type="submit"
-              buttonStyle="sm-modal"
-              buttonColor="brand1"
-              disabled={spinner}
-            >
-              {spinner ? (
-                <SyncLoader color="#FFFFFF" size={8} />
-              ) : (
-                "Salvar alterações"
-              )}
-            </StyledButton>
-          </DivBtns>
-        </Form>
-      </StyledRegForm>
+        )}
+        <div className="flexRow">
+          <StyledButton
+            onClick={closeModal}
+            type="button"
+            $buttonStyle="big"
+            $buttonColor="negative"
+          >
+            Cancelar
+          </StyledButton>
+          <StyledButton
+            onClick={() => {
+              setModalType("deleteUser");
+            }}
+            type="button"
+            $buttonStyle="big"
+            $buttonColor="alert"
+          >
+            Excluir Perfil
+          </StyledButton>
+          <StyledButton
+            $buttonStyle="big"
+            $buttonColor="brand1"
+            disabled={loading}
+            $minWidth="19rem"
+          >
+            {loading ? (
+              <ClipLoader color="#F8F9FA" size={"3rem"} />
+            ) : (
+              "Salvar alterações"
+            )}
+          </StyledButton>
+        </div>
+      </StyledFormFlexCol>
     </Modal>
   );
 };

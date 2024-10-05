@@ -1,112 +1,103 @@
-import { useEffect, useState } from "react";
-import { HeaderLoggedIn } from "../../components/headerLoggedIn";
 import { StyledText } from "../../styles/tipography";
 import {
-  BlueBox,
-  Circle,
-  Container,
-  ContainerList,
-  Flex,
-  PerfilBox,
-  StyledDiv,
+  StyledDivFullPage,
+  StyledMain,
+  StyledDivUserInformations,
 } from "./style";
-import { useUser } from "../../hooks/useUser";
-import { api } from "../../services/api";
-import { iProductItem } from "../../contexts/productContext/types";
-import { HeaderNotLoggedIn } from "../../components/headerNotLoggedIn";
-import { CarList } from "../../components/carList";
-import { FooterComponent } from "../../components/footer";
-import { CustomIconsPagination } from "../../components/pagination";
-import { useNavigate, useParams } from "react-router-dom";
-import axios, { AxiosError } from "axios";
-import { toast } from "react-toastify";
+import { UserAvatar } from "../../components/userAvatar";
+import { DetailBox } from "../../components/detailBox";
+import { Footer } from "../../components/footer";
+import { Vehicles } from "../../components/vehicles";
+import { Pagination } from "../../components/pagination";
+import { useModal, useSeller, useUser } from "../../hooks/useContexts";
+import { VehicleProfileView } from "../../components/vehicleProfileView";
+import { StyledButton } from "../../styles/buttons";
+import { ModalCreateVehicle } from "../../components/modalCreateVehicle";
+import { ModalEditVehicle } from "../../components/modalEditVehicle";
+import { ModalDeleteVehicle } from "../../components/modalDeleteVehicle";
 
-export const ProfileView = () => {
-  const [vehicles, setVehicles] = useState<null | iProductItem[]>(null);
+export const ProfileViewPage = () => {
   const { user } = useUser();
-  const [totalPages, setTotalPages] = useState(0);
+  const { loading, sellerVehicles, page, setPage } = useSeller();
+  const { isOpenModal, modalType, setModalType, openModal } = useModal();
 
-  const navigate = useNavigate();
-
-  const initials =
-    vehicles && vehicles[0]?.seller.name.substring(0, 2)?.toUpperCase();
-
-  const { userId } = useParams();
-
-  useEffect(() => {
-    if (!userId) {
-      navigate("/");
-    } else {
-      const fetchSellerCars = async () => {
-        try {
-          const response = await api.get(`vehicles/user/${userId}`);
-          setVehicles(response.data.data);
-        } catch (error: unknown) {
-          console.error(error);
-          if (axios.isAxiosError(error)) {
-            console.log("dasdsadsadasdas");
-            const axiosError = error as AxiosError;
-            if (axiosError.response) {
-              const status = axiosError.response.status;
-              if (status === 404 || status === 400) {
-                toast.error("Usuário não encontrado");
-              } else if (axiosError.code === "ECONNABORTED") {
-                toast.error("Erro de timeout. Tente novamente mais tarde.");
-              }
-            }
-          }
-          navigate("/");
-        }
-      };
-      fetchSellerCars();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const getVehiclesPaginationProfile = async (
-    perPage: number,
-    page: number
-  ) => {
-    try {
-      const response = await api.get(
-        `vehicles/user/${userId}?perPage=${perPage}&page=${page}`
-      );
-
-      setVehicles(response.data.data);
-      setTotalPages(response.data.totalPages);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  console.log();
   return (
     <>
-      <Container>
-        {user ? <HeaderLoggedIn /> : <HeaderNotLoggedIn />}
-        <BlueBox />
-        <PerfilBox>
-          <div>
-            <Circle>{initials}</Circle>
-            <Flex>
-              <StyledText tag="h1" textColor="grey1" textStyle="heading-6-600">
-                {vehicles && vehicles[0]?.seller.name}
+      {isOpenModal && (
+        <>
+          {(() => {
+            switch (modalType) {
+              case "createVehicle":
+                return <ModalCreateVehicle />;
+              case "editVehicle":
+                return <ModalEditVehicle />;
+              case "deleteVehicle":
+                return <ModalDeleteVehicle />;
+            }
+          })()}
+        </>
+      )}
+      <StyledDivFullPage>
+        <StyledMain>
+          <div className="background"></div>
+          <div className="toTop">
+            <StyledDivUserInformations>
+              <div>
+                <UserAvatar username={user?.name} size="big" color="#4529E6" />
+                <div className="userInformationName">
+                  <StyledText
+                    tag="h2"
+                    $textStyle="heading-6-600"
+                    $textColor="grey1"
+                  >
+                    {user?.name}
+                  </StyledText>
+                  <DetailBox value="Anunciante" />
+                </div>
+                <StyledText tag="p" $textStyle="body-1-400" $textColor="grey2">
+                  {user?.description}
+                </StyledText>
+                <StyledButton
+                  onClick={() => {
+                    openModal();
+                    setModalType("createVehicle");
+                  }}
+                  $buttonStyle="big"
+                  $buttonColor="outlineBrand1"
+                >
+                  Criar Anúncio
+                </StyledButton>
+              </div>
+            </StyledDivUserInformations>
+            <div className="container">
+              <StyledText
+                tag="h1"
+                $textStyle="heading-5-600"
+                $textColor="grey1"
+              >
+                Anúncios
               </StyledText>
-              <StyledDiv>Anunciante</StyledDiv>
-            </Flex>
-            <StyledText tag="p" textStyle="body-1-400" textColor="grey2">
-              {vehicles && vehicles[0]?.seller.description}
-            </StyledText>
+              <Vehicles
+                loadingVehicle={loading}
+                length={sellerVehicles ? sellerVehicles.data.length : 0}
+                emptyMessage="Você ainda não possui nenhum anúncio"
+              >
+                {sellerVehicles &&
+                  sellerVehicles.data.length > 0 &&
+                  sellerVehicles.data.map((vehicle, i) => (
+                    <VehicleProfileView key={i} vehicle={vehicle} />
+                  ))}
+              </Vehicles>
+              <Pagination
+                page={page}
+                setPage={setPage}
+                totalPages={sellerVehicles ? sellerVehicles.totalPages : 0}
+              />
+            </div>
           </div>
-        </PerfilBox>
-        <ContainerList>
-          <CarList cars={vehicles} />
-          <CustomIconsPagination
-            getVehiclesPaginationProfile={getVehiclesPaginationProfile}
-            totalPagesOtherPage={totalPages}
-          />
-        </ContainerList>
-        <FooterComponent />
-      </Container>
+        </StyledMain>
+        <Footer />
+      </StyledDivFullPage>
     </>
   );
 };

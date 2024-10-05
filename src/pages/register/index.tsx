@@ -1,21 +1,17 @@
-import { HeaderNotLoggedIn } from "../../components/headerNotLoggedIn";
-import { FooterComponent } from "../../components/footer";
-import { RegisterFormMui } from "../../components/forms/registerFormMui";
-import { RegisterSection, RegisterFormDiv } from "./style";
-import { ContainerWrapper } from "../login/style";
+import { Footer } from "../../components/footer";
+import { FormRegister } from "../../components/formRegister";
+import { StyledDivFullPage } from "./style";
 
-export const Register = () => {
+export const RegisterPage = () => {
   return (
-    <ContainerWrapper>
-      <HeaderNotLoggedIn />
-      <main>
-        <RegisterSection>
-          <RegisterFormDiv>
-            <RegisterFormMui />
-          </RegisterFormDiv>
-        </RegisterSection>
-      </main>
-      <FooterComponent />
-    </ContainerWrapper>
+    <>
+      <StyledDivFullPage>
+        <div className="headerHeight"></div>
+        <main className="form">
+          <FormRegister />
+        </main>
+        <Footer />
+      </StyledDivFullPage>
+    </>
   );
 };

@@ -1,81 +1,107 @@
-import { AiOutlineClose } from "react-icons/ai";
+import { ClipLoader } from "react-spinners";
+import { useState } from "react";
+import axios from "axios";
+import { toast } from "react-toastify";
+
+import { useModal, useUser } from "../../hooks/useContexts";
+import { StyledButton } from "../../styles/buttons";
 import { StyledText } from "../../styles/tipography";
 import { Modal } from "../modal";
-import { DivBtns, DivModalBody, DivTitle, StyledTitle } from "./style";
-import { StyledButton } from "../../styles/buttons";
+import { StyledDivFlexEnd, StyledDivModalBody } from "./style";
 import { api } from "../../services/api";
-import { toast } from "react-toastify";
-import { useContext } from "react";
-import { ProductContext } from "../../contexts/productContext";
+import {
+  iCommentResponse,
+  iVehicleResponseWithUserAndImagesAndCommentsPartial,
+} from "../../interfaces";
 
-interface iProp {
-  toggleModal: () => void;
-  id: string;
-}
+export const ModalDeleteComment = ({
+  comment,
+  setVehicle,
+}: {
+  comment: iCommentResponse | null;
+  setVehicle: React.Dispatch<
+    React.SetStateAction<iVehicleResponseWithUserAndImagesAndCommentsPartial | null>
+  >;
+}) => {
+  const [loading, setLoading] = useState(false);
+  const { closeModal } = useModal();
+  const { logoutUser } = useUser();
 
-export function ModalDeleteComment({ toggleModal, id }: iProp) {
-  const { getComments } = useContext(ProductContext);
-
-  async function deleteComment() {
-    const token = localStorage.getItem("@KenzieKars:token");
+  const deleteComment = async (commentId: string | undefined) => {
     try {
-      await api.delete(`comments/${id}`, {
-        headers: {
-          authorization: `Bearer ${token}`,
-        },
+      setLoading(true);
+
+      await api.delete(`comments/${commentId}`);
+
+      setVehicle((prevVehicle) => {
+        if (!prevVehicle) return null;
+
+        const updatedComments = prevVehicle.comments?.filter(
+          (comment) => comment.id !== commentId
+        );
+
+        return {
+          ...prevVehicle,
+          comments: updatedComments,
+        };
       });
-      toggleModal();
-      toast.success("Comentário excluido com sucesso!");
-      getComments();
+      toast.success("Comentário deletado com sucesso");
+      closeModal();
     } catch (error) {
       console.error(error);
-      toast.error(`Ops! Algo deu errado.`);
+
+      if (axios.isAxiosError(error)) {
+        if (error.code === "ECONNABORTED") {
+          toast.error(
+            "O servidor está demorando muito para responder. Por favor, aguarde um momento e tente novamente."
+          );
+        } else if (error.response) {
+          closeModal();
+          logoutUser();
+          toast.error(error.response?.data.message);
+        }
+      }
+    } finally {
+      setLoading(false);
     }
-  }
+  };
 
   return (
-    <Modal toggleModal={toggleModal}>
-      <StyledTitle>
-        <DivTitle>
-          <StyledText
-            tag="h3"
-            textStyle="heading-6-500"
-          >{`Excluir comentário`}</StyledText>
-          <button onClick={() => toggleModal()}>
-            <AiOutlineClose size={22} color={"#0b0d0d"} />
-          </button>
-        </DivTitle>
-
-        <StyledText tag="p" textStyle="heading-7-500">
-          {`Tem certeza que deseja excluir seu comentário?`}
+    <Modal title="Excluir comentário">
+      <StyledDivModalBody>
+        <StyledText tag="h2" $textStyle="heading-7-500" $textColor="grey1">
+          Tem certeza que deseja excluir seu comentário?
         </StyledText>
-      </StyledTitle>
-      <DivModalBody>
-        {" "}
-        <StyledText
-          tag="p"
-          textStyle="body-1-400"
-        >{`Essa ação não pode ser desfeita. Isso excluirá permanentemente o comentário e removerá seus dados de nossos servidores.
-        `}</StyledText>
-        <DivBtns>
-          <StyledButton
-            onClick={() => toggleModal()}
-            buttonStyle="sm-modal"
-            buttonColor="negative"
-          >
-            Cancelar
-          </StyledButton>
-          <StyledButton
-            onClick={() => {
-              deleteComment();
-            }}
-            buttonStyle="sm-modal"
-            buttonColor="alert"
-          >
-            Sim, excluir comentário
-          </StyledButton>
-        </DivBtns>
-      </DivModalBody>
+        <StyledText tag="p" $textStyle="body-1-400" $textColor="grey2">
+          Essa ação não pode ser desfeita. Isso excluirá permanentemente seu
+          comentário.
+        </StyledText>
+        <StyledDivFlexEnd>
+          <div>
+            <StyledButton
+              onClick={closeModal}
+              type="button"
+              $buttonStyle="big"
+              $buttonColor="negative"
+            >
+              Cancelar
+            </StyledButton>
+            <StyledButton
+              onClick={() => deleteComment(comment?.id)}
+              type="button"
+              $buttonStyle="big"
+              $buttonColor="alert"
+              $minWidth="24rem"
+            >
+              {loading ? (
+                <ClipLoader color="#F8F9FA" size={"3rem"} />
+              ) : (
+                "Sim, excluir meu comentário"
+              )}
+            </StyledButton>
+          </div>
+        </StyledDivFlexEnd>
+      </StyledDivModalBody>
     </Modal>
   );
-}
+};

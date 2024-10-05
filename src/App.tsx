@@ -1,30 +1,30 @@
-import ThemeProvider from "@mui/material/styles/ThemeProvider";
-import { GlobalStyle } from "./styles/globalStyles";
-import { theme } from "./theme";
+import { Bounce, ToastContainer } from "react-toastify";
 
-import { RoutesMain } from "./routes";
-import { ToastContainer } from "react-toastify";
+import { GlobalStyle } from "./styles/globalStyles";
+import { RoutesMain as Routes } from "./routes";
+import { Header } from "./components/header";
 
 const App = () => {
   return (
     <>
-      <ThemeProvider theme={theme}>
-        <GlobalStyle />
-        <RoutesMain />
-
-        <ToastContainer
-          position="top-right"
-          autoClose={2000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="light"
-        />
-      </ThemeProvider>
+      <GlobalStyle />
+      <Header />
+      <Routes />
+      <ToastContainer
+        position="bottom-right"
+        autoClose={4000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        transition={Bounce}
+        theme="light"
+        limit={3}
+        style={{ fontSize: "1.5rem", fontWeight: "500" }}
+      />
     </>
   );
 };

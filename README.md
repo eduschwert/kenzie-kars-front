@@ -2,129 +2,104 @@
 
 <h1 align="center">Kenzie Kars</h1>
 
-The KenzieKars application is a vehicle advertisement platform for purchase/sale.
-<br/>
+<p align="center"><img width="800" alt="Kenzie Kars GIF" src="./src/assets/kenzie-kars.gif"/></p>
+
+<p><strong>Kenzie Kars</strong> is a personal e-commerce platform focused on vehicle buying and selling, built to showcase my full-stack development skills. The platform is based on vehicle data retrieved from a mock FIPE API and allows users to register as buyers or sellers. Below are the main features and a walkthrough of the app's flow.</p>
 
 <h2>Features</h2>
+<ul>
+    <li><strong>User Registration:</strong> Users can sign up as either buyers or sellers. Buyers can browse vehicle listings, contact sellers via WhatsApp, and leave comments on ads. Sellers can create, manage, and edit their vehicle ads, as well as interact with buyers and other sellers through comments and WhatsApp.</li>
+    <li><strong>Password Recovery:</strong> Users can recover their accounts by requesting a password reset link, sent via email, allowing them to securely reset their password.</li>
+    <li><strong>Advanced Vehicle Filtering on Home Page:</strong> Users can browse a wide selection of vehicles using filters such as:
+        <ul>
+            <li><strong>Brand</strong></li>
+            <li><strong>Model</strong></li>
+            <li><strong>Price below FIPE value</strong></li>
+            <li><strong>Color</strong></li>
+            <li><strong>Year</strong></li>
+            <li><strong>Fuel Type</strong></li>
+            <li><strong>Mileage Range</strong></li>
+            <li><strong>Price Range</strong></li>
+        </ul>
+    </li>
+    <li><strong>AutoComplete Vehicle Search:</strong> Sellers can use an AutoComplete feature (powered by Material-UI) integrated with the FIPE API when creating vehicle ads, allowing them to quickly find and list vehicles.</li>
+    <li><strong>Seller Profile Page:</strong> Sellers have access to a profile page where they can:
+        <ul>
+            <li>Create new vehicle ads</li>
+            <li>Edit existing ads</li>
+            <li>Manage all their current ads</li>
+        </ul>
+    </li>
+    <li><strong>Comments Section:</strong> Buyers and sellers can leave comments on vehicle ads to ask questions or provide feedback.</li>
+</ul>
 
-- Buyer or advertiser registration
-- AutoLogin
-- View ads page with filter options (dynamic filter) by brand, model, color, year, fuel, mileage range and price range (no need to be logged in).
-- Ads details can be seen by clickng on the ad card
-- Create, edit and delete vehicle ads (logged in as advertiser)
-- Create, edit and delete vehicle ad comments (logged in as buyer or advertiser). If user is not logged in, will be redirected to login page.
-- Purchase of a vehicle (buyer is directed to whatsapp for direct contact with the advertiser)
+<h2>Application Workflow</h2>
 
-To register a new vehicle, the form is fed with data from an API of the Fipe table. All vehicles registered in this API will be automatically available to be announced.
+<p><strong>1. User Registration & Login:</strong> New users can sign up as buyers or sellers. After logging in, buyers can explore available vehicles, and sellers can create and manage ads.</p>
 
-<h4 align="left">API Kenzie Kars Fipe: <a href="https://kenzie-kars.herokuapp.com/">API Kenzie Kars Fipe</a></h4>
-<h4 align="left">Documentation: <a href="https://kenzie-kars.herokuapp.com/api">Documentation of Kenzie Kars Fipe</a></h4>
-<br/>
+<p><strong>2. Password Recovery:</strong> If a user forgets their password, they can easily reset it by requesting a reset link via email, ensuring secure access to their account.</p>
+
+<p><strong>3. Home Page Navigation:</strong> Users can search through listed vehicles using a robust set of filters, narrowing results by brand, price, mileage, and other factors.</p>
+
+<p><strong>4. Seller Ad Management:</strong> Sellers can add new ads using an intuitive form integrated with the FIPE API to prepopulate vehicle details. They can also edit or remove existing ads as needed.</p>
+
+<p><strong>5. Interaction through Comments:</strong> Buyers and sellers can communicate via comments on individual vehicle ads, enhancing user interaction and providing a feedback loop for sellers.</p>
+
+<h2>Fake FIPE API</h2>
+
+<h4><a href="https://kenzie-kars.herokuapp.com/">Kenzie Kars FIPE API</a></h4>
+<h4><a href="https://kenzie-kars.herokuapp.com/api">API Documentation</a></h4>
+
 <h2>Requirements</h2>
 
-Before starting, you will need to have the following tools installed:
-[Git](https://git-scm.com), [Node.js](https://nodejs.org/en/).
-It's also nice to have an editor to work with the code like [VSCode](https://code.visualstudio.com/)
+<p>Before starting, ensure you have the following installed:</p>
+<ul>
+    <li><a href="https://git-scm.com">Git</a></li>
+    <li><a href="https://nodejs.org/en/">Node.js</a></li>
+</ul>
+<p>We recommend using <a href="https://code.visualstudio.com/">VSCode</a> as your code editor.</p>
 
-<br/>
 <h2>Application Design</h2>
 
-<h4 align="left">Figma: <a href="https://www.figma.com/file/KX3C3fIi8zmCRpNipxIYYF/M6---E-Commerce-Filter?type=design&node-id=45-2">Kenzie Kars Design Definition</a></h4>
-<br/>
-<h2>🚀 Executing</h2>
+<h4><a href="https://www.figma.com/design/eWe8HjOjXzLYG6IeNjQmMc/M6---E-Commerce-Filter?node-id=45-2&node-type=canvas&t=49vnOxG0iUrbZt89-0">Figma Design Mockup</a></h4>
 
-### Clone this repository
+<h2>🚀 Running the Application</h2>
 
-https://github.com/G8-KenzieKars/Kenzie-Kars_front.git
+<h3>1. Clone the repository:</h3>
 
-```bash
-$ git clone <git@github.com:G8-KenzieKars/Kenzie-Kars_front.git>
-```
+<pre><code>git clone git@github.com:eduschwert/kenzie-kars-front.git</code></pre>
 
-### Access project folder in terminal/cmd
+<h3>2. Access the project folder:</h3>
 
-```bash
-$ cd kenzie-kars-front
-```
+<pre><code>cd kenzie-kars-front</code></pre>
 
-### Install all dependencies
+<h3>3. Install dependencies:</h3>
 
-```bash
-$ npm install
-```
+<pre><code>npm install or yarn</code></pre>
 
-### Run the application in development environment
+<h3>4. Start the development server:</h3>
 
-```bash
-$ npm run dev
-```
+<pre><code>npm run dev or yarn dev</code></pre>
 
-Application will start at: <http://localhost:3000>
+<p>The app will run locally at: <a href="http://localhost:5173">http://localhost:5173</a></p>
 
-<br/>
-<h2>🛠 Technologies</h2>
+<h2>🛠 Technologies Used</h2>
 
-The following tools were used to build this application:
+<p>This project leverages the following tools and technologies:</p>
+<ul>
+    <li><a href="https://reactjs.org/">React</a></li>
+    <li><a href="https://vitejs.dev/guide/">Vite</a></li>
+    <li><a href="https://styled-components.com/">Styled-Components</a></li>
+    <li><a href="https://www.npmjs.com/package/zod">Zod</a></li>
+    <li><a href="https://react-hook-form.com/">React Hook Form</a></li>
+    <li><a href="https://mui.com/">Material UI</a></li>
+    <li><a href="https://reactrouter.com/">React Router</a></li>
+    <li><a href="https://axios-http.com/">Axios</a></li>
+</ul>
 
-- [React](https://pt-br.reactjs.org/)
-- [Vite](https://vitejs.dev/guide/)
-- [Styled-Components](https://styled-components.com/)
-- [Yup](https://www.npmjs.com/package/yup/)
-- [Zod](https://www.npmjs.com/package/zod)
-- [React Hook Form](https://react-hook-form.com/)
-- [Material UI](https://mui.com/)
-- [React Router](https://reactrouter.com/en/main)
-- [Axios](https://axios-http.com/ptbr/docs/intro)
+<h2>Author</h2>
 
-<br/>
-<h2>Authors</h2>
-
-<p>Douglas Fernandes Santos  </p>
-<img style="border-radius: 50%" width="50" src="https://avatars.githubusercontent.com/u/33332097?v=4"/>
-<a href="https://www.linkedin.com/in/douglas-santos-0525b4216/"><img src="https://img.shields.io/badge/-Douglas-%230A66C2?logo=linkedin"/></a>
-<a href="mailto:dougbmth@hotmail.com"><img src="https://img.shields.io/badge/-dougbmth%40hotmail.com-blue?logo=microsoftoutlook
-" alt="dougbmth@hotmail.com"/></a>
-
-<br/>
-<p>Eduardo Schwert de Freitas</p>
-<img style="border-radius: 50%" width="50" src="https://avatars.githubusercontent.com/u/106620111?s=400&u=d29e7cd5bdcadc0a09721f69115d267054018be7&v=4"/>
+<p><strong>Eduardo Schwert de Freitas</strong></p>
+<img src="https://avatars.githubusercontent.com/u/106620111?s=400&u=d29e7cd5bdcadc0a09721f69115d267054018be7&v=4" alt="Eduardo Schwert" style="border-radius:50%;width:50px"/>
 <a href="https://www.linkedin.com/in/eduardoschwert/"><img src="https://img.shields.io/badge/-Eduardo-%230A66C2?logo=linkedin"/></a>
 <a href="mailto:eduardoschwert@yahoo.com.br"><img src="https://img.shields.io/badge/-eduardoschwert%40yahoo.com.br-%236001D2?logo=yahoo" alt="eduardoschwert@yahoo.com.br"/></a>
-
-<br/>
-<p>Juliana Serrano do Carmo Ferraz</p>
-<img style="border-radius: 50%" width="50" src="https://avatars.githubusercontent.com/u/110045459?s=400&u=f78f09d76322238fe1e6ba930246950c74e809c6&v=4"/>
-<a href="https://www.linkedin.com/in/juliana-serrano-do-carmo-ferraz-964839111/"><img src="https://img.shields.io/badge/-Juliana-%230A66C2?logo=linkedin"/></a>
-<a href="mailto:ferrazjsc@gmail.com"><img src="https://img.shields.io/badge/-ferrazjsc%40gmail.com-red?logo=google&logoColor=%23ffffff
-" alt="ferrazjsc@gmail.com"/></a>
-
-<br/>
-<p>Natália Badilho de Carvalho</p>
-<img style="border-radius: 50%" width="50" src="https://avatars.githubusercontent.com/u/109743554?v=4"/>
-<a href="https://www.linkedin.com/in/eduardoschwert/"><img src="https://img.shields.io/badge/-Natalia-%230A66C2?logo=linkedin"/></a>
-<a href="mailto:nbadilho@gmail.com"><img src="https://img.shields.io/badge/-nbadilho%40gmail.com-red?logo=google&logoColor=%23ffffff
-" alt="nbadilho@gmail.com"/></a>
-
-<br/>
-<p>Wesley Ricarte</p>
-<img style="border-radius: 50%" width="50" src="https://avatars.githubusercontent.com/u/110259771?v=4"/>
-<a href="https://www.linkedin.com/in/wesleyricarte/"><img src="https://img.shields.io/badge/-Wesley-%230A66C2?logo=linkedin"/></a>
-<a href="mailto:wesley.ricarte97@gmail.com"><img src="https://img.shields.io/badge/-wesley.ricarte97%40gmail.com-red?logo=google&logoColor=%23ffffff
-" alt="wesley.ricarte97@gmail.com"/></a>
-
-<br/>
-<h2>Available Scripts</h2>
-
-### `npm run preview`
-
-Vite preview is a CLI utility that can be used to preview Vite projects in a production-like environment.\ It builds the project, starts a production server, and opens a browser to the server URL.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.

@@ -1,15 +1,20 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App.tsx";
 import { BrowserRouter } from "react-router-dom";
+import { PrimeReactProvider } from "primereact/api";
+
+import App from "./App.tsx";
+import { ThemeProvider } from "styled-components";
+import { mainTheme } from "./styles/theme.ts";
 import { Providers } from "./contexts/Providers.tsx";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <React.StrictMode>
-    <BrowserRouter>
+  <BrowserRouter>
+    <PrimeReactProvider>
       <Providers>
-        <App />
+        <ThemeProvider theme={mainTheme}>
+          <App />
+        </ThemeProvider>
       </Providers>
-    </BrowserRouter>
-  </React.StrictMode>
+    </PrimeReactProvider>
+  </BrowserRouter>
 );

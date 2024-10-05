@@ -1,20 +1,17 @@
-import { FooterComponent } from "../../components/footer";
-import { HeaderNotLoggedIn } from "../../components/headerNotLoggedIn";
-import { ContainerWrapper, LoginFormDiv, LoginSection } from "./style";
-import { LoginFormMui } from "../../components/forms/loginFormMui";
+import { Footer } from "../../components/footer";
+import { FormLogin } from "../../components/formLogin";
+import { StyledDivFullPage } from "./style";
 
-export const Login = () => {
+export const LoginPage = () => {
   return (
-    <ContainerWrapper>
-      <HeaderNotLoggedIn />
-      <main>
-        <LoginSection>
-          <LoginFormDiv id="form_login">
-            <LoginFormMui />
-          </LoginFormDiv>
-        </LoginSection>
-      </main>
-      <FooterComponent />
-    </ContainerWrapper>
+    <>
+      <StyledDivFullPage>
+        <div className="headerHeight"></div>
+        <main className="form">
+          <FormLogin />
+        </main>
+        <Footer />
+      </StyledDivFullPage>
+    </>
   );
 };

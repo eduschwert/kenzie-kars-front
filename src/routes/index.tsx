@@ -1,28 +1,43 @@
-import { Route, Routes } from "react-router-dom";
-import { HomePage } from "../pages/homePage";
-import { Register } from "../pages/register";
-import { Login } from "../pages/login";
-import { ProfileViewAdmin } from "../pages/profileViewAdmin";
-import { AnnoucementPage } from "../pages/annoucement";
-import { ProfileView } from "../pages/profileView";
+import { Navigate, Route, Routes } from "react-router-dom";
+import { SellerProvider } from "../contexts/sellerContext";
+
+import { HomePage } from "../pages/home";
+import { VehiclePage } from "../pages/vehicle";
+import { SellerPage } from "../pages/seller";
 import { ResetPasswordPage } from "../pages/resetPassword";
-import { ProtectedRoutes } from "../components/protectedRoutes";
-import { SendEmailResetPasswordPage } from "../pages/sendEmailResetPassword";
+import { SendEmailPage } from "../pages/sendEmail";
+import { RoutesSeller } from "../components/routesSeller";
+import { RoutesNotLoggedIn } from "../components/routesNotLoggedIn";
+import { RegisterPage } from "../pages/register";
+import { LoginPage } from "../pages/login";
+import { ProfileViewPage } from "../pages/profileView";
 
 export const RoutesMain = () => {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
-      <Route path="/register" element={<Register />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/resetPassword" element={<SendEmailResetPasswordPage />} />
-      <Route path="/resetPassword/:token" element={<ResetPasswordPage />} />
-      <Route path="/anouncement/:vehicleId" element={<AnnoucementPage />} />
-      <Route path="/profileview/:userId" element={<ProfileView />} />
-      <Route element={<ProtectedRoutes />}>
-        <Route path="/profileviewadmin" element={<ProfileViewAdmin />} />
+      <Route path="/vehicle/:vehicleId" element={<VehiclePage />} />
+      <Route path="/seller/:sellerId" element={<SellerPage />} />
+
+      <Route element={<RoutesNotLoggedIn />}>
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/resetPassword" element={<SendEmailPage />} />
+        <Route path="/resetPassword/:token" element={<ResetPasswordPage />} />
       </Route>
-      <Route path="*" element={<Login />} />
+
+      <Route element={<RoutesSeller />}>
+        <Route
+          path="/profileview"
+          element={
+            <SellerProvider>
+              <ProfileViewPage />
+            </SellerProvider>
+          }
+        />
+      </Route>
+
+      <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );
 };

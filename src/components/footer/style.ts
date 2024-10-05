@@ -1,48 +1,42 @@
 import styled from "styled-components";
 
-export const Footer = styled.footer`
-  background: var(--color-grey0);
+export const StyledFooter = styled.footer`
+  background: ${({ theme }) => theme.colors.grey0};
   width: 100%;
-  min-height: 80px;
-  @media (min-width: 700px) {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-  }
-`;
-
-export const DivFooter = styled.div`
+  min-height: 14rem;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  padding-top: 34px;
-  padding-bottom: 34px;
-  gap: 38px;
+  align-items: center;
 
-  & > img {
-    width: 153px;
-  }
-
-  @media (min-width: 600px) {
-    flex-direction: row;
+  & > .footerContainer {
+    display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 32px 5vw 32px 5vw;
+    width: 97%;
+    max-width: 148rem;
+    height: 100%;
+    padding: 3rem 0px;
+
+    @media screen and (max-width: 768px) {
+      flex-direction: column;
+      gap: 5rem;
+    }
   }
 `;
 
-export const LinkFooter = styled.a`
-  border: 0px;
-  width: 39px;
-  height: 38px;
-  background-color: var(--color-grey1);
-  border-radius: var(--radius-2);
+export const StyledButtonFooter = styled.button`
+  border: none;
+  width: 4.5rem;
+  height: 5rem;
+  background-color: ${({ theme }) => theme.colors.grey1};
+  border-radius: ${({ theme }) => theme.borderRadius.small};
   display: flex;
   align-items: center;
   justify-content: center;
 
+  transition: 150ms ease-in-out;
+
   &:hover {
-    background-color: var(--color-grey2);
+    background-color: ${({ theme }) => theme.colors.grey2};
   }
 `;
